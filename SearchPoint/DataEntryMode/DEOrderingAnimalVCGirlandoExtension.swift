@@ -703,9 +703,9 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
             }
         }
         
-        if textField == scanEarTagTextField {
-            scanBarcodeTextfield.becomeFirstResponder()
-        } else if  textField == scanBarcodeTextfield {
+        if textField == scanBarcodeTextfield {
+            scanEarTagTextField.becomeFirstResponder()
+        } else if  textField == scanEarTagTextField {
             breedRegTextfield.becomeFirstResponder()
         } else if textField == breedRegTextfield {
             

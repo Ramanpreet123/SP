@@ -27,7 +27,8 @@ class OfflinePopUp: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        title.text = NSLocalizedString("Restrições offline", comment: "")
+      //  title.text = NSLocalizedString("Restrições offline", comment: "")
+        title.text = NSLocalizedString("Offline Restriction", comment: "")
         NSLocalizedString(AlertMessagesStrings.alertString, comment: "")
         
         let arrayString = [NSLocalizedString(LocalizedStrings.orderStoredDuringOfflineMode, comment: ""), NSLocalizedString(LocalizedStrings.lastTimeActions, comment: ""), NSLocalizedString(LocalizedStrings.lastTimeSampleStates, comment: "")

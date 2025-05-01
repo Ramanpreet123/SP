@@ -15,6 +15,12 @@ import GigyaAuth
 class SettingsVC : UIViewController {
     
     //MARK: IB OUTLETS
+    @IBOutlet weak var calendarViewBkg: UIView!
+    @IBOutlet weak var productGroupingView: UIView!
+    @IBOutlet weak var evaluationProviderView: UIView!
+    @IBOutlet weak var ocrViewShow: UIView!
+    @IBOutlet weak var ocrBackroundBtnOutlet: UIButton!
+    @IBOutlet weak var keyboardTitleView: UIView!
     @IBOutlet weak var scrolView: UIScrollView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var productDoneClick: UIButton!
@@ -25,7 +31,6 @@ class SettingsVC : UIViewController {
     @IBOutlet weak var mainViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var primarlyBasedStackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var primarlybasedStackView: UIStackView!
-    @IBOutlet weak var evaluationProviderViewWidth: NSLayoutConstraint!
     @IBOutlet weak var networkStatusImg: UIImageView!
     @IBOutlet weak var NetworkStatusLbl: UILabel!
     @IBOutlet weak var offLineBtn: UIButton!
@@ -65,7 +70,6 @@ class SettingsVC : UIViewController {
     @IBOutlet weak var datepickerEntryBtn: UIButton!
     @IBOutlet weak var marketTipYopOutlet: UIButton!
     @IBOutlet weak var marketView: UIView!
-
     @IBOutlet weak var providerTitleLbl: UILabel!
     @IBOutlet weak var menuBttn: UIButton!
     @IBOutlet weak var continueOrderBttn: UIButton!
@@ -132,6 +136,7 @@ class SettingsVC : UIViewController {
     let pvidDairy = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
     let buttonbg = UIButton ()
     var customPopView :OfflinePopUp!
+    var auProviderArray = [GetProviderTbl]()
     
     //MARK: VIEW LIFE CYCLE
     override func viewDidLoad() {
@@ -171,6 +176,15 @@ class SettingsVC : UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        //location is relative to the current view
+        // do something with the touched point
+        if touch?.view != self.sideMenuViewVC {
+            sideMenuState(expanded: false)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setUIOnWillAppear()
@@ -199,11 +213,9 @@ class SettingsVC : UIViewController {
             self.setButtonState(button: persistenceOnBtn, isOn: false)
         }
         holsteinBtnOutlet.isHidden = true
-        if UIDevice().userInterfaceIdiom == .phone {
-            //            ocrViewShow.isHidden = true
-            //            ocrBackroundBtnOutlet.isHidden = true
-            //            calendarViewBkg.isHidden = true
-        }
+        calendarViewBkg.isHidden = true
+        ocrViewShow.isHidden = true
+        ocrBackroundBtnOutlet.isHidden = true
         
         getMarketsForCurrentCustomer()
         UserDefaults.standard.set( 1, forKey: "SpeciesId")
@@ -425,7 +437,7 @@ class SettingsVC : UIViewController {
     func setUIOnWillAppear(){
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
         
-            //calendarViewBkg.isHidden = true
+        calendarViewBkg.isHidden = true
         productTblView.delegate = self
         productTblView.dataSource = self
         initialNetworkCheck()
@@ -492,12 +504,16 @@ class SettingsVC : UIViewController {
         
         let checkValue = UserDefaults.standard.value(forKey: "settingDone") as? String
         if checkValue == "true" {
+            continueOrderBttn.titleLabel?.font = continueOrderBttn.titleLabel?.font.withSize(23)
             continueOrderBttn.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
             screenTitle.text = NSLocalizedString("Settings", comment: "")
         }
         else {
+            continueOrderBttn.titleLabel?.font = continueOrderBttn.titleLabel?.font.withSize(23)
+
             continueOrderBttn.setTitle(NSLocalizedString("Continue to Ordering", comment: ""), for: .normal)
             screenTitle.text = NSLocalizedString("Ordering Defaults", comment: "")
+
         }
         
         
@@ -549,7 +565,8 @@ class SettingsVC : UIViewController {
                 ocrBtnOutlet.isHidden = false
                 rfidBtnOutlet.isHidden = false
                 ocrInfoBtnOutle.isHidden = false
-                
+                self.continueOrderBottomConstraint.constant = 26.0
+                self.mainViewHeightConstraint.constant = 926.0
                 if getListProvider.count == 0 {
                     //CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated product found for this customer in the app.", comment: ""))
                     marketTipYopOutlet.isHidden = true
@@ -625,13 +642,14 @@ class SettingsVC : UIViewController {
                 nominatorView.isHidden = false
                 
             }
-            else  if UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (IT)" || UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (BeNeLux)" || UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (CAN)" {
+            else  if UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (IT)" || UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (BeNeLux)" || UserDefaults.standard.string(forKey: "ProviderName") == "CLARIFIDE CDCB (CAN)" || UserDefaults.standard.string(forKey: "ProviderName") == "AU Dairy Products" ||
+                        UserDefaults.standard.string(forKey: "ProviderName") == "US Dairy Products"{
                 //      nominatorHeightConst.constant = 100
                 nominatorView.isHidden = false
             }
             else{
                 // nominatorHeightConst.constant = 0
-                if UserDefaults.standard.string(forKey: "ProviderName") == "UK Dairy Genomics" {
+                if UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 2 {
                     self.continueOrderBottomConstraint.constant = 66.0
                     self.mainViewHeightConstraint.constant = 831.0
                 } else {
@@ -643,14 +661,20 @@ class SettingsVC : UIViewController {
             }
             providerTitleLbl.text = NSLocalizedString("Evaluation Provider/Market", comment: "")
             primaryBasedOutlet.isHidden = false
-            evaluationProviderViewWidth.constant = 223.0
+            evaluationProviderView.isHidden = false
+            productGroupingView.isHidden = true
+            evaluationProviderView.isHidden = false
+            productGroupingView.isHidden = true
              productTblView.reloadData()
         }
         else{
             
             primaryBasedOutlet.isHidden = true
             providerTitleLbl.text = NSLocalizedString("Product Groupings", comment: "")
-            evaluationProviderViewWidth.constant = 145.0
+            evaluationProviderView.isHidden = true
+            productGroupingView.isHidden = false
+            evaluationProviderView.isHidden = true
+            productGroupingView.isHidden = false
             let pvid = UserDefaults.standard.integer(forKey: "BeefPvid")
             productArr = fetchproviderProductDataBeef(entityName: "GetProductTbl", provId: pvid)
             // primarlyHeightConst.constant = 0
@@ -842,7 +866,8 @@ class SettingsVC : UIViewController {
             switchFromDairy = true
             primaryBasedOutlet.isHidden = false
             providerTitleLbl.text = NSLocalizedString("Evaluation Provider/Market", comment: "")
-            evaluationProviderViewWidth.constant = 223.0
+            evaluationProviderView.isHidden = false
+            productGroupingView.isHidden = true
             if UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 1 ||  UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 2 ||  UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 3
                 || UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 8 || UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 11 ||
                 UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue ) == 12 ||
@@ -1004,7 +1029,8 @@ class SettingsVC : UIViewController {
             //marketView.isHidden = true
             primaryBasedOutlet.isHidden = true
             providerTitleLbl.text = NSLocalizedString("Product Groupings", comment: "")
-            evaluationProviderViewWidth.constant = 145.0
+            evaluationProviderView.isHidden = true
+            productGroupingView.isHidden = false
             //  primarlyHeightConst.constant = 0
             self.primarlyBasedView.isHidden = true
             self.primarlybasedStackView.isHidden = true

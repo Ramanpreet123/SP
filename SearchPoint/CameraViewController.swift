@@ -370,13 +370,13 @@ class CameraViewController: UIViewController {
     }
     
     private func stopSession() {
-        weak var weakSelf = self
+      //  weak var weakSelf = self
         sessionQueue.async {
-            guard let strongSelf = weakSelf else {
-                print("Self is nil!")
-                return
-            }
-            strongSelf.captureSession.stopRunning()
+//            guard let strongSelf = weakSelf else {
+//                print("Self is nil!")
+//                return
+//            }
+            self.captureSession.stopRunning()
         }
     }
     

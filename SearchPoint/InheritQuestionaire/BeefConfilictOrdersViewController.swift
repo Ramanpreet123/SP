@@ -23,6 +23,7 @@ class BeefConfilictOrdersViewController: UIViewController {
     var pviduser = Int()
     var value = 0
     weak var delegateCustom1 : objectPickfromConfilict?
+    weak var dismissDelegate : DismissConflictPopUp?
     var screenName = String()
     var langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
     var currentCustomerId = Int()
@@ -59,7 +60,7 @@ class BeefConfilictOrdersViewController: UIViewController {
     @objc func methodOfReceivedNotification(notification: Notification){
         if value == 0{
             UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
-            let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
+            let storyBoard: UIStoryboard = UIStoryboard(name: "iPad", bundle: nil)
             let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
             self.navigationController?.pushViewController(newViewController, animated: true)
             self.hideIndicator()
@@ -126,12 +127,32 @@ class BeefConfilictOrdersViewController: UIViewController {
                     UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)
                     self.delegateCustom1?.selectionObject!(check: false)
                 } else {
-                    if self.screenName == ClassIdentifiers.beefProductSelectionReviewScreen {
-                        self.delegateCustom1?.dataReload!(check :false)
-                        
-                    } else if self.screenName == ClassIdentifiers.beefReviewVCScreen{
-                        self.delegateCustom1?.dataReload!(check :true)
-                    }}
+//                    if self.screenName == ClassIdentifiers.beefProductSelectionReviewScreen {
+//                        self.delegateCustom1?.dataReload!(check :false)
+//                        
+//                    } else if self.screenName == ClassIdentifiers.beefReviewVCScreen{
+//                        self.delegateCustom1?.dataReload!(check :true)
+//                    }
+                    
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        if self.screenName == ClassIdentifiers.beefProductSelectionReviewScreen {
+                            self.delegateCustom1?.dataReload!(check :false)
+                            
+                        } else if self.screenName == ClassIdentifiers.beefReviewVCScreen{
+                            self.delegateCustom1?.dataReload!(check :true)
+                        }
+                    } else {
+                        if self.screenName == "BeefOPSSelectionReviewIPadVC" {
+                           // self.delegateCustom1?.dataReload!(check :false)
+                         //   self.navigationController?.popViewController(animated: false)
+                            self.dismissDelegate?.updateDismissUI()
+                        } else if self.screenName == "BeefReviewOrderVCIpad"{
+                            self.dismissDelegate?.updateDismissUI()
+                         //   self.delegateCustom1?.dataReload!(check :true)
+                           // self.navigationController?.popViewController(animated: false)
+                        }
+                    }
+                }
             }
         }))
         present(refreshAlert, animated: true, completion: nil)
@@ -139,12 +160,24 @@ class BeefConfilictOrdersViewController: UIViewController {
     
     @IBAction func crossBtnAction(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: keyValue.beefPlaceOrderCheck.rawValue)
+        UserDefaults.standard.set(false, forKey: keyValue.addDealerCodeCheck.rawValue)
         UserDefaults.standard.set(true, forKey: keyValue.checkValue.rawValue)
         self.dismiss(animated: false, completion: nil)
-        if self.screenName == ClassIdentifiers.beefProductSelectionReviewScreen {
-            self.delegateCustom1?.dataReload!(check :false)
-        } else if self.screenName == ClassIdentifiers.beefReviewVCScreen{
-            self.delegateCustom1?.dataReload!(check :true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            if self.screenName == ClassIdentifiers.beefProductSelectionReviewScreen {
+                self.delegateCustom1?.dataReload!(check :false)
+                
+            } else if self.screenName == ClassIdentifiers.beefReviewVCScreen{
+                self.delegateCustom1?.dataReload!(check :true)
+            }
+        } else {
+            if self.screenName == "BeefOPSSelectionReviewIPadVC" {
+                self.delegateCustom1?.dataReload!(check: true)
+              //  self.navigationController?.popViewController(animated: false)
+            } else if self.screenName == "BeefReviewOrderVCIpad"{
+                self.delegateCustom1?.dataReload!(check: true)
+              //  self.navigationController?.popViewController(animated: false)
+            }
         }
     }
 }
@@ -152,32 +185,67 @@ class BeefConfilictOrdersViewController: UIViewController {
 // MARK: - TABLEVIEW DATASOURCE AND DELEGATE
 extension BeefConfilictOrdersViewController :UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.conficlitOrders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:BeefConfilictOrdersCell = (self.conflictTableView.dequeueReusableCell(withIdentifier: "cell") as? BeefConfilictOrdersCell)!
-        let animalVal =  conficlitOrders[indexPath.row] as! BeefAnimaladdTbl
-        
+        let animalVal =  conficlitOrders[indexPath.section] as! BeefAnimaladdTbl
+        if animalVal.farmId != ""{
+            cell.onFarmIdLbl.text = animalVal.farmId
+        } else {
+            cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+        }
+        if animalVal.animalTag != ""{
+            cell.officalIdLbl.text = animalVal.animalTag
+        } else {
+            cell.officalIdLbl.text = "N/A" // Or any default placeholder
+        }
         if pviduser == 5 {
+            
             cell.onFarmIdLbl.text = animalVal.animalTag
             cell.officalIdLbl.text = animalVal.animalbarCodeTag
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             
         }
-        if pviduser == 13 {
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.animalbarCodeTag
-            cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.uniqueIdText, comment: "")
-            cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
-        }
+//        if pviduser == 13 {
+//            cell.onFarmIdLbl.text = animalVal.animalTag
+//            cell.officalIdLbl.text = animalVal.animalbarCodeTag
+//            cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.uniqueIdText, comment: "")
+//            cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
+//        }
         
         if pviduser == 6 {
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.offsireId
-            cell.barcodeLbl.text = animalVal.offPermanentId
-            cell.fourthLbl.text = animalVal.offDamId
+            if animalVal.offsireId != ""{
+                cell.officalIdLbl.text = animalVal.offsireId
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.animalTag != ""{
+                cell.onFarmIdLbl.text = animalVal.animalTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offPermanentId != ""{
+                cell.barcodeLbl.text = animalVal.offPermanentId
+            } else {
+                cell.barcodeLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offDamId != ""{
+                cell.fourthLbl.text = animalVal.offDamId
+            } else {
+                cell.fourthLbl.text = "N/A" // Or any default placeholder
+            }
+           
+           // cell.onFarmIdLbl.text = animalVal.animalTag
+          //  cell.officalIdLbl.text = animalVal.offsireId
+           // cell.barcodeLbl.text = animalVal.offPermanentId
+           // cell.fourthLbl.text = animalVal.offDamId
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.seriesText, comment: "")
             cell.barcodeTitleLbl.text = NSLocalizedString(LocalizedStrings.RGNText, comment: "")
@@ -185,8 +253,18 @@ extension BeefConfilictOrdersViewController :UITableViewDelegate,UITableViewData
         }
         
         if pviduser == 7 {
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.animalbarCodeTag
+            if animalVal.animalbarCodeTag != ""{
+                cell.officalIdLbl.text = animalVal.animalbarCodeTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.animalTag != ""{
+                cell.onFarmIdLbl.text = animalVal.animalTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+//            cell.onFarmIdLbl.text = animalVal.animalTag
+//            cell.officalIdLbl.text = animalVal.animalbarCodeTag
             cell.onFarmIdTitleLbl.text = NSLocalizedString(LocalizedStrings.animalTagStr, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
         }
@@ -208,6 +286,19 @@ extension BeefConfilictOrdersViewController :UITableViewDelegate,UITableViewData
     }
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Delete".localized
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // 1
+        let headerView = UIView()
+        // 2
+        headerView.backgroundColor = view.backgroundColor
+        // 3
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -194,7 +194,7 @@ class GetListForCustomerViewModel {
                     }
                 }
                 
-                if item.providerID == 7 || item.providerID == 13 {
+                if item.providerID == 7  { //|| item.providerID == 13
                     
                     let fetchDatEntry = fetchAllDataEnteryList(entityName: Entities.dataEntryListTblEntity,customerId:Int64(item.customerID ?? 0),listName: item.listName ?? "" ,productName:marketNameType.Beef.rawValue)
                     

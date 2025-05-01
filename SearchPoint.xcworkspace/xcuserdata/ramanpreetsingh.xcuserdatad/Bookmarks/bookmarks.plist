@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>122</string>
+					<key>EndingLineNumber</key>
+					<string>888</string>
+					<key>StartingColumnNumber</key>
+					<string>116</string>
+					<key>StartingLineNumber</key>
+					<string>888</string>
+					<key>Timestamp</key>
+					<string>766486051.162786</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>searchpoint_ios/SearchPoint/Beef dashboard/BeefOPSiPadVC.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>status</string>
+				<key>leading</key>
+				<string>                }
+                deleteDuplicateProductIds(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false",orderId:orderId,userId:userId, farmId: animaldata.animalTag!)
+                let dataval =  fetchAllDataFarmIdStatusCheck(entityName: "ProductAdonAnimlTbLBeef", asending: true, </string>
+				<key>trailing</key>
+				<string>: "true", orderStatus: "false",orderId:orderId,userId:userId, farmId: animaldata.animalTag!)
+                if dataval.count == 1{
+                    let datValue = dataval.object(at: 0) as! ProductAdonAnimlTbLBeef
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -4049,7 +4049,7 @@ func fetchAnimaldataValidateAnimalwithouOrderID(entityName: String, animalTag: S
     let pid =   UserDefaults.standard.integer(forKey: "BfProductId")
     
     if  UserDefaults.standard.value(forKey: "name") as? String == "Beef" {
-        if pvid == 5  || pvid == 7 || pvid == 13 {
+        if pvid == 5  || pvid == 7  { //|| pvid == 13
             requestDel.predicate = NSPredicate(format: "(animalTag LIKE[c] %@ )  AND userId == %d AND custmerId == %d" ,animalTag,userId,custmerId)
             
         }
@@ -4949,6 +4949,8 @@ func fetchAllDataFarmIdStatusCheck(entityName: String,asending:Bool ,status: Str
   
   return commanArray
 }
+
+
  
 func fetchAllDataFarmIdStatus(entityName: String,asending:Bool ,status: String,orderStatus:String,orderId:Int,userId:Int,farmId :String) -> NSArray{
     let managedObjectContext: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -7177,22 +7179,80 @@ func fetchSubProductDataBeef(entityName: String,productId: Int,animalTag: String
     requestDel.predicate = NSPredicate(format: "productId == %d AND animalTag == %@ AND orderId == %d AND userId == %d",productId,animalTag,orderId,userId)
     requestDel.returnsObjectsAsFaults = false
     do{
-        let fetchedResult = try context.fetch(requestDel) as? [NSManagedObject]
+        let fetchedResult = try context.fetch(requestDel) as? [ProductAdonAnimlTbLBeef]
+        
         if let results = fetchedResult{
-            
-            
-            
             commanArray = results as NSArray
-            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "adonId", ascending: true)
-            let sortedResults = commanArray.sortedArray(using: [descriptor])
-            commanArray = sortedResults as NSArray
+//            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "adonId", ascending: true)
+//            let sortedResults = commanArray.sortedArray(using: [descriptor])
+//            commanArray = sortedResults as NSArray
             //commanArray = results as NSArray
+            var animalId = Int()
+            if fetchedResult!.count > 1 {
+                    for x in fetchedResult! {
+                        if x.animalId == animalId {
+                            print("already exist")
+                            context.delete(x)
+                            let fetchedResult = try context.fetch(requestDel) as? [ProductAdonAnimlTbLBeef]
+                            if let results = fetchedResult{
+                                commanArray = results as NSArray
+                            }
+                        } else {
+                            animalId = Int(x.animalId)
+                            let fetchedResult = try context.fetch(requestDel) as? [ProductAdonAnimlTbLBeef]
+                            if let results = fetchedResult{
+                                commanArray = results as NSArray
+                            }
+                        }
+                    }
+                }
+            
         }
     } catch {
     }
     return commanArray
 }
 
+func deleteDuplicateProductIds(entityName: String,asending:Bool ,status: String,orderStatus:String,orderId:Int,userId:Int,farmId :String){
+  let managedObjectContext: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  let fetchRequest   =  NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+  fetchRequest.returnsObjectsAsFaults = false
+  
+  fetchRequest.predicate = NSPredicate(format: "status == %@ AND orderstatus == %@ AND orderId == %d AND userId == %d AND animalTag == %@", status,orderStatus,orderId,userId,farmId)
+  
+  fetchRequest.returnsObjectsAsFaults = false
+  do{
+    let fetchedResult = try managedObjectContext.fetch(fetchRequest) as? [ProductAdonAnimlTbLBeef]
+    if let results = fetchedResult{
+      
+      commanArray = results as NSArray
+      let descriptor: NSSortDescriptor = NSSortDescriptor(key: "farmId", ascending: asending)
+      let sortedResults = commanArray.sortedArray(using: [descriptor])
+      commanArray = sortedResults as NSArray
+        
+        var productIdArray = [Int]()
+        var productId = Int()
+        for product in fetchedResult! {
+            if product.productId == productId {
+                managedObjectContext.delete(product)
+            } else {
+                productId = Int(product.productId)
+                productIdArray.append(Int(product.productId))
+//                for id in productIdArray {
+//                    if id == product.productId {
+//                        managedObjectContext.delete(product)
+//                    } else {
+//                        
+//                    }
+//                }
+            }
+            print(productIdArray)
+        }
+    }
+  } catch {
+  }
+  
+}
 
 
 func fetchSubProductDataTrue(productId: Int,animalTag: String,status: String,orderId:Int,userId:Int) -> NSArray{
@@ -9821,6 +9881,27 @@ func fetchAllDataEditCondition(entityName: String,userId:Int,orderStatus:String,
     
     return commanArray
 }
+
+func fetchAllDataEditConditionWithoutServerId(entityName: String,userId:Int,orderStatus:String,listid:Int64,custmerId:Int64,providerId:Int,serverAnimalId:String) -> NSArray{
+    let managedObjectContext: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let fetchRequest   =  NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+    fetchRequest.predicate = NSPredicate(format: "orderstatus == %@ AND listId == %d AND custmerId == %d AND providerId == %d AND serverAnimalId == %@ AND addeditdelete == %d",orderStatus,listid,custmerId,providerId,serverAnimalId,2)
+    fetchRequest.returnsObjectsAsFaults = false
+    do{
+        let fetchedResult = try managedObjectContext.fetch(fetchRequest) as? [NSManagedObject]
+        if let results = fetchedResult{
+            commanArray = results as NSArray
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "farmId", ascending: false)
+            let sortedResults = commanArray.sortedArray(using: [descriptor])
+            commanArray = sortedResults as NSArray
+            //commanArray = results as NSArray
+        }
+    } catch {
+    }
+    
+    return commanArray
+}
+
 
 
 func fetchAllDataOrderStatusWithoutOrderId(entityName: String,ordestatus: String,orderId:Int,userId:Int) -> NSArray{

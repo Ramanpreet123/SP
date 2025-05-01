@@ -599,7 +599,7 @@ extension MyHerdResultsByAnimalViewController {
         var filteredData = [AutoAnimalList]()
         if searchByEarTag {
             
-            self.viewModel.autoAnimalData.filter({ ($0.earTag ?? "").lowercased().contains(seachText.lowercased())})
+            filteredData =  self.viewModel.autoAnimalData.filter({ ($0.earTag ?? "").lowercased().contains(seachText.lowercased())})
             
             
         } else {

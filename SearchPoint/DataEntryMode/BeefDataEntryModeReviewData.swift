@@ -188,7 +188,8 @@ class BeefDataEntryModeReviewData: UIViewController{
     
     // MARK: - IB ACTIONS
     @IBAction func bckBtnAction(_ sender: UIButton) {
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
     }
     
     @IBAction func cartBttnAction(_ sender: Any) {
@@ -618,28 +619,73 @@ extension BeefDataEntryModeReviewData :UITableViewDelegate,UITableViewDataSource
         let animalVal  =  reviewListArray[indexPath.row]
         
         if pviduser == 7{
+            if animalVal.animalTag != ""{
+                cell.onFarmIdLbl.text = animalVal.animalTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.animalbarCodeTag != ""{
+                cell.officalIdLbl.text = animalVal.animalbarCodeTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
             cell.onFarmIdTitleLbl.text = LocalizedStrings.animalTagTattoo.localized
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.animalbarCodeTag
+//            cell.onFarmIdLbl.text = animalVal.animalTag
+//            cell.officalIdLbl.text = animalVal.animalbarCodeTag
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
         }
         if pviduser == 5{
+            if animalVal.animalTag != ""{
+                cell.onFarmIdLbl.text = animalVal.animalTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.animalbarCodeTag != ""{
+                cell.officalIdLbl.text = animalVal.animalbarCodeTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.animalbarCodeTag
+//            cell.onFarmIdLbl.text = animalVal.animalTag
+//            cell.officalIdLbl.text = animalVal.animalbarCodeTag
         }
         
         if pviduser == 6 {
+            if animalVal.animalTag != ""{
+                cell.onFarmIdLbl.text = animalVal.animalTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offsireId != ""{
+                cell.officalIdLbl.text = animalVal.offsireId
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offPermanentId != ""{
+                cell.barcodeLbl.text = animalVal.offPermanentId
+            } else {
+                cell.barcodeLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offPermanentId != ""{
+                cell.barcodeLbl.text = animalVal.offPermanentId
+            } else {
+                cell.barcodeLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.offDamId != ""{
+                cell.fourthLbl.text = animalVal.offDamId
+            } else {
+                cell.fourthLbl.text = "N/A" // Or any default placeholder
+            }
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.seriesText, comment: "")
-            cell.onFarmIdLbl.text = animalVal.animalTag
-            cell.officalIdLbl.text = animalVal.offsireId
+//            cell.onFarmIdLbl.text = animalVal.animalTag
+//            cell.officalIdLbl.text = animalVal.offsireId
             cell.barcodeTitleLbl.text = NSLocalizedString(LocalizedStrings.RGNText, comment: "")
-            cell.barcodeLbl.text = animalVal.offPermanentId
+           // cell.barcodeLbl.text = animalVal.offPermanentId
             cell.fourthTitleLbl.text = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
-            cell.fourthLbl.text = animalVal.offDamId
+           // cell.fourthLbl.text = animalVal.offDamId
             cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.seriesText, comment: "")
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             cell.fourthTitleLbl.text = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")

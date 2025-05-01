@@ -342,14 +342,14 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
                     let maxLength = 9
 //                    let currentString = (textField.text ?? "") as NSString
 //                    let newString = currentString.replacingCharacters(in: range, with: string)
-                    let check  = LocalizedStrings.farmIdRegex.contains(string)
+                    let check  = LocalizedStrings.farmIdRegexAlphanumeric.contains(string)
                       if check == false {
                           return false
                       }
                   
                     return newString.count <= maxLength
                 }
-              let check  = LocalizedStrings.farmIdRegex.contains(string)
+              let check  = LocalizedStrings.farmIdRegexAlphanumeric.contains(string)
               //borderRedCheck = true
               if check == false {
                 return false
@@ -380,14 +380,14 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
                     let maxLength = 9
 //                    let currentString = (textField.text ?? "") as NSString
 //                    let newString = currentString.replacingCharacters(in: range, with: string)
-                    let check  = LocalizedStrings.farmIdRegex.contains(string)
+                    let check  = LocalizedStrings.farmIdRegexAlphanumeric.contains(string)
                       if check == false {
                           return false
                       }
                   
                     return newString.count <= maxLength
                 }
-              let check  = LocalizedStrings.farmIdRegex.contains(string)
+              let check  = LocalizedStrings.farmIdRegexAlphanumeric.contains(string)
              // borderRedCheck = true
               if check == false {
                 return false

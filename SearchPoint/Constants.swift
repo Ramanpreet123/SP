@@ -19,7 +19,7 @@ struct Constants {
     static let circleViewIdentifier = "MLKit Circle View"
     static let lineViewIdentifier = "MLKit Line View"
     static let rectangleViewIdentifier = "MLKit Rectangle View"
-    static let appVersion = "Ver: UAT 3.0"
+    static let appVersion = "Ver: UAT 3.0.06"
     static var farmValue : String?
     static var marketName : String?
     static var providerId : Int?
@@ -409,6 +409,8 @@ struct LocalizedStrings {
     static let noPhotoSaved = "No photo currently saved"
     static let banStatus = "ban"
     static let alphaNumericFormat = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\("")"
+    static let numericFormat = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\("")"
+
     static let animationEndNoti = "AnimationEnd"
     static let officialCheckId = "Offlicail"
     static let imageSelection = "Image Selection"
@@ -493,7 +495,9 @@ struct LocalizedStrings {
     static let sireIDShouldBeDiff = "The SireID cannot be the same as the Official ID or the On Farm ID."
     static let animalsMissingInfo = "animal(s) have missing information. Please select action to be performed."
     static let memomeryLowInfo = "Your device is running low on memory. To prevent performance issues or disruptions, please close unused apps or free up storage space."
-    static let farmIdRegex = "^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\("") !\"#$%&'()*+-./:<=>?@\\[\\\\\\]^_`{|}~].{8}$"
+    static let farmIdRegexAlphanumeric = "^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\("") !\"#$%&'()*+-./:<=>?@\\[\\\\\\]^_`{|}~].{8}$"
+    static let farmIdRegexNumeric = "0123456789"
+
     static let earTagRegex = "+?%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#$&'()*-./:<=>@\\[\\\\\\]^_`{|}~].{8}$"
 }
 

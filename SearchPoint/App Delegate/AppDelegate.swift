@@ -35,8 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var status :String?
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if UIDevice().userInterfaceIdiom == .phone {
+            return .portrait
+        }
             return self.orientationLock
     }
+    
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         

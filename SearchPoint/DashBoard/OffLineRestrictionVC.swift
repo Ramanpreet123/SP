@@ -132,7 +132,15 @@ class OffLineRestrictionVC: UIViewController {
     
     //MARK: IB ACTIONS
     @IBAction func backBtnClk(_ sender: UIButton) {
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+     
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        }
+        else {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        }
+     
     }
     
     @IBAction func showMenuBtn(_ sender: Any) {
@@ -148,7 +156,13 @@ class OffLineRestrictionVC: UIViewController {
         self.view .addSubview(buttonbg)
         customPopView = OfflinePopUp.loadFromNibNamed(ClassIdentifiers.offlineViewNib) as? OfflinePopUp
         customPopView.delegate = self
-        customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+        if UIDevice().userInterfaceIdiom == .phone {
+            customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+
+        } else {
+            customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 330,height: screenSize.height/1.7)
+
+        }
         customPopView.center = view.center
         customPopView.layer.cornerRadius = 8
         customPopView.layer.borderWidth = 3

@@ -2,9 +2,10 @@
 //  QuestionaireViewCell.swift
 //  SearchPoint
 //
-//  Created by "" 16/03/20.
+//  Created by Ramanpreet Singh on 02/03/25.
 //
 
+import Foundation
 import UIKit
 
 class QuestionaireViewCell: UITableViewCell {

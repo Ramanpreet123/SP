@@ -22,33 +22,33 @@
                         <rect key="frame" x="2" y="0.0" width="298" height="240"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderplaced" translatesAutoresizingMaskIntoConstraints="NO" id="fjz-P5-uZB">
-                                <rect key="frame" x="119" y="30" width="60" height="60"/>
+                                <rect key="frame" x="119" y="22" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="AI8-MG-cmG"/>
                                     <constraint firstAttribute="width" constant="60" id="z3x-5r-pO6"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACE AN ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUd-rP-3bh">
-                                <rect key="frame" x="56.666666666666657" y="107" width="185" height="27"/>
+                                <rect key="frame" x="56.666666666666657" y="99" width="185" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your desired items, and proceed to checkout. Placing an order is simple and convenient…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-Gx-OjY">
-                                <rect key="frame" x="20" y="151" width="258" height="61"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select your desired items, and proceed to checkout. Placing an order is simple and convenient…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-Gx-OjY">
+                                <rect key="frame" x="14" y="141" width="270" height="71"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="rbA-Gx-OjY" secondAttribute="trailing" constant="20" id="Hne-N5-Td2"/>
-                            <constraint firstItem="fjz-P5-uZB" firstAttribute="top" secondItem="xXY-iS-dJv" secondAttribute="top" constant="30" id="ReQ-Ma-U6P"/>
-                            <constraint firstItem="rbA-Gx-OjY" firstAttribute="leading" secondItem="xXY-iS-dJv" secondAttribute="leading" constant="20" id="Tu7-wj-Ul7"/>
+                            <constraint firstAttribute="trailing" secondItem="rbA-Gx-OjY" secondAttribute="trailing" constant="14" id="Hne-N5-Td2"/>
+                            <constraint firstItem="fjz-P5-uZB" firstAttribute="top" secondItem="xXY-iS-dJv" secondAttribute="top" constant="22" id="ReQ-Ma-U6P"/>
+                            <constraint firstItem="rbA-Gx-OjY" firstAttribute="leading" secondItem="xXY-iS-dJv" secondAttribute="leading" constant="14" id="Tu7-wj-Ul7"/>
                             <constraint firstItem="fjz-P5-uZB" firstAttribute="centerX" secondItem="xXY-iS-dJv" secondAttribute="centerX" id="Vk8-vt-5L2"/>
                             <constraint firstItem="VUd-rP-3bh" firstAttribute="top" secondItem="fjz-P5-uZB" secondAttribute="bottom" constant="17" id="Vvw-jj-eLn"/>
-                            <constraint firstItem="rbA-Gx-OjY" firstAttribute="top" secondItem="VUd-rP-3bh" secondAttribute="bottom" constant="17" id="bNs-fD-2aw"/>
+                            <constraint firstItem="rbA-Gx-OjY" firstAttribute="top" secondItem="VUd-rP-3bh" secondAttribute="bottom" constant="15" id="bNs-fD-2aw"/>
                             <constraint firstAttribute="height" constant="240" id="rLS-oG-LQ8"/>
                             <constraint firstItem="VUd-rP-3bh" firstAttribute="centerX" secondItem="fjz-P5-uZB" secondAttribute="centerX" id="sDb-3m-POo"/>
                         </constraints>

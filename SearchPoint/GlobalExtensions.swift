@@ -401,7 +401,7 @@ extension UITableView {
         lblMessage.textColor = .black
         lblMessage.numberOfLines = 0
         lblMessage.textAlignment = .center
-        lblMessage.font = UIFont(name: "TrebuchetMS", size: 15)
+        lblMessage.font = UIFont(name: "TrebuchetMS", size: 22)
         lblMessage.sizeToFit()
 
         self.backgroundView = lblMessage

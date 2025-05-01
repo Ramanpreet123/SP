@@ -22,6 +22,8 @@ class OpenSheetViewController: UIViewController {
    // weak var delegate: CustomersListControllerDelegate?
     var customerList = [GetCustomer]()
     weak var delegate: OpenSheetViewControllerDelegate?
+    var searchText = String()
+    var searchData = [GetCustomer]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +81,9 @@ class OpenSheetViewController: UIViewController {
             
             UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
             self.hideIndicator()
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+       
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
             
         }))
         
@@ -90,6 +94,9 @@ class OpenSheetViewController: UIViewController {
 extension OpenSheetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        // return customers.count
+        if searchData.count > 0 {
+            return searchData.count
+        }
         return customerList.count
     }
 
@@ -102,7 +109,7 @@ extension OpenSheetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected Customer: \(customerList[indexPath.row])")
         self.selectedCustomer = customerList[indexPath.row]
-        delegate?.didSelectCustomer(customerList[indexPath.row].customerName ?? "", selectedCustomer: self.selectedCustomer!)
+     //   delegate?.didSelectCustomer(customerList[indexPath.row].customerName ?? "", selectedCustomer: self.selectedCustomer!)
         dismiss(animated: true, completion: nil)
     }
 }

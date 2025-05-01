@@ -48,7 +48,7 @@ class TimerApplication: UIApplication {
     
     super.sendEvent(event)
     
-    if idleTimer != nil {
+    if idleTimer != nil {3
       self.resetIdleTimer()
     }
     

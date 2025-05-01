@@ -49,15 +49,24 @@ class DataEntryModeHelpVC: UIViewController {
     func setInitialUI(){
         self.navigationController?.navigationBar.isHidden = true
         if UserDefaults.standard.value(forKey: keyValue.dataEntryHelpScreen.rawValue) as? Bool == true {
-            let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeListVC) as! DataEntryModeListVC
-            self.navigationController?.pushViewController(secondViewController, animated: false)
+            if UIDevice().userInterfaceIdiom == .phone {
+                let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: Bundle.main)
+                let secondViewController = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeListVC) as! DataEntryModeListVC
+                self.navigationController?.pushViewController(secondViewController, animated: false)
+            } else {
+                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                let secondViewController = storyboard.instantiateViewController(withIdentifier: "DataEntryModeListiPadVC") as! DataEntryModeListiPadVC
+                self.navigationController?.pushViewController(secondViewController, animated: false)
+            }
+          
+            
             
         }
         initialNetworkCheck()
         UserDefaults.standard.set(false, forKey: keyValue.expandView.rawValue)
         screenTitleHelp.text = LocalizedStrings.dataEntryModeHelp.localized
         acknoeledgeBtnOutlet.setTitle(LocalizedStrings.acknowledge.localized, for: .normal)
-        appStatusText.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
+     //   appStatusText.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
         helpTextView1.text = LocalizedStrings.focusedDataEntryMode.localized
         helpTextView2.text = LocalizedStrings.previousAnimalData.localized
         helpTextView3.text = LocalizedStrings.sampleBarcodeCollector.localized
@@ -115,13 +124,20 @@ class DataEntryModeHelpVC: UIViewController {
     // MARK: - IB ACTIONS
     
     @IBAction func acknowledgeBtnAction(_ sender: UIButton) {
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeListVC)), animated: true)
+        } else {
+            let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "DataEntryModeListiPadVC")), animated: true)
+        }
         UserDefaults.standard.set(true, forKey: keyValue.dataEntryHelpScreen.rawValue)
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeListVC)), animated: true)
+      
         
     }
     
     @IBAction func backBtnAction(_ sender: UIButton) {
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
         
     }
     

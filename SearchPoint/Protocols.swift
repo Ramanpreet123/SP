@@ -63,6 +63,12 @@ protocol syncApi{
     func failWithInternetConnection()
 }
 
+protocol updateDataEntryListDelegate{
+  func refreshList()
+    func navigateToMergeList(listName : String, descText : String)
+}
+
+
 protocol UpdateView {
     func responseRecievedStatus(value:String)
    
@@ -111,6 +117,19 @@ protocol BillingDelegate {
 
 protocol CustomTableViewCellDelegate {
     func didToggleRadioButton(_ indexPath: IndexPath)
+}
+
+@objc protocol DismissConflictPopUp {
+    func updateDismissUI()
+}
+
+protocol ADHBarcodeView {
+    func showBarcodeView(isHidden : Bool?)
+}
+
+
+@objc protocol ImportListProtocol {
+    func importList(listNameString: String, listId: Int)
 }
 
 protocol ADHFilterProtocol {

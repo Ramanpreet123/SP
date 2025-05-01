@@ -109,7 +109,14 @@ class SideMenuVC: UIViewController {
         let count = UserDefaults.standard.integer(forKey: keyValue.countAnimal.rawValue)
         let custId = UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as? Int
         saveCustomerDataCount(customerId: Int64(custId!), dataCount: Int64(count))
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        } else {
+       
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        }
+    
         self.sideMenuViewController!.hideMenuViewController()
         
     }
@@ -582,7 +589,14 @@ extension SideMenuVC : UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             self.customerOrderSetting.saveCustomerSetting()
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+            if UIDevice().userInterfaceIdiom == .phone {
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+            } else {
+             
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+            }
+          
             self.sideMenuViewController!.hideMenuViewController()
             
         case 1:
@@ -591,19 +605,36 @@ extension SideMenuVC : UITableViewDataSource, UITableViewDelegate {
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
                 self.sideMenuViewController!.hideMenuViewController()
             }  else {
-                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+                UserDefaults.standard.set(1, forKey: keyValue.orderSlideTag.rawValue)
+              
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
                 self.sideMenuViewController!.hideMenuViewController()
             }
          
         case 2:
                 self.customerOrderSetting.saveCustomerSetting()
+            if UIDevice().userInterfaceIdiom == .phone {
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.offLineRestrictionVC)), animated: true)
+            } else {
+             
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.offLineRestrictionVC)), animated: true)
+            }
+         
                 self.sideMenuViewController!.hideMenuViewController()
           
             
         case 3:
             self.customerOrderSetting.saveCustomerSetting()
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            if UIDevice().userInterfaceIdiom == .phone {
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            } else {
+              
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            }
+        
             self.sideMenuViewController!.hideMenuViewController()
             
         case 4:
@@ -885,13 +916,27 @@ extension SideMenuVC : UITableViewDataSource, UITableViewDelegate {
 extension SideMenuVC : ResponseLogoutApi {
     func logoutSuccess(){
         self.hideIndicator()
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        } else {
+          
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        }
+     
         self.sideMenuViewController!.hideMenuViewController()
     }
     
     func responseRecievedStstus(status:Bool) {
         self.hideIndicator()
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        } else {
+        
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        }
+      
         self.sideMenuViewController!.hideMenuViewController()
     }
 }

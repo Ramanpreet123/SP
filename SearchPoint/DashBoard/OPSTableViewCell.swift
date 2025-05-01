@@ -12,6 +12,9 @@ import UIKit
 class OPSTableViewCell: UITableViewCell {
     
     //MARK: IB OUTLETS
+    @IBOutlet weak var noAddOnLbl: UILabel!
+    @IBOutlet weak var collView1: UICollectionView!
+    @IBOutlet weak var collView2: UICollectionView!
     @IBOutlet weak var deleteBttn: UIButton!
     @IBOutlet weak var OfficialId: UILabel!
     @IBOutlet weak var OnFarmId: UILabel!
@@ -32,6 +35,10 @@ class OPSTableViewCell: UITableViewCell {
     @IBOutlet weak var barcodeTitleleft: UILabel!
     @IBOutlet weak var rgdOrAnimalID: UILabel!
     @IBOutlet weak var farmIdColonHeight: NSLayoutConstraint!
+    @IBOutlet weak var productTitle: UILabel!
+    @IBOutlet weak var productTitleSecond: UILabel!
+    @IBOutlet weak var productTitleThird: UILabel!
+    @IBOutlet weak var productTitleFourth: UILabel!
     
     //MARK: VARIABLES
     var arr2 :[String]?

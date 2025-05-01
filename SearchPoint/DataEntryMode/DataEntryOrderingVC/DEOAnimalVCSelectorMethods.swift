@@ -366,7 +366,394 @@ extension DataEntryOrderingAnimalVC {
       let animalData = fetchAnimaldataValidateAnimalwithouOrderID(entityName: Entities.dataEntryAnimalAddTbl, animalTag:animalTagValue.uppercased(), farmId: farmIdValue, animalbarCodeTag: scanBarcodeText.text!.uppercased(), offPermanentId: permanentIDTextField.text!.uppercased(), offDamId: damtexfield.text!.uppercased(), offsireId: sireIdTextField.text!.uppercased(),orderId:orderId,userId:userId,custmerId:custmerId ?? 0)
         
         if isautoPopulated == false {
-            if animalData.count > 0 {
+            if animalData1.count > 0 {
+                self.view.hideToast()
+                let data = animalData1.lastObject as! AnimalMaster
+                if data.breedName == ButtonTitles.girolandoText || data.breedId == keyValue.girlandoNewBreedId.rawValue || data.breedName == BreedNames.girlandoBreed{
+                    return
+                }
+                
+                adhDataServerAutoPopulate = data.adhDataServer
+                barcodeflag = false
+                isautoPopulated = true
+                barAutoPopu = true
+                textFieldBackroungWhite()
+                updateOrder = true
+                dataAutoPopulatedBool =  true
+                
+                let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
+                animalId1 = Int(data.animalId)
+                if pvid == 3 {
+                    sireIdValidationB = true
+                    autoSuggestionStatus = true
+                } else {
+                    sireIdValidationB = false
+                    autoSuggestionStatus = false
+                    
+                }
+                if selctionAuProvider == true {
+                    if data.sireIDAU == "" {
+                    } else {
+                        nationalHerdIdTextField.text = data.nationHerdAU
+                        sireIAuTextField.text = data.sireIDAU
+                    }
+                    
+                } else {
+                    nationalHerdIdTextField.text = data.nationHerdAU
+                    sireIAuTextField.text = data.sireIDAU
+                }
+                
+                officalTagView.layer.borderColor = UIColor.gray.cgColor
+                farmIdView.layer.borderColor = UIColor.gray.cgColor
+                barcodeView.layer.borderColor = UIColor.gray.cgColor
+                permanentIDTextField.layer.borderColor = UIColor.gray.cgColor
+                sireIdTextField.layer.borderColor = UIColor.gray.cgColor
+                damtexfield.layer.borderColor = UIColor.gray.cgColor
+                dateBtnOutlet.titleLabel!.text = ""
+                if data.date != "" {
+                    
+                    let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
+                    let formatter = DateFormatter()
+                    if dateStr == "MM"{
+                        var dateVale = ""
+                        let values = data.date!.components(separatedBy: "/")
+                        let date = values[0]
+                        let month = values[1]
+                        let year = values[2]
+                        dateVale = month + "/" + date + "/" + year
+                        dateBtnOutlet.setTitle(dateVale, for: .normal)
+                        dateTextField.text = dateVale
+                        formatter.dateFormat = DateFormatters.MMddyyyyFormat
+                    }
+                    else {
+                        var dateVale = ""
+                        let values = data.date!.components(separatedBy: "/")
+                        let date = values[0]
+                        let month = values[1]
+                        let year = values[2]
+                        dateVale = date + "/" + month + "/" + year
+                        dateBtnOutlet.setTitle(dateVale, for: .normal)
+                        dateTextField.text = dateVale
+                        formatter.dateFormat = DateFormatters.ddMMyyyyFormat
+                    }
+                    
+                    self.selectedDate = formatter.date(from: dateBtnOutlet.titleLabel!.text!) ?? Date()
+                    let isGreater = Date().isSmaller(than: selectedDate)
+                    if isGreater == true {
+                        dateBtnOutlet.setTitle("", for: .normal)
+                        dateTextField.text = ""
+                    }
+                }
+                
+                permanentIDTextField.text = data.offPermanentId
+                checkBarcode = false
+                incrementalBarcodeTitleLabel.textColor = .black
+                incrementalBarcodeButton.isEnabled = true
+                
+                let dataFetch = fetchAllDataWithAnimalId(entityName: Entities.dataEntryAnimalAddTbl,orderId:Int(data.orderId),userId:Int(data.userId),animalId:Int(data.animalId))
+                if dataFetch.count != 0 {
+                    if data.orderstatus == "true"{
+                    
+                    } else {
+                        scanBarcodeText.text = data.animalbarCodeTag
+                        UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncremental.rawValue)
+                        UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncrementalClear.rawValue)
+                        self.isBarcodeAutoIncrementedEnabled = false
+                        incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.incrementalCheckImg)
+                        incrementalBarcodeButton.isEnabled = false
+                        incrementalBarcodeTitleLabel.textColor = .gray
+                        incrementalBarcodeCheckBox.alpha = 0.6
+                        incrementalBarcodeTitleLabel.alpha = 0.6
+                        checkBarcode = false
+                        matchedBarcodeCheckBox.image = UIImage(named: ImageNames.incrementalCheckImg)
+                        matchedBarcodeBtnOutlet.isEnabled = false
+                        matchedBarcodeLbl.textColor = .gray
+                        matchedBarcodeLbl.alpha = 0.6
+                        matchedBarcodeCheckBox.alpha = 0.6
+                        matchedBarcodeBtnOutlet.alpha = 0.6
+                        UserDefaults.standard.setValue(false, forKey: keyValue.matchedBarcodeFlagDataEntry.rawValue)
+                    }
+                }
+ 
+                tissueBtnOutlet.setTitleColor(.black, for: .normal)
+                breedBtnOutlet.setTitleColor(.black, for: .normal)
+                tissueBtnOutlet.setTitle(data.tissuName, for: .normal)
+                UserDefaults.standard.set(data.tissuName, forKey: keyValue.dataEntryTsu.rawValue)
+                
+                if data.tissuName?.isEmpty == true {
+                    let providerName = UserDefaults.standard.value(forKey: keyValue.providerName.rawValue) as? String
+                    if providerName == keyValue.clarifideAHDBUK.rawValue{
+                        
+                        self.tissueArr = fetchproviderData(entityName: Entities.getSampleTblEntity, provId: UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue))
+                        for items in self.tissueArr
+                        {
+                            let tissue = items  as? GetSampleTbl
+                            let checkdefault  = tissue?.isDefault
+                            
+                            if self.pvid == 11 {
+                                let country : String = UserDefaults.standard.object(forKey: keyValue.country.rawValue) as? String ?? ""
+                                switch country  {
+                                case countryName.Belgium.title, countryName.Luxembourg.title :
+                                    self.saveSampleNameandID(sampleNameStr: ButtonTitles.allflexTSUText, sampleID: 1)
+                                    self.tissueBtnOutlet.setTitle(ButtonTitles.allflexTSUText, for: .normal)
+                                case countryName.Netherlands.title :
+                                    self.saveSampleNameandID(sampleNameStr: LocalizedStrings.hairString, sampleID: 4)
+                                    self.tissueBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.hairString, comment: ""), for: .normal)
+                                default:
+                                    break
+                                }
+                            } else if self.pvid == 8 {
+                                self.saveSampleNameandID(sampleNameStr: LocalizedStrings.hairString, sampleID: 4)
+                                self.tissueBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.hairString, comment: ""), for: .normal)
+                            }
+                            else {
+                                if checkdefault == true
+                                {
+                                    self.saveSampleNameandID(sampleNameStr: tissue?.sampleName ?? "", sampleID: 0)
+                                    self.tissueBtnOutlet.setTitle(tissue?.sampleName?.localized, for: .normal)
+                                }
+                            }
+                        }
+                      
+                    } else {
+                        self.tissueArr = fetchproviderData(entityName: Entities.getSampleTblEntity, provId: UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue))
+                        for items in self.tissueArr
+                        {
+                            let tissue = items  as? GetSampleTbl
+                            let checkdefault  = tissue?.isDefault
+                            
+                            if pvid == 11 {
+                                let country : String = UserDefaults.standard.object(forKey: keyValue.country.rawValue) as? String ?? ""
+                                switch country  {
+                                case countryName.Belgium.title, countryName.Luxembourg.title :
+                                    self.saveSampleNameandID(sampleNameStr: ButtonTitles.allflexTSUText, sampleID: 1)
+                                    self.tissueBtnOutlet.setTitle(ButtonTitles.allflexTSUText, for: .normal)
+                                case countryName.Netherlands.title :
+                                    self.saveSampleNameandID(sampleNameStr: LocalizedStrings.hairString, sampleID: 4)
+                                    self.tissueBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.hairString, comment: ""), for: .normal)
+                                default:
+                                    break
+                                }
+                            } else if pvid == 8 {
+                                self.saveSampleNameandID(sampleNameStr: LocalizedStrings.hairString, sampleID: 4)
+                                self.tissueBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.hairString, comment: ""), for: .normal)
+                            }
+                            else {
+                                if checkdefault == true
+                                {
+                                    self.saveSampleNameandID(sampleNameStr: tissue?.sampleName ?? "", sampleID: 4)
+                                    self.tissueBtnOutlet.setTitle(tissue?.sampleName?.localized, for: .normal)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if data.breedId == "" {
+                    let inheritBreed = fetchAllDataProductBreedIdDairy(entityName: Entities.getBreedsTblEntity,breedId:breedId,pvid:pvid)
+                    if inheritBreed.count != 0 {
+                        let medbreedRegArr1 = inheritBreed.object(at: 0) as? GetBreedsTbl
+                        data.breedName = medbreedRegArr1?.alpha2 ?? medbreedRegArr1?.threeCharCode ?? medbreedRegArr1?.breedName
+                        data.breedId = breedId
+                    }
+                }
+                
+                breedBtnOutlet.setTitle(data.breedName, for: .normal)
+                breedId = data.breedId!
+                let breedidd =  UserDefaults.standard.value(forKey: keyValue.dataEntrybreedId.rawValue) as? String
+                if breedidd != breedId {
+                    let  aDat = fetchAnimaldata(status: Entities.dataEntryAnimalAddTbl)
+                    if aDat.count > 1{
+                        UserDefaults.standard.set(true, forKey: keyValue.identifyStore.rawValue)
+                    }
+                }
+                UserDefaults.standard.set(breedId, forKey: keyValue.dataEntrybreedId.rawValue)
+                
+                if data.gender == ButtonTitles.maleText.localized || data.gender == "M" {
+                    self.male_femaleBtnOutlet.setImage(UIImage(named: "LangMale\(langCode)"), for: .normal)
+                    genderToggleFlag = 1
+                    genderString = NSLocalizedString(ButtonTitles.maleText, comment: "")
+                    
+                } else {
+                    self.male_femaleBtnOutlet.setImage(UIImage(named: "LangFemale\(langCode)"), for: .normal)
+                    genderToggleFlag = 0
+                    genderString = ButtonTitles.femaleText.localized
+                    
+                }
+                
+                let screenRefernce = UserDefaults.standard.value(forKey:keyValue.screen.rawValue) as? String
+                if screenRefernce == keyValue.farmId.rawValue || screenRefernce == ""{
+                    scanAnimalTagText.text = data.farmId
+                    UserDefaults.standard.set(data.animalTag!.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
+                    farmIdTextField.text = data.animalTag
+                    if data.animalTag!.count  == 17 {
+                        borderRedCheck = false
+                        farmIdTextField.textColor = UIColor.black
+                    } else {
+                        
+                        if data.animalTag!.count  == 0{
+                        } else {
+                            let replacedString = farmIdTextField.text?.replacingOccurrences(of: " ", with: "")
+                            self.validationId17(animalId: replacedString?.uppercased() ?? "")
+                        }
+                    }
+                } else {
+                    scanAnimalTagText.text = data.animalTag
+                    UserDefaults.standard.set(data.animalTag!.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
+                    farmIdTextField.text = data.farmId
+                    
+                    if data.animalTag?.count == 17 {
+                        let twoString = data.animalTag
+                        let twoBreed  = String((twoString?.prefix(2))!)
+                        if breedAr.contains(twoBreed) {
+                            
+                            self.breedBtnOutlet.setTitle(twoBreed, for: .normal)
+                            let codeId1 = fetchBreedDatabreedCode( entityName: Entities.getBreedsTblEntity,provId: self.pvid,breedCode:(self.breedBtnOutlet.titleLabel?.text)!)
+                            let naabFetch11 = codeId1.value(forKey: keyValue.breedId.rawValue) as? NSArray
+                            if naabFetch11!.count == 0 {
+                                
+                            } else {
+                                let breedIdGet = (naabFetch11![0] as? String)!
+                                self.breedId = breedIdGet
+                                UserDefaults.standard.set(self.breedId, forKey: keyValue.dataEntrybreedId.rawValue)
+                                let breedName = codeId1.value(forKey: keyValue.alpha2.rawValue) as? NSArray
+                                if naabFetch11!.count != 0 {
+                                    let nameBreed = (breedName![0] as? String)!
+                                    self.breedBtnOutlet.setTitle(nameBreed, for: .normal)
+                                }}
+                        }
+                    }
+                }
+                damIdValidationB = false
+                singleBttn.layer.borderColor = UIColor.gray.cgColor
+                singleBttn.layer.borderWidth = 0.5
+                let et = data.eT
+                etBtn = et!
+                etBttn.layer.borderWidth = 0.5
+                singleBttn.layer.borderWidth = 0.5
+                multipleBirthBttn.layer.borderWidth = 0.5
+                cloneOutlet.layer.borderWidth = 0.5
+                SplitEmbryoOutlet.layer.borderWidth = 0.5
+                internalBtnOulet.layer.borderWidth = 0.5
+                
+                if data.selectedBornTypeId == 3 {
+                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    etBttn.layer.borderWidth = 2
+                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+                    internalBtnOulet.layer.borderColor = UIColor.gray.cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    SplitEmbryoOutlet.layer.borderColor = UIColor.gray.cgColor
+                    cloneOutlet.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 3
+                    
+                }
+                else if data.selectedBornTypeId == 1{
+                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    singleBttn.layer.borderWidth = 2
+                    internalBtnOulet.layer.borderColor = UIColor.gray.cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    SplitEmbryoOutlet.layer.borderColor = UIColor.gray.cgColor
+                    cloneOutlet.layer.borderColor = UIColor.gray.cgColor
+                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 1
+                    
+                }
+                else if data.selectedBornTypeId == 2{
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderWidth = 2
+                    internalBtnOulet.layer.borderColor = UIColor.gray.cgColor
+                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+                    SplitEmbryoOutlet.layer.borderColor = UIColor.gray.cgColor
+                    cloneOutlet.layer.borderColor = UIColor.gray.cgColor
+                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 2
+                }
+                
+                else if data.selectedBornTypeId == 4 {
+                    SplitEmbryoOutlet.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    SplitEmbryoOutlet.layer.borderWidth = 2
+                    internalBtnOulet.layer.borderColor = UIColor.gray.cgColor
+                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    cloneOutlet.layer.borderColor = UIColor.gray.cgColor
+                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 4
+                    
+                }
+                
+                else if data.selectedBornTypeId ==  5 {
+                    cloneOutlet.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    cloneOutlet.layer.borderWidth = 2
+                    internalBtnOulet.layer.borderColor = UIColor.gray.cgColor
+                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    SplitEmbryoOutlet.layer.borderColor = UIColor.gray.cgColor
+                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 5
+                }
+                
+                else if data.selectedBornTypeId == 6 {
+                    internalBtnOulet.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+                    internalBtnOulet.layer.borderWidth = 2
+                    cloneOutlet.layer.borderColor = UIColor.gray.cgColor
+                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    SplitEmbryoOutlet.layer.borderColor = UIColor.gray.cgColor
+                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    selectedBornTypeId = 6
+                }
+                
+                tissuId = Int(data.tissuId)
+                dateBtnOutlet.setTitleColor(.black, for: .normal)
+                statusOrder = false
+                messageCheck = false
+                let adata = fetchAllDataOrderStatusMaster(entityName: Entities.animalMasterTblEntity, ordestatus: "true", userId: userId,farmId: data.farmId!,animalTag:data.animalTag!,barcodeTag:data.animalbarCodeTag!)
+                if adata.count > 0{
+                    let animal  = adata.object(at: 0) as! AnimalMaster
+                    idAnimal = Int(animal.animalId)
+                    messageCheck = true
+                }
+                
+                if pvid == 3 {
+                    if ausBullId.contains(data.offsireId as Any) || sireNationalID.contains(data.offsireId as Any){
+                        sireIdTextField.textColor = UIColor.black
+                        let fetchData =  fetchAusNaabBullAgaintName(entityName: Entities.ausNaabBullTblEntity, sireNationalId: data.offsireId ?? "")
+                        if fetchData.count != 0 {
+                            let nationHerdAU1 = fetchData.object(at: 0) as? AusNaabBull
+                            let bullId =   nationHerdAU1?.bullID ?? ""
+                            sireIdTextField.text = bullId.uppercased()
+                        }
+                        
+                    } else {
+                        let replacedString = data.offsireId!.replacingOccurrences(of: " ", with: "")
+                        sireIdTextField.text = replacedString.uppercased()
+                        validationId17SireDam(animalId: sireIdTextField.text!, tag: 3)
+                        
+                    }
+                } else  {
+                    
+                    if data.offsireId?.count == 17 || data.offsireId?.count == 0 {
+                        sireIdTextField.text = data.offsireId?.uppercased()
+                    } else {
+                        let replacedString = data.offsireId!.replacingOccurrences(of: " ", with: "")
+                        sireIdTextField.text = replacedString.uppercased()
+                        validationId17SireDam(animalId: sireIdTextField.text!, tag: 3)
+                    }
+                }
+                
+                if pvid == 3 {
+                    damtexfield.text = data.offDamId?.uppercased()
+                    
+                } else {
+                    if data.offDamId?.count == 17 ||  data.offDamId?.count == 0 {
+                        damtexfield.text = data.offDamId?.uppercased()
+                    } else {
+                        let replacedString = data.offDamId!.replacingOccurrences(of: " ", with: "")
+                        damtexfield.text = replacedString.uppercased()
+                        validationId17SireDam(animalId: damtexfield.text!, tag: 4)
+                    }
+                }
+            } else if animalData.count > 0 {
                 self.view.hideToast()
                 let data = animalData.lastObject as! DataEntryAnimaladdTbl
                 if data.breedName == ButtonTitles.girolandoText || data.breedId == keyValue.girlandoNewBreedId.rawValue || data.breedName == BreedNames.girlandoBreed{

@@ -12,24 +12,28 @@ import Foundation
 extension DashboardVC: CustomersListControllerDelegate {
     
     func setupCurrentSelectedCustomer() {
-        self.updateCustomerButton.isHidden = true
-        
+        if UIDevice().userInterfaceIdiom == .pad {
+            updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+        } else {
+            self.updateCustomerButton.isHidden = true
+            self.selectedCustomerLabel.text = ""
+        }
+       
         if let currentCustomerId = UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as? Int {
             if let currentCustomer = fetchCurrentActiveCustomer(entityName: Entities.getCustomerTblEntity, customerId: currentCustomerId) as? [GetCustomer] {
                 guard currentCustomer.count > 0 else {
                     return
                 }
-                
-                self.selectedCustomerLabel.text = currentCustomer[0].customerName ?? ""
-                if UIDevice().userInterfaceIdiom == .phone {
-                    self.customertitleLbll.text = NSLocalizedString(LocalizedStrings.customerTextStr, comment: "")
-                    self.selectedCustomerLabel.text = ""
-
+                if UIDevice().userInterfaceIdiom == .pad {
+                    self.searchTextField.text = currentCustomer[0].customerName ?? ""
+                } else {
+                    self.selectedCustomerLabel.text = currentCustomer[0].customerName ?? ""
                 }
+                
                 if fetchAllData(entityName: Entities.getCustomerTblEntity).count > 1 {
                     self.updateCustomerButton.isUserInteractionEnabled = true
                     if UIDevice().userInterfaceIdiom == .phone {
-                       // self.updateCustomerButton.isHidden = false
+                        self.updateCustomerButton.isHidden = false
                         self.customertitleLbll.text = NSLocalizedString(LocalizedStrings.customerTextStr, comment: "")
 
                     }
@@ -39,7 +43,9 @@ extension DashboardVC: CustomersListControllerDelegate {
                 }
                 else{
                     self.updateCustomerButton.isHidden = true
-                    
+                    if UIDevice().userInterfaceIdiom == .pad {
+                        updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+                    }
                 }
                 // manish userwise comment
                 if self.customerOrderSetting.isCustomerAlreadySettingExist() == false {
@@ -101,7 +107,13 @@ extension DashboardVC: CustomersListControllerDelegate {
                 
                 UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
                 self.hideIndicator()
-                self.sideMenuViewController?.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                if UIDevice().userInterfaceIdiom == .phone {
+                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                } else {
+                
+                    let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                }
                 self.sideMenuViewController?.hideMenuViewController()
                 self.ssologoutMethod()
             }))
@@ -124,8 +136,20 @@ extension DashboardVC: CustomersListControllerDelegate {
             UserDefaults.standard.set(customer.marketId,forKey: keyValue.marketNameID.rawValue)
             
             self.updateCustomerButton.isHidden = true
+            if UIDevice().userInterfaceIdiom == .pad {
+                updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+            }
         } else {
-            self.updateCustomerButton.isHidden = true
+            if UIDevice().userInterfaceIdiom == .pad {
+                if searchTextField.text == "" {
+                    self.searchTextField.becomeFirstResponder()
+                }
+            }
+           
+            
+            if UIDevice().userInterfaceIdiom == .pad {
+                updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+            }
             var storyBoard = UIStoryboard()
             if UIDevice().userInterfaceIdiom == .phone {
                  storyBoard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
@@ -135,14 +159,21 @@ extension DashboardVC: CustomersListControllerDelegate {
             }
             else {
                 storyBoard = UIStoryboard(name: "iPad", bundle: nil)
-                if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
-                    customerSelectionVC.modalPresentationStyle = .overFullScreen
-                    customerSelectionVC.delegate = self
-                    if let sheet = customerSelectionVC.sheetPresentationController {
-                        customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
-                    }
-                    present(customerSelectionVC, animated: false, completion: nil)
-                }
+//                if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
+//                //    customerSelectionVC.modalPresentationStyle = .overFullScreen
+//                    customerSelectionVC.delegate = self
+//                    if let sheet = customerSelectionVC.sheetPresentationController {
+//                        customerSelectionVC.preferredContentSize = CGSize(width: 320, height: 280)
+//                        customerSelectionVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: 320.0, height: 280.0)
+//                    }
+//                    present(customerSelectionVC, animated: false, completion: nil)
+//                }
+                self.customerTblView.isHidden = false
+                self.containerViewHeight.constant = 501.0
+                self.customerTblBottomConstraint.constant = 50.0
+                self.calendarViewBkg.isHidden = false
+                self.tblViewSeperator.isHidden = false
+                self.customerTblView.reloadData()
             }
         }
     }
@@ -154,7 +185,15 @@ extension DashboardVC: CustomersListControllerDelegate {
             
             UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
             self.hideIndicator()
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+         
+            if UIDevice().userInterfaceIdiom == .phone {
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+            } else {
+              
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+            }
+          
             self.sideMenuViewController!.hideMenuViewController()
             
         }))
@@ -171,12 +210,19 @@ extension DashboardVC: CustomersListControllerDelegate {
                 if UIDevice().userInterfaceIdiom == .phone {
                     self.updateCustomerButton.isHidden = false
                 } else {
-                    self.updateCustomerButton.isHidden = true
+                   // self.updateCustomerButton.isHidden = true
+                    if UIDevice().userInterfaceIdiom == .pad {
+                        updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+                    }
                 }
                 
             }
             
-            self.selectedCustomerLabel.text = currentCustomer.customerName ?? ""
+            if UIDevice().userInterfaceIdiom == .pad {
+                self.searchTextField.text = currentCustomer.customerName ?? ""
+            } else {
+                self.selectedCustomerLabel.text = currentCustomer.customerName ?? ""
+            }
             if UIDevice().userInterfaceIdiom == .phone {
                 self.customertitleLbll.text = NSLocalizedString(LocalizedStrings.customerTextStr, comment: "")
 
@@ -316,7 +362,11 @@ extension DashboardVC: CustomersListControllerDelegate {
     
     func setDefaultSettingsForCustomer(selectedCustomer: GetCustomer?) {
         if let currentCustomer = selectedCustomer {
-            self.selectedCustomerLabel.text = currentCustomer.customerName ?? ""
+            if UIDevice().userInterfaceIdiom == .pad {
+                self.searchTextField.text = currentCustomer.customerName ?? ""
+            } else {
+                self.selectedCustomerLabel.text = currentCustomer.customerName ?? ""
+            }
             if UIDevice().userInterfaceIdiom == .phone {
                 self.customertitleLbll.text = NSLocalizedString(LocalizedStrings.customerTextStr, comment: "")
 

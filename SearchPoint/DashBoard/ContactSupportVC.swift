@@ -61,7 +61,10 @@ class ContactSupportVC: UIViewController {
             appHelpIcon.isHidden = false
         } else {
             menuBtnOutlet.isHidden = true
-            appHelpIcon.isHidden = true
+            if UIDevice().userInterfaceIdiom == .pad {
+                appHelpIcon.isHidden = true
+            }
+            
         }
         initialNetworkCheck()
         self.navigationController?.navigationBar.isHidden = true
@@ -79,6 +82,15 @@ class ContactSupportVC: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.removeObserver(Notification.Name(keyValue.notificationIdentifier.rawValue))
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        //location is relative to the current view
+        // do something with the touched point
+        if touch?.view != self.sideMenuViewVC {
+            sideMenuState(expanded: false)
+        }
     }
     
     //MARK: OBJC SELECTOR METHODS
@@ -265,24 +277,39 @@ class ContactSupportVC: UIViewController {
 @IBAction func bckBtnClick(_ sender: Any) {
     let login =  UserDefaults.standard.value(forKey: keyValue.firstLogin.rawValue) as? String
     if login == "true"{
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+     
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        }
+        else {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        }
+     
     }
     else{
 //        if UIDevice().userInterfaceIdiom == .pad {
 //            self.navigationController?.popViewController(animated: true)
 //        }
 //        else {
+    
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        if UIDevice().userInterfaceIdiom == .phone {
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        }
+        else {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        }
+          
      //   }
         
     }
 }
 
 @IBAction func showMenuBtnClick(_ sender: Any) {
-   // self.view.makeCorner(withRadius: 40)
     if UIDevice().userInterfaceIdiom == .phone {
         self.sideMenuViewController?.presentRightMenuViewController()
-
+        self.view.makeCorner(withRadius: 40)
     }  else {
         self.sideMenuRevealSettingsViewController()?.revealSideMenu()
     }
@@ -296,7 +323,13 @@ class ContactSupportVC: UIViewController {
     self.view .addSubview(buttonbg)
     customPopView = OfflinePopUp.loadFromNibNamed(ClassIdentifiers.offlineViewNib) as? OfflinePopUp
     customPopView.delegate = self
-    customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+    if UIDevice().userInterfaceIdiom == .phone {
+        customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+
+    } else {
+        customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 330,height: screenSize.height/1.7)
+
+    }
     customPopView.center = view.center
     customPopView.layer.cornerRadius = 8
     customPopView.layer.borderWidth = 3

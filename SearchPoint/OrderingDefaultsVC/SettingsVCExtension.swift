@@ -95,9 +95,18 @@ extension SettingsVC: UICollectionViewDelegate,UICollectionViewDataSource ,UICol
                    // nominatorHeightConst.constant = 0
                     nominatorView.isHidden = true
                 }
-                
+                var pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
+                if pvid ==  nil || pvid == 0{
+                    UserDefaults.standard.setValue(getListProvider[0].providerId, forKey: keyValue.providerID.rawValue)
+                    pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
+                }
+//                if pvid == 3 {
+//                    getListProvider.swapAt(0, 1)
+//                }
                 item.EcalutionProviderBttn.tag = indexPath.row
                 let arrData = getListProvider[indexPath.row] as! GetProviderTbl
+               
+                
                 item.EcalutionProviderBttn.setTitle("\(arrData.providerName!)", for: .normal )
              //   item.EcalutionProviderBttn.setTitleColor(UIColor.black, for: .normal)
                 item.EcalutionProviderBttn.titleLabel?.lineBreakMode = .byWordWrapping
@@ -115,11 +124,8 @@ extension SettingsVC: UICollectionViewDelegate,UICollectionViewDataSource ,UICol
                     
                 }
            
-                var pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
-                if pvid ==  nil || pvid == 0{
-                    UserDefaults.standard.setValue(getListProvider[0].providerId, forKey: keyValue.providerID.rawValue)
-                    pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
-                }
+                
+
                 if pvid == arrData.providerId{
 //                    item.EcalutionProviderBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
 //                    item.EcalutionProviderBttn.layer.borderWidth = 2
@@ -384,7 +390,7 @@ extension SettingsVC : UITableViewDelegate,UITableViewDataSource{
           //  tblViewhRIGHTcON.constant = 188
             
             if product.isAdded == "true" {
-                cell.radioBttn.setImage(UIImage(named: "check"), for: .normal)
+                cell.radioBttn.setImage(UIImage(named: "incrementalCheckIpad"), for: .normal)
             } else{
                 cell.radioBttn.setImage(UIImage(named: "Uncheck"), for: .normal)
             }
@@ -781,12 +787,12 @@ extension SettingsVC: InheritQuestionaireControllerDelegate {
     func inheritQuestionaireControllerDismissed() {
         if UserDefaults.standard.value(forKey: "settingDone") == nil || UserDefaults.standard.value(forKey: "settingDone") as? String == ""{
             UserDefaults.standard.set("true", forKey: "settingDone")
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: "BeefAnimalGlobalHD50KVC") as! BeefAnimalGlobalHD50KVC
+            let storyBoard: UIStoryboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "InheritBeefVC") as! InheritBeefVC
             self.navigationController?.pushViewController(newViewController, animated: false)
         }
         else {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyBoard: UIStoryboard = UIStoryboard(name: "iPad", bundle: nil)
             let newViewController = storyBoard.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
             self.navigationController?.pushViewController(newViewController, animated: false)
         }

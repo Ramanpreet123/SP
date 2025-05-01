@@ -722,13 +722,13 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                     
            //     }
 //                else {
-//                    
+//
 //                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalCannotBeAdded, comment: ""), preferredStyle: .alert)
-//                    
+//
 //                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
 //                        UIAlertAction in
 //                        self.byDefaultSetting()
-//                        
+//
 //                    }
 //                    let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
 //                        UIAlertAction in
@@ -1144,6 +1144,8 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
         isautoPopulated = true
         barAutoPopu = true
         var animalFetch = NSArray()
+        var animalMaster = NSArray()
+        var animalMasterData = AnimalMaster()
         if animalIdBool == true {
             textFieldBackroungWhite()
             animalFetch = fetchAllDataWithAnimalId(entityName: Entities.dataEntryAnimalAddTbl, animalId: animalId, customerID: custmerId!)
@@ -1151,6 +1153,28 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
             loadedAnimalData = animalFetch[0] as! DataEntryAnimaladdTbl
           }
             let data = animalFetch.object(at: 0) as! DataEntryAnimaladdTbl
+            let screenRefernce = UserDefaults.standard.value(forKey:keyValue.screen.rawValue) as? String
+            
+            if screenRefernce == keyValue.farmId.rawValue || screenRefernce == "" {
+                scanAnimalTagText.text = data.farmId
+                farmIdTextField.text = data.animalTag
+                farmiDValueStore = data.farmId ?? ""
+                UserDefaults.standard.set(data.animalTag?.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
+                textFieldAnimal = data.animalTag ?? ""
+                animalMaster =  fetchAnimaldataValidateAnimalwithouOrderIDAND(entityName: Entities.animalMasterTblEntity, animalTag: "", farmId: scanAnimalTagText.text!, animalbarCodeTag: scanBarcodeText.text!.uppercased(), offPermanentId: permanentIDTextField.text!.uppercased(), offDamId: damtexfield.text!.uppercased(), offsireId: sireIdTextField.text!.uppercased(),orderId:orderId,userId:userId,custmerId:custmerId ?? 0)
+            } else {
+                textFieldAnimal = data.farmId!
+                scanAnimalTagText.text = data.animalTag
+                UserDefaults.standard.set(data.animalTag?.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
+                farmIdTextField.text = data.farmId
+                textFieldAnimal = data.animalTag ?? ""
+                
+                animalMaster =  fetchAnimaldataValidateAnimalwithouOrderIDAND(entityName: Entities.animalMasterTblEntity, animalTag: scanAnimalTagText.text!, farmId: "", animalbarCodeTag: scanBarcodeText.text!.uppercased(), offPermanentId: permanentIDTextField.text!.uppercased(), offDamId: damtexfield.text!.uppercased(), offsireId: sireIdTextField.text!.uppercased(),orderId:orderId,userId:userId,custmerId:custmerId ?? 0)
+            }
+            if animalMaster.count > 0 {
+                 animalMasterData = animalMaster.object(at: 0) as! AnimalMaster
+
+            }
             let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
             animalId1 = Int(data.animalId)
             dataAutoPopulatedBool =  true
@@ -1208,22 +1232,92 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                     dateBtnOutlet.setTitle("", for: .normal)
                     dateTextField.text = ""
                 }
+                
+            } else if animalMaster.count > 0  {
+                if animalMasterData.date != "" {
+                    let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
+                    let formatter = DateFormatter()
+                    
+                    if dateStr == "MM"{
+                    var dateVale = ""
+                    let values = animalMasterData.date!.components(separatedBy: "/")
+                    let date = values[0]
+                    let month = values[1]
+                    let year = values[2]
+                    dateVale = month + "/" + date + "/" + year
+                    dateBtnOutlet.setTitle(dateVale, for: .normal)
+                    dateTextField.text = dateVale
+                    formatter.dateFormat = DateFormatters.MMddyyyyFormat
+                }
+                else {
+                    var dateVale = ""
+                    let values = data.date!.components(separatedBy: "/")
+                    let date = values[0]
+                    let month = values[1]
+                    let year = values[2]
+                    dateVale = date + "/" + month + "/" + year
+                    dateBtnOutlet.setTitle(dateVale, for: .normal)
+                    dateTextField.text = dateVale
+                    formatter.dateFormat = DateFormatters.ddMMyyyyFormat
+                }
+                self.selectedDate = formatter.date(from: dateBtnOutlet.titleLabel!.text!) ?? Date()
+                let isGreater = Date().isSmaller(than: selectedDate)
+                if isGreater == true {
+                    dateBtnOutlet.setTitle("", for: .normal)
+                    dateTextField.text = ""
+                    }
+                }
             }
-            
-            scanBarcodeText.text = data.animalbarCodeTag
-            borderRedCheck = false
-            barcodeflag = false
+            if data.animalbarCodeTag != "" {
+                scanBarcodeText.text = data.animalbarCodeTag
+                borderRedCheck = false
+                barcodeflag = false
+            } else if animalMaster.count > 0  {
+                if animalMasterData.animalbarCodeTag != "" {
+                    scanBarcodeText.text = animalMasterData.animalbarCodeTag
+                    borderRedCheck = false
+                    barcodeflag = false
+                }
+            } else {
+                scanBarcodeText.text = ""
+            }
+          
             permanentIDTextField.text = data.offPermanentId
             
             if pvid == 3 {
-                sireIdTextField.text = data.offsireId
+                if data.offsireId != "" {
+                    sireIdTextField.text = data.offsireId
+                } else if animalMaster.count > 0 {
+                    if animalMasterData.offsireId != "" {
+                        sireIdTextField.text = animalMasterData.offsireId
+                    }
+                } else {
+                    sireIdTextField.text = ""
+                }
+                
                 
             } else  {
-                sireIdTextField.text = data.offsireId
+                if data.offsireId != "" {
+                    sireIdTextField.text = data.offsireId
+                } else if animalMaster.count > 0 {
+                    if animalMasterData.offsireId != "" {
+                        sireIdTextField.text = animalMasterData.offsireId
+                    }
+                } else {
+                    sireIdTextField.text = ""
+                }
                 
             }
-            
-            damtexfield.text = data.offDamId
+            if data.offDamId != "" {
+                damtexfield.text = data.offDamId
+            } else if animalMaster.count > 0 {
+                if animalMasterData.offDamId != "" {
+                    damtexfield.text = animalMasterData.offDamId
+                }
+            } else {
+                damtexfield.text = ""
+            }
+          //  damtexfield.text = data.offDamId
             breedBtnOutlet.setTitle(data.breedName, for: .normal)
             tissueBtnOutlet.setTitleColor(.black, for: .normal)
             breedBtnOutlet.setTitleColor(.black, for: .normal)
@@ -1268,21 +1362,7 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
             matchedBarcodeBtnOutlet.alpha = 0.6
             matchedBarcodeLbl.alpha = 0.6
             UserDefaults.standard.setValue(false, forKey: keyValue.matchedBarcodeFlagDataEntry.rawValue)
-            let screenRefernce = UserDefaults.standard.value(forKey:keyValue.screen.rawValue) as? String
-            
-            if screenRefernce == keyValue.farmId.rawValue || screenRefernce == "" {
-                scanAnimalTagText.text = data.farmId
-                farmIdTextField.text = data.animalTag
-                farmiDValueStore = data.farmId ?? ""
-                UserDefaults.standard.set(data.animalTag?.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
-                textFieldAnimal = data.animalTag ?? ""
-            } else {
-                textFieldAnimal = data.farmId!
-                scanAnimalTagText.text = data.animalTag
-                UserDefaults.standard.set(data.animalTag?.uppercased(), forKey: keyValue.selectAnimalId.rawValue)
-                farmIdTextField.text = data.farmId
-                textFieldAnimal = data.animalTag ?? ""
-            }
+
             
             if pvid == 3 {
                 sireIdValidationB = true
@@ -1396,7 +1476,6 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                 clearFormOutlet.isHidden = false
                 resetIconImage.isHidden = false
             }
-            
         } else {
             animalFetch = fetchAllDataWithAnimalId(entityName: Entities.animalMasterTblEntity, animalId: idAnimal, customerID: custmerId!)
             if animalFetch.count > 0 {
@@ -1685,6 +1764,16 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                     for _ in 0...addObject - 1{
                         inputLessThenEight = "0" + inputLessThenEight
                     }
+                }
+            }
+            
+            if providerSelectionCountryCode != "USA" {
+                let last12 = inputLessThenEight.suffix(12)
+                
+                if last12 == "000000000000" {
+                    self.view.makeToast(NSLocalizedString("Invalid Animal Id", comment: ""), duration: 2, position: .top)
+                    id17display(animalId: animalId, borderRed: true)
+                    return
                 }
             }
             
@@ -3319,8 +3408,8 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
         var  animalId = String(animalId)
         let trimmedString = animalId.replacingOccurrences(of: " ", with: "")
         animalId = trimmedString
-        
-        if countryCode == "840" ||  countryCode == "USA"{
+        //|| countryCode == "GBR" || countryCode == "312" || countryCode == "AUS"
+        if countryCode == "840" ||  countryCode == "USA" {
             if animalId.isInt == true {
                 if (003001000001) <= (Int(animalId)!){
                     return "840"
@@ -3328,6 +3417,11 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                 if (10000...003001000001).contains(Int(animalId)!){
                     return "USA"
                 }
+                
+                if (10000...003001000001).contains(Int(animalId)!){
+                    return "AUS"
+                }
+                
                 else {
                     return LocalizedStrings.invalidRangeStr
                 }

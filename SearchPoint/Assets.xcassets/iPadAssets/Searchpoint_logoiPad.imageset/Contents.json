@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Searchpoint_logo 1 (1).png",
+      "filename" : "logo_searchpoint@3x 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Searchpoint_logo 1 (1) 1.png",
+      "filename" : "logo_searchpoint@3x 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Searchpoint_logo 1 (1) 2.png",
+      "filename" : "logo_searchpoint@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

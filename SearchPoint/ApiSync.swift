@@ -226,7 +226,7 @@ class ApiSync :NSObject {
         dateFormatter.dateFormat = DateFormatters.ddMMyyyyFormat
         let date1 = dateFormatter.date(from: date )// create   date from string
         dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
-        let timeStamp = dateFormatter.string(from: date1!)
+        let timeStamp = dateFormatter.string(from: date1 ?? Date())
         print(timeStamp)
         return timeStamp
     }

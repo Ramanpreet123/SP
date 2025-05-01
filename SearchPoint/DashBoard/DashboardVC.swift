@@ -22,6 +22,12 @@ import GigyaAuth
 class DashboardVC: UIViewController {
     
     // MARK: - OUTLETS
+    @IBOutlet weak var productSelectionView: UIView!
+    @IBOutlet weak var customerTblBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tblViewSeperator: UILabel!
+    @IBOutlet weak var customerTblView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var customerContainerTrailing: NSLayoutConstraint!
     @IBOutlet weak var menuIconLeadingConstraint: NSLayoutConstraint!
@@ -61,6 +67,8 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var appStatusTitle: UILabel!
     
     // MARK: - VARIABLES AND CONSTANTS
+    var filteredData = [GetCustomer]()
+    var customerList = [GetCustomer]()
     var sideMenuViewVC: SideMenuVC!
     var sideMenuShadowView: UIView!
     var sideMenuRevealWidth: CGFloat = 300
@@ -68,6 +76,7 @@ class DashboardVC: UIViewController {
     var isExpanded: Bool = false
     var draggingIsEnabled: Bool = false
     var panBaseLocation: CGFloat = 0.0
+    var search : String = ""
     
     // Expand/Collapse the side menu by changing trailing's constant
     private var sideMenuTrailingConstraint: NSLayoutConstraint!
@@ -75,6 +84,7 @@ class DashboardVC: UIViewController {
     var gestureEnabled: Bool = true
     
     weak var delegate: OpenSheetViewControllerDelegate?
+    var openSheetController = OpenSheetViewController()
     let gigya =  Gigya.sharedInstance(GigyaAccount.self)
     var fetchMyHerdDataDownloadCheck = [ResultMyHerdData]()
     private var labelPercentage: UILabel = UILabel()
@@ -172,7 +182,14 @@ class DashboardVC: UIViewController {
     var value = 0
     let tapRec = UITapGestureRecognizer()
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    
+    let placeOrderDesc = "Easily order veterinary products and diagnostics with accurate selection and seamless submission."
+    let dataEntryDesc = "Manually enter test details with structured fields, ensuring accuracy, validation, and compliance."
+    let resultDesc = "Access real-time diagnostic results for actionable insights in clinical decisions and patient care."
+    let actionRequiredDesc = "Stay informed on approvals, pending actions, or flagged issues to ensure smooth diagnostics."
+    let trackSampleDesc = "Monitor veterinary samples with real-time updates on processing, results, and turnaround times."
+    let contactSupportDesc = "Get help with orders, tracking, results, or technical issues from Zoetis support."
+    var descriptionTextArray = [String]()
+    var selectedCustomer: GetCustomer?
     // MARK: - VIEW LIFE CYCLE
     
     override func viewDidLoad() {
@@ -235,6 +252,10 @@ class DashboardVC: UIViewController {
         productTblView.reloadData()
         calendarViewBkg.isHidden = true
         billingView.isHidden = true
+        if UIDevice().userInterfaceIdiom == .pad {
+            productSelectionView.isHidden = true
+        }
+        
         if Connectivity.isConnectedToInternet() {
             
             group.enter()
@@ -259,34 +280,54 @@ class DashboardVC: UIViewController {
         guard let market = UserDefaults.standard.value(forKey: keyValue.marketName.rawValue) as? String else { return }
         if market == keyValue.brazilMarket.rawValue {
             btnSampleCollector.isHidden = false
-            self.customerContainerTrailing.constant = 310
+          //  self.customerContainerTrailing.constant = 310
         } else {
             btnSampleCollector.isHidden = true
-            self.customerContainerTrailing.constant = 15
+           // self.customerContainerTrailing.constant = 15
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        //location is relative to the current view
+        // do something with the touched point
+        if touch?.view != self.sideMenuViewVC {
+            sideMenuState(expanded: false)
         }
     }
     
     // MARK: - UI AND OTHER METHODS
     
     func setUpInitialUI(){
+      
         if UIDevice().userInterfaceIdiom == .phone {
             print("phone")
         }
         else {
+            self.tblViewSeperator.isHidden = true
+            self.customerTblView.isHidden = true
+            self.calendarViewBkg.isHidden = true
+            self.containerViewHeight.constant = 50.0
+            self.customerTblBottomConstraint.constant = 0
+            searchTextField.setLeftPaddingPoints(20.0)
           //  hamburgerBtnOutlet.target = revealViewController()
+            descriptionTextArray = [placeOrderDesc, dataEntryDesc, resultDesc, actionRequiredDesc, trackSampleDesc, contactSupportDesc]
             self.setSideMenu()
-            tapRec.addTarget(self, action: #selector(updateCustomerAction(tapGestureRecognizer:)))
-            self.selectedCustomerContainerView.addGestureRecognizer(tapRec)
+          //  tapRec.addTarget(self, action: #selector(updateCustomerAction(tapGestureRecognizer:)))
+          //  self.selectedCustomerContainerView.addGestureRecognizer(tapRec)
             self.btnSampleCollector.isHidden = true
-            self.customerContainerTrailing.constant = 15
-            self.selectedCustomerLabel.text = "Select Customer"
+           // self.customerContainerTrailing.constant = 15
+          //  self.selectedCustomerLabel.text = "Select Customer"
             let nib = UINib(nibName: "DashboardCardCell", bundle: nil)
             collectionView.register(nib, forCellWithReuseIdentifier: "DashboardCardCell")
             selectedCustomerContainerView.setupCustomerSelectionView()
             dashboardImagesIpad = [UIImage(named: "orderplaced"), UIImage(named: "dataEntryiPad"), UIImage(named: "resultsiPad"), UIImage(named: "actionRequirediPad"), UIImage(named: "trackSampleIpad"), UIImage(named: "contactSupportiPad"), ]
             
         }
-        self.appHelpView.isHidden = true
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.appHelpView.isHidden = true
+        }
+        
         self.getFolderList()
         UserDefaults.standard.removeObject(forKey: keyValue.isAnimalClickedFromBeefCart.rawValue)
         UserDefaults.standard.removeObject(forKey: keyValue.isToUpdateAndAddAnimal.rawValue)
@@ -307,23 +348,23 @@ class DashboardVC: UIViewController {
         UserDefaults.standard.set(nil, forKey: keyValue.submitTypeSelection.rawValue)
         
         guard let market = UserDefaults.standard.value(forKey: keyValue.marketName.rawValue) as? String else { return }
-        if UIDevice().userInterfaceIdiom == .phone {
+        if UIDevice().userInterfaceIdiom == .pad {
             if market == keyValue.brazilMarket.rawValue {
                 btnSampleCollector.isHidden = false
-                self.customerContainerTrailing.constant = 310
+              //  self.customerContainerTrailing.constant = 310
             } else {
                 btnSampleCollector.isHidden = true
-                self.customerContainerTrailing.constant = 15
+              //  self.customerContainerTrailing.constant = 15
             }
             
             btnSampleCollector.setTitle(NSLocalizedString(LocalizedStrings.orderCollectorStr, comment: ""), for: .normal)
             guard let markett = UserDefaults.standard.value(forKey: keyValue.marketName.rawValue) as? String else { return }
             if markett == keyValue.brazilMarket.rawValue {
                 btnSampleCollector.isHidden = false
-                self.customerContainerTrailing.constant = 310
+              //  self.customerContainerTrailing.constant = 310
             } else {
                 btnSampleCollector.isHidden = true
-                self.customerContainerTrailing.constant = 15
+               // self.customerContainerTrailing.constant = 15
             }
         }
         
@@ -587,7 +628,14 @@ class DashboardVC: UIViewController {
                             
                             UserDefaults.standard.set("false", forKey: "FirstLogin")
                             self.hideIndicator()
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                          
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                            } else {
+                            
+                                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                            }
                             self.sideMenuViewController!.hideMenuViewController()})
                             alert.addAction(ok)
                             DispatchQueue.main.async(execute: {
@@ -607,10 +655,12 @@ class DashboardVC: UIViewController {
                         //(UserDefaults.standard.value(forKey: "userName") as? String)!)
                         if custmerName.count > 0 {
                             let custName  = custmerName.object(at: 0) as! GetCustomer
-                            self.selectedCustomerLabel.text = custName.customerName
+                            
                             if UIDevice().userInterfaceIdiom == .phone {
                                 self.customertitleLbll.text = NSLocalizedString("Customer: ", comment: "")
-                                
+                                self.selectedCustomerLabel.text = custName.customerName
+                            } else {
+                                self.searchTextField.text = custName.customerName
                             }
                             
                         }
@@ -633,7 +683,12 @@ class DashboardVC: UIViewController {
                 } else {
                     
                     if fetchAllData(entityName: "GetCustomer").count == 1 {
-                        self.updateCustomerButton.isHidden = true
+                        if UIDevice().userInterfaceIdiom == .phone {
+                            self.updateCustomerButton.isHidden = true
+                        } else {
+                            updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
+                        }
+                        
                         
                         
                     } else {
@@ -882,7 +937,11 @@ class DashboardVC: UIViewController {
                         let custmerName =  updateCustomerOrderSetting(entityName: "GetCustomer", customerId: UserDefaults.standard.integer(forKey: keyValue.currentActiveCustomerId.rawValue),emailId:(email ?? ""))
                         if custmerName.count > 0 {
                             let custName  = custmerName.object(at: 0) as! GetCustomer
-                            self.selectedCustomerLabel.text = custName.customerName
+                            if UIDevice().userInterfaceIdiom == .pad {
+                                self.searchTextField.text = custName.customerName ?? ""
+                            } else {
+                                self.selectedCustomerLabel.text = custName.customerName ?? ""
+                            }
                             if UIDevice().userInterfaceIdiom == .phone {
                                 self.customertitleLbll.text = NSLocalizedString("Customer: ", comment: "")
                                 
@@ -938,6 +997,8 @@ class DashboardVC: UIViewController {
         
         NotificationCenter.default.removeObserver(Notification.Name("Session_Expired"))
         NotificationCenter.default.addObserver(self, selector: #selector(self.sessionExpired(notification:)), name: Notification.Name("Session_Expired"), object: nil)
+        
+       
     }
     
     func dataEnterModeAction() {
@@ -949,10 +1010,25 @@ class DashboardVC: UIViewController {
                 
                 let pviduser = (UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue) as? Int)!
                 if pviduser == 1 || pviduser == 2 || pviduser == 3 || pviduser == 4 || pviduser == 8 || pviduser == 10 || pviduser == 11  || pviduser == 12 {
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                    if UIDevice().userInterfaceIdiom == .pad {
+                        let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "DataEntryModeListiPadVC")
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: viewController), animated: true)
+                        
+                    } else {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                    }
                 } else {
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+                    } else {
+                        
+                        
+                        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+                        
+                    }
                     
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
                     return
                 }
             }else {
@@ -990,7 +1066,14 @@ class DashboardVC: UIViewController {
                     if animalCount.count > 0 {
                         if UserDefaults.standard.value(forKey: keyValue.dataEntryScreenSave.rawValue) as! String == ScreenNames.dataEntry.rawValue {
                             
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                         
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                            
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                             
                         }
                         return
@@ -1016,14 +1099,32 @@ class DashboardVC: UIViewController {
                         
                         if UserDefaults.standard.bool(forKey: keyValue.showBeefProductTbl.rawValue) == true || UserDefaults.standard.string(forKey: keyValue.beefProduct.rawValue) == nil {
                             UserDefaults.standard.set(keyValue.capsInherit.rawValue, forKey: keyValue.beefProduct.rawValue)
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                           
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                             productTblView.reloadData()
                         } else {
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                             
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                         }
                         
                     } else {
-                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                        if UIDevice().userInterfaceIdiom == .phone {
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                        } else {
+                         
+                            let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                        }
                     }
                 }
                 else if UserDefaults.standard.integer(forKey: keyValue.beefProduct.rawValue) == 13{
@@ -1069,7 +1170,13 @@ class DashboardVC: UIViewController {
                     if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 6 {
                         
                         if animalCount.count > 0 {
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                              
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                             return
                         }
                         
@@ -1095,17 +1202,33 @@ class DashboardVC: UIViewController {
                                 }
                             }
                             if UserDefaults.standard.bool(forKey: keyValue.showBeefProductTbl.rawValue) == true  || UserDefaults.standard.string(forKey: keyValue.beefProduct.rawValue) == nil{
+                                self.selectedCustomerContainerView.alpha = 0.1
                                 calendarViewBkg.isHidden = false
                                 billingView.isHidden = false
+                                if UIDevice().userInterfaceIdiom == .pad {
+                                    productSelectionView.isHidden = false
+                                }
                                 productTblView.reloadData()
                             }else {
                                 
-                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                if UIDevice().userInterfaceIdiom == .phone {
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                } else {
+                                  
+                                    let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                }
                                 
                             }
                         }
                         else{
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                             
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                         }
                         
                     }
@@ -1117,7 +1240,13 @@ class DashboardVC: UIViewController {
                         deleteRecordFromDatabase(entityName: Entities.getProductBeefTblEntity)
                         saveProductSaveBeef(entity: Entities.getProductBeefTblEntity, productId: Int(product.productId), productName: product.productName ?? "", providerId: Int(product.providerId), breedId: product.breedId ?? "", mkId: product.marketId ?? "", status:"true", isAdded: "true", orderAcceptTerms: product.orderAcceptTerms ?? "", pricing: product.pricing ?? "")
                     }
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                    } else {
+                     
+                        let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                    }
                     productTblView.reloadData()
                     
                     
@@ -1125,7 +1254,14 @@ class DashboardVC: UIViewController {
             }
         } else {
             
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+            if UIDevice().userInterfaceIdiom == .phone {
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+            } else {
+                
+                
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+            }
         }
     }
     
@@ -1250,14 +1386,38 @@ class DashboardVC: UIViewController {
                 UserDefaults.standard.set(keyValue.placeOrder.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
                 
                 let pviduser = (UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue))
-                if pviduser == 4  { self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingAnimalVCGirlando)), animated: true)
+                if pviduser == 4  {
                     
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "OrderingAnimalVCGirlando")), animated: true)
+                    } else {
+                        let storyboard = UIStoryboard(name: "DairyPlaceAnOrder", bundle: Bundle.main)
+                     
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "OrderingAnimalVCGirlandoIpad")), animated: true)
+                    }
+
                     
                 } else if pviduser == 1 || pviduser == 2 || pviduser == 3 || pviduser == 8 || pviduser == 10 || pviduser == 11 || pviduser == 12 {
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingAnimalVC)), animated: true)
-                } else {
+                    if UIDevice().userInterfaceIdiom == .pad {
+                        let storyboard = UIStoryboard(name: "DairyPlaceAnOrder", bundle: Bundle.main)
+                        
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "OrderingAnimalipadVC")), animated: true)
+                    }
+                    else {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingAnimalVC)), animated: true)
+                    }
                     
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+
+                } else {
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+                        
+                    } else {
+                        
+                        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+                        
+                    }
                     return
                 }
             }
@@ -1269,7 +1429,15 @@ class DashboardVC: UIViewController {
                 UserDefaults.standard.set(keyValue.placeOrder.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
                 
                 if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 5 {
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                    } else {
+                        
+                        let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                        
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "InheritBeefVC")), animated: true)
+                    }
+                    
                     if animalCount.count == 0 {
                         deleteRecordFromDatabase(entityName: Entities.getProductBeefTblEntity)
                         for product in self.productArr as? [GetProductTbl] ?? [] {
@@ -1299,15 +1467,32 @@ class DashboardVC: UIViewController {
                         }
                         
                     }
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefUSAddAnimalVC)), animated: true)
+                    }
+                    else {
+                        
+                        let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                        
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "BlockyardBeefiPad")), animated: true)
+                    }
                     
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefUSAddAnimalVC)), animated: true)
                 }
                 
                 if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 6 {
                     
                     if animalCount.count > 0 {
-                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
-                        return
+                        if UIDevice().userInterfaceIdiom == .phone {
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                            return
+                        } else {
+                            
+                            let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                            
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "BeefAnimalBrazilVCIpad")), animated: true)
+                            return
+                        }
+                    
                     }
                     
                     if UserDefaults.standard.bool(forKey: keyValue.showBeefProductTbl.rawValue) == true ||  UserDefaults.standard.value(forKey: keyValue.beefProductAdded.rawValue) as? String == "true" {
@@ -1335,13 +1520,39 @@ class DashboardVC: UIViewController {
                             calendarViewBkg.isHidden = false
                             deleteRecordFromDatabase(entityName: Entities.getProductBeefTblEntity)
                             billingView.isHidden = false
+                            if UIDevice().userInterfaceIdiom == .pad {
+                                productSelectionView.isHidden = false
+                                self.selectedCustomerContainerView.alpha = 0.1
+                            }
+//                            else {
+//                                productSelectionView.isHidden = true
+//                            }
                             productTblView.reloadData()
+                            
                         } else {
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                                return
+                            } else {
+                                
+                                let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                                
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "BeefAnimalBrazilVCIpad")), animated: true)
+                                return
+                            }
                         }
                     }
                     else {
-                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                        if UIDevice().userInterfaceIdiom == .phone {
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                            return
+                        } else {
+                            
+                            let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                            
+                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "BeefAnimalBrazilVCIpad")), animated: true)
+                            return
+                        }
                     }
                     
                 }
@@ -1357,7 +1568,16 @@ class DashboardVC: UIViewController {
                 }
                 
                 if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 0 {
-                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
+                        return
+                    } else {
+                        
+                        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+                        return
+                    }
+                    
                 }
             }
             
@@ -1367,7 +1587,9 @@ class DashboardVC: UIViewController {
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
             } else {
                 UserDefaults.standard.set(keyValue.placeorder.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
-                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
+           
+                    let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)
             }
            
         }
@@ -1393,7 +1615,18 @@ class DashboardVC: UIViewController {
     // MARK: - NAVIGATION METHODS
     func navigateToAnotherVc(){
         group.leave()
-        
+        if UIDevice().userInterfaceIdiom == .phone {
+            print("phone")
+        }
+        else {
+            customerList = fetchAllDataCustomer(entityName: Entities.getCustomerTblEntity) as! [GetCustomer]
+            self.customerTblView.isHidden = true
+            self.containerViewHeight.constant = 50.0
+            self.customerTblBottomConstraint.constant = 0
+            self.calendarViewBkg.isHidden = true
+            self.tblViewSeperator.isHidden = true
+            filteredData = customerList
+        }
     }
     
     func navigateToAnotherVcProduct(){
@@ -1503,21 +1736,33 @@ class DashboardVC: UIViewController {
             if custmerName.count > 0{
                 self.setupCurrentSelectedCustomer()
                 let custName  = custmerName.object(at: 0) as! GetCustomer
-                self.selectedCustomerLabel.text = custName.customerName
+                if UIDevice().userInterfaceIdiom == .phone {
+                    self.selectedCustomerLabel.text = custName.customerName
+                } else {
+                    self.searchTextField.text = custName.customerName
+                }
+                
                 
             }
             else {
                 self.moveToCustomerListing()
             }
             if fetchAllData(entityName: Entities.getCustomerTblEntity).count > 1 {
-                if selectedCustomerLabel.text?.count != 0 {
+                var textCount = Int()
+                if UIDevice().userInterfaceIdiom == .phone {
+                    textCount = selectedCustomerLabel.text?.count ?? 0
+                } else {
+                    textCount = searchTextField.text?.count ?? 0
+                }
+                if textCount != 0 {
                     
                     if UIDevice().userInterfaceIdiom == .phone {
                         self.updateCustomerButton.isHidden = false
                         self.customertitleLbll.text = NSLocalizedString(LocalizedStrings.customerTextStr, comment: "")
                         
                     } else {
-                        self.updateCustomerButton.isHidden = true
+                      //  self.updateCustomerButton.isHidden = true
+                        updateCustomerButton.setImage(UIImage(named: "editIconIpad"), for: .normal)
                     }
                 }
             }
@@ -1654,7 +1899,13 @@ class DashboardVC: UIViewController {
                 UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
                 self.hideIndicator()
                 
-                self.sideMenuViewController?.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                if UIDevice().userInterfaceIdiom == .phone {
+                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                } else {
+                
+                    let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+                }
                 self.sideMenuViewController?.hideMenuViewController()
                 self.ssologoutMethod()
             }))
@@ -1676,11 +1927,21 @@ class DashboardVC: UIViewController {
         if value == 0
         {
             UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
-            let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
-            self.navigationController?.pushViewController(newViewController, animated: true)
-            self.hideIndicator()
-            value = value + 1
+            if UIDevice().userInterfaceIdiom == .phone {
+                let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
+                self.navigationController?.pushViewController(newViewController, animated: true)
+                self.hideIndicator()
+                value = value + 1
+            } else {
+            
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                let newViewController = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
+                self.navigationController?.pushViewController(newViewController, animated: true)
+                self.hideIndicator()
+                value = value + 1
+            }
+          
         }
         
     }
@@ -1689,7 +1950,7 @@ class DashboardVC: UIViewController {
         self.view.makeToast(NSLocalizedString(LocalizedStrings.orderSampleCollectors, comment: ""), duration: 15, position: .bottom)
     }
     
-    @objc func updateCustomerAction(tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc func updateCustomerAction(tapGestureRecognizer : UITapGestureRecognizer) {
         if UserDefaults.standard.value(forKey: keyValue.oflinesave.rawValue) as? String == keyValue.checkOffline.rawValue
         {
             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.changeCustomerAlert, comment: ""))
@@ -1713,14 +1974,23 @@ class DashboardVC: UIViewController {
                 
                 var storyBoard = UIStoryboard()
                 storyBoard = UIStoryboard(name: "iPad", bundle: nil)
-                if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
-                    customerSelectionVC.modalPresentationStyle = .overFullScreen
-                    customerSelectionVC.delegate = self
-                    if let sheet = customerSelectionVC.sheetPresentationController {
-                        customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
-                    }
-                    present(customerSelectionVC, animated: false, completion: nil)
-                }
+//                if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
+//                    customerSelectionVC.modalPresentationStyle = .overFullScreen
+//                    customerSelectionVC.delegate = self
+//                    if let sheet = customerSelectionVC.sheetPresentationController {
+//                        customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
+//                    }
+//                    present(customerSelectionVC, animated: false, completion: nil)
+//                }
+                updateCustomerButton.setImage(UIImage(named: "searchIconiPad"), for: .normal)
+                self.searchTextField.text = ""
+              //  self.searchTextField.becomeFirstResponder()
+                self.customerTblView.isHidden = false
+                self.calendarViewBkg.isHidden = false
+                self.tblViewSeperator.isHidden = false
+                self.containerViewHeight.constant = 501.0
+                self.customerTblBottomConstraint.constant = 50.0
+                self.customerTblView.reloadData()
             }
         }
     }
@@ -1728,7 +1998,14 @@ class DashboardVC: UIViewController {
     // MARK: - IB ACTIONS
     
     @IBAction func acnNavigateToSampleCollector(_ sender: UIButton) {
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataCollectorVC)), animated: true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataCollectorVC)), animated: true)
+        } else {
+        
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataCollectorVC)), animated: true)
+        }
+      
     }
     
     @IBAction func helpAction(_ sender: UIButton) {
@@ -1751,6 +2028,7 @@ class DashboardVC: UIViewController {
         }
         else
         {
+            
             checkworkitem = true
             checkpercentage = false
             UserDefaults.standard.setValue(0, forKey: keyValue.pageNumber.rawValue)
@@ -1776,14 +2054,23 @@ class DashboardVC: UIViewController {
                 }
                 else {
                     storyBoard = UIStoryboard(name: "iPad", bundle: nil)
-                    if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
-                        customerSelectionVC.modalPresentationStyle = .overFullScreen
-                        customerSelectionVC.delegate = self
-                        if let sheet = customerSelectionVC.sheetPresentationController {
-                            customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
-                        }
-                        present(customerSelectionVC, animated: false, completion: nil)
-                    }
+//                    if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
+//                        customerSelectionVC.modalPresentationStyle = .overFullScreen
+//                        customerSelectionVC.delegate = self
+//                        if let sheet = customerSelectionVC.sheetPresentationController {
+//                            customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
+//                        }
+//                        present(customerSelectionVC, animated: false, completion: nil)
+//                    }
+                    updateCustomerButton.setImage(UIImage(named: "searchIconiPad"), for: .normal)
+                    self.searchTextField.text = ""
+                   
+                    self.customerTblView.isHidden = false
+                    self.containerViewHeight.constant = 501.0
+                    self.customerTblBottomConstraint.constant = 50.0
+                    self.calendarViewBkg.isHidden = false
+                    self.tblViewSeperator.isHidden = false
+                    self.customerTblView.reloadData()
                 }
                 
             }
@@ -1801,6 +2088,10 @@ class DashboardVC: UIViewController {
         productPopupFlag = 0
         calendarViewBkg.isHidden = true
         billingView.isHidden = true
+        if UIDevice().userInterfaceIdiom == .pad {
+            productSelectionView.isHidden = true
+        }
+        self.selectedCustomerContainerView.alpha = 1.0
         let fetchPid = fetchAllData(entityName: Entities.getProductBeefTblEntity)
         if fetchPid.count == 0 {
             UserDefaults.standard.set(true, forKey: keyValue.showBeefProductTbl.rawValue)
@@ -1982,10 +2273,24 @@ class DashboardVC: UIViewController {
                             UserDefaults.standard.set("true", forKey: keyValue.settingDone.rawValue)
                             UserDefaults.standard.set(keyValue.capsInherit.rawValue, forKey: keyValue.beefProduct.rawValue)
                             if UserDefaults.standard.value(forKey: keyValue.dataEntryScreenSave.rawValue) as! String == ScreenNames.dataEntry.rawValue {
-                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            
+                                if UIDevice().userInterfaceIdiom == .phone {
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                } else {
+                                  
+                                    let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                }
                                 
                             } else {
-                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                              
+                                if UIDevice().userInterfaceIdiom == .phone {
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                                } else {
+                                    let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                      
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "InheritBeefVC")), animated: true)
+                                }
                             }
                         }
                         else{
@@ -1994,11 +2299,25 @@ class DashboardVC: UIViewController {
                             UserDefaults.standard.set(keyValue.globalHD50K.rawValue, forKey: keyValue.beefProduct.rawValue)
                             
                             if UserDefaults.standard.value(forKey: keyValue.dataEntryScreenSave.rawValue) as! String == ScreenNames.dataEntry.rawValue {
-                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                             
+                                if UIDevice().userInterfaceIdiom == .phone {
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                } else {
+                                
+                                    let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                                }
                                 
                             } else {
                                 deleteRecordFromDatabase(entityName: Entities.beefAnimalAddTblEntity)
-                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                              
+                                if UIDevice().userInterfaceIdiom == .phone {
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalGlobalHD50KVC)), animated: true)
+                                } else {
+                                    let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                                
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "InheritBeefVC")), animated: true)
+                                }
                             }
                             
                         }
@@ -2021,12 +2340,28 @@ class DashboardVC: UIViewController {
                     if pvid == 6{
                         if UserDefaults.standard.value(forKey: keyValue.dataEntryScreenSave.rawValue) as! String == ScreenNames.dataEntry.rawValue {
                             UserDefaults.standard.set(false, forKey: keyValue.showBeefProductTbl.rawValue)
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                          
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            } else {
+                           
+                                let storyboard = UIStoryboard(name: "DataEntryiPad", bundle: Bundle.main)
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dataEntryModeHelpVC)), animated: true)
+                            }
                             
                         } else {
                             deleteRecordFromDatabase(entityName: Entities.beefAnimalAddTblEntity)
                             UserDefaults.standard.set(false, forKey: keyValue.showBeefProductTbl.rawValue)
-                            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                            if UIDevice().userInterfaceIdiom == .phone {
+                                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.beefAnimalBrazilVC)), animated: true)
+                                return
+                            } else {
+                                    let storyboard = UIStoryboard(name: "BeefPlaceAnOrder", bundle: Bundle.main)
+                           
+                                    self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "BeefAnimalBrazilVCIpad")), animated: true)
+                              
+                                return
+                            }
                         }}
                     if pvid == 7{
                         UserDefaults.standard.set(false, forKey: keyValue.showBeefProductTbl.rawValue)
@@ -2037,6 +2372,9 @@ class DashboardVC: UIViewController {
             
             calendarViewBkg.isHidden = true
             billingView.isHidden = true
+            if UIDevice().userInterfaceIdiom == .pad {
+                productSelectionView.isHidden = true
+            }
         } else {
             let  pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
             if pvid == 6 {
@@ -2057,10 +2395,10 @@ class DashboardVC: UIViewController {
         self.saveResulyByPageViewModel?.timer.invalidate()
         self.workItem?.cancel()
         checkworkitem = true
-       // self.view.makeCorner(withRadius: 40)
+       //
         if UIDevice().userInterfaceIdiom == .phone {
             self.sideMenuViewController?.presentRightMenuViewController()
-
+            self.view.makeCorner(withRadius: 40)
         }  else {
          //   self.sideMenuViewController?.presentLeftMenuViewController()
             self.sideMenuRevealViewController()?.revealSideMenu()
@@ -2075,7 +2413,13 @@ class DashboardVC: UIViewController {
         self.view .addSubview(buttonbg)
         customPopView = OfflinePopUp.loadFromNibNamed(ClassIdentifiers.offlineViewNib) as? OfflinePopUp
         customPopView.delegate = self
-        customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+        if UIDevice().userInterfaceIdiom == .phone {
+            customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 30,height: screenSize.height/1.7)
+
+        } else {
+            customPopView.frame = CGRect(x: 30,y: 160,width: screenSize.width - 330,height: screenSize.height/1.7)
+
+        }
         customPopView.center = view.center
         customPopView.layer.cornerRadius = 8
         customPopView.layer.borderWidth = 3

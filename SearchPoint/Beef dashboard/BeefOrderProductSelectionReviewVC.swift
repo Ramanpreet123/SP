@@ -15,8 +15,10 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
   
     func crossBtn() {
     }
-    @IBOutlet weak var selectBillingContactLbl: UILabel!
     
+    
+    
+    @IBOutlet weak var selectBillingContactLbl: UILabel!
     @IBOutlet weak var farmIdHideLbl: UILabel!
     @IBOutlet weak var notificationLblCount: UILabel!
     @IBOutlet weak var billingViewHeightConst: NSLayoutConstraint!
@@ -82,7 +84,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     func dataReload(check :Bool){
         if check == true{
 
-        } else {
+        }
+        else {
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let newViewController = storyBoard.instantiateViewController(withIdentifier: "BeefOrderProductSelectionReviewVC") as! BeefOrderProductSelectionReviewVC
             self.navigationController?.pushViewController(newViewController, animated: false)
@@ -752,6 +755,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         transparentView.isHidden = true
         billingView.isHidden = true
     }
+    
+  
     
     @IBAction func viewAnimalClick(_ sender: Any) {
         

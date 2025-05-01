@@ -41,8 +41,6 @@ class InheritQuestionaireController: UIViewController {
     // MARK: - UI METHODS AND FUNCTIONS
     func configureUI() {
         self.titleLabel.text = NSLocalizedString(ButtonTitles.selectBreedHerdText, comment: "")
-        self.primaryLabel.text = NSLocalizedString(ButtonTitles.primaryBreedText, comment: "")
-        primaryButton.layer.borderWidth = 2
         self.inheritQuestionaireModel.currentActiveBreedType = .primary
         self.tableView.reloadData()    }
     
@@ -121,6 +119,18 @@ extension InheritQuestionaireController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if UIDevice().userInterfaceIdiom == .pad{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionaireViewCelliPad", for: indexPath) as! QuestionaireViewCell
+            cell.questionlabel.text = self.inheritQuestionaireModel.primaryHerdBreed[indexPath.row].title
+            if self.inheritQuestionaireModel.primaryHerdBreed[indexPath.row].isSelected  {
+                cell.radioButton.setImage(UIImage(named: ImageNames.radioSelectedBtn), for: .normal)
+            } else{
+                cell.radioButton.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
+            }
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: ClassIdentifiers.questionaireViewCellId, for: indexPath) as! QuestionaireViewCell
         cell.questionlabel.text = self.inheritQuestionaireModel.primaryHerdBreed[indexPath.row].title
         if self.inheritQuestionaireModel.primaryHerdBreed[indexPath.row].isSelected  {
@@ -129,6 +139,8 @@ extension InheritQuestionaireController: UITableViewDataSource, UITableViewDeleg
             cell.radioButton.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
         }
         return cell
+        
+        
     }
     
     
@@ -150,7 +162,10 @@ extension InheritQuestionaireController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        if UIDevice().userInterfaceIdiom == .phone {
+            return 40
+        }
+        return 60
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.001

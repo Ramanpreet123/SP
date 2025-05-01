@@ -179,7 +179,7 @@ class LoginViewController: UIViewController,UITextViewDelegate{
         Constants.lockOrientation(.landscape)
         langArray = [NSLocalizedString(Languages.englishLang, comment: ""),NSLocalizedString(Languages.portugueseLang, comment: ""),NSLocalizedString(Languages.italianLang, comment: "")]
         let seelectedLanguage = UserDefaults.standard.value(forKey: keyValue.appleLanguages.rawValue) as! Array<String>
-        if seelectedLanguage[0] == Languages.engIn ||  seelectedLanguage[0] == Languages.eng || seelectedLanguage[0] == Languages.engUS{
+        if seelectedLanguage[0] == Languages.engIn ||  seelectedLanguage[0] == Languages.eng || seelectedLanguage[0] == Languages.engUS || seelectedLanguage[0].contains("en"){
             UserDefaults.standard.set(1, forKey: keyValue.lngId.rawValue)
         }else if (seelectedLanguage[0] == Languages.ptPT  ){
             UserDefaults.standard.set(2, forKey: keyValue.lngId.rawValue)
@@ -236,7 +236,7 @@ class LoginViewController: UIViewController,UITextViewDelegate{
         
         countryArray = [NSLocalizedString(CountryNames.unitedKingdom, comment: ""),NSLocalizedString(CountryNames.italy, comment: ""),NSLocalizedString(CountryNames.netherland, comment: ""), NSLocalizedString(CountryNames.usa, comment: ""), NSLocalizedString(CountryNames.brazil, comment: ""), NSLocalizedString(CountryNames.australia, comment: ""), NSLocalizedString(CountryNames.newZealand, comment: "")]
         apiKeysArray = [GigyaAPIKeys.ukAPIKey, GigyaAPIKeys.usAPIKey, GigyaAPIKeys.ausAPIKey]
-        selectedApiKey = GigyaAPIKeys.ukAPIKeyProd
+        selectedApiKey = GigyaAPIKeys.ukAPIKey
         countryLblOutlet.text = NSLocalizedString(CountryNames.unitedKingdom, comment: "")
         langArray = [LanguageNames.englishUK]
         langCodeArray = [LanguageCodes.ukEnCode]

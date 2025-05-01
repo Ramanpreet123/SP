@@ -16,7 +16,10 @@ class BorntTypeCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleButton.setTitle("", for: .normal)
-        self.titleButton.layer.cornerRadius = 19
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.titleButton.layer.cornerRadius = 19
+
+        }
         
         if UIDevice().userInterfaceIdiom == .phone {
             switch UIScreen.main.bounds.size.width {

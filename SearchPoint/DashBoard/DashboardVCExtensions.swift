@@ -30,7 +30,9 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
             let cell : DashboardCardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashboardCardCell", for: indexPath as IndexPath) as! DashboardCardCell
           //  cell.imgVw.image = UIImage(named: self.dashboardItemsImageArray[indexPath.row] as! String)
             cell.mainTitleLabel.text = self.iPadTitleArray[indexPath.row]
+            
             cell.imgVw.image = self.dashboardImagesIpad[indexPath.row] as? UIImage
+            cell.descriptionLabel.text = self.descriptionTextArray[indexPath.row]
             cell.layer.cornerRadius = 18
             cell.contentView.layer.cornerRadius = 18
             cell.contentView.clipsToBounds = true
@@ -39,6 +41,37 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
             cell.layer.shadowOpacity = 0.7
             cell.layer.shadowRadius = 6
             cell.layer.masksToBounds = false
+            
+            switch UIScreen.main.bounds.height {
+            case 768:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(22)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(15)
+                
+            case 810:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(22)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(15)
+                
+            case 820:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(22)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(15)
+                
+            case 834:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(22)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(15)
+                
+            case 1024:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(25)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(21)
+                
+            case 1032:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(25)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(21)
+                
+            default:
+                cell.mainTitleLabel.font = cell.mainTitleLabel.font.withSize(22)
+                cell.descriptionLabel.font = cell.mainTitleLabel.font.withSize(15)
+            }
+            
             return cell
         }
         else {
@@ -93,10 +126,25 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
             
 
             
-        } else if indexPath.item == 1 {
+        }
+        
+        else if indexPath.item == 1 {
             
             if UIDevice().userInterfaceIdiom == .pad {
-                CommonClass.showAlertMessage(self, titleStr: "Alert!", messageStr: "In progress")
+               // CommonClass.showAlertMessage(self, titleStr: "Alert!", messageStr: "In progress")
+                let marketId = UserDefaults.standard.value(forKey: keyValue.currentActiveMarketId.rawValue) as! String
+                let pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
+                
+                if marketId == MarketID.USMarketId  && pvid == 13 && UserDefaults.standard.string(forKey: "name") == marketNameType.Beef.rawValue{
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.inheritEnrollmentText, comment: ""))
+                }else {
+                    UserDefaults.standard.set(ScreenNames.dataEntry.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
+                    self.saveResulyByPageViewModel?.timer.invalidate()
+                    self.workItem?.cancel()
+                    checkworkitem = true
+                    self.checkpercentage = true
+                    self.dataEnterModeAction()
+               }
             }
             else {
                 let marketId = UserDefaults.standard.value(forKey: keyValue.currentActiveMarketId.rawValue) as! String
@@ -137,7 +185,13 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
         
         else if indexPath.item == 3 {
             if UIDevice().userInterfaceIdiom == .pad {
-                CommonClass.showAlertMessage(self, titleStr: "Alert!", messageStr: "In progress")
+              //  CommonClass.showAlertMessage(self, titleStr: "Alert!", messageStr: "In progress")
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                checkworkitem = true
+                self.checkpercentage = true
+                self.saveResulyByPageViewModel?.timer.invalidate()
+                self.customerOrderSetting.saveCustomerSetting()
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ResolveIssuesiPadVC")), animated: true)
             }
             else {
                 checkworkitem = true
@@ -148,7 +202,11 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
             }
         } else if indexPath.item == 4 {
             if UIDevice().userInterfaceIdiom == .pad {
-                CommonClass.showAlertMessage(self, titleStr: "Alert!", messageStr: "In progress")
+                checkworkitem = true
+                self.checkpercentage = true
+                self.saveResulyByPageViewModel?.timer.invalidate()
+                self.customerOrderSetting.saveCustomerSetting()
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "SampleTrackingVCIpad")), animated: true)
             }
             else {
                 checkworkitem = true
@@ -163,7 +221,14 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
             self.checkpercentage = true
             self.saveResulyByPageViewModel?.timer.invalidate()
             self.customerOrderSetting.saveCustomerSetting()
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            if UIDevice().userInterfaceIdiom == .phone {
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            } else {
+              
+                let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+                self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.contactSupportVC)), animated: true)
+            }
+          
             
         }
     }
@@ -212,20 +277,52 @@ extension DashboardVC :UICollectionViewDelegate,UICollectionViewDataSource,UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if UIDevice().userInterfaceIdiom == .pad {
-          //  if UIDevice.current.orientation.isLandscape {
-            if UIScreen.main.bounds.height == 768.0{
+            switch UIScreen.main.bounds.height {
+            case 768:
                 let totalSpacing = 9 * 3
                 let screenWidth = UIScreen.main.bounds.width
                 let itemWidth = screenWidth / 3
                 return CGSize(width: Int(itemWidth) - totalSpacing, height: 220)
-            }
-            else {
+                
+            case 810:
+                let totalSpacing = 9 * 3
+                let screenWidth = UIScreen.main.bounds.width
+                let itemWidth = screenWidth / 3
+                return CGSize(width: Int(itemWidth) - totalSpacing, height: 240)
+                
+            case 820:
+                let totalSpacing = 9 * 3
+                let screenWidth = UIScreen.main.bounds.width
+                let itemWidth = screenWidth / 3
+                return CGSize(width: Int(itemWidth) - totalSpacing, height: 240)
+                
+            case 834:
+                let totalSpacing = 9 * 3
+                let screenWidth = UIScreen.main.bounds.width
+                let itemWidth = screenWidth / 3
+                return CGSize(width: Int(itemWidth) - totalSpacing, height: 250)
+                
+            case 1024:
+                let totalSpacing = 9 * 3
+                let screenWidth = UIScreen.main.bounds.width
+                let itemWidth = screenWidth / 3
+                return CGSize(width: Int(itemWidth) - totalSpacing, height: 300)
+                
+            case 1032:
+                let totalSpacing = 9 * 3
+                let screenWidth = UIScreen.main.bounds.width
+                let itemWidth = screenWidth / 3
+                return CGSize(width: Int(itemWidth) - totalSpacing, height: 300)
+                
+            default:
                 let totalSpacing = 9 * 3
                 let screenWidth = UIScreen.main.bounds.width
                 let itemWidth = screenWidth / 3
                 return CGSize(width: Int(itemWidth) - totalSpacing, height: 240)
             }
               
+            
+            //for portrait
          //   } else {
 //                let totalSpacing = 20 * 2
 //                let screenWidth = UIScreen.main.bounds.width
@@ -304,154 +401,188 @@ extension DashboardVC : ResultTypeSelectionDelegate {
 extension DashboardVC : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == customerTblView {
+            return filteredData.count
+        }
         return productArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let  pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
-        let cell = tableView.dequeueReusableCell(withIdentifier: ClassIdentifiers.beefProductTVCIdentifier, for: indexPath) as! BeefProductsTableViewCell
-        let product =  self.productArr.object(at: indexPath.row) as! GetProductTbl
-        if product.productName == keyValue.genoTypeOnly.rawValue
-        {
-            let langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
-            if langId == 2{
-                cell.productName.text = keyValue.genotipagem.rawValue
+        if tableView == customerTblView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OpenSheetTableViewCell", for: indexPath) as! OpenSheetTableViewCell
+            cell.lblTitle?.text = filteredData[indexPath.row].customerName
+            return cell
+            //return customerList.count
+        } else {
+            let  pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
+            let cell = tableView.dequeueReusableCell(withIdentifier: ClassIdentifiers.beefProductTVCIdentifier, for: indexPath) as! BeefProductsTableViewCell
+            let product =  self.productArr.object(at: indexPath.row) as! GetProductTbl
+            if product.productName == keyValue.genoTypeOnly.rawValue
+            {
+                let langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
+                if langId == 2{
+                    cell.productName.text = keyValue.genotipagem.rawValue
+                }
+                else
+                {
+                    cell.productName.text = product.productName
+                }
             }
             else
             {
                 cell.productName.text = product.productName
             }
-        }
-        else
-        {
-            cell.productName.text = product.productName
-        }
-        cell.radioBttn.isUserInteractionEnabled = false
-        cell.iBttn.isHidden = true
-        //for Global
-        if pvid == 5 {
-            tblviewHeightConstaint.constant = 140
-            
-            if product.productId == 20 {
-                cell.iBttn.isHidden = false
-                self.inheritInfoButtonFrame = cell.iBttn.center.x - cell.iBttn.frame.size.width / 2
-                cell.iBttn.addTarget(self, action: #selector(self.marketTipPopClick), for: .touchUpInside)
+            cell.radioBttn.isUserInteractionEnabled = false
+            cell.iBttn.isHidden = true
+            //for Global
+            if pvid == 5 {
+                tblviewHeightConstaint.constant = 140
+                
+                if product.productId == 20 {
+                    cell.iBttn.isHidden = false
+                    self.inheritInfoButtonFrame = cell.iBttn.center.x - cell.iBttn.frame.size.width / 2
+                    cell.iBttn.addTarget(self, action: #selector(self.marketTipPopClick), for: .touchUpInside)
+                }
+                if product.isAdded == "true" {
+                    cell.radioBttn.setImage(UIImage(named: ImageNames.radioSelectedBtn), for: .normal)
+                } else{
+                    cell.radioBttn.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
+                }
+                cell.isUserInteractionEnabled = true
+                cell.radioBttn.alpha = 1
+                cell.alpha = 1
+                cell.productName.alpha = 1
+                
             }
-            if product.isAdded == "true" {
-                cell.radioBttn.setImage(UIImage(named: ImageNames.radioSelectedBtn), for: .normal)
-            } else{
-                cell.radioBttn.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
-            }
-            cell.isUserInteractionEnabled = true
-            cell.radioBttn.alpha = 1
-            cell.alpha = 1
-            cell.productName.alpha = 1
             
-        }
-        
-        //for brazil
-        if pvid == 6 {
-            if UIDevice().userInterfaceIdiom == .phone {
-                tblviewHeightConstaint.constant = 188
+            //for brazil
+            if pvid == 6 {
+                if UIDevice().userInterfaceIdiom == .phone {
+                    tblviewHeightConstaint.constant = 188
 
-            } else {
-                tblviewHeightConstaint.constant = 379
+                } else {
+                    tblviewHeightConstaint.constant = 379
 
+                }
+                
+                if product.isAdded == "true" {
+                    cell.radioBttn.setImage(UIImage(named: "incrementalCheckIpad"), for: .normal)
+                } else{
+                    cell.radioBttn.setImage(UIImage(named: ImageNames.unCheckImg), for: .normal)
+                }
+                cell.isUserInteractionEnabled = true
+                cell.radioBttn.alpha = 1
+                cell.alpha = 1
+                cell.productName.alpha = 1
             }
             
-            if product.isAdded == "true" {
-                cell.radioBttn.setImage(UIImage(named: ImageNames.checkImg), for: .normal)
-            } else{
-                cell.radioBttn.setImage(UIImage(named: ImageNames.unCheckImg), for: .normal)
+            //for Newzealand
+            if pvid == 7 {
+                if product.isAdded == "true" {
+                    cell.radioBttn.setImage(UIImage(named: ImageNames.radioSelectedBtn), for: .normal)
+                } else{
+                    cell.radioBttn.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
+                }
             }
-            cell.isUserInteractionEnabled = true
-            cell.radioBttn.alpha = 1
-            cell.alpha = 1
-            cell.productName.alpha = 1
+            
+            return cell
         }
-        
-        //for Newzealand
-        if pvid == 7 {
-            if product.isAdded == "true" {
-                cell.radioBttn.setImage(UIImage(named: ImageNames.radioSelectedBtn), for: .normal)
-            } else{
-                cell.radioBttn.setImage(UIImage(named: ImageNames.radioBtn), for: .normal)
-            }
-        }
-        
-        return cell
+     
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let  pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
-        let product =  self.productArr.object(at: indexPath.row) as! GetProductTbl
-        if pvid == 13{
-            //for global
-            if let  products = productArr as? [GetProductTbl] {
-                for product in products {
-                    product.isAdded = "false"
-                }
-                products[indexPath.row].isAdded = "true"
-            }
-            UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
-            productTblView.reloadData()
+        if tableView == customerTblView {
+            self.selectedCustomer = filteredData[indexPath.row]
+            self.didSelectCustomer(filteredData[indexPath.row].customerName ?? "", selectedCustomer: self.selectedCustomer!)
+            dismiss(animated: true, completion: nil)
+            self.searchTextField.endEditing(true)
+            self.searchTextField.resignFirstResponder()
+            self.tblViewSeperator.isHidden = true
+            self.customerTblView.isHidden = true
+            self.containerViewHeight.constant = 50.0
+            self.customerTblBottomConstraint.constant = 0
+            self.calendarViewBkg.isHidden = true
         }
-        
-        if pvid == 5{
-            //for global
-            if let  products = productArr as? [GetProductTbl] {
-                for product in products {
-                    product.isAdded = "false"
-                }
-                products[indexPath.row].isAdded = "true"
-            }
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
-            UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
-            productTblView.reloadData()
-        }
-        
-        if pvid == 6 {
-            //for brazil
-            if let  products = productArr as? [GetProductTbl] {
-                if products[indexPath.row].isAdded == "true" {
-                    products[indexPath.row].isAdded = "false"
-                } else {
+        else {
+            let  pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
+            let product =  self.productArr.object(at: indexPath.row) as! GetProductTbl
+            if pvid == 13{
+                //for global
+                if let  products = productArr as? [GetProductTbl] {
+                    for product in products {
+                        product.isAdded = "false"
+                    }
                     products[indexPath.row].isAdded = "true"
                 }
-            }
-            brazilProduct.append(product.productName!)
-            
-            UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
-            UserDefaults.standard.set(brazilProduct, forKey: keyValue.brazilProduct.rawValue)
-            
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
-            productTblView.reloadData()
-        }
-        
-        if pvid == 7 {
-            //for Newzealand
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
-            UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
-            if let  products = productArr as? [GetProductTbl] {
-                for product in products {
-                    product.isAdded = "false"
-                }
                 UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
-                products[indexPath.row].isAdded = "true"
+                productTblView.reloadData()
             }
             
-            productTblView.reloadData()
+            if pvid == 5{
+                //for global
+                if let  products = productArr as? [GetProductTbl] {
+                    for product in products {
+                        product.isAdded = "false"
+                    }
+                    products[indexPath.row].isAdded = "true"
+                }
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
+                UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
+                productTblView.reloadData()
+            }
+            
+            if pvid == 6 {
+                //for brazil
+                if let  products = productArr as? [GetProductTbl] {
+                    if products[indexPath.row].isAdded == "true" {
+                        products[indexPath.row].isAdded = "false"
+                    } else {
+                        products[indexPath.row].isAdded = "true"
+                    }
+                }
+                brazilProduct.append(product.productName!)
+                
+                UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
+                UserDefaults.standard.set(brazilProduct, forKey: keyValue.brazilProduct.rawValue)
+                
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
+                productTblView.reloadData()
+            }
+            
+            if pvid == 7 {
+                //for Newzealand
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOSampleTrackingDetailVC.rawValue)
+                UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.inheritFOReviewOrderVC.rawValue)
+                if let  products = productArr as? [GetProductTbl] {
+                    for product in products {
+                        product.isAdded = "false"
+                    }
+                    UserDefaults.standard.set(product.productId, forKey: keyValue.beefProductID.rawValue)
+                    products[indexPath.row].isAdded = "true"
+                }
+                
+                productTblView.reloadData()
+            }
         }
-        
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-  
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if tableView == customerTblView {
+////            if indexPath.row == filteredData.count{
+////                if UserDefaults.standard.string(forKey: keyValue.providerNameUS.rawValue) != keyValue.clarifideCDCBUS.rawValue {
+////                    return UITableView.automaticDimension
+////                }else{
+////                    return UITableView.automaticDimension
+////                }
+////            }
+//            return 60
+//            
+//        }
+//            return 70
+//    }
 }
 
 // MARK: - RESPONSE LOGOUT API
@@ -460,7 +591,14 @@ extension DashboardVC : ResponseLogoutApi {
     func logoutSuccess(){
         UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
         self.hideIndicator()
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        if UIDevice().userInterfaceIdiom == .phone {
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        } else {
+        
+            let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController)), animated: true)
+        }
+     
         self.sideMenuViewController!.hideMenuViewController()
     }
     
@@ -480,9 +618,9 @@ extension DashboardVC:offlineCustomView{
 
 // MARK: - CUSTOMER SELECTION  IPAD DELEGATE
 
-extension DashboardVC:OpenSheetViewControllerDelegate{
+extension DashboardVC{
     func didSelectCustomer(_ customer: String, selectedCustomer : GetCustomer?) {
-        self.selectedCustomerLabel.text = customer
+        self.searchTextField.text = customer
         self.pageapi = 0
         UserDefaults.standard.setValue(0, forKey: keyValue.totalAnimalsCount.rawValue)
         UserDefaults.standard.set(selectedCustomer?.customerId, forKey: keyValue.currentActiveCustomerId.rawValue)
@@ -518,6 +656,7 @@ extension DashboardVC:OpenSheetViewControllerDelegate{
         UserDefaults.standard.removeObject(forKey: keyValue.beefDateEntrySaveReviewPreference.rawValue)
         UserDefaults.standard.set(nil, forKey: keyValue.breedNameClear.rawValue)
         UserDefaults.standard.set(nil, forKey: keyValue.capsBreedName.rawValue)
+        UserDefaults.standard.set(nil, forKey: keyValue.foReviewOrderVC.rawValue)
         UserDefaults.standard.removeObject(forKey: keyValue.dataEntrybreedName.rawValue)
         UserDefaults.standard.removeObject(forKey: keyValue.dataEntrybreedId.rawValue)
         UserDefaults.standard.removeObject(forKey: keyValue.beefBreed.rawValue)
@@ -612,7 +751,9 @@ extension DashboardVC  {
                                 saveImageDetailsInDB(entity: Entities.imageTblEntity, dict: dictDat)
                                 if self.counter == result?.items.count {
                                     DispatchQueue.main.async {
-                                        self.appHelpView.isHidden = true
+                                        if UIDevice().userInterfaceIdiom == .phone {
+                                            self.appHelpView.isHidden = true
+                                        }
                                     }
                                 }
                             }
@@ -848,5 +989,92 @@ extension DashboardVC : syncApiOffline {
     func failWithInternetConnectionOffline() {
         self.view.isUserInteractionEnabled = true
         self.hideIndicator()
+    }
+}
+
+extension DashboardVC : UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //  updateCustomerAction()
+        if UserDefaults.standard.value(forKey: keyValue.oflinesave.rawValue) as? String == keyValue.checkOffline.rawValue
+        {
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.changeCustomerAlert, comment: ""))
+        }
+        else
+        {
+            checkworkitem = true
+            checkpercentage = false
+            UserDefaults.standard.setValue(0, forKey: keyValue.pageNumber.rawValue)
+            let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
+            let orderId = UserDefaults.standard.integer(forKey: keyValue.orderId.rawValue)
+            let orderIdBeef = UserDefaults.standard.integer(forKey: keyValue.orderIdBeef.rawValue)
+            let  viewAnimalArray =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: userId,orderId:orderId,orderStatus:"false", providerId: UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue))
+            let beefDAta =  fetchAllDataAnimalDatarderId(entityName: Entities.beefAnimalAddTblEntity, userId: userId,orderId:orderIdBeef,orderStatus:"false", providerId: UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue))
+            if viewAnimalArray.count > 0 || beefDAta.count > 0 { //|| orderIdDataOff.count > 0 || orderIdDataOnn.count > 0{
+                self.searchTextField.resignFirstResponder()
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.completeClearOrder, comment: ""))
+            }
+            
+            else
+            {
+                
+                var storyBoard = UIStoryboard()
+                storyBoard = UIStoryboard(name: "iPad", bundle: nil)
+//                if let customerSelectionVC = storyBoard.instantiateViewController(withIdentifier: "OpenSheetViewController") as? OpenSheetViewController {
+//                    customerSelectionVC.modalPresentationStyle = .overFullScreen
+//                    customerSelectionVC.delegate = self
+//                    if let sheet = customerSelectionVC.sheetPresentationController {
+//                        customerSelectionVC.preferredContentSize = UIScreen.main.bounds.size
+//                    }
+//                    present(customerSelectionVC, animated: false, completion: nil)
+//                }
+                updateCustomerButton.setImage(UIImage(named: "searchIconiPad"), for: .normal)
+                self.searchTextField.text = ""
+              //  self.searchTextField.becomeFirstResponder()
+                self.customerTblView.isHidden = false
+                self.containerViewHeight.constant = 501.0
+                self.customerTblBottomConstraint.constant = 50.0
+                self.calendarViewBkg.isHidden = false
+                self.tblViewSeperator.isHidden = false
+                self.customerTblView.reloadData()
+            }
+        }
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.isEmpty
+        {
+            search = String(search.dropLast())
+        }
+        else
+        {
+            search=textField.text!+string
+        }
+        
+        print(search)
+        if search.count > 0 {
+            filteredData  =  self.customerList.filter { ($0.customerName?.lowercased())!.contains( search.lowercased())}
+         //   customerList = filteredData
+        } else {
+            filteredData = customerList
+        }
+        
+//        let predicate=NSPredicate(format: "SELF.name CONTAINS[cd] %@", search)
+//        let arr = (customerList as NSArray).filtered(using: predicate)
+//        
+//        if arr.count > 0
+//        {
+//            customerList.removeAll(keepingCapacity: true)
+//            customerList = arr as! [GetCustomer]
+//        }
+//        else
+//        {
+//            customerList = arr as! [GetCustomer]
+//        }
+        customerTblView.reloadData()
+        return true
     }
 }

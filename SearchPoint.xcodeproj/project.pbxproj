@@ -306,7 +306,16 @@
 		4EE422B62458CE4B0088F430 /* ValidateDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE422B52458CE4B0088F430 /* ValidateDeviceModel.swift */; };
 		4EE422B82458CE650088F430 /* ValidateDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE422B72458CE650088F430 /* ValidateDeviceViewModel.swift */; };
 		4EF17160249388F9003210D8 /* CustomerOrderSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF1715F249388F9003210D8 /* CustomerOrderSetting.swift */; };
+		652A35CB2DA5328A0079FE28 /* ADHFilteriPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A35CA2DA532890079FE28 /* ADHFilteriPadVC.swift */; };
+		652A35CD2DA536430079FE28 /* ADHFilterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A35CC2DA5360D0079FE28 /* ADHFilterExtension.swift */; };
+		658A3B772D817D600097EC6D /* DataEntryModeCreateListiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658A3B762D817D600097EC6D /* DataEntryModeCreateListiPadVC.swift */; };
+		658B01042D837936000A1FAE /* DataEntryListViewAnimalListiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658B01032D837936000A1FAE /* DataEntryListViewAnimalListiPadVC.swift */; };
+		658B01072D83864F000A1FAE /* DataEntryReviewDataiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658B01062D83864F000A1FAE /* DataEntryReviewDataiPadVC.swift */; };
+		658B010A2D83881B000A1FAE /* ReviewOrderFilteriPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658B01092D83881B000A1FAE /* ReviewOrderFilteriPadVC.swift */; };
 		6596F9C8A8AD4FA3B8916589 /* Pods_SearchPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718C27409A60A1FFAB804DAE /* Pods_SearchPoint.framework */; };
+		65CFB83D2D82C190006C697F /* DataEntryModeListiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CFB83C2D82C136006C697F /* DataEntryModeListiPadVC.swift */; };
+		65CFB8402D82C96E006C697F /* DataListCollectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CFB83F2D82C96E006C697F /* DataListCollectionCellView.swift */; };
+		65D3A7412D81BAE900D0588D /* DataEntryiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D3A7402D81BAE900D0588D /* DataEntryiPad.storyboard */; };
 		B108A53D247012F800796F92 /* OrderDetailByPastDaysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B108A53C247012F800796F92 /* OrderDetailByPastDaysModel.swift */; };
 		B108A53F2470131500796F92 /* OrderDetailsByDatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B108A53E2470131500796F92 /* OrderDetailsByDatesModel.swift */; };
 		B108A5412470132E00796F92 /* OrderDetailByPastDaysVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B108A5402470132E00796F92 /* OrderDetailByPastDaysVM.swift */; };
@@ -322,17 +331,100 @@
 		B1D173A424853EAB00374315 /* GetCustomerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D173A324853EAB00374315 /* GetCustomerViewModel.swift */; };
 		B1E2591A24406C5900F22740 /* ListingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2591924406C5900F22740 /* ListingTableViewCell.swift */; };
 		B1F29C9C24AB3B5F00549A67 /* ReviewAddonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F29C9B24AB3B5F00549A67 /* ReviewAddonsCell.swift */; };
+		BC01B5442DB78B5500069A10 /* ResolveIssuesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01B5432DB78B5500069A10 /* ResolveIssuesCollectionViewCell.swift */; };
+		BC0222362D605B21007D9685 /* OPSSecondVCiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0222352D605B21007D9685 /* OPSSecondVCiPad.swift */; };
+		BC0222382D605B36007D9685 /* OPSSecondVCActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0222372D605B36007D9685 /* OPSSecondVCActionMethods.swift */; };
+		BC02223A2D605B4F007D9685 /* OPSSecondVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0222392D605B4F007D9685 /* OPSSecondVCExtensions.swift */; };
+		BC1A04D52DBF717500544073 /* SampleTrackingDetailVCiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A04D42DBF717500544073 /* SampleTrackingDetailVCiPad.swift */; };
+		BC1A04D72DBF718900544073 /* SampleTrackingDetailVCiPadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A04D62DBF718900544073 /* SampleTrackingDetailVCiPadExtension.swift */; };
+		BC1AE1842D6BA0660006693F /* OPSReviewVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1AE1832D6BA0660006693F /* OPSReviewVCIpad.swift */; };
 		BC1BCB572D2D798600ECC88C /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1BCB552D2D798600ECC88C /* SideMenuTableViewCell.swift */; };
 		BC1BCB582D2D798600ECC88C /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1BCB542D2D798600ECC88C /* SideMenuVC.swift */; };
+		BC22E44A2DAE5E8600ABD6CA /* OrderSaveVCiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC22E4492DAE5E8600ABD6CA /* OrderSaveVCiPad.swift */; };
+		BC2B1AD72D738B5F0098562A /* QuestionaireViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC2B1AD62D738B5F0098562A /* QuestionaireViewCell.xib */; };
+		BC2B1AD92D738B850098562A /* QuestionaireViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1AD82D738B850098562A /* QuestionaireViewCell.swift */; };
 		BC2CC3A62D2D8FBD00C94ABD /* DashboardCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC2CC3A52D2D8FBD00C94ABD /* DashboardCardCell.xib */; };
 		BC2CC3A82D2D8FC000C94ABD /* DashboardCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2CC3A72D2D8FC000C94ABD /* DashboardCardCell.swift */; };
 		BC2CC3AA2D2D8FDA00C94ABD /* OpenSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2CC3A92D2D8FDA00C94ABD /* OpenSheetViewController.swift */; };
 		BC2CC3AC2D2D8FE800C94ABD /* OpenSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2CC3AB2D2D8FE800C94ABD /* OpenSheetTableViewCell.swift */; };
+		BC34B5D02D44EE81008D34BB /* ViewAnimalsControlleriPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC34B5CF2D44EE81008D34BB /* ViewAnimalsControlleriPadVC.swift */; };
+		BC34B5D22D44EEB1008D34BB /* ViewAnimalCelliPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC34B5D12D44EEB1008D34BB /* ViewAnimalCelliPad.swift */; };
+		BC3804342D8F03AB008819F1 /* DairyPlaceAnOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC3804332D8F03AB008819F1 /* DairyPlaceAnOrder.storyboard */; };
+		BC3804362D8F03C3008819F1 /* BeefPlaceAnOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC3804352D8F03C3008819F1 /* BeefPlaceAnOrder.storyboard */; };
+		BC496DA32D89AA700053C304 /* Brazil.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC496DA22D89AA700053C304 /* Brazil.storyboard */; };
+		BC496DA62D8AA6600053C304 /* DEOAnimalVCGirlando.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC496DA52D8AA6600053C304 /* DEOAnimalVCGirlando.swift */; };
+		BC496DA82D8AA6760053C304 /* DEOAnimalVCGirlandoActionMethodsipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC496DA72D8AA6760053C304 /* DEOAnimalVCGirlandoActionMethodsipad.swift */; };
+		BC496DAA2D8AA68E0053C304 /* DEOAnimalVCGirlandoipadUIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC496DA92D8AA68E0053C304 /* DEOAnimalVCGirlandoipadUIMethods.swift */; };
+		BC496DAC2D8AA6A00053C304 /* DEOAnimalVCGirlandoExtensionipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC496DAB2D8AA6A00053C304 /* DEOAnimalVCGirlandoExtensionipad.swift */; };
+		BC54B9272D6CD5C300A7F459 /* OrderSubmittedVCiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54B9262D6CD5C300A7F459 /* OrderSubmittedVCiPad.swift */; };
+		BC5684F12D9E64AC00755962 /* AddExistingAnimaliPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684F02D9E64AC00755962 /* AddExistingAnimaliPad.swift */; };
+		BC5684F32DA1225600755962 /* OrderingAnimalImportListExtensionIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684F22DA1225600755962 /* OrderingAnimalImportListExtensionIpad.swift */; };
+		BC5684F52DA12D1F00755962 /* ImportListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684F42DA12D1F00755962 /* ImportListVC.swift */; };
+		BC5684F82DA30BCF00755962 /* ADHAnimalVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684F72DA30BCF00755962 /* ADHAnimalVCIpad.swift */; };
+		BC5684FA2DA30BDC00755962 /* ADHAnimalVCExtensionIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684F92DA30BDC00755962 /* ADHAnimalVCExtensionIpad.swift */; };
+		BC5684FC2DA30BF300755962 /* ADHAnimalVCActionsIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684FB2DA30BF300755962 /* ADHAnimalVCActionsIpad.swift */; };
+		BC5684FE2DA310B600755962 /* ADHListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5684FD2DA310B600755962 /* ADHListCollectionViewCell.swift */; };
+		BC598B572D6A5C3700701661 /* ReviewOrderVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B562D6A5C3700701661 /* ReviewOrderVCIpad.swift */; };
+		BC598B592D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B582D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift */; };
+		BC598B5B2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B5A2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift */; };
+		BC804BB22DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC804BB12DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift */; };
+		BC804BB42DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC804BB32DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift */; };
 		BC9C66872D32D14C005E89ED /* SettingsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C66862D32D14C005E89ED /* SettingsVCExtension.swift */; };
 		BC9C66892D32D69C005E89ED /* SettingsVCActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C66882D32D69C005E89ED /* SettingsVCActions.swift */; };
+		BCA121422D89855E002ECA12 /* DataEntryaMergeListIpadVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA121412D89855E002ECA12 /* DataEntryaMergeListIpadVc.swift */; };
+		BCA84B1B2D3A43DC00CFE2A8 /* OrderingAnimalipadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA84B1A2D3A43DC00CFE2A8 /* OrderingAnimalipadVC.swift */; };
+		BCABBBCE2D65D05E0009EEB6 /* BeefOPSSecondVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABBBCD2D65D05E0009EEB6 /* BeefOPSSecondVCIpad.swift */; };
+		BCACF3B92DA667E400A72ECA /* DataEntryConflictedImportListIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACF3B82DA667E400A72ECA /* DataEntryConflictedImportListIpad.swift */; };
 		BCB350952414D0CA005FD36D /* BeefAnimalBrazilVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB350942414D0C9005FD36D /* BeefAnimalBrazilVC.swift */; };
 		BCB350972414D0F0005FD36D /* BeefAnimalNZ_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB350962414D0F0005FD36D /* BeefAnimalNZ_VC.swift */; };
+		BCB506B12D47A4920006E916 /* OPSelectioniPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB506B02D47A4920006E916 /* OPSelectioniPadVC.swift */; };
+		BCB506B52D47A4B30006E916 /* OPSelectioniPadVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB506B42D47A4B30006E916 /* OPSelectioniPadVCExtensions.swift */; };
+		BCBA0D942D4FFC6E00F5679E /* BeefOPSiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D932D4FFC6E00F5679E /* BeefOPSiPadVC.swift */; };
+		BCBA0D972D500EFD00F5679E /* InheritBeefVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D962D500EFD00F5679E /* InheritBeefVC.swift */; };
+		BCBA0D992D500F1200F5679E /* InheritBeefVCInheritMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D982D500F1200F5679E /* InheritBeefVCInheritMethods.swift */; };
+		BCBA0D9B2D500F2C00F5679E /* InheritBeefVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D9A2D500F2C00F5679E /* InheritBeefVCExtensions.swift */; };
+		BCBA0D9D2D500F3A00F5679E /* InheritBeefVCActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D9C2D500F3A00F5679E /* InheritBeefVCActionMethods.swift */; };
+		BCBA0D9F2D500F5300F5679E /* InheritBeefVCUISelectorMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA0D9E2D500F5300F5679E /* InheritBeefVCUISelectorMethods.swift */; };
 		BCC0339F2D2E78A100DC3A42 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0339E2D2E78A100DC3A42 /* SettingsVC.swift */; };
+		BCC1CCF52D82C5FB00AF25A5 /* DataEntryOrderingAnimalVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCF42D82C5FB00AF25A5 /* DataEntryOrderingAnimalVCIpad.swift */; };
+		BCC1CCF72D82C61200AF25A5 /* DEOAnimalVCExtensionCountryFlowsiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCF62D82C61200AF25A5 /* DEOAnimalVCExtensionCountryFlowsiPad.swift */; };
+		BCC1CCF92D82C69200AF25A5 /* DEOAnimalVCUIMethodsIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCF82D82C69200AF25A5 /* DEOAnimalVCUIMethodsIpad.swift */; };
+		BCC1CCFB2D82C6B700AF25A5 /* DEOAnimalVCTextFieldDelegatesIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCFA2D82C6B700AF25A5 /* DEOAnimalVCTextFieldDelegatesIpad.swift */; };
+		BCC1CCFD2D82C6E500AF25A5 /* DEOAnimalVCExtensionsIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCFC2D82C6E500AF25A5 /* DEOAnimalVCExtensionsIpad.swift */; };
+		BCC1CCFF2D82C73600AF25A5 /* DEOAnimalVCID17Flowsipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CCFE2D82C73600AF25A5 /* DEOAnimalVCID17Flowsipad.swift */; };
+		BCC1CD012D82C75F00AF25A5 /* DEOAnimalVCActionMethodsiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD002D82C75F00AF25A5 /* DEOAnimalVCActionMethodsiPad.swift */; };
+		BCC1CD032D82C79700AF25A5 /* DEOAnimalVCSelectorMethodsIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD022D82C79700AF25A5 /* DEOAnimalVCSelectorMethodsIpad.swift */; };
+		BCC4B9042D3B99E2001F14C8 /* OrderingAnimalVCiPadActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B9032D3B99E2001F14C8 /* OrderingAnimalVCiPadActionMethods.swift */; };
+		BCC4B9062D3B9A28001F14C8 /* OrderingAnimalVCCountryFlowsiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B9052D3B9A28001F14C8 /* OrderingAnimalVCCountryFlowsiPad.swift */; };
+		BCC4B9082D3B9A73001F14C8 /* OrderingAnimalVCiPadTextFldDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B9072D3B9A73001F14C8 /* OrderingAnimalVCiPadTextFldDelegates.swift */; };
+		BCC4B90A2D3B9AA5001F14C8 /* OrderingAnimalVCTableViewiPadDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B9092D3B9AA5001F14C8 /* OrderingAnimalVCTableViewiPadDelegates.swift */; };
+		BCC4B90C2D3B9AE2001F14C8 /* OrderingAnimaliPadVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B90B2D3B9AE2001F14C8 /* OrderingAnimaliPadVCExtensions.swift */; };
+		BCC4B90E2D3B9B65001F14C8 /* OrderingAnimalVCiPadAddAnimalFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B90D2D3B9B65001F14C8 /* OrderingAnimalVCiPadAddAnimalFlow.swift */; };
+		BCCA38872D75EA5E004D5C7A /* BeefOPSSelectionReviewIPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA38862D75EA5E004D5C7A /* BeefOPSSelectionReviewIPadVC.swift */; };
+		BCCD3BCF2D402FE400B2E89F /* BlockyardBeefiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCD3BCE2D402FE400B2E89F /* BlockyardBeefiPad.swift */; };
+		BCD062A82DB6407500E36F63 /* ResolveIssuesiPadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD062A72DB6407500E36F63 /* ResolveIssuesiPadVC.swift */; };
+		BCD062AB2DB640BF00E36F63 /* ResolveIssuesiPadVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD062AA2DB640BF00E36F63 /* ResolveIssuesiPadVCExtensions.swift */; };
+		BCDD6A7A2D91592C007AD8AF /* DataEntryBeefiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCDD6A792D91592C007AD8AF /* DataEntryBeefiPad.storyboard */; };
+		BCDD6A7D2D92A594007AD8AF /* DataEntryInheritBeefVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A7C2D92A594007AD8AF /* DataEntryInheritBeefVC.swift */; };
+		BCDD6A7F2D92A5A5007AD8AF /* DataEntryInheritBeefExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A7E2D92A5A5007AD8AF /* DataEntryInheritBeefExtensions.swift */; };
+		BCDD6A812D92A5B6007AD8AF /* DataEntryInheritBeefActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A802D92A5B6007AD8AF /* DataEntryInheritBeefActionMethods.swift */; };
+		BCDD6A832D92A5D1007AD8AF /* DataEntryInheritBeefModuleMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A822D92A5D1007AD8AF /* DataEntryInheritBeefModuleMethods.swift */; };
+		BCDD6A852D92A5E1007AD8AF /* DataEntryInheritBeefUIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A842D92A5E1007AD8AF /* DataEntryInheritBeefUIMethods.swift */; };
+		BCDD6A872D93B0E6007AD8AF /* DataEntryBeefViewAnimalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A862D93B0E6007AD8AF /* DataEntryBeefViewAnimalList.swift */; };
+		BCDD6A892D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A882D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift */; };
+		BCDD6A8C2D93DF1B007AD8AF /* DEBrazilBeefVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A8B2D93DF1B007AD8AF /* DEBrazilBeefVCIpad.swift */; };
+		BCDD6A8E2D93DF3F007AD8AF /* DEBrazilBeefIpadExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A8D2D93DF3F007AD8AF /* DEBrazilBeefIpadExtensions.swift */; };
+		BCDD6A902D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A8F2D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift */; };
+		BCDD6A922D93DF67007AD8AF /* DEBrazilBeefiPadGenotypeMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD6A912D93DF67007AD8AF /* DEBrazilBeefiPadGenotypeMethods.swift */; };
+		BCDE50652D7C32C90005E91F /* OrderingAnimalVCGirlandoIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE50642D7C32C90005E91F /* OrderingAnimalVCGirlandoIpad.swift */; };
+		BCDE50672D7C32E40005E91F /* OrderingAnimalVCGirlandoIpadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE50662D7C32E40005E91F /* OrderingAnimalVCGirlandoIpadExtension.swift */; };
+		BCDE50692D7C32FE0005E91F /* OrderingAnimalVCGirlandoIpadActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE50682D7C32FE0005E91F /* OrderingAnimalVCGirlandoIpadActionMethods.swift */; };
+		BCDE506B2D7C33220005E91F /* OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE506A2D7C33220005E91F /* OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift */; };
+		BCE4E6152D3A465B00CB047E /* OrderAnimalUIMethodsIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4E6142D3A465B00CB047E /* OrderAnimalUIMethodsIpad.swift */; };
+		BCE4E6172D3A46DC00CB047E /* OrderAnimalVCID17SireDamValidationipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4E6162D3A46DC00CB047E /* OrderAnimalVCID17SireDamValidationipad.swift */; };
+		BCE7625A2D74F16D0025CD61 /* BeefReviewOrderVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE762592D74F16D0025CD61 /* BeefReviewOrderVCIpad.swift */; };
+		BCE88F152D4684960063E248 /* BeefViewAnimalVCiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE88F142D4684960063E248 /* BeefViewAnimalVCiPad.swift */; };
+		BCE88F172D4684A80063E248 /* BeefViewAnimalVCiPadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE88F162D4684A80063E248 /* BeefViewAnimalVCiPadExtension.swift */; };
 		BCEC54FD23533B9700B31A42 /* SearchPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCEC54FB23533B9600B31A42 /* SearchPoint.xcdatamodeld */; };
 		BCEC550623533C6A00B31A42 /* GetProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC54FE23533C6900B31A42 /* GetProviderModel.swift */; };
 		BCEC550723533C6A00B31A42 /* GetNominatorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC54FF23533C6A00B31A42 /* GetNominatorsModel.swift */; };
@@ -350,6 +442,9 @@
 		BCEC551A23533CDF00B31A42 /* GetMarketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC551323533CDF00B31A42 /* GetMarketsViewModel.swift */; };
 		BCEC551B23533CDF00B31A42 /* GetProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC551423533CDF00B31A42 /* GetProviderViewModel.swift */; };
 		BCEC551D23533DD700B31A42 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC551C23533DD700B31A42 /* ApiKeys.swift */; };
+		BCF310252D7DB5A7007B9F7F /* BeefAnimalBrazilVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF310242D7DB5A7007B9F7F /* BeefAnimalBrazilVCIpad.swift */; };
+		BCF9B9552DBD641500591139 /* SampleTrackingVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF9B9542DBD641500591139 /* SampleTrackingVCIpad.swift */; };
+		BCFBE3422D6C5F20006920D9 /* ReviewOrderItemCelliPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFBE3412D6C5F20006920D9 /* ReviewOrderItemCelliPad.swift */; };
 		BCFE05AC241391A900A748E5 /* BeefAnimalGlobalHD50KVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFE05AB241391A900A748E5 /* BeefAnimalGlobalHD50KVC.swift */; };
 		BD17987323FBF06B0067684B /* ApiSyncModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17987223FBF06B0067684B /* ApiSyncModal.swift */; };
 		BD1912C92416512A00E19AC2 /* BeefProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1912C82416512900E19AC2 /* BeefProductsTableViewCell.swift */; };
@@ -357,8 +452,6 @@
 		BD19510C241FA4AF00F8D066 /* InheritQuestionaireController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD195106241FA4A700F8D066 /* InheritQuestionaireController.swift */; };
 		BD19510D241FA4AF00F8D066 /* InheritQuestionaireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD195107241FA4A900F8D066 /* InheritQuestionaireModel.swift */; };
 		BD19510E241FA4AF00F8D066 /* QuestionaireHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD195108241FA4AA00F8D066 /* QuestionaireHeaderView.xib */; };
-		BD19510F241FA4AF00F8D066 /* QuestionaireViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD195109241FA4AC00F8D066 /* QuestionaireViewCell.swift */; };
-		BD195110241FA4AF00F8D066 /* QuestionaireViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD19510A241FA4AD00F8D066 /* QuestionaireViewCell.xib */; };
 		BD195112241FBC5B00F8D066 /* BeefViewAnimalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD195111241FBC5B00F8D066 /* BeefViewAnimalVC.swift */; };
 		BD2D751F241A22E600EC6B00 /* BeefOrderingProductSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2D751E241A22E600EC6B00 /* BeefOrderingProductSelectionVC.swift */; };
 		BD2D7521241A2F9E00EC6B00 /* BeefOrderProductSelectionSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2D7520241A2F9E00EC6B00 /* BeefOrderProductSelectionSecondVC.swift */; };
@@ -715,6 +808,15 @@
 		4EE422B52458CE4B0088F430 /* ValidateDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateDeviceModel.swift; sourceTree = "<group>"; };
 		4EE422B72458CE650088F430 /* ValidateDeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateDeviceViewModel.swift; sourceTree = "<group>"; };
 		4EF1715F249388F9003210D8 /* CustomerOrderSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerOrderSetting.swift; sourceTree = "<group>"; };
+		652A35CA2DA532890079FE28 /* ADHFilteriPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHFilteriPadVC.swift; sourceTree = "<group>"; };
+		652A35CC2DA5360D0079FE28 /* ADHFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHFilterExtension.swift; sourceTree = "<group>"; };
+		658A3B762D817D600097EC6D /* DataEntryModeCreateListiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryModeCreateListiPadVC.swift; sourceTree = "<group>"; };
+		658B01032D837936000A1FAE /* DataEntryListViewAnimalListiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryListViewAnimalListiPadVC.swift; sourceTree = "<group>"; };
+		658B01062D83864F000A1FAE /* DataEntryReviewDataiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryReviewDataiPadVC.swift; sourceTree = "<group>"; };
+		658B01092D83881B000A1FAE /* ReviewOrderFilteriPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderFilteriPadVC.swift; sourceTree = "<group>"; };
+		65CFB83C2D82C136006C697F /* DataEntryModeListiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryModeListiPadVC.swift; sourceTree = "<group>"; };
+		65CFB83F2D82C96E006C697F /* DataListCollectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataListCollectionCellView.swift; sourceTree = "<group>"; };
+		65D3A7402D81BAE900D0588D /* DataEntryiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DataEntryiPad.storyboard; sourceTree = "<group>"; };
 		718C27409A60A1FFAB804DAE /* Pods_SearchPoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchPoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC12690FBE081520AE2464B /* Pods-SearchPoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchPoint.release.xcconfig"; path = "Target Support Files/Pods-SearchPoint/Pods-SearchPoint.release.xcconfig"; sourceTree = "<group>"; };
 		9CE6CA7629101F2E004921C4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = ../it.lproj/Main.strings; sourceTree = "<group>"; };
@@ -735,17 +837,100 @@
 		B1D173A324853EAB00374315 /* GetCustomerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCustomerViewModel.swift; sourceTree = "<group>"; };
 		B1E2591924406C5900F22740 /* ListingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewCell.swift; sourceTree = "<group>"; };
 		B1F29C9B24AB3B5F00549A67 /* ReviewAddonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAddonsCell.swift; sourceTree = "<group>"; };
+		BC01B5432DB78B5500069A10 /* ResolveIssuesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveIssuesCollectionViewCell.swift; sourceTree = "<group>"; };
+		BC0222352D605B21007D9685 /* OPSSecondVCiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSSecondVCiPad.swift; sourceTree = "<group>"; };
+		BC0222372D605B36007D9685 /* OPSSecondVCActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSSecondVCActionMethods.swift; sourceTree = "<group>"; };
+		BC0222392D605B4F007D9685 /* OPSSecondVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSSecondVCExtensions.swift; sourceTree = "<group>"; };
+		BC1A04D42DBF717500544073 /* SampleTrackingDetailVCiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackingDetailVCiPad.swift; sourceTree = "<group>"; };
+		BC1A04D62DBF718900544073 /* SampleTrackingDetailVCiPadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackingDetailVCiPadExtension.swift; sourceTree = "<group>"; };
+		BC1AE1832D6BA0660006693F /* OPSReviewVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSReviewVCIpad.swift; sourceTree = "<group>"; };
 		BC1BCB542D2D798600ECC88C /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		BC1BCB552D2D798600ECC88C /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		BC22E4492DAE5E8600ABD6CA /* OrderSaveVCiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSaveVCiPad.swift; sourceTree = "<group>"; };
+		BC2B1AD62D738B5F0098562A /* QuestionaireViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionaireViewCell.xib; sourceTree = "<group>"; };
+		BC2B1AD82D738B850098562A /* QuestionaireViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireViewCell.swift; sourceTree = "<group>"; };
 		BC2CC3A52D2D8FBD00C94ABD /* DashboardCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardCardCell.xib; sourceTree = "<group>"; };
 		BC2CC3A72D2D8FC000C94ABD /* DashboardCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCardCell.swift; sourceTree = "<group>"; };
 		BC2CC3A92D2D8FDA00C94ABD /* OpenSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSheetViewController.swift; sourceTree = "<group>"; };
 		BC2CC3AB2D2D8FE800C94ABD /* OpenSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSheetTableViewCell.swift; sourceTree = "<group>"; };
+		BC34B5CF2D44EE81008D34BB /* ViewAnimalsControlleriPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimalsControlleriPadVC.swift; sourceTree = "<group>"; };
+		BC34B5D12D44EEB1008D34BB /* ViewAnimalCelliPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimalCelliPad.swift; sourceTree = "<group>"; };
+		BC3804332D8F03AB008819F1 /* DairyPlaceAnOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DairyPlaceAnOrder.storyboard; sourceTree = "<group>"; };
+		BC3804352D8F03C3008819F1 /* BeefPlaceAnOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BeefPlaceAnOrder.storyboard; sourceTree = "<group>"; };
+		BC496DA22D89AA700053C304 /* Brazil.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Brazil.storyboard; sourceTree = "<group>"; };
+		BC496DA52D8AA6600053C304 /* DEOAnimalVCGirlando.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCGirlando.swift; sourceTree = "<group>"; };
+		BC496DA72D8AA6760053C304 /* DEOAnimalVCGirlandoActionMethodsipad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCGirlandoActionMethodsipad.swift; sourceTree = "<group>"; };
+		BC496DA92D8AA68E0053C304 /* DEOAnimalVCGirlandoipadUIMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCGirlandoipadUIMethods.swift; sourceTree = "<group>"; };
+		BC496DAB2D8AA6A00053C304 /* DEOAnimalVCGirlandoExtensionipad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCGirlandoExtensionipad.swift; sourceTree = "<group>"; };
+		BC54B9262D6CD5C300A7F459 /* OrderSubmittedVCiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSubmittedVCiPad.swift; sourceTree = "<group>"; };
+		BC5684F02D9E64AC00755962 /* AddExistingAnimaliPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExistingAnimaliPad.swift; sourceTree = "<group>"; };
+		BC5684F22DA1225600755962 /* OrderingAnimalImportListExtensionIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalImportListExtensionIpad.swift; sourceTree = "<group>"; };
+		BC5684F42DA12D1F00755962 /* ImportListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportListVC.swift; sourceTree = "<group>"; };
+		BC5684F72DA30BCF00755962 /* ADHAnimalVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHAnimalVCIpad.swift; sourceTree = "<group>"; };
+		BC5684F92DA30BDC00755962 /* ADHAnimalVCExtensionIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHAnimalVCExtensionIpad.swift; sourceTree = "<group>"; };
+		BC5684FB2DA30BF300755962 /* ADHAnimalVCActionsIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHAnimalVCActionsIpad.swift; sourceTree = "<group>"; };
+		BC5684FD2DA310B600755962 /* ADHListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHListCollectionViewCell.swift; sourceTree = "<group>"; };
+		BC598B562D6A5C3700701661 /* ReviewOrderVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpad.swift; sourceTree = "<group>"; };
+		BC598B582D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpadActionMethods.swift; sourceTree = "<group>"; };
+		BC598B5A2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpadExtensions.swift; sourceTree = "<group>"; };
+		BC804BB12DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackingDeetailCellIpad.swift; sourceTree = "<group>"; };
+		BC804BB32DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackDetailCollectionCell.swift; sourceTree = "<group>"; };
 		BC9C66862D32D14C005E89ED /* SettingsVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVCExtension.swift; sourceTree = "<group>"; };
 		BC9C66882D32D69C005E89ED /* SettingsVCActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVCActions.swift; sourceTree = "<group>"; };
+		BCA121412D89855E002ECA12 /* DataEntryaMergeListIpadVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryaMergeListIpadVc.swift; sourceTree = "<group>"; };
+		BCA84B1A2D3A43DC00CFE2A8 /* OrderingAnimalipadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalipadVC.swift; sourceTree = "<group>"; };
+		BCABBBCD2D65D05E0009EEB6 /* BeefOPSSecondVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefOPSSecondVCIpad.swift; sourceTree = "<group>"; };
+		BCACF3B82DA667E400A72ECA /* DataEntryConflictedImportListIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryConflictedImportListIpad.swift; sourceTree = "<group>"; };
 		BCB350942414D0C9005FD36D /* BeefAnimalBrazilVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefAnimalBrazilVC.swift; sourceTree = "<group>"; };
 		BCB350962414D0F0005FD36D /* BeefAnimalNZ_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefAnimalNZ_VC.swift; sourceTree = "<group>"; };
+		BCB506B02D47A4920006E916 /* OPSelectioniPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSelectioniPadVC.swift; sourceTree = "<group>"; };
+		BCB506B42D47A4B30006E916 /* OPSelectioniPadVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPSelectioniPadVCExtensions.swift; sourceTree = "<group>"; };
+		BCBA0D932D4FFC6E00F5679E /* BeefOPSiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefOPSiPadVC.swift; sourceTree = "<group>"; };
+		BCBA0D962D500EFD00F5679E /* InheritBeefVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritBeefVC.swift; sourceTree = "<group>"; };
+		BCBA0D982D500F1200F5679E /* InheritBeefVCInheritMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritBeefVCInheritMethods.swift; sourceTree = "<group>"; };
+		BCBA0D9A2D500F2C00F5679E /* InheritBeefVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritBeefVCExtensions.swift; sourceTree = "<group>"; };
+		BCBA0D9C2D500F3A00F5679E /* InheritBeefVCActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritBeefVCActionMethods.swift; sourceTree = "<group>"; };
+		BCBA0D9E2D500F5300F5679E /* InheritBeefVCUISelectorMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritBeefVCUISelectorMethods.swift; sourceTree = "<group>"; };
 		BCC0339E2D2E78A100DC3A42 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		BCC1CCF42D82C5FB00AF25A5 /* DataEntryOrderingAnimalVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryOrderingAnimalVCIpad.swift; sourceTree = "<group>"; };
+		BCC1CCF62D82C61200AF25A5 /* DEOAnimalVCExtensionCountryFlowsiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCExtensionCountryFlowsiPad.swift; sourceTree = "<group>"; };
+		BCC1CCF82D82C69200AF25A5 /* DEOAnimalVCUIMethodsIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCUIMethodsIpad.swift; sourceTree = "<group>"; };
+		BCC1CCFA2D82C6B700AF25A5 /* DEOAnimalVCTextFieldDelegatesIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCTextFieldDelegatesIpad.swift; sourceTree = "<group>"; };
+		BCC1CCFC2D82C6E500AF25A5 /* DEOAnimalVCExtensionsIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCExtensionsIpad.swift; sourceTree = "<group>"; };
+		BCC1CCFE2D82C73600AF25A5 /* DEOAnimalVCID17Flowsipad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCID17Flowsipad.swift; sourceTree = "<group>"; };
+		BCC1CD002D82C75F00AF25A5 /* DEOAnimalVCActionMethodsiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCActionMethodsiPad.swift; sourceTree = "<group>"; };
+		BCC1CD022D82C79700AF25A5 /* DEOAnimalVCSelectorMethodsIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOAnimalVCSelectorMethodsIpad.swift; sourceTree = "<group>"; };
+		BCC4B9032D3B99E2001F14C8 /* OrderingAnimalVCiPadActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCiPadActionMethods.swift; sourceTree = "<group>"; };
+		BCC4B9052D3B9A28001F14C8 /* OrderingAnimalVCCountryFlowsiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCCountryFlowsiPad.swift; sourceTree = "<group>"; };
+		BCC4B9072D3B9A73001F14C8 /* OrderingAnimalVCiPadTextFldDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCiPadTextFldDelegates.swift; sourceTree = "<group>"; };
+		BCC4B9092D3B9AA5001F14C8 /* OrderingAnimalVCTableViewiPadDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCTableViewiPadDelegates.swift; sourceTree = "<group>"; };
+		BCC4B90B2D3B9AE2001F14C8 /* OrderingAnimaliPadVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimaliPadVCExtensions.swift; sourceTree = "<group>"; };
+		BCC4B90D2D3B9B65001F14C8 /* OrderingAnimalVCiPadAddAnimalFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCiPadAddAnimalFlow.swift; sourceTree = "<group>"; };
+		BCCA38862D75EA5E004D5C7A /* BeefOPSSelectionReviewIPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefOPSSelectionReviewIPadVC.swift; sourceTree = "<group>"; };
+		BCCD3BCE2D402FE400B2E89F /* BlockyardBeefiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockyardBeefiPad.swift; sourceTree = "<group>"; };
+		BCD062A72DB6407500E36F63 /* ResolveIssuesiPadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveIssuesiPadVC.swift; sourceTree = "<group>"; };
+		BCD062AA2DB640BF00E36F63 /* ResolveIssuesiPadVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveIssuesiPadVCExtensions.swift; sourceTree = "<group>"; };
+		BCDD6A792D91592C007AD8AF /* DataEntryBeefiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DataEntryBeefiPad.storyboard; sourceTree = "<group>"; };
+		BCDD6A7C2D92A594007AD8AF /* DataEntryInheritBeefVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryInheritBeefVC.swift; sourceTree = "<group>"; };
+		BCDD6A7E2D92A5A5007AD8AF /* DataEntryInheritBeefExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryInheritBeefExtensions.swift; sourceTree = "<group>"; };
+		BCDD6A802D92A5B6007AD8AF /* DataEntryInheritBeefActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryInheritBeefActionMethods.swift; sourceTree = "<group>"; };
+		BCDD6A822D92A5D1007AD8AF /* DataEntryInheritBeefModuleMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryInheritBeefModuleMethods.swift; sourceTree = "<group>"; };
+		BCDD6A842D92A5E1007AD8AF /* DataEntryInheritBeefUIMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryInheritBeefUIMethods.swift; sourceTree = "<group>"; };
+		BCDD6A862D93B0E6007AD8AF /* DataEntryBeefViewAnimalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryBeefViewAnimalList.swift; sourceTree = "<group>"; };
+		BCDD6A882D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefDataEntryReviewDataIpad.swift; sourceTree = "<group>"; };
+		BCDD6A8B2D93DF1B007AD8AF /* DEBrazilBeefVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEBrazilBeefVCIpad.swift; sourceTree = "<group>"; };
+		BCDD6A8D2D93DF3F007AD8AF /* DEBrazilBeefIpadExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEBrazilBeefIpadExtensions.swift; sourceTree = "<group>"; };
+		BCDD6A8F2D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEBrazilBeefActionMethods.swift; sourceTree = "<group>"; };
+		BCDD6A912D93DF67007AD8AF /* DEBrazilBeefiPadGenotypeMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEBrazilBeefiPadGenotypeMethods.swift; sourceTree = "<group>"; };
+		BCDE50642D7C32C90005E91F /* OrderingAnimalVCGirlandoIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoIpad.swift; sourceTree = "<group>"; };
+		BCDE50662D7C32E40005E91F /* OrderingAnimalVCGirlandoIpadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoIpadExtension.swift; sourceTree = "<group>"; };
+		BCDE50682D7C32FE0005E91F /* OrderingAnimalVCGirlandoIpadActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoIpadActionMethods.swift; sourceTree = "<group>"; };
+		BCDE506A2D7C33220005E91F /* OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift; sourceTree = "<group>"; };
+		BCE4E6142D3A465B00CB047E /* OrderAnimalUIMethodsIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAnimalUIMethodsIpad.swift; sourceTree = "<group>"; };
+		BCE4E6162D3A46DC00CB047E /* OrderAnimalVCID17SireDamValidationipad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAnimalVCID17SireDamValidationipad.swift; sourceTree = "<group>"; };
+		BCE762592D74F16D0025CD61 /* BeefReviewOrderVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefReviewOrderVCIpad.swift; sourceTree = "<group>"; };
+		BCE88F142D4684960063E248 /* BeefViewAnimalVCiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefViewAnimalVCiPad.swift; sourceTree = "<group>"; };
+		BCE88F162D4684A80063E248 /* BeefViewAnimalVCiPadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefViewAnimalVCiPadExtension.swift; sourceTree = "<group>"; };
 		BCEC54FC23533B9700B31A42 /* SearchPoint.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SearchPoint.xcdatamodel; sourceTree = "<group>"; };
 		BCEC54FE23533C6900B31A42 /* GetProviderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProviderModel.swift; sourceTree = "<group>"; };
 		BCEC54FF23533C6A00B31A42 /* GetNominatorsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNominatorsModel.swift; sourceTree = "<group>"; };
@@ -763,6 +948,9 @@
 		BCEC551323533CDF00B31A42 /* GetMarketsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMarketsViewModel.swift; sourceTree = "<group>"; };
 		BCEC551423533CDF00B31A42 /* GetProviderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProviderViewModel.swift; sourceTree = "<group>"; };
 		BCEC551C23533DD700B31A42 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		BCF310242D7DB5A7007B9F7F /* BeefAnimalBrazilVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefAnimalBrazilVCIpad.swift; sourceTree = "<group>"; };
+		BCF9B9542DBD641500591139 /* SampleTrackingVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackingVCIpad.swift; sourceTree = "<group>"; };
+		BCFBE3412D6C5F20006920D9 /* ReviewOrderItemCelliPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderItemCelliPad.swift; sourceTree = "<group>"; };
 		BCFE05AB241391A900A748E5 /* BeefAnimalGlobalHD50KVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeefAnimalGlobalHD50KVC.swift; sourceTree = "<group>"; };
 		BD17987223FBF06B0067684B /* ApiSyncModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSyncModal.swift; sourceTree = "<group>"; };
 		BD1912C82416512900E19AC2 /* BeefProductsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeefProductsTableViewCell.swift; sourceTree = "<group>"; };
@@ -770,8 +958,6 @@
 		BD195106241FA4A700F8D066 /* InheritQuestionaireController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InheritQuestionaireController.swift; sourceTree = "<group>"; };
 		BD195107241FA4A900F8D066 /* InheritQuestionaireModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InheritQuestionaireModel.swift; sourceTree = "<group>"; };
 		BD195108241FA4AA00F8D066 /* QuestionaireHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionaireHeaderView.xib; sourceTree = "<group>"; };
-		BD195109241FA4AC00F8D066 /* QuestionaireViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionaireViewCell.swift; sourceTree = "<group>"; };
-		BD19510A241FA4AD00F8D066 /* QuestionaireViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionaireViewCell.xib; sourceTree = "<group>"; };
 		BD195111241FBC5B00F8D066 /* BeefViewAnimalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefViewAnimalVC.swift; sourceTree = "<group>"; };
 		BD1FCFF523E9C15F00F6849D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BD2D751E241A22E600EC6B00 /* BeefOrderingProductSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefOrderingProductSelectionVC.swift; sourceTree = "<group>"; };
@@ -911,12 +1097,13 @@
 		00159E642B91E73500B14B56 /* ReviewOrderListVC */ = {
 			isa = PBXGroup;
 			children = (
+				00159E692B91F4D700B14B56 /* ReviewOrderCell.swift */,
 				DCE17C0723AA54D20023F8C7 /* ReviewOrderListVc.swift */,
 				00159E672B91E7A700B14B56 /* ReviewOrderListVCExtension.swift */,
 				4E821445246B0B1D00B72618 /* ReviewController_TermsVC.swift */,
 				C715C68828499B8700B088F0 /* Sucessalert.swift */,
 				00159E652B91E75700B14B56 /* ReviewOrderItemCell.swift */,
-				00159E692B91F4D700B14B56 /* ReviewOrderCell.swift */,
+				BCFBE3412D6C5F20006920D9 /* ReviewOrderItemCelliPad.swift */,
 			);
 			path = ReviewOrderListVC;
 			sourceTree = "<group>";
@@ -934,6 +1121,9 @@
 		0024FB662B93CD73004FF3E4 /* ReviewOrderVC */ = {
 			isa = PBXGroup;
 			children = (
+				BC598B562D6A5C3700701661 /* ReviewOrderVCIpad.swift */,
+				BC598B582D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift */,
+				BC598B5A2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift */,
 				BDEDAA7C234E1CE4002F327E /* ReviewOrderVC.swift */,
 				0024FB692B93D0E5004FF3E4 /* ReviewOrderVCActionMethods.swift */,
 				0024FB672B93CDBD004FF3E4 /* ReviewOrderVCExtension.swift */,
@@ -1139,6 +1329,9 @@
 		00D38F952B9616420005F0C1 /* OrderProductSelectionSecondVC */ = {
 			isa = PBXGroup;
 			children = (
+				BC0222352D605B21007D9685 /* OPSSecondVCiPad.swift */,
+				BC0222372D605B36007D9685 /* OPSSecondVCActionMethods.swift */,
+				BC0222392D605B4F007D9685 /* OPSSecondVCExtensions.swift */,
 				2719571E23588F6B006322A2 /* OrderProductSelectionSecondVC.swift */,
 				00D38F982B9618F60005F0C1 /* OrderProductSelectionSecondVCActionMethods.swift */,
 				00D38F962B9616550005F0C1 /* OrderProductSelectionSecondVCExtension.swift */,
@@ -1149,8 +1342,11 @@
 		00D38F9A2B962BAF0005F0C1 /* OrderingProductSelectionVC */ = {
 			isa = PBXGroup;
 			children = (
+				BD8074A62344C5930083DC99 /* OrdingProductSelectionCollectionViewCell.swift */,
 				BD8074A423449D870083DC99 /* OrderingProductSelectionVC.swift */,
 				00D38F9B2B962BBF0005F0C1 /* OrderingProductSelectionVCExtension.swift */,
+				BCB506B02D47A4920006E916 /* OPSelectioniPadVC.swift */,
+				BCB506B42D47A4B30006E916 /* OPSelectioniPadVCExtensions.swift */,
 			);
 			path = OrderingProductSelectionVC;
 			sourceTree = "<group>";
@@ -1183,6 +1379,10 @@
 		00DC288A2B9E3251009FAB3B /* OrderingAnimalVCGirlando */ = {
 			isa = PBXGroup;
 			children = (
+				BCDE50642D7C32C90005E91F /* OrderingAnimalVCGirlandoIpad.swift */,
+				BCDE50662D7C32E40005E91F /* OrderingAnimalVCGirlandoIpadExtension.swift */,
+				BCDE50682D7C32FE0005E91F /* OrderingAnimalVCGirlandoIpadActionMethods.swift */,
+				BCDE506A2D7C33220005E91F /* OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift */,
 				B18D53E9244ED89E00B54E9D /* OrderingAnimalVCGirlando.swift */,
 				00DC288B2B9E326D009FAB3B /* OrderingAnimalVCGirlandoExtension.swift */,
 				00DC288D2B9E327C009FAB3B /* OrderingAnimalVCGirlandoActionMethods.swift */,
@@ -1215,6 +1415,7 @@
 				00AA39B42BAD3775000EDF43 /* OrderingAnimalVCID17SireDamValidations.swift */,
 				00AA39B62BAD37D5000EDF43 /* OrderingAnimalVCActionMethods.swift */,
 				0057EEFF2BAD897100ABA550 /* OrderingAnimalVCSelectorAndUIMethods.swift */,
+				BCC4B9022D3B9979001F14C8 /* OrderingAnimalVCiPad */,
 			);
 			path = OrderingAnimalVC;
 			sourceTree = "<group>";
@@ -1232,6 +1433,7 @@
 			isa = PBXGroup;
 			children = (
 				27D33438237D423500BA5DC9 /* OrderProductSelectionReviewVC.swift */,
+				BC1AE1832D6BA0660006693F /* OPSReviewVCIpad.swift */,
 				00FEC9C62B925D4A005E21F9 /* OrderProductSelectionReviewVCExtension.swift */,
 			);
 			path = OrderProductSelectionReviewVC;
@@ -1241,6 +1443,8 @@
 			isa = PBXGroup;
 			children = (
 				BD195111241FBC5B00F8D066 /* BeefViewAnimalVC.swift */,
+				BCE88F142D4684960063E248 /* BeefViewAnimalVCiPad.swift */,
+				BCE88F162D4684A80063E248 /* BeefViewAnimalVCiPadExtension.swift */,
 				00FEC9C82B927304005E21F9 /* BeefAnimalVCExtension.swift */,
 			);
 			path = BeefViewAnimalVC;
@@ -1452,42 +1656,34 @@
 			children = (
 				BC1BCB562D2D798600ECC88C /* SideMenuVC */,
 				E2DF1DAC2341F45C001BADBF /* DashboardVC.swift */,
-				00F689052B7B99410023EBE4 /* DashboardVC+ControllerExtensions.swift */,
 				00F689032B7B991F0023EBE4 /* DashboardVCExtensions.swift */,
+				00F689052B7B99410023EBE4 /* DashboardVC+ControllerExtensions.swift */,
 				006494E325EF8BCE003ED3D3 /* DashboardCollectionCell.swift */,
 				BC2CC3A52D2D8FBD00C94ABD /* DashboardCardCell.xib */,
 				BC2CC3A72D2D8FC000C94ABD /* DashboardCardCell.swift */,
 				BC2CC3A92D2D8FDA00C94ABD /* OpenSheetViewController.swift */,
 				BC2CC3AB2D2D8FE800C94ABD /* OpenSheetTableViewCell.swift */,
-				2A2D39302AF3AFDF00D4D52A /* BeefPlaceAnOrder */,
 				2AC1755929B10B5000741D20 /* OrderingAnimalViewModel */,
 				00D040E22615DE8D00B3CED1 /* CommanInfoPopUpController.swift */,
 				00B27AA725946C38007716D0 /* ImportListCell.swift */,
 				14E2C99B23A3FFCB008CCD2B /* FullSiteVC.swift */,
 				14EDC34823A24B82005A3FF8 /* OrderSaveViewController.swift */,
+				BC22E4492DAE5E8600ABD6CA /* OrderSaveVCiPad.swift */,
 				FA1F519324E521DF008C9B0A /* OcrCollectionViewCell.swift */,
-				00D38F9D2B964B060005F0C1 /* SampleTrackingDetailVC */,
 				BD70EEE823438BAA008C9D3D /* SpeciesCollectionViewCell.swift */,
 				272D2101237459EA0020EF49 /* RadioCell.swift */,
 				BD70EEEA23439259008C9D3D /* EvaluationProviderViewCell.swift */,
 				2719572223588FC4006322A2 /* OPSTableViewCell.swift */,
 				2747388B241CFAD800133448 /* BeefOPSTableViewCell.swift */,
 				272D210D2375903B0020EF49 /* ReusableCollectionReusableView.swift */,
-				00D38F9A2B962BAF0005F0C1 /* OrderingProductSelectionVC */,
-				00D38F952B9616420005F0C1 /* OrderProductSelectionSecondVC */,
-				272D210A23745B820020EF49 /* SampleTrackingVC.swift */,
-				272D210923745B810020EF49 /* SampleTrackingCell.swift */,
 				2719572023588F92006322A2 /* OPSCollectionViewCell.swift */,
-				BD8074A62344C5930083DC99 /* OrdingProductSelectionCollectionViewCell.swift */,
 				BD79707223462B8B003326A9 /* RootViewController.swift */,
-				00F961992B94BC7100CF1AEC /* OrderingAnimalVC */,
 				2AB07B46286B29F00095B3B8 /* OrderingAnimalViewModel_italy */,
 				BDEDAA78234E0954002F327E /* customButton.swift */,
 				272D21112375A9CB0020EF49 /* OrderSubmittedVC.swift */,
+				BC54B9262D6CD5C300A7F459 /* OrderSubmittedVCiPad.swift */,
 				BDEDAA77234E0953002F327E /* customView.swift */,
-				0024FB662B93CD73004FF3E4 /* ReviewOrderVC */,
 				27A1450A23573B1700E9BFDF /* OrderProductCell.swift */,
-				0024FB632B936C53004FF3E4 /* ResolveIssuesVC */,
 				272D210F2375A93A0020EF49 /* BillingTableViewCell.swift */,
 				27DD8BBD235F283C002B5771 /* Terms_ConditionsVC.swift */,
 				27B22FF32374376C006E8E6A /* WebViewExtension.swift */,
@@ -1495,11 +1691,10 @@
 				27253EDD2379838900DD9144 /* ContactSupportVC.swift */,
 				27253EDF237984AB00DD9144 /* ContactSupportCell.swift */,
 				2795D8B523900C73001A73B0 /* ViewAnimalsController.swift */,
+				BC34B5CF2D44EE81008D34BB /* ViewAnimalsControlleriPadVC.swift */,
+				BC34B5D12D44EEB1008D34BB /* ViewAnimalCelliPad.swift */,
 				2795D8B723901006001A73B0 /* ViewAnimalCell.swift */,
 				00FEC9CA2B92731A005E21F9 /* BeefViewAnimalVC */,
-				00FEC9C52B925D35005E21F9 /* OrderProductSelectionReviewVC */,
-				00FEC9C22B925949005E21F9 /* BillingTableCell */,
-				00159E642B91E73500B14B56 /* ReviewOrderListVC */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -1523,8 +1718,13 @@
 		278DAEB423421850006AF5B6 /* MainStoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				2A5DFECF28FD9342001EF5D5 /* Main.storyboard */,
+				65D3A7402D81BAE900D0588D /* DataEntryiPad.storyboard */,
+				BCDD6A792D91592C007AD8AF /* DataEntryBeefiPad.storyboard */,
+				BC3804352D8F03C3008819F1 /* BeefPlaceAnOrder.storyboard */,
+				BC3804332D8F03AB008819F1 /* DairyPlaceAnOrder.storyboard */,
 				00EF4D192CFF32A800687307 /* iPad.storyboard */,
+				2A5DFECF28FD9342001EF5D5 /* Main.storyboard */,
+				BC496DA22D89AA700053C304 /* Brazil.storyboard */,
 				E20D517F233DF808005D8940 /* LaunchScreen.storyboard */,
 				00EF4D1B2CFF34CB00687307 /* LaunchScreeniPad.storyboard */,
 				14895B692386793100BC4DC4 /* OfflinePopUp.swift */,
@@ -1545,12 +1745,13 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		2A2D39302AF3AFDF00D4D52A /* BeefPlaceAnOrder */ = {
+		2A2D39302AF3AFDF00D4D52A /* Blockyard */ = {
 			isa = PBXGroup;
 			children = (
 				00B5F4C72C6B70E4007CF9CE /* BeefUSAddAnimalVC.swift */,
+				BCCD3BCE2D402FE400B2E89F /* BlockyardBeefiPad.swift */,
 			);
-			path = BeefPlaceAnOrder;
+			path = Blockyard;
 			sourceTree = "<group>";
 		};
 		2AB07B46286B29F00095B3B8 /* OrderingAnimalViewModel_italy */ = {
@@ -1634,6 +1835,60 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		652A35C92DA532720079FE28 /* ADHFilter */ = {
+			isa = PBXGroup;
+			children = (
+				652A35CC2DA5360D0079FE28 /* ADHFilterExtension.swift */,
+				652A35CA2DA532890079FE28 /* ADHFilteriPadVC.swift */,
+			);
+			path = ADHFilter;
+			sourceTree = "<group>";
+		};
+		658A3B752D817CC10097EC6D /* DataEntryiPad */ = {
+			isa = PBXGroup;
+			children = (
+				BCACF3B82DA667E400A72ECA /* DataEntryConflictedImportListIpad.swift */,
+				BCDD6A8A2D93DED3007AD8AF /* DataEntryBrazilBeefVC */,
+				BCDD6A7B2D92A554007AD8AF /* InheritBeefDataEntry */,
+				BCC1CCF32D82C5C700AF25A5 /* DataEntryOrderingAnimalVCIpad */,
+				658B01082D8387DD000A1FAE /* DataEntryReview */,
+				658B01052D83798A000A1FAE /* DataListCart */,
+				65CFB83E2D82C92F006C697F /* DataEntryList */,
+				BC496DA42D8AA6350053C304 /* DEOAnimalVCGirlando */,
+			);
+			path = DataEntryiPad;
+			sourceTree = "<group>";
+		};
+		658B01052D83798A000A1FAE /* DataListCart */ = {
+			isa = PBXGroup;
+			children = (
+				658B01032D837936000A1FAE /* DataEntryListViewAnimalListiPadVC.swift */,
+				BCDD6A862D93B0E6007AD8AF /* DataEntryBeefViewAnimalList.swift */,
+			);
+			path = DataListCart;
+			sourceTree = "<group>";
+		};
+		658B01082D8387DD000A1FAE /* DataEntryReview */ = {
+			isa = PBXGroup;
+			children = (
+				658B01062D83864F000A1FAE /* DataEntryReviewDataiPadVC.swift */,
+				BCDD6A882D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift */,
+				658B01092D83881B000A1FAE /* ReviewOrderFilteriPadVC.swift */,
+			);
+			path = DataEntryReview;
+			sourceTree = "<group>";
+		};
+		65CFB83E2D82C92F006C697F /* DataEntryList */ = {
+			isa = PBXGroup;
+			children = (
+				658A3B762D817D600097EC6D /* DataEntryModeCreateListiPadVC.swift */,
+				65CFB83C2D82C136006C697F /* DataEntryModeListiPadVC.swift */,
+				BCA121412D89855E002ECA12 /* DataEntryaMergeListIpadVc.swift */,
+				65CFB83F2D82C96E006C697F /* DataListCollectionCellView.swift */,
+			);
+			path = DataEntryList;
+			sourceTree = "<group>";
+		};
 		B1CECB9724AB030F002780F8 /* ReviewOrderAddons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1652,6 +1907,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BC1A04D32DBF715500544073 /* SampleTrackingDetailVCiPad */ = {
+			isa = PBXGroup;
+			children = (
+				BC1A04D42DBF717500544073 /* SampleTrackingDetailVCiPad.swift */,
+				BC1A04D62DBF718900544073 /* SampleTrackingDetailVCiPadExtension.swift */,
+				BC804BB12DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift */,
+				BC804BB32DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift */,
+			);
+			path = SampleTrackingDetailVCiPad;
+			sourceTree = "<group>";
+		};
 		BC1BCB562D2D798600ECC88C /* SideMenuVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1661,17 +1927,161 @@
 			path = SideMenuVC;
 			sourceTree = "<group>";
 		};
+		BC496DA42D8AA6350053C304 /* DEOAnimalVCGirlando */ = {
+			isa = PBXGroup;
+			children = (
+				BC496DA52D8AA6600053C304 /* DEOAnimalVCGirlando.swift */,
+				BC496DA72D8AA6760053C304 /* DEOAnimalVCGirlandoActionMethodsipad.swift */,
+				BC496DA92D8AA68E0053C304 /* DEOAnimalVCGirlandoipadUIMethods.swift */,
+				BC496DAB2D8AA6A00053C304 /* DEOAnimalVCGirlandoExtensionipad.swift */,
+			);
+			path = DEOAnimalVCGirlando;
+			sourceTree = "<group>";
+		};
+		BC5684EF2D9E622000755962 /* AddExistingAnimalImportListIpad */ = {
+			isa = PBXGroup;
+			children = (
+				BC5684F02D9E64AC00755962 /* AddExistingAnimaliPad.swift */,
+				BC5684F42DA12D1F00755962 /* ImportListVC.swift */,
+			);
+			path = AddExistingAnimalImportListIpad;
+			sourceTree = "<group>";
+		};
+		BC5684F62DA30BA300755962 /* ADHDataIpad */ = {
+			isa = PBXGroup;
+			children = (
+				652A35C92DA532720079FE28 /* ADHFilter */,
+				BC5684F72DA30BCF00755962 /* ADHAnimalVCIpad.swift */,
+				BC5684F92DA30BDC00755962 /* ADHAnimalVCExtensionIpad.swift */,
+				BC5684FB2DA30BF300755962 /* ADHAnimalVCActionsIpad.swift */,
+				BC5684FD2DA310B600755962 /* ADHListCollectionViewCell.swift */,
+			);
+			path = ADHDataIpad;
+			sourceTree = "<group>";
+		};
+		BCABBBCC2D65D0270009EEB6 /* BeefOrderProductSelectionSecondVC */ = {
+			isa = PBXGroup;
+			children = (
+				BD2D7520241A2F9E00EC6B00 /* BeefOrderProductSelectionSecondVC.swift */,
+				BCABBBCD2D65D05E0009EEB6 /* BeefOPSSecondVCIpad.swift */,
+			);
+			path = BeefOrderProductSelectionSecondVC;
+			sourceTree = "<group>";
+		};
+		BCBA0D952D500EAF00F5679E /* InheritBeefiPad */ = {
+			isa = PBXGroup;
+			children = (
+				BCBA0D962D500EFD00F5679E /* InheritBeefVC.swift */,
+				BCBA0D982D500F1200F5679E /* InheritBeefVCInheritMethods.swift */,
+				BCBA0D9A2D500F2C00F5679E /* InheritBeefVCExtensions.swift */,
+				BCBA0D9C2D500F3A00F5679E /* InheritBeefVCActionMethods.swift */,
+				BCBA0D9E2D500F5300F5679E /* InheritBeefVCUISelectorMethods.swift */,
+			);
+			path = InheritBeefiPad;
+			sourceTree = "<group>";
+		};
+		BCC1CCF32D82C5C700AF25A5 /* DataEntryOrderingAnimalVCIpad */ = {
+			isa = PBXGroup;
+			children = (
+				BCC1CCF42D82C5FB00AF25A5 /* DataEntryOrderingAnimalVCIpad.swift */,
+				BCC1CCF62D82C61200AF25A5 /* DEOAnimalVCExtensionCountryFlowsiPad.swift */,
+				BCC1CCF82D82C69200AF25A5 /* DEOAnimalVCUIMethodsIpad.swift */,
+				BCC1CCFA2D82C6B700AF25A5 /* DEOAnimalVCTextFieldDelegatesIpad.swift */,
+				BCC1CCFC2D82C6E500AF25A5 /* DEOAnimalVCExtensionsIpad.swift */,
+				BCC1CCFE2D82C73600AF25A5 /* DEOAnimalVCID17Flowsipad.swift */,
+				BCC1CD002D82C75F00AF25A5 /* DEOAnimalVCActionMethodsiPad.swift */,
+				BCC1CD022D82C79700AF25A5 /* DEOAnimalVCSelectorMethodsIpad.swift */,
+			);
+			path = DataEntryOrderingAnimalVCIpad;
+			sourceTree = "<group>";
+		};
+		BCC4B9022D3B9979001F14C8 /* OrderingAnimalVCiPad */ = {
+			isa = PBXGroup;
+			children = (
+				BCA84B1A2D3A43DC00CFE2A8 /* OrderingAnimalipadVC.swift */,
+				BCE4E6142D3A465B00CB047E /* OrderAnimalUIMethodsIpad.swift */,
+				BC5684F22DA1225600755962 /* OrderingAnimalImportListExtensionIpad.swift */,
+				BCE4E6162D3A46DC00CB047E /* OrderAnimalVCID17SireDamValidationipad.swift */,
+				BCC4B9032D3B99E2001F14C8 /* OrderingAnimalVCiPadActionMethods.swift */,
+				BCC4B9052D3B9A28001F14C8 /* OrderingAnimalVCCountryFlowsiPad.swift */,
+				BCC4B9072D3B9A73001F14C8 /* OrderingAnimalVCiPadTextFldDelegates.swift */,
+				BCC4B9092D3B9AA5001F14C8 /* OrderingAnimalVCTableViewiPadDelegates.swift */,
+				BCC4B90B2D3B9AE2001F14C8 /* OrderingAnimaliPadVCExtensions.swift */,
+				BCC4B90D2D3B9B65001F14C8 /* OrderingAnimalVCiPadAddAnimalFlow.swift */,
+			);
+			path = OrderingAnimalVCiPad;
+			sourceTree = "<group>";
+		};
+		BCD062A92DB6409100E36F63 /* ResolveIssuesiPadVC */ = {
+			isa = PBXGroup;
+			children = (
+				BCD062A72DB6407500E36F63 /* ResolveIssuesiPadVC.swift */,
+				BCD062AA2DB640BF00E36F63 /* ResolveIssuesiPadVCExtensions.swift */,
+				BC01B5432DB78B5500069A10 /* ResolveIssuesCollectionViewCell.swift */,
+			);
+			path = ResolveIssuesiPadVC;
+			sourceTree = "<group>";
+		};
+		BCDD6A7B2D92A554007AD8AF /* InheritBeefDataEntry */ = {
+			isa = PBXGroup;
+			children = (
+				BCDD6A7C2D92A594007AD8AF /* DataEntryInheritBeefVC.swift */,
+				BCDD6A7E2D92A5A5007AD8AF /* DataEntryInheritBeefExtensions.swift */,
+				BCDD6A802D92A5B6007AD8AF /* DataEntryInheritBeefActionMethods.swift */,
+				BCDD6A822D92A5D1007AD8AF /* DataEntryInheritBeefModuleMethods.swift */,
+				BCDD6A842D92A5E1007AD8AF /* DataEntryInheritBeefUIMethods.swift */,
+			);
+			path = InheritBeefDataEntry;
+			sourceTree = "<group>";
+		};
+		BCDD6A8A2D93DED3007AD8AF /* DataEntryBrazilBeefVC */ = {
+			isa = PBXGroup;
+			children = (
+				BCDD6A8B2D93DF1B007AD8AF /* DEBrazilBeefVCIpad.swift */,
+				BCDD6A8D2D93DF3F007AD8AF /* DEBrazilBeefIpadExtensions.swift */,
+				BCDD6A8F2D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift */,
+				BCDD6A912D93DF67007AD8AF /* DEBrazilBeefiPadGenotypeMethods.swift */,
+			);
+			path = DataEntryBrazilBeefVC;
+			sourceTree = "<group>";
+		};
+		BCE762582D74F13F0025CD61 /* BeefReviewOrderVC */ = {
+			isa = PBXGroup;
+			children = (
+				BD2D7522241A365F00EC6B00 /* BeefReviewOrderVC.swift */,
+				BCE762592D74F16D0025CD61 /* BeefReviewOrderVCIpad.swift */,
+			);
+			path = BeefReviewOrderVC;
+			sourceTree = "<group>";
+		};
+		BCF9B9522DBD63CC00591139 /* SampleTrackingVC */ = {
+			isa = PBXGroup;
+			children = (
+				272D210A23745B820020EF49 /* SampleTrackingVC.swift */,
+				272D210923745B810020EF49 /* SampleTrackingCell.swift */,
+			);
+			path = SampleTrackingVC;
+			sourceTree = "<group>";
+		};
+		BCF9B9532DBD63F600591139 /* SampleTrackingVCIpad */ = {
+			isa = PBXGroup;
+			children = (
+				BCF9B9542DBD641500591139 /* SampleTrackingVCIpad.swift */,
+			);
+			path = SampleTrackingVCIpad;
+			sourceTree = "<group>";
+		};
 		BCFE05AA2413914A00A748E5 /* Beef dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				008A2E442B9F2D130050BEEF /* BeefAnimalGlobalHD50KVC */,
-				BD2D7522241A365F00EC6B00 /* BeefReviewOrderVC.swift */,
 				BCB350942414D0C9005FD36D /* BeefAnimalBrazilVC.swift */,
-				BD2D7520241A2F9E00EC6B00 /* BeefOrderProductSelectionSecondVC.swift */,
+				BCF310242D7DB5A7007B9F7F /* BeefAnimalBrazilVCIpad.swift */,
 				BD1912C82416512900E19AC2 /* BeefProductsTableViewCell.swift */,
 				BCB350962414D0F0005FD36D /* BeefAnimalNZ_VC.swift */,
 				BD2D7524241A378D00EC6B00 /* BeefOrderProductSelectionReviewVC.swift */,
+				BCCA38862D75EA5E004D5C7A /* BeefOPSSelectionReviewIPadVC.swift */,
 				BD2D751E241A22E600EC6B00 /* BeefOrderingProductSelectionVC.swift */,
+				BCBA0D932D4FFC6E00F5679E /* BeefOPSiPadVC.swift */,
 				B1E2591924406C5900F22740 /* ListingTableViewCell.swift */,
 			);
 			path = "Beef dashboard";
@@ -1682,11 +2092,10 @@
 			children = (
 				BD195106241FA4A700F8D066 /* InheritQuestionaireController.swift */,
 				BD195107241FA4A900F8D066 /* InheritQuestionaireModel.swift */,
-				00DC288A2B9E3251009FAB3B /* OrderingAnimalVCGirlando */,
 				BD195105241FA4A500F8D066 /* QuestionaireHeaderView.swift */,
 				BD195108241FA4AA00F8D066 /* QuestionaireHeaderView.xib */,
-				BD195109241FA4AC00F8D066 /* QuestionaireViewCell.swift */,
-				BD19510A241FA4AD00F8D066 /* QuestionaireViewCell.xib */,
+				BC2B1AD82D738B850098562A /* QuestionaireViewCell.swift */,
+				BC2B1AD62D738B5F0098562A /* QuestionaireViewCell.xib */,
 				009AFE192567DB6D003117A9 /* ConfilictOrdersViewController.swift */,
 				009AFE1C2567DE5A003117A9 /* ConfilictOrdersCell.swift */,
 				0021B2062593127500063417 /* BeefConfilictOrdersViewController.swift */,
@@ -1732,7 +2141,6 @@
 				4EAA337D245C32FE0062FEC3 /* BornTypes */,
 				4E6C9EBB2458BE9D009BFC12 /* RegisterDevice */,
 				BD195104241FA49100F8D066 /* InheritQuestionaire */,
-				BCFE05AA2413914A00A748E5 /* Beef dashboard */,
 				141A1EB323C8A3810029481F /* SearchPoint.entitlements */,
 				BDD6B5F323EC0D0900D750F0 /* Localizable.strings */,
 				27DD8BB9235DFDCA002B5771 /* Reachability */,
@@ -1742,10 +2150,33 @@
 				2740B8B0234B370E00CC285E /* Networking */,
 				2740B8B5234B483700CC285E /* Model */,
 				278DAEAF234217F6006AF5B6 /* ViewModel */,
+				BC5684F62DA30BA300755962 /* ADHDataIpad */,
+				00DC288A2B9E3251009FAB3B /* OrderingAnimalVCGirlando */,
 				00CA0F362B7FC444009C856D /* OrderingDefaultsVC */,
 				4E408D5A248A1E29003E4526 /* Customer */,
+				BCABBBCC2D65D0270009EEB6 /* BeefOrderProductSelectionSecondVC */,
+				008A2E442B9F2D130050BEEF /* BeefAnimalGlobalHD50KVC */,
+				BCFE05AA2413914A00A748E5 /* Beef dashboard */,
+				BCE762582D74F13F0025CD61 /* BeefReviewOrderVC */,
+				BCBA0D952D500EAF00F5679E /* InheritBeefiPad */,
+				2A2D39302AF3AFDF00D4D52A /* Blockyard */,
+				00F961992B94BC7100CF1AEC /* OrderingAnimalVC */,
+				BC5684EF2D9E622000755962 /* AddExistingAnimalImportListIpad */,
+				00D38F9A2B962BAF0005F0C1 /* OrderingProductSelectionVC */,
+				00D38F952B9616420005F0C1 /* OrderProductSelectionSecondVC */,
+				0024FB662B93CD73004FF3E4 /* ReviewOrderVC */,
+				00159E642B91E73500B14B56 /* ReviewOrderListVC */,
+				00FEC9C52B925D35005E21F9 /* OrderProductSelectionReviewVC */,
+				00FEC9C22B925949005E21F9 /* BillingTableCell */,
+				BCD062A92DB6409100E36F63 /* ResolveIssuesiPadVC */,
+				0024FB632B936C53004FF3E4 /* ResolveIssuesVC */,
+				BCF9B9522DBD63CC00591139 /* SampleTrackingVC */,
+				BCF9B9532DBD63F600591139 /* SampleTrackingVCIpad */,
+				00D38F9D2B964B060005F0C1 /* SampleTrackingDetailVC */,
+				BC1A04D32DBF715500544073 /* SampleTrackingDetailVCiPad */,
 				278DAEB123421816006AF5B6 /* DashBoard */,
 				0092A57B25F23EBA00CDA3C6 /* Result Screen */,
+				658A3B752D817CC10097EC6D /* DataEntryiPad */,
 				00649818258743ED00B730D2 /* DataEntryMode */,
 				1433160D2372C74400BE2D07 /* ScanerView */,
 				278DAEB423421850006AF5B6 /* MainStoryBoard */,
@@ -1839,8 +2270,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				14895B6C2386794E00BC4DC4 /* OfflinePopUp.xib in Resources */,
+				65D3A7412D81BAE900D0588D /* DataEntryiPad.storyboard in Resources */,
 				E20D5181233DF808005D8940 /* LaunchScreen.storyboard in Resources */,
+				BC496DA32D89AA700053C304 /* Brazil.storyboard in Resources */,
 				2A5DFED128FD9342001EF5D5 /* Main.storyboard in Resources */,
+				BC3804362D8F03C3008819F1 /* BeefPlaceAnOrder.storyboard in Resources */,
 				BDD6B5F123EC0D0900D750F0 /* Localizable.strings in Resources */,
 				0C82A7EE26DE7564007D119A /* ss3.png in Resources */,
 				BC2CC3A62D2D8FBD00C94ABD /* DashboardCardCell.xib in Resources */,
@@ -1854,11 +2288,13 @@
 				0C82A7EC26DE7564007D119A /* ss1.png in Resources */,
 				00EF4D1C2CFF34CB00687307 /* LaunchScreeniPad.storyboard in Resources */,
 				00BDE8E325E3C19200A6232A /* GoogleService-Info.plist in Resources */,
+				BCDD6A7A2D91592C007AD8AF /* DataEntryBeefiPad.storyboard in Resources */,
 				0C82A7EB26DE7564007D119A /* TYProgressBar.gif in Resources */,
 				0C7D6E9726D837C900058108 /* Empty.xib in Resources */,
+				BC3804342D8F03AB008819F1 /* DairyPlaceAnOrder.storyboard in Resources */,
 				00EF4D1A2CFF32A800687307 /* iPad.storyboard in Resources */,
-				BD195110241FA4AF00F8D066 /* QuestionaireViewCell.xib in Resources */,
 				4EAA3388245C3ECA0062FEC3 /* BorntTypeCell.xib in Resources */,
+				BC2B1AD72D738B5F0098562A /* QuestionaireViewCell.xib in Resources */,
 				1B603DEE28DA0084006998D8 /* Assets.xcassets in Resources */,
 				BD19510E241FA4AF00F8D066 /* QuestionaireHeaderView.xib in Resources */,
 			);
@@ -1949,8 +2385,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDD6A7F2D92A5A5007AD8AF /* DataEntryInheritBeefExtensions.swift in Sources */,
 				2AFE28DA2A8F7B5800CAC9C2 /* NotesPhotosViewController.swift in Sources */,
 				0011DEEF2B8CCCD7005BCFB4 /* DEBAnimalNZSelectorUIMethods.swift in Sources */,
+				BCF310252D7DB5A7007B9F7F /* BeefAnimalBrazilVCIpad.swift in Sources */,
 				2A2B172F2A5316FF00975268 /* TimerApplication.swift in Sources */,
 				2AEF079D2CC12834008B6D5A /* AutoAnimalViewModel.swift in Sources */,
 				14895B622385632100BC4DC4 /* SampleTypeModel.swift in Sources */,
@@ -1965,6 +2403,7 @@
 				272D21102375A93A0020EF49 /* BillingTableViewCell.swift in Sources */,
 				B1C78CB32485FF7F0017F62B /* AusNaabBullModel.swift in Sources */,
 				2740B8B7234B484600CC285E /* LoginModel.swift in Sources */,
+				BCDD6A852D92A5E1007AD8AF /* DataEntryInheritBeefUIMethods.swift in Sources */,
 				00C3815529DAD6E0000968E3 /* TextScanVC.swift in Sources */,
 				00D27B652B860E0B00426A84 /* ApiSyncListDairyExtension.swift in Sources */,
 				00F689062B7B99410023EBE4 /* DashboardVC+ControllerExtensions.swift in Sources */,
@@ -1977,52 +2416,75 @@
 				BDEDAA79234E0954002F327E /* customView.swift in Sources */,
 				0024FB6A2B93D0E5004FF3E4 /* ReviewOrderVCActionMethods.swift in Sources */,
 				00C159C725C1775400F21CEC /* AnimalDeleteListModel.swift in Sources */,
+				BC02223A2D605B4F007D9685 /* OPSSecondVCExtensions.swift in Sources */,
 				0002DC292590A5DC005E5AEE /* DataEntryViewAnimalController.swift in Sources */,
+				BCDD6A902D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift in Sources */,
 				B1472C34243CC77000C386C7 /* CoreDataManager.swift in Sources */,
+				65CFB83D2D82C190006C697F /* DataEntryModeListiPadVC.swift in Sources */,
 				00E43C922B8757D20097A0E5 /* DEOrderingAnimalVCGirlandoExtension.swift in Sources */,
+				BCC1CCFD2D82C6E500AF25A5 /* DEOAnimalVCExtensionsIpad.swift in Sources */,
+				BC598B592D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift in Sources */,
 				BCEC551A23533CDF00B31A42 /* GetMarketsViewModel.swift in Sources */,
 				27253EE223798A6100DD9144 /* ContactSupportViewModel.swift in Sources */,
 				00159E6A2B91F4D700B14B56 /* ReviewOrderCell.swift in Sources */,
+				BCDD6A872D93B0E6007AD8AF /* DataEntryBeefViewAnimalList.swift in Sources */,
 				B108A5432470133E00796F92 /* OrderDetailsByDatesVM.swift in Sources */,
+				BCD062A82DB6407500E36F63 /* ResolveIssuesiPadVC.swift in Sources */,
 				2719571F23588F6B006322A2 /* OrderProductSelectionSecondVC.swift in Sources */,
 				B108A5412470132E00796F92 /* OrderDetailByPastDaysVM.swift in Sources */,
 				BCEC54FD23533B9700B31A42 /* SearchPoint.xcdatamodeld in Sources */,
 				14895B6A2386793100BC4DC4 /* OfflinePopUp.swift in Sources */,
 				BD19510C241FA4AF00F8D066 /* InheritQuestionaireController.swift in Sources */,
 				0092A58125F2567900CDA3C6 /* MyHerdTblCell.swift in Sources */,
+				BCC4B9082D3B9A73001F14C8 /* OrderingAnimalVCiPadTextFldDelegates.swift in Sources */,
+				BCC4B9042D3B99E2001F14C8 /* OrderingAnimalVCiPadActionMethods.swift in Sources */,
 				0064983A2587597000B730D2 /* DataEntryModeCreateList.swift in Sources */,
 				00D5AC002B8A77EA00B1CA80 /* DEOAnimalVCOtherExtenions.swift in Sources */,
 				00AA39B12BAD3561000EDF43 /* OrderingAnimalVCTextFieldDelegates.swift in Sources */,
+				BCBA0D9B2D500F2C00F5679E /* InheritBeefVCExtensions.swift in Sources */,
+				652A35CD2DA536430079FE28 /* ADHFilterExtension.swift in Sources */,
 				4EAA337C245C15960062FEC3 /* ProviderBornTypesViewModel.swift in Sources */,
 				00B27AA825946C38007716D0 /* ImportListCell.swift in Sources */,
+				BC01B5442DB78B5500069A10 /* ResolveIssuesCollectionViewCell.swift in Sources */,
 				2A31FA3A284903B400E525C9 /* DataCollectorViewModel.swift in Sources */,
+				BCDD6A922D93DF67007AD8AF /* DEBrazilBeefiPadGenotypeMethods.swift in Sources */,
 				00D38F992B9618F60005F0C1 /* OrderProductSelectionSecondVCActionMethods.swift in Sources */,
 				008082F4285880DD00BF20F1 /* BaseViewModel.swift in Sources */,
 				2795D8B823901006001A73B0 /* ViewAnimalCell.swift in Sources */,
 				B1D173A224853E7000374315 /* GetCustomerModel.swift in Sources */,
 				00CDD05F2B7A49FD00CB8D7F /* LoginVCExtensions.swift in Sources */,
+				658A3B772D817D600097EC6D /* DataEntryModeCreateListiPadVC.swift in Sources */,
+				BC5684F12D9E64AC00755962 /* AddExistingAnimaliPad.swift in Sources */,
+				BCBA0D942D4FFC6E00F5679E /* BeefOPSiPadVC.swift in Sources */,
 				00C3815729DAD8DB000968E3 /* CustomCameraVC.swift in Sources */,
 				009AFE1D2567DE5A003117A9 /* ConfilictOrdersCell.swift in Sources */,
 				0CF071D927A3F29E00772811 /* CityModel.swift in Sources */,
 				2795001E23BA42AC00F30464 /* ProductResponse.swift in Sources */,
 				0C70C37D2784D1CC00D5D722 /* Resultbyindexmodel.swift in Sources */,
 				BD8074A72344C5930083DC99 /* OrdingProductSelectionCollectionViewCell.swift in Sources */,
+				BCCA38872D75EA5E004D5C7A /* BeefOPSSelectionReviewIPadVC.swift in Sources */,
 				4E408D60248A236D003E4526 /* CustomerCell.swift in Sources */,
+				BCE4E6152D3A465B00CB047E /* OrderAnimalUIMethodsIpad.swift in Sources */,
 				4EAA337A245C15750062FEC3 /* ProviderBornTypes.swift in Sources */,
 				BC9C66872D32D14C005E89ED /* SettingsVCExtension.swift in Sources */,
 				4EAA3387245C3ECA0062FEC3 /* BorntTypeCell.swift in Sources */,
 				2795002023C3542500F30464 /* ApisyncOffLine.swift in Sources */,
+				BCC1CCF72D82C61200AF25A5 /* DEOAnimalVCExtensionCountryFlowsiPad.swift in Sources */,
 				00C159D025C17B2A00F21CEC /* EmailListViewModel.swift in Sources */,
 				006589C625FF6AA300A06B1F /* IndividualAnimalResultController.swift in Sources */,
 				009359A7264194AB00A52C89 /* AnimalMergePopUpVC.swift in Sources */,
 				00F078E52B8F31A300B29880 /* MyHerdResultsByAnimalVCFunctionsExt.swift in Sources */,
+				BCC1CD012D82C75F00AF25A5 /* DEOAnimalVCActionMethodsiPad.swift in Sources */,
 				00097CCB2B9128010093961A /* MyHerdFilterControllerActionMethods.swift in Sources */,
 				4E6C9EBA2458AF96009BFC12 /* RegisterDeviceViewModel.swift in Sources */,
 				00DC28902B9E5AE6009FAB3B /* OrderingAnimalVCGirlandoSelectorUIMethods.swift in Sources */,
 				002EF388258E2AFE00D98967 /* DataEntryOrderingAnimalVC.swift in Sources */,
 				BCB350972414D0F0005FD36D /* BeefAnimalNZ_VC.swift in Sources */,
+				BCDE50692D7C32FE0005E91F /* OrderingAnimalVCGirlandoIpadActionMethods.swift in Sources */,
 				0011DEE22B8C72FF005BCFB4 /* DEBAnimalGlobalHD50KVCExtensions.swift in Sources */,
 				00159E632B91D3C900B14B56 /* MyHerdResultsViewControllerActionMethods.swift in Sources */,
+				BC2B1AD92D738B850098562A /* QuestionaireViewCell.swift in Sources */,
+				BCC1CCF52D82C5FB00AF25A5 /* DataEntryOrderingAnimalVCIpad.swift in Sources */,
 				2740B8C0234DFB0600CC285E /* TextFieldCommanClass.swift in Sources */,
 				0067D5142657E975006D7766 /* ResulyByPageViewModel.swift in Sources */,
 				0065BC742597ABE60019E46C /* ConflicedImportListCell.swift in Sources */,
@@ -2030,6 +2492,7 @@
 				BC2CC3A82D2D8FC000C94ABD /* DashboardCardCell.swift in Sources */,
 				0C822DED26F8BCCD003A5598 /* ResultAnimalServer.swift in Sources */,
 				2A8D0A332B1E32EA00CFCEC8 /* BeefUSSubmitOrderResponseModel.swift in Sources */,
+				BCDD6A8C2D93DF1B007AD8AF /* DEBrazilBeefVCIpad.swift in Sources */,
 				4EF17160249388F9003210D8 /* CustomerOrderSetting.swift in Sources */,
 				B108A53D247012F800796F92 /* OrderDetailByPastDaysModel.swift in Sources */,
 				27B30A3B236080FC002E8AE8 /* OffLineRestrictionVC.swift in Sources */,
@@ -2043,16 +2506,24 @@
 				272D21122375A9CB0020EF49 /* OrderSubmittedVC.swift in Sources */,
 				2AE187152CBE8F9C006937B3 /* AutogetAnimalModel.swift in Sources */,
 				00C159BE25C161B100F21CEC /* SaveListViewModel.swift in Sources */,
+				BCC4B90E2D3B9B65001F14C8 /* OrderingAnimalVCiPadAddAnimalFlow.swift in Sources */,
+				BC5684FC2DA30BF300755962 /* ADHAnimalVCActionsIpad.swift in Sources */,
+				BCA84B1B2D3A43DC00CFE2A8 /* OrderingAnimalipadVC.swift in Sources */,
 				008082BA28587BEC00BF20F1 /* UIApplication.swift in Sources */,
 				00B5F4C82C6B70E4007CF9CE /* BeefUSAddAnimalVC.swift in Sources */,
 				008A2E462B9F2D2C0050BEEF /* BeefAnimalGlobalHD50KVCExtension.swift in Sources */,
+				BC5684FE2DA310B600755962 /* ADHListCollectionViewCell.swift in Sources */,
 				00CEE32C2B998AA80034CFCB /* ADHAnimalVCExtension.swift in Sources */,
+				BC496DAA2D8AA68E0053C304 /* DEOAnimalVCGirlandoipadUIMethods.swift in Sources */,
 				0C8728E026BD347200488A06 /* ResulttotalanimalsViewModel.swift in Sources */,
 				2A8CC86F286110CF006246FB /* UserDefaults.swift in Sources */,
+				BC5684F82DA30BCF00755962 /* ADHAnimalVCIpad.swift in Sources */,
 				B1CECB9924AB0340002780F8 /* ReviewAddonsController.swift in Sources */,
 				0C7DE80326E249D90096687F /* TYProgressBar.swift in Sources */,
+				BCC4B9062D3B9A28001F14C8 /* OrderingAnimalVCCountryFlowsiPad.swift in Sources */,
 				00762490285A8E8900B2064B /* ADHFilterBreedCell.swift in Sources */,
 				0080833C28588EDB00BF20F1 /* MessageBase.swift in Sources */,
+				BC496DA62D8AA6600053C304 /* DEOAnimalVCGirlando.swift in Sources */,
 				BDEDAA7A234E0954002F327E /* customButton.swift in Sources */,
 				B1E2591A24406C5900F22740 /* ListingTableViewCell.swift in Sources */,
 				2A8B5FC32AC4332600073542 /* ChooseProviderVC.swift in Sources */,
@@ -2062,9 +2533,12 @@
 				0080833D28588EDB00BF20F1 /* ErrorBase.swift in Sources */,
 				002C82B926426CE10053CE7B /* AnimalMergePopUpCell.swift in Sources */,
 				BCEC550D23533C6A00B31A42 /* GetSpeciesModel.swift in Sources */,
+				BC598B5B2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift in Sources */,
+				BCC1CCFB2D82C6B700AF25A5 /* DEOAnimalVCTextFieldDelegatesIpad.swift in Sources */,
 				E20D5176233DF806005D8940 /* LoginViewController.swift in Sources */,
 				00AA39AD2BAD32ED000EDF43 /* OrderingAnimalVCOtherExtensions.swift in Sources */,
 				007E664329D49F8A0036BDF5 /* UIUtilities.swift in Sources */,
+				BC5684F32DA1225600755962 /* OrderingAnimalImportListExtensionIpad.swift in Sources */,
 				0080833628588A0800BF20F1 /* UserService.swift in Sources */,
 				00C159BB25C1608A00F21CEC /* SaveListModel.swift in Sources */,
 				E2DF1DAD2341F45C001BADBF /* DashboardVC.swift in Sources */,
@@ -2084,8 +2558,10 @@
 				009AFE1A2567DB6D003117A9 /* ConfilictOrdersViewController.swift in Sources */,
 				1BAC08E628D4B2EA004DE677 /* AppHelpListVC.swift in Sources */,
 				BD1912C92416512A00E19AC2 /* BeefProductsTableViewCell.swift in Sources */,
+				BC5684F52DA12D1F00755962 /* ImportListVC.swift in Sources */,
 				000BA5952C700BB600BB7398 /* OrderingDefaultsVC.swift in Sources */,
 				BD17987323FBF06B0067684B /* ApiSyncModal.swift in Sources */,
+				658B01042D837936000A1FAE /* DataEntryListViewAnimalListiPadVC.swift in Sources */,
 				0CF071D527A3E6CA00772811 /* DropDownTableViewCell.swift in Sources */,
 				000A9F972B9C836E001A697B /* ADHFilterVCExtension.swift in Sources */,
 				006498402587648700B730D2 /* DataEntryModeListCell.swift in Sources */,
@@ -2100,6 +2576,7 @@
 				2A1C48A628577323009D0001 /* ADHAnimalModel.swift in Sources */,
 				00F689042B7B991F0023EBE4 /* DashboardVCExtensions.swift in Sources */,
 				27253EDE2379838900DD9144 /* ContactSupportVC.swift in Sources */,
+				BCF9B9552DBD641500591139 /* SampleTrackingVCIpad.swift in Sources */,
 				14AF550E2410F48100FBD6F2 /* GetCountryCodeVM.swift in Sources */,
 				1411BD3423EAB99100B076CE /* LanguageUtility.swift in Sources */,
 				BD70EEEB23439259008C9D3D /* EvaluationProviderViewCell.swift in Sources */,
@@ -2111,24 +2588,30 @@
 				4E79B10624954238009F45E5 /* AnimalByCustomerViewModel.swift in Sources */,
 				00619CC225FF751F0008C186 /* IndividualAnimalCell.swift in Sources */,
 				4E79B104249541BB009F45E5 /* AnimalByCustomer.swift in Sources */,
+				BCBA0D9D2D500F3A00F5679E /* InheritBeefVCActionMethods.swift in Sources */,
 				00698896267084A600097E28 /* ResultFilterViewModel.swift in Sources */,
 				00AA39B52BAD3775000EDF43 /* OrderingAnimalVCID17SireDamValidations.swift in Sources */,
 				00159E682B91E7A700B14B56 /* ReviewOrderListVCExtension.swift in Sources */,
 				003D91D425888FD3002EE474 /* DataEntryModeReviewDataCell.swift in Sources */,
 				BC2CC3AA2D2D8FDA00C94ABD /* OpenSheetViewController.swift in Sources */,
+				BCE4E6172D3A46DC00CB047E /* OrderAnimalVCID17SireDamValidationipad.swift in Sources */,
 				008A2E482B9F2D700050BEEF /* BeefAnimalGlobalHD50KVCActionMethods.swift in Sources */,
+				BCFBE3422D6C5F20006920D9 /* ReviewOrderItemCelliPad.swift in Sources */,
 				27DD8BBE235F283C002B5771 /* Terms_ConditionsVC.swift in Sources */,
 				00D27B632B860D5C00426A84 /* APISyncListExtenions.swift in Sources */,
 				0C7DE80526E263D60096687F /* UpdateGroupModel.swift in Sources */,
 				14E2C99C23A3FFCB008CCD2B /* FullSiteVC.swift in Sources */,
 				BD2D7523241A365F00EC6B00 /* BeefReviewOrderVC.swift in Sources */,
+				BC34B5D22D44EEB1008D34BB /* ViewAnimalCelliPad.swift in Sources */,
 				00CDD0592B7A48B700CB8D7F /* Enumerations.swift in Sources */,
 				4E821446246B0B1D00B72618 /* ReviewController_TermsVC.swift in Sources */,
 				0065A51725F6697B008A51F9 /* MyManagementGroupController.swift in Sources */,
 				4E4014FE246C7C8400D5363C /* ProductWiseTermsController.swift in Sources */,
+				BCE88F172D4684A80063E248 /* BeefViewAnimalVCiPadExtension.swift in Sources */,
 				BCEC550723533C6A00B31A42 /* GetNominatorsModel.swift in Sources */,
 				2A9EBF1E2CBD133700DB82E7 /* AnimalAutoPopViewModel.swift in Sources */,
 				4EE422B82458CE650088F430 /* ValidateDeviceViewModel.swift in Sources */,
+				652A35CB2DA5328A0079FE28 /* ADHFilteriPadVC.swift in Sources */,
 				2719572123588F92006322A2 /* OPSCollectionViewCell.swift in Sources */,
 				27253EE0237984AB00DD9144 /* ContactSupportCell.swift in Sources */,
 				00169A9F24FCF5DB001330D7 /* HeartBeatViewModel.swift in Sources */,
@@ -2139,6 +2622,7 @@
 				145A786323A12D7600F21FFB /* TermsConditionViewModel.swift in Sources */,
 				008084572858C05E00BF20F1 /* ADHListCell.swift in Sources */,
 				003D91D125888A23002EE474 /* DataEntryModeReviewData.swift in Sources */,
+				BCA121422D89855E002ECA12 /* DataEntryaMergeListIpadVc.swift in Sources */,
 				008FF9D3260C77120039E6C2 /* RoundRectPagerOptions.swift in Sources */,
 				0C893B2327578714007B6D67 /* TranslationslanguageModel.swift in Sources */,
 				0011DEF62B8CFE65005BCFB4 /* ChildVCExtensions.swift in Sources */,
@@ -2147,41 +2631,57 @@
 				2AD994A52A9E80CC0024A655 /* Textfield.swift in Sources */,
 				0011DEEB2B8CC435005BCFB4 /* DataEntryBeefAnimalNZVCExtensions.swift in Sources */,
 				4E6C9EBD2458BECB009BFC12 /* ValidateDeviceController.swift in Sources */,
+				BCC1CCF92D82C69200AF25A5 /* DEOAnimalVCUIMethodsIpad.swift in Sources */,
 				4E710055247678580076A155 /* SampleStatuses.swift in Sources */,
 				0028C49F28535C8700E5F566 /* ADHFilterVC.swift in Sources */,
 				4E6C9EB82458AF70009BFC12 /* RegisterDeviceModel.swift in Sources */,
 				00674B0126538699003DFAB2 /* AnimalGroupsForCustomerUpdateModel.swift in Sources */,
 				BD70EEE52343617B008C9D3D /* SWRevealViewController.m in Sources */,
+				BCB506B12D47A4920006E916 /* OPSelectioniPadVC.swift in Sources */,
+				BCDD6A832D92A5D1007AD8AF /* DataEntryInheritBeefModuleMethods.swift in Sources */,
 				0065BC712597AA130019E46C /* DataEntryViewConflicedImportList.swift in Sources */,
+				BC496DAC2D8AA6A00053C304 /* DEOAnimalVCGirlandoExtensionipad.swift in Sources */,
 				272D210723745A130020EF49 /* ResolveIssueCell.swift in Sources */,
 				00665D6825D2573E002C5BC0 /* DataEntryBeefAnimalBrazilVC.swift in Sources */,
 				27253EE423798B4100DD9144 /* ContactSupportModel.swift in Sources */,
 				B18FC3DA2469A7A90014BC96 /* ActionRequiredVM.swift in Sources */,
 				1452F4FD238E9543003CF6BC /* TipPopUp.swift in Sources */,
+				658B010A2D83881B000A1FAE /* ReviewOrderFilteriPadVC.swift in Sources */,
 				00097CC42B9078960093961A /* IndividualAnimalResultControllerExtensions.swift in Sources */,
 				2AA554422A8CD01B003DCCB9 /* ResultByCell.swift in Sources */,
+				BCBA0D9F2D500F5300F5679E /* InheritBeefVCUISelectorMethods.swift in Sources */,
 				BCEC550B23533C6A00B31A42 /* GetProductsModel.swift in Sources */,
 				00FEC9C92B927304005E21F9 /* BeefAnimalVCExtension.swift in Sources */,
 				BD2D7525241A378D00EC6B00 /* BeefOrderProductSelectionReviewVC.swift in Sources */,
 				00AA39B32BAD3646000EDF43 /* OrderingAnimalVCCountryFlows.swift in Sources */,
 				00693B3D25F73F9600B4A3BA /* ResultCreateGroupViewController.swift in Sources */,
+				BCC1CD032D82C79700AF25A5 /* DEOAnimalVCSelectorMethodsIpad.swift in Sources */,
+				BCABBBCE2D65D05E0009EEB6 /* BeefOPSSecondVCIpad.swift in Sources */,
 				00CDD0552B7A489E00CB8D7F /* Constants.swift in Sources */,
+				BC1AE1842D6BA0660006693F /* OPSReviewVCIpad.swift in Sources */,
 				0080833728588A0800BF20F1 /* UserServiceHelper.swift in Sources */,
+				BC804BB22DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift in Sources */,
 				00159E662B91E75700B14B56 /* ReviewOrderItemCell.swift in Sources */,
 				0CA9571E278B5766001BEC27 /* Singletone.swift in Sources */,
 				00D78B4C2BAACF5200402F8D /* BeefAnimalGlobalHD50KVCInheritMethods.swift in Sources */,
 				BCEC550923533C6A00B31A42 /* GetMarketsModel.swift in Sources */,
 				00D38F9F2B964B190005F0C1 /* SampleTrackingDetailVCExtension.swift in Sources */,
 				00CDD05D2B7A499100CB8D7F /* ValidateDeviceVCExtensions.swift in Sources */,
+				BCB506B52D47A4B30006E916 /* OPSelectioniPadVCExtensions.swift in Sources */,
 				006494E425EF8BCE003ED3D3 /* DashboardCollectionCell.swift in Sources */,
 				0080833428588A0800BF20F1 /* KeyChainFile.swift in Sources */,
+				BC34B5D02D44EE81008D34BB /* ViewAnimalsControlleriPadVC.swift in Sources */,
+				BCCD3BCF2D402FE400B2E89F /* BlockyardBeefiPad.swift in Sources */,
 				1474A8AD239E72F2002C7589 /* GetBillingModel.swift in Sources */,
 				00159E612B91D2C200B14B56 /* MyHerdResultsViewControllerExtension.swift in Sources */,
 				0011DEED2B8CC934005BCFB4 /* DEBAnimalNZVCActionMethods.swift in Sources */,
 				BDCEDB4E23509062009A240B /* CommanExtension.swift in Sources */,
+				BCBA0D972D500EFD00F5679E /* InheritBeefVC.swift in Sources */,
+				BCD062AB2DB640BF00E36F63 /* ResolveIssuesiPadVCExtensions.swift in Sources */,
 				4E4014FC246C7C5C00D5363C /* ProductwiseTermsCell.swift in Sources */,
 				0067D5172657E98A006D7766 /* ResulyByPageModel.swift in Sources */,
 				27B22FF42374376C006E8E6A /* WebViewExtension.swift in Sources */,
+				BCDE506B2D7C33220005E91F /* OrderingAnimalVCGirlandoIpadSelectorUIMethods.swift in Sources */,
 				BCEC551723533CDF00B31A42 /* GetAddonsViewModel.swift in Sources */,
 				14EDC34923A24B82005A3FF8 /* OrderSaveViewController.swift in Sources */,
 				E20D5174233DF806005D8940 /* AppDelegate.swift in Sources */,
@@ -2189,12 +2689,15 @@
 				27A1450B23573B1700E9BFDF /* OrderProductCell.swift in Sources */,
 				2740B8B2234B373100CC285E /* NetworkManager.swift in Sources */,
 				1420D190241A69E8003CF99E /* GetBreedSocietiesVM.swift in Sources */,
+				BC1A04D52DBF717500544073 /* SampleTrackingDetailVCiPad.swift in Sources */,
 				272D210E2375903B0020EF49 /* ReusableCollectionReusableView.swift in Sources */,
 				008082AF28587A2400BF20F1 /* BaseViewController.swift in Sources */,
 				00D5ABFE2B8A776E00B1CA80 /* DEOAnimalVCTextfieldDelegateExtension.swift in Sources */,
+				BCE7625A2D74F16D0025CD61 /* BeefReviewOrderVCIpad.swift in Sources */,
 				BDEDAA7E234E1CE4002F327E /* ReviewOrderVC.swift in Sources */,
 				B108A53F2470131500796F92 /* OrderDetailsByDatesModel.swift in Sources */,
 				BC9C66892D32D69C005E89ED /* SettingsVCActions.swift in Sources */,
+				BCC4B90C2D3B9AE2001F14C8 /* OrderingAnimaliPadVCExtensions.swift in Sources */,
 				0C7C913627106C280011EE74 /* resultmastermodel.swift in Sources */,
 				00C6F066259F873C0054FE85 /* DataEntryOrderingAnimalVCGirlando.swift in Sources */,
 				B1D173A424853EAB00374315 /* GetCustomerViewModel.swift in Sources */,
@@ -2209,10 +2712,15 @@
 				BCEC551623533CDF00B31A42 /* GetNominatorsViewModel.swift in Sources */,
 				DCE17C0823AA54D20023F8C7 /* ReviewOrderListVc.swift in Sources */,
 				14AF550A2410E32D00FBD6F2 /* GetBreedCodeVM.swift in Sources */,
+				BCDE50652D7C32C90005E91F /* OrderingAnimalVCGirlandoIpad.swift in Sources */,
 				14AF55042410E28B00FBD6F2 /* GetNaabCodeModel.swift in Sources */,
 				BD19510D241FA4AF00F8D066 /* InheritQuestionaireModel.swift in Sources */,
 				00D5AC062B8A826C00B1CA80 /* DEOAnimalVCUIMethodsFunctions.swift in Sources */,
+				BC0222382D605B36007D9685 /* OPSSecondVCActionMethods.swift in Sources */,
+				BC54B9272D6CD5C300A7F459 /* OrderSubmittedVCiPad.swift in Sources */,
 				0C860CDD2714E04400B904A6 /* Resulttotalanimalupdate.swift in Sources */,
+				BC598B572D6A5C3700701661 /* ReviewOrderVCIpad.swift in Sources */,
+				BCDE50672D7C32E40005E91F /* OrderingAnimalVCGirlandoIpadExtension.swift in Sources */,
 				0021B2072593127500063417 /* BeefConfilictOrdersViewController.swift in Sources */,
 				BCEC550623533C6A00B31A42 /* GetProviderModel.swift in Sources */,
 				BD8074A523449D870083DC99 /* OrderingProductSelectionVC.swift in Sources */,
@@ -2221,8 +2729,10 @@
 				0028E7AD283D32A1005A4A8D /* DataCollectorVC.swift in Sources */,
 				00674AC426538036003DFAB2 /* ResultMasterTemplateModel.swift in Sources */,
 				1420D192241A69FF003CF99E /* GetPriorityBreedNameVM.swift in Sources */,
+				65CFB8402D82C96E006C697F /* DataListCollectionCellView.swift in Sources */,
 				0CF9A46826D654C2000670F3 /* Dates.swift in Sources */,
 				008082B728587B9700BF20F1 /* UIAlertController.swift in Sources */,
+				BCBA0D992D500F1200F5679E /* InheritBeefVCInheritMethods.swift in Sources */,
 				00D38F9C2B962BBF0005F0C1 /* OrderingProductSelectionVCExtension.swift in Sources */,
 				0064981A2587441E00B730D2 /* DataEntryModeHelpVC.swift in Sources */,
 				007E664429D49F8A0036BDF5 /* CameraViewController.swift in Sources */,
@@ -2239,6 +2749,7 @@
 				0C893B252757874B007B6D67 /* Translationslanguageviewmodel.swift in Sources */,
 				BDEDAA7D234E1CE4002F327E /* reviewOrderCell.swift in Sources */,
 				272D210823745A130020EF49 /* ResolveIssuesVC.swift in Sources */,
+				BCC4B90A2D3B9AA5001F14C8 /* OrderingAnimalVCTableViewiPadDelegates.swift in Sources */,
 				00674B0B2653BF3D003DFAB2 /* AnimalGroupsForCustomerModel.swift in Sources */,
 				272D210B23745B840020EF49 /* SampleTrackingCell.swift in Sources */,
 				00AA39B72BAD37D5000EDF43 /* OrderingAnimalVCActionMethods.swift in Sources */,
@@ -2249,10 +2760,14 @@
 				00B615D425CD5DD400F19900 /* GetListForCutomerWithTimeViewModel.swift in Sources */,
 				272D21152375B9270020EF49 /* SampleTrackingDetailVC.swift in Sources */,
 				4E44314C2450C3A700654F29 /* LogoutModel.swift in Sources */,
+				BC0222362D605B21007D9685 /* OPSSecondVCiPad.swift in Sources */,
+				BC804BB42DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift in Sources */,
+				BCC1CCFF2D82C73600AF25A5 /* DEOAnimalVCID17Flowsipad.swift in Sources */,
 				00D6910F260219E900B6E7BB /* GroupDetailsViewController.swift in Sources */,
 				BCEC550A23533C6A00B31A42 /* GetBreedsModel.swift in Sources */,
 				00D5AC022B8A788700B1CA80 /* DEOAnimalVCActionMethods.swift in Sources */,
 				001E701C2890002300E04716 /* ManagementGroupVM.swift in Sources */,
+				BC496DA82D8AA6760053C304 /* DEOAnimalVCGirlandoActionMethodsipad.swift in Sources */,
 				2740B8BE234DE89700CC285E /* OrderingDefaultsViewModel.swift in Sources */,
 				0016843C2CFDE1840053B7C8 /* LoginScreenSetViewModel.swift in Sources */,
 				4E408D5D248A1E6C003E4526 /* CustomersListController.swift in Sources */,
@@ -2262,19 +2777,22 @@
 				00FEC9C42B925962005E21F9 /* BillingTableViewDelegate.swift in Sources */,
 				FA46163C24F3C5A70084CE74 /* MobileVersionViewModel.swift in Sources */,
 				007BADDC25B06B2A0052EEBF /* BeefDataEntryModeReviewData.swift in Sources */,
-				BD19510F241FA4AF00F8D066 /* QuestionaireViewCell.swift in Sources */,
 				27DD8BBC235DFDE2002B5771 /* Reachability.m in Sources */,
 				0011DEDF2B8C5646005BCFB4 /* DEBAnimalBrazilVCGenotypeMethodsExtension.swift in Sources */,
+				BC1A04D72DBF718900544073 /* SampleTrackingDetailVCiPadExtension.swift in Sources */,
 				B18FC3D82469A7370014BC96 /* ActionRequiredModel.swift in Sources */,
 				2795D8B42387CCA9001A73B0 /* BillingTableCell.swift in Sources */,
 				B1C78CB52485FF9E0017F62B /* AusNaabBullVM.swift in Sources */,
 				2795D8B623900C73001A73B0 /* ViewAnimalsController.swift in Sources */,
+				BCDD6A8E2D93DF3F007AD8AF /* DEBrazilBeefIpadExtensions.swift in Sources */,
 				FA1F519424E521DF008C9B0A /* OcrCollectionViewCell.swift in Sources */,
 				0080833528588A0800BF20F1 /* APIService.swift in Sources */,
 				B18D53EA244ED89E00B54E9D /* OrderingAnimalVCGirlando.swift in Sources */,
 				B1F29C9C24AB3B5F00549A67 /* ReviewAddonsCell.swift in Sources */,
 				BCEC550C23533C6A00B31A42 /* GetBaseModel.swift in Sources */,
 				00DDAFF226032C3900EAB4A8 /* MyTransformer.swift in Sources */,
+				BC22E44A2DAE5E8600ABD6CA /* OrderSaveVCiPad.swift in Sources */,
+				BCDD6A892D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift in Sources */,
 				00F078E32B8F2FDD00B29880 /* MyHerdResultsByAnimalVCExtensions.swift in Sources */,
 				08786EA624BA198800F27086 /* PairedDeviceCell.swift in Sources */,
 				007BADDF25B072540052EEBF /* DataEntryBeefViewAnimalController.swift in Sources */,
@@ -2283,21 +2801,27 @@
 				BCB350952414D0CA005FD36D /* BeefAnimalBrazilVC.swift in Sources */,
 				0011DEE82B8CA6EE005BCFB4 /* DEBAnimalGlobalHD50KVCInheritModuleMethods.swift in Sources */,
 				00C159CD25C17B1700F21CEC /* EmailListModel.swift in Sources */,
+				BCDD6A812D92A5B6007AD8AF /* DataEntryInheritBeefActionMethods.swift in Sources */,
+				BCDD6A7D2D92A594007AD8AF /* DataEntryInheritBeefVC.swift in Sources */,
+				BCE88F152D4684960063E248 /* BeefViewAnimalVCiPad.swift in Sources */,
 				00DC288C2B9E326D009FAB3B /* OrderingAnimalVCGirlandoExtension.swift in Sources */,
 				00674B112653C8E7003DFAB2 /* DeleteGroupModel.swift in Sources */,
 				272D21162375B9270020EF49 /* SampleTrackingDetailCell.swift in Sources */,
 				0028C465285308DD00E5F566 /* ADHAnimalVC.swift in Sources */,
 				006988932670849300097E28 /* ResultFilterModel.swift in Sources */,
+				658B01072D83864F000A1FAE /* DataEntryReviewDataiPadVC.swift in Sources */,
 				0021B225259312A200063417 /* BeefConfilictOrdersCell.swift in Sources */,
 				008FF9C9260C76C00039E6C2 /* CustomCell.swift in Sources */,
 				0CF071D727A3EFCA00772811 /* DropDownSwift.swift in Sources */,
 				0046FF542B8BD577003BC669 /* DEBAnimalBrazilVCActionsExtension.swift in Sources */,
+				BC5684FA2DA30BDC00755962 /* ADHAnimalVCExtensionIpad.swift in Sources */,
 				BCC0339F2D2E78A100DC3A42 /* SettingsVC.swift in Sources */,
 				2747388C241CFAD800133448 /* BeefOPSTableViewCell.swift in Sources */,
 				2A9A699C28D21B7300634D93 /* ResultMasterTemplateViewModel.swift in Sources */,
 				4E44314A2450C33C00654F29 /* LogoutViewModel.swift in Sources */,
 				2AC1755B29B10B8D00741D20 /* OrderingDataListViewModel.swift in Sources */,
 				BCEC551523533CDF00B31A42 /* GetBreedViewModel.swift in Sources */,
+				BCACF3B92DA667E400A72ECA /* DataEntryConflictedImportListIpad.swift in Sources */,
 				1420D18C241A69B7003CF99E /* GetBreedSocietiesModel.swift in Sources */,
 				BD70EEE923438BAA008C9D3D /* SpeciesCollectionViewCell.swift in Sources */,
 				00F85F532B89475700A23BC5 /* DataEntryOrderingVCExtension.swift in Sources */,
@@ -2479,7 +3003,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SearchPoint/SearchPoint.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Binu Varghese (776FM8RFF2)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2501,7 +3026,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mp.SearchPoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SearchPoint-Testflight";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SearchPoint-Dev";
 				STRIP_INSTALLED_PRODUCT = YES;
 				STRIP_STYLE = all;
 				STRIP_SWIFT_SYMBOLS = YES;
@@ -2523,7 +3048,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SearchPoint/SearchPoint.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Binu Varghese (776FM8RFF2)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2544,8 +3070,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mp.SearchPoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SearchPoint-Testflight";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SearchPoint-Testflight";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SearchPoint-Dev";
 				STRIP_INSTALLED_PRODUCT = YES;
 				STRIP_SWIFT_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

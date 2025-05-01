@@ -26,13 +26,15 @@ class ConfilictOrdersViewController: UIViewController {
     var pviduser = Int()
     var value = 0
     weak var delegateCustom1 : objectPickfromConfilict?
+    weak var dismissDelegate : DismissConflictPopUp?
     var screenName = String()
     var langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
     var fetchDataEntry : [DataEntryList] = []
     var listName = String()
     let orderingDatalistVM = OrderingDataListViewModel()
     var custmerId = UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as! Int
-    
+    var reviewProductOrder = ReviewOrderVCIpad()
+    var reviewAnimalOrder = OPSReviewVCIpad()
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +82,7 @@ class ConfilictOrdersViewController: UIViewController {
     @objc func methodOfReceivedNotification(notification: Notification){
         if value == 0{
             UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
-            let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
+            let storyBoard: UIStoryboard = UIStoryboard(name: "iPad", bundle: nil)
             let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
             self.navigationController?.pushViewController(newViewController, animated: true)
             self.hideIndicator()
@@ -93,11 +95,22 @@ class ConfilictOrdersViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)
         UserDefaults.standard.set(false, forKey: keyValue.beefPlaceOrderCheck.rawValue)
         UserDefaults.standard.set(false, forKey: keyValue.placeOrderCheck.rawValue)
-        if self.screenName == ScreenNames.productSelectionReview.rawValue {
-            self.delegateCustom1?.dataReload!(check :false)
-        } else if self.screenName == ScreenNames.reviewVC.rawValue{
-            self.delegateCustom1?.dataReload!(check :true)
+        
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            if self.screenName == ScreenNames.productSelectionReview.rawValue {
+                self.delegateCustom1?.dataReload!(check :false)
+            } else if self.screenName == ScreenNames.reviewVC.rawValue{
+                self.delegateCustom1?.dataReload!(check :true)
+            }
+        } else {
+            if self.screenName == "OPSProductReview" {
+                self.delegateCustom1?.dataReload!(check :true)
+            } else if self.screenName == "OPSAnimalReview"{
+                self.delegateCustom1?.dataReload!(check :false)
+            }
         }
+       
     }
     
     @IBAction func removeAllAction(_ sender: Any) {
@@ -146,12 +159,32 @@ class ConfilictOrdersViewController: UIViewController {
                     UserDefaults.standard.set(false, forKey: keyValue.isAgreeForSubmit.rawValue)
                     self.delegateCustom1?.selectionObject!(check: false)
                 } else {
-                    if self.screenName == ScreenNames.productSelectionReview.rawValue {
-                        self.delegateCustom1?.dataReload!(check :false)
+//                    if self.screenName == ScreenNames.productSelectionReview.rawValue {
+//                        self.delegateCustom1?.dataReload!(check :false)
+//                        
+//                    } else if self.screenName == ScreenNames.reviewVC.rawValue{
+//                        self.delegateCustom1?.dataReload!(check :true)
+//                    }
+                    
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        if self.screenName == ScreenNames.productSelectionReview.rawValue {
+                            self.delegateCustom1?.dataReload!(check :false)
+                        } else if self.screenName == ScreenNames.reviewVC.rawValue{
+                            self.delegateCustom1?.dataReload!(check :true)
+                        }
+                    } else {
                         
-                    } else if self.screenName == ScreenNames.reviewVC.rawValue{
-                        self.delegateCustom1?.dataReload!(check :true)
-                    }}
+                        if self.screenName == "OPSProductReview" {
+                          //  self.reviewProductOrder.dataReload(check :true)
+                           // self.navigationController?.popViewController(animated: false)
+                            self.dismissDelegate?.updateDismissUI()
+                        } else if self.screenName == "OPSAnimalReview"{
+                           // self.reviewAnimalOrder.dataReload(check :false)
+                           // self.navigationController?.popViewController(animated: false)
+                            self.dismissDelegate?.updateDismissUI()
+                        }
+                    }
+                }
             }
         }))
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
@@ -164,30 +197,56 @@ class ConfilictOrdersViewController: UIViewController {
 // MARK: - TABLEVIEW DATASOURCE AND DELEGATE
 extension ConfilictOrdersViewController :UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.conficlitOrders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ConfilictOrdersCell = (self.conflictTableView.dequeueReusableCell(withIdentifier: "cell") as? ConfilictOrdersCell)!
-        let animalVal =  conficlitOrders[indexPath.row] as! AnimaladdTbl
-        cell.onFarmIdLbl.text = animalVal.farmId
-        cell.officalIdLbl.text = animalVal.animalTag
-        cell.barcodeLbl.text = animalVal.animalbarCodeTag
-        cell.onFarmIdTitleLbl.text = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
-        cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
-        cell.barcodeTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
+        let animalVal =  conficlitOrders[indexPath.section] as! AnimaladdTbl
+        
         
         if pviduser == 4  {
+            if animalVal.animalTag != ""{
+                cell.officalIdLbl.text = animalVal.animalbarCodeTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.farmId != ""{
+                cell.onFarmIdLbl.text = animalVal.earTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             cell.onFarmIdLbl.text = animalVal.earTag
             cell.officalIdLbl.text = animalVal.animalbarCodeTag
+        } else {
+            if animalVal.animalTag != ""{
+                cell.officalIdLbl.text = animalVal.animalTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if animalVal.farmId != ""{
+                cell.onFarmIdLbl.text = animalVal.farmId
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+           // cell.onFarmIdLbl.text = animalVal.farmId
+           // cell.officalIdLbl.text = animalVal.animalTag
+            cell.barcodeLbl.text = animalVal.animalbarCodeTag
+            cell.onFarmIdTitleLbl.text = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
+            cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
+            cell.barcodeTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let animalVal  =  conficlitOrders[indexPath.row] as! AnimaladdTbl
+        let animalVal  =  conficlitOrders[indexPath.section] as! AnimaladdTbl
         UserDefaults.standard.set(Int(animalVal.animalId), forKey: keyValue.animalIdSelectionCart.rawValue)
         UserDefaults.standard.set(1, forKey: keyValue.placeorder.rawValue)
         self.delegateCustom1?.selectionObject!(check: true)
@@ -196,9 +255,22 @@ extension ConfilictOrdersViewController :UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if pviduser == 4 {
-            return 80
+            return 75
         }
         return 113
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // 1
+        let headerView = UIView()
+        // 2
+        headerView.backgroundColor = view.backgroundColor
+        // 3
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {

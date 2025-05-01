@@ -538,16 +538,36 @@ extension DataEntryModeReviewData :UITableViewDelegate,UITableViewDataSource {
         let cell:DataEntryModeReviewDataCell = self.tbleView.dequeueReusableCell(withIdentifier: "cell") as! DataEntryModeReviewDataCell
         
         if pviduser == 1 || pviduser == 2 || pviduser == 3 || pviduser == 10 || pviduser == 11 || pviduser == 8 || pviduser == 12{
-            cell.onFarmIdLbl.text = reviewListArray[indexPath.row].farmId
-            cell.officalIdLbl.text = reviewListArray[indexPath.row].animalTag
+            if reviewListArray[indexPath.row].farmId != ""{
+                cell.onFarmIdLbl.text = reviewListArray[indexPath.row].farmId
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if reviewListArray[indexPath.row].animalTag != ""{
+                cell.officalIdLbl.text = reviewListArray[indexPath.row].animalTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+//            cell.onFarmIdLbl.text = reviewListArray[indexPath.row].farmId
+//            cell.officalIdLbl.text = reviewListArray[indexPath.row].animalTag
             cell.barcodeLbl.text = reviewListArray[indexPath.row].animalbarCodeTag
             cell.onFarmIdTitleLbl.text = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
             cell.barcodeTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
             
         } else if pviduser == 4 {
-            cell.onFarmIdLbl.text = reviewListArray[indexPath.row].earTag
-            cell.officalIdLbl.text = reviewListArray[indexPath.row].animalbarCodeTag
+            if reviewListArray[indexPath.row].earTag != ""{
+                cell.onFarmIdLbl.text = reviewListArray[indexPath.row].earTag
+            } else {
+                cell.onFarmIdLbl.text = "N/A" // Or any default placeholder
+            }
+            if reviewListArray[indexPath.row].animalbarCodeTag != ""{
+                cell.officalIdLbl.text = reviewListArray[indexPath.row].animalbarCodeTag
+            } else {
+                cell.officalIdLbl.text = "N/A" // Or any default placeholder
+            }
+//            cell.onFarmIdLbl.text = reviewListArray[indexPath.row].earTag
+//            cell.officalIdLbl.text = reviewListArray[indexPath.row].animalbarCodeTag
             cell.onFarmIdTitleLbl.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             cell.officalIdTitleLbl.text = NSLocalizedString(ButtonTitles.barcodeText, comment: "")
         }

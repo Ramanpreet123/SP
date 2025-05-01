@@ -45,6 +45,8 @@ class ApiSyncList: NSObject {
     func postListData(listId:Int64,custmerId:Int64) {
         let animaltbl = fetchAllDataAnimalDaWithOutOrderIdserverAnimalId(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
         
+        let editCaseDataWithoutServerId = fetchAllDataEditConditionWithoutServerId(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
+       
         let editCaseData = fetchAllDataEditCondition(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
         
         if animaltbl.count == 0 && editCaseData.count == 0 {
@@ -120,6 +122,66 @@ class ApiSyncList: NSObject {
             ApisyncList.addAnimals.append(ob)
             ob = Animal()
         }
+        
+        for item in editCaseDataWithoutServerId {
+            var ob = Animal()
+            if let value = item as? DataEntryAnimaladdTbl{
+                if value.date != "" {
+                    print(value)
+                    datee = getOrderDateChange(date: value.date ?? "")
+                    ob.dob = datee
+                }
+                ob.deviceAnimalID = Int(value.animalId)
+                ob.onFarmID = value.farmId ?? ""
+                ob.officialTag = value.animalTag
+                ob.sampleBarCode = value.animalbarCodeTag
+                ob.breedId = value.breedId ?? ""
+                ob.sampleTypeId = Int(value.tissuId)
+                
+                let sexName = value.gender ?? ""
+                if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
+                    nameSex = "F"
+                } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
+                    nameSex = "M"
+                }  else {
+                    nameSex = "F"
+                }
+                
+                ob.sex = nameSex
+                
+                ob.bornTypeId = Int(value.selectedBornTypeId)
+                ob.officialSireId = value.offsireId
+                ob.officialDamId  = value.offDamId
+                ob.earTag  = value.earTag
+                ob.animalName  = value.animalName
+                ob.speciesId = SpeciesID.dairySpeciesId
+                ob.breedId = value.breedId ?? ""
+                ob.earTag  = value.earTag
+                ob.animalTag  = ""
+                ob.breedRegNumber  = value.breedRegNumber
+                
+                ob.animalName  = value.animalName
+                ob.sireRegNumber  = value.offsireId
+                ob.damRegNumber  = value.offDamId
+                ob.sireID  = value.offsireId
+                ob.damId = value.offDamId
+                ob.sireNAAB = ""
+                ob.mbc  = value.eT
+                ob.breedRegistrationNumber = ""
+                ob.sireYOB = 0
+                ob.animalDamID = ""
+                ob.damYOB = 0
+                ob.series  = ""
+                ob.rgd  = ""
+                ob.rgn  = value.breedAssocation
+                if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
+                    ob.breedAssociationId = "a40549b9-beae-4c0c-8e48-5147f18333d9"
+                }
+            }
+            ApisyncList.addAnimals.append(ob)
+            ob = Animal()
+        }
+        
       // get the list name and check farmid and official id animal list and update that list
         for item in editCaseData{
             
@@ -420,7 +482,7 @@ class ApiSyncList: NSObject {
         dateFormatter.dateFormat = DateFormatters.ddMMyyyyFormat
         let date1 = dateFormatter.date(from: date )// create   date from string
         dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
-        let timeStamp = dateFormatter.string(from: date1!)
+        let timeStamp = dateFormatter.string(from: date1 ?? Date())
         print(timeStamp)
         return timeStamp
     }

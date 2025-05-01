@@ -174,7 +174,11 @@ class TextScanVC: UIViewController, CropViewControllerDelegate {
     
     func openAcnSheet() {
         let alert = UIAlertController(title: "Select Image Source", message: "", preferredStyle: .actionSheet)
-        
+        alert.modalPresentationStyle = .popover
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = imgView
+            presenter.sourceRect = CGRect(x: imgView.frame.width / 2, y: imgView.frame.width / 2, width: 50, height: 50);
+         }
       alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
             print("User click Approve button")
             let picker = UIImagePickerController()
