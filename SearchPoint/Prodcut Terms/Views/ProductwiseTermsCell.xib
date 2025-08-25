@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="198" id="KGk-i7-Jjw" customClass="ProductwiseTermsCell" customModule="SearchPoint" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="448" height="198"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="448" height="198"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBA-3T-TZF">
+                        <rect key="frame" x="5" y="5" width="438" height="188"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-U6-Nkj">
+                                <rect key="frame" x="0.0" y="0.0" width="438" height="188"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences" minimumFontSize="20"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DVe-U6-Nkj" secondAttribute="trailing" id="Pue-AG-sQw"/>
+                            <constraint firstItem="DVe-U6-Nkj" firstAttribute="top" secondItem="aBA-3T-TZF" secondAttribute="top" id="hlm-gb-ms1"/>
+                            <constraint firstAttribute="bottom" secondItem="DVe-U6-Nkj" secondAttribute="bottom" id="hrq-Br-kOf"/>
+                            <constraint firstItem="DVe-U6-Nkj" firstAttribute="leading" secondItem="aBA-3T-TZF" secondAttribute="leading" id="qAn-Bt-8IM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="aBA-3T-TZF" secondAttribute="bottom" constant="5" id="Mek-bT-RbJ"/>
+                    <constraint firstItem="aBA-3T-TZF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="frK-HH-FzH"/>
+                    <constraint firstAttribute="trailing" secondItem="aBA-3T-TZF" secondAttribute="trailing" constant="5" id="gox-6e-HAH"/>
+                    <constraint firstItem="aBA-3T-TZF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="kks-sr-O8t"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="containerView" destination="aBA-3T-TZF" id="EQ8-Np-2AA"/>
+                <outlet property="webView" destination="DVe-U6-Nkj" id="Xyx-4m-pzm"/>
+            </connections>
+            <point key="canvasLocation" x="230.43478260869566" y="153.34821428571428"/>
+        </tableViewCell>
+    </objects>
+</document>
