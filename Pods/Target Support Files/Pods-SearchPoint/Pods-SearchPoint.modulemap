@@ -1,6 +1,0 @@
-framework module Pods_SearchPoint {
-  umbrella header "Pods-SearchPoint-umbrella.h"
-
-  export *
-  module * { export * }
-}
