@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AdonServerResponse" representedClassName="AdonServerResponse" syncable="YES" codeGenerationType="class">
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="adonName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="offbarcde" optional="YES" attributeType="String"/>
+        <attribute name="offfarmId" optional="YES" attributeType="String"/>
+        <attribute name="offId" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverId" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="AdontAddTbl" representedClassName="AdontAddTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addoName" optional="YES" attributeType="String"/>
+        <attribute name="addonId" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="regCode" optional="YES" attributeType="String"/>
+        <attribute name="regrfid" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="AnimaladdTbl" representedClassName="AnimaladdTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="breedAssocation" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="breedRegNumber" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="eid" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="secondaryId" optional="YES" attributeType="String"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="AnimalMaster" representedClassName=".AnimalMaster" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="breedAssocation" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="breedRegNumber" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="AnimalUpdatedTime" representedClassName="AnimalUpdatedTime" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hittingTime" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="AusNaabBull" representedClassName="AusNaabBull" syncable="YES" codeGenerationType="class">
+        <attribute name="bullID" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="sireName" optional="YES" attributeType="String"/>
+        <attribute name="sireNationalId" optional="YES" attributeType="String"/>
+        <attribute name="srcLine" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="BeefAnimaladdTbl" representedClassName="BeefAnimaladdTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ageConf" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="bothConf" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="damYOB" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="diffAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isUpadte" optional="YES" attributeType="String"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rgd" optional="YES" attributeType="String"/>
+        <attribute name="rgn" optional="YES" attributeType="String"/>
+        <attribute name="sampTypeConf" optional="YES" attributeType="String"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serie" optional="YES" attributeType="String"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="sireRegAssocation" optional="YES" attributeType="String"/>
+        <attribute name="sireYOB" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="BeefAnimalMaster" representedClassName="BeefAnimalMaster" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="damYOB" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rgd" optional="YES" attributeType="String"/>
+        <attribute name="rgn" optional="YES" attributeType="String"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serie" optional="YES" attributeType="String"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="sireRegAssocation" optional="YES" attributeType="String"/>
+        <attribute name="sireYOB" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ContactSupportTbl" representedClassName="ContactSupportTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="hoursOfOpertion" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CustomerMarkets" representedClassName=".CustomerMarkets" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="marketCode" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CustomerSettingSave" representedClassName="CustomerSettingSave" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="DataEntryAnimaladdTbl" representedClassName="DataEntryAnimaladdTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="breedAssocation" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="breedRegNumber" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="DataEntryBeefAnimaladdTbl" representedClassName="DataEntryBeefAnimaladdTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addonName" optional="YES" attributeType="String"/>
+        <attribute name="adhDataServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ageConf" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalName" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="bothConf" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="damYOB" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="diffAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="editFlagSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="eT" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="isSyncServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isUpadte" optional="YES" attributeType="String"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="nationHerdAU" optional="YES" attributeType="String"/>
+        <attribute name="offDamId" optional="YES" attributeType="String"/>
+        <attribute name="offPermanentId" optional="YES" attributeType="String"/>
+        <attribute name="offsireId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rgd" optional="YES" attributeType="String"/>
+        <attribute name="rgn" optional="YES" attributeType="String"/>
+        <attribute name="sampTypeConf" optional="YES" attributeType="String"/>
+        <attribute name="selectedBornTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serie" optional="YES" attributeType="String"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="sireIDAU" optional="YES" attributeType="String"/>
+        <attribute name="sireRegAssocation" optional="YES" attributeType="String"/>
+        <attribute name="sireYOB" optional="YES" attributeType="String"/>
+        <attribute name="specisType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="tissuId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tissuName" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="DataEntryList" representedClassName="DataEntryList" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="listDesc" optional="YES" attributeType="String"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="listName" optional="YES" attributeType="String"/>
+        <attribute name="offlineSync" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="productType" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="EvaluationMarkets" representedClassName=".EvaluationMarkets" syncable="YES" codeGenerationType="class">
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="marketsID" optional="YES" attributeType="String"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="providerID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetActionRequired" representedClassName="GetActionRequired" syncable="YES" codeGenerationType="class">
+        <attribute name="actionRequired" optional="YES" attributeType="String" customClassName="[String]"/>
+        <attribute name="conflictsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerId" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="offcialPermanenetId" optional="YES" attributeType="String"/>
+        <attribute name="officialTag" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="orderId" optional="YES" attributeType="String"/>
+        <attribute name="pastDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="product" optional="YES" attributeType="String"/>
+        <attribute name="receivedDate" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarcode" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatusId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="speciesID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetAdonTbl" representedClassName="GetAdonTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="adonName" optional="YES" attributeType="String"/>
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="isCdcbProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isIncludedInProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="textValueEnglish" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="textValuePortugese" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetBaseTbl" representedClassName="GetBaseTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="databaseId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="databaseName" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetBillingContact" representedClassName="GetBillingContact" syncable="YES" codeGenerationType="class">
+        <attribute name="billToCustId" optional="YES" attributeType="String"/>
+        <attribute name="contactName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetBornTypes" representedClassName=".GetBornTypes" syncable="YES" codeGenerationType="class">
+        <attribute name="bornTypeCode" optional="YES" attributeType="String"/>
+        <attribute name="bornTypeID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="bornTypeName" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetBreedsCodes" representedClassName="GetBreedsCodes" syncable="YES" codeGenerationType="class">
+        <attribute name="breedCode" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetBreedSocieties" representedClassName="GetBreedSocieties" syncable="YES" codeGenerationType="class">
+        <attribute name="association" optional="YES" attributeType="String"/>
+        <attribute name="associationId" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="productID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="sequenceId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetBreedsTbl" representedClassName="GetBreedsTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="abbrev" optional="YES" attributeType="String"/>
+        <attribute name="alpha2" optional="YES" attributeType="String"/>
+        <attribute name="breedCode" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="isdefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="market" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="provideName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+        <attribute name="threeCharCode" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetCountryCode" representedClassName="GetCountryCode" syncable="YES" codeGenerationType="class">
+        <attribute name="alpha2" optional="YES" attributeType="String"/>
+        <attribute name="alphaCode" optional="YES" attributeType="String"/>
+        <attribute name="countryName" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+        <attribute name="numericCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetCustomer" representedClassName="GetCustomer" syncable="YES" codeGenerationType="class">
+        <attribute name="billToCustomerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="billToCustomerName" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="marketCode" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetDatabaseCount" representedClassName="GetDatabaseCount" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dataCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetMarketsTbl" representedClassName="GetMarketsTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="pricingInfoText" optional="YES" attributeType="String"/>
+        <attribute name="pricingLinkText" optional="YES" attributeType="String"/>
+        <attribute name="pricingLinkUrl" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetNaabCode" representedClassName="GetNaabCode" syncable="YES" codeGenerationType="class">
+        <attribute name="animalId" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="naabCode" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetNominatorsTbl" representedClassName="GetNominatorsTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="nominator" optional="YES" attributeType="String"/>
+        <attribute name="nominatorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="providerGroup" optional="YES" attributeType="String"/>
+        <attribute name="providerGroupId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetPriorityBreeding" representedClassName="GetPriorityBreeding" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="priorityBreedId" optional="YES" attributeType="String"/>
+        <attribute name="priorityBreedName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetProductTbl" representedClassName=".GetProductTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addON" optional="YES" attributeType="String"/>
+        <attribute name="addonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="addOnNames" optional="YES" attributeType="String"/>
+        <attribute name="addOnStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="isAdded" optional="YES" attributeType="String"/>
+        <attribute name="isCdcbProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isInculderInProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="orderAcceptTerms" optional="YES" attributeType="String"/>
+        <attribute name="pricing" optional="YES" attributeType="String"/>
+        <attribute name="productDescription" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetProductTblBeef" representedClassName=".GetProductTblBeef" syncable="YES" codeGenerationType="class">
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="isAdded" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="marketId" optional="YES" attributeType="String"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="orderAcceptTerms" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pricing" optional="YES" attributeType="String"/>
+        <attribute name="productDescription" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GetProviderTbl" representedClassName="GetProviderTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="providerGroup" optional="YES" attributeType="String"/>
+        <attribute name="providerGroupId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetSampleTbl" representedClassName=".GetSampleTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sampleId" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="sampleName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetSecondaryBreedingPrograms" representedClassName="GetSecondaryBreedingPrograms" syncable="YES" codeGenerationType="class">
+        <attribute name="priorityBreedId" optional="YES" attributeType="String"/>
+        <attribute name="priorityBreedName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GetSpeciesTbl" representedClassName=".GetSpeciesTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="LastUpdatedDates" representedClassName="LastUpdatedDates" syncable="YES" codeGenerationType="class">
+        <attribute name="addOnsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="austrailianBullsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="bornTypesLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="breedAssociationsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="breedsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="countryCodesLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="evaluationProvidersLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="marketsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="priorityBreedingProgrLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="productsLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatusesLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="sampleTypesLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="speciesLastUpdated" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="LoginTbl" representedClassName=".LoginTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="agreedToTermsOfService" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="authorizationToken" optional="YES" attributeType="String"/>
+        <attribute name="errorDetail" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="marketCode" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="mustRegisterDevice" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="mustValidateDevice" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="responseCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ManageCustomerDownloadData" representedClassName="ManageCustomerDownloadData" syncable="YES" codeGenerationType="class">
+        <attribute name="customerDataPercentage" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="MergeDataEntryList" representedClassName="MergeDataEntryList" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="listDesc" optional="YES" attributeType="String"/>
+        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="listName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="MobileVersion" representedClassName="MobileVersion" syncable="YES" codeGenerationType="class">
+        <attribute name="appVersion" optional="YES" attributeType="String"/>
+        <attribute name="dbVersion" optional="YES" attributeType="String"/>
+        <attribute name="deployment" optional="YES" attributeType="String"/>
+        <attribute name="os" optional="YES" attributeType="String"/>
+        <attribute name="versionCode" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="NewMarketName" representedClassName="NewMarketName" syncable="YES" codeGenerationType="class">
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="marketsId" optional="YES" attributeType="String"/>
+        <attribute name="product" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="speciesId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="OfflineOrder" representedClassName="OfflineOrder" syncable="YES" codeGenerationType="class">
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="statusEmail" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="OfflineOrderBeef" representedClassName="OfflineOrderBeef" syncable="YES" codeGenerationType="class">
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="statusEmail" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="OrderId" representedClassName="OrderId" syncable="YES" codeGenerationType="class">
+        <attribute name="autoId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="OrderSettings" representedClassName=".OrderSettings" syncable="YES" codeGenerationType="class">
+        <attribute name="beefProductAdded" optional="YES" attributeType="String"/>
+        <attribute name="beefPvid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="defaultDatePicker" optional="YES" attributeType="String"/>
+        <attribute name="isGlobalHD50DisabledForBrazil" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isInhertDisabledForBrazil" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="keyboardSelection" optional="YES" attributeType="String"/>
+        <attribute name="nominatorSave" optional="YES" attributeType="String"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="providerNameUS" optional="YES" attributeType="String"/>
+        <attribute name="pvid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="scannerSelection" optional="YES" attributeType="String"/>
+        <attribute name="screen" optional="YES" attributeType="String"/>
+        <attribute name="settingDefault" optional="YES" attributeType="String"/>
+        <attribute name="settingDone" optional="YES" attributeType="String"/>
+        <attribute name="speciesId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="OrderUserId" representedClassName=".OrderUserId" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ProductAddTbl" representedClassName="ProductAddTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="addoName" optional="YES" attributeType="String"/>
+        <attribute name="addonId" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="regCode" optional="YES" attributeType="String"/>
+        <attribute name="regrfid" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ProductAdonAnimalTbl" representedClassName="ProductAdonAnimalTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="clarifidestatus" optional="YES" attributeType="String"/>
+        <attribute name="clarifidestatusAu" optional="YES" attributeType="String"/>
+        <attribute name="clarifidestatusUk" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="isCdcbProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="orderAcceptTerms" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="orderStatusServer" optional="YES" attributeType="String"/>
+        <attribute name="pricing" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serveradonName" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ProductAdonAnimlTbLBeef" representedClassName="ProductAdonAnimlTbLBeef" syncable="YES" codeGenerationType="class">
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="isCdcbProduct" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="marketName" optional="YES" attributeType="String"/>
+        <attribute name="mkdId" optional="YES" attributeType="String"/>
+        <attribute name="orderAcceptTerms" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="orderStatusServer" optional="YES" attributeType="String"/>
+        <attribute name="pricing" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rgd" optional="YES" attributeType="String"/>
+        <attribute name="rgn" optional="YES" attributeType="String"/>
+        <attribute name="serveradonName" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Productidentify" representedClassName="Productidentify" syncable="YES" codeGenerationType="class">
+        <attribute name="breedId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ProductResonseServer" representedClassName="ProductResonseServer" syncable="YES" codeGenerationType="class">
+        <attribute name="actionReq" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="officialId" optional="YES" attributeType="String"/>
+        <attribute name="onBarcode" optional="YES" attributeType="String"/>
+        <attribute name="onfarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="productStatus" optional="YES" attributeType="String"/>
+        <attribute name="rgd" optional="YES" attributeType="String"/>
+        <attribute name="rgn" optional="YES" attributeType="String"/>
+        <attribute name="series" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ProductResponseTbl" representedClassName="ProductResponseTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="actionRequired" optional="YES" attributeType="String"/>
+        <attribute name="breedRegNumber" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="latestSampleRecDate" optional="YES" attributeType="String"/>
+        <attribute name="officialId" optional="YES" attributeType="String"/>
+        <attribute name="officialTag" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="orderedDate" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="String"/>
+        <attribute name="orderStatus" optional="YES" attributeType="String"/>
+        <attribute name="packageRecieved" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="receivedDate" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarcode" optional="YES" attributeType="String"/>
+        <attribute name="sampleCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sampleStaus" optional="YES" attributeType="String"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ResultAnimalGroupCust" representedClassName="ResultAnimalGroupCust" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultFilterData" representedClassName="ResultFilterData" syncable="YES" codeGenerationType="class">
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="providerID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultFIlterDataSave" representedClassName="ResultFIlterDataSave" syncable="YES" codeGenerationType="class">
+        <attribute name="breedID" optional="YES" attributeType="String"/>
+        <attribute name="breedIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="datefrom" optional="YES" attributeType="String"/>
+        <attribute name="dateto" optional="YES" attributeType="String"/>
+        <attribute name="header" optional="YES" attributeType="String"/>
+        <attribute name="productIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+        <attribute name="traidsave" optional="YES" attributeType="String"/>
+        <attribute name="trait" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultGroupCreate" representedClassName="ResultGroupCreate" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupDesc" optional="YES" attributeType="String"/>
+        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupName" optional="YES" attributeType="String"/>
+        <attribute name="groupServerId" optional="YES" attributeType="String"/>
+        <attribute name="groupStatus" optional="YES" attributeType="String"/>
+        <attribute name="groupStatusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupTypeName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultGroupsAnimals" representedClassName="ResultGroupsAnimals" syncable="YES" codeGenerationType="class">
+        <attribute name="animalID" optional="YES" attributeType="String"/>
+        <attribute name="breedId" optional="YES" attributeType="String"/>
+        <attribute name="breedName" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="datedob" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dob" optional="YES" attributeType="String"/>
+        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupName" optional="YES" attributeType="String"/>
+        <attribute name="groupStatus" optional="YES" attributeType="String"/>
+        <attribute name="groupStatusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupTypeName" optional="YES" attributeType="String"/>
+        <attribute name="isUpdatedtrue" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="officalId" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="photos" optional="YES" attributeType="Binary"/>
+        <attribute name="serverAnimalId" optional="YES" attributeType="String"/>
+        <attribute name="serverGroupId" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultGroupUpdatedTime" representedClassName="ResultGroupUpdatedTime" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hittingTime" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultHideIndex" representedClassName="ResultHideIndex" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="headerName" optional="YES" attributeType="String"/>
+        <attribute name="traitId" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ResultMasterPageNumber" representedClassName="ResultMasterPageNumber" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pageNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ResultMasterTemplate" representedClassName="ResultMasterTemplate" syncable="YES" codeGenerationType="class">
+        <attribute name="attributeName" optional="YES" attributeType="String"/>
+        <attribute name="breedFilter" optional="YES" attributeType="Transformable"/>
+        <attribute name="calving" optional="YES" attributeType="String"/>
+        <attribute name="defaultSortOder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="fertility" optional="YES" attributeType="String"/>
+        <attribute name="geneticConditions" optional="YES" attributeType="String"/>
+        <attribute name="indexes" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="milkProteins" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="parentage" optional="YES" attributeType="String"/>
+        <attribute name="photos" optional="YES" attributeType="String"/>
+        <attribute name="production" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="profile" optional="YES" attributeType="String"/>
+        <attribute name="results" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sortBy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="speciesName" optional="YES" attributeType="String"/>
+        <attribute name="traitId" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="wellness" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultMyHerdData" representedClassName="ResultMyHerdData" syncable="YES" codeGenerationType="class">
+        <attribute name="animalDownloadCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalID" optional="YES" attributeType="String"/>
+        <attribute name="breed" optional="YES" attributeType="String"/>
+        <attribute name="breedID" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="damID" optional="YES" attributeType="String"/>
+        <attribute name="datedob" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dob" optional="YES" attributeType="String"/>
+        <attribute name="groupIDs" optional="YES" attributeType="String"/>
+        <attribute name="mgsID" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="officialID" optional="YES" attributeType="String"/>
+        <attribute name="onFarmID" optional="YES" attributeType="String"/>
+        <attribute name="orderDate" optional="YES" attributeType="String"/>
+        <attribute name="orderNumber" optional="YES" attributeType="String"/>
+        <attribute name="photos" optional="YES" attributeType="Binary"/>
+        <attribute name="products" optional="YES" attributeType="String"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarCode" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+        <attribute name="sireID" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultMyHerdDatasave" representedClassName="ResultMyHerdDatasave" syncable="YES" codeGenerationType="class">
+        <attribute name="animalID" optional="YES" attributeType="String"/>
+        <attribute name="breed" optional="YES" attributeType="String"/>
+        <attribute name="breedID" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="damID" optional="YES" attributeType="String"/>
+        <attribute name="dob" optional="YES" attributeType="String"/>
+        <attribute name="groupIDs" optional="YES" attributeType="String"/>
+        <attribute name="mgsID" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="officialID" optional="YES" attributeType="String"/>
+        <attribute name="onFarmID" optional="YES" attributeType="String"/>
+        <attribute name="orderDate" optional="YES" attributeType="String"/>
+        <attribute name="orderNumber" optional="YES" attributeType="String"/>
+        <attribute name="photos" optional="YES" attributeType="Binary"/>
+        <attribute name="products" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarCode" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+        <attribute name="sireID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultPageByTrait" representedClassName="ResultPageByTrait" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="display" optional="YES" attributeType="String"/>
+        <attribute name="numericFormat" optional="YES" attributeType="String"/>
+        <attribute name="numericValue" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="officalId" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderNumber" optional="YES" attributeType="String"/>
+        <attribute name="stringValue" optional="YES" attributeType="String"/>
+        <attribute name="trait" optional="YES" attributeType="String"/>
+        <attribute name="traitDate" optional="YES" attributeType="String"/>
+        <attribute name="traitId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ResultTotalanimals" representedClassName="ResultTotalanimals" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="totalAnimals" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ResultTraitHeader" representedClassName="ResultTraitHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="headerName" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="trait" optional="YES" attributeType="String"/>
+        <attribute name="traitId" optional="YES" attributeType="String"/>
+        <attribute name="traitNames" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SampleDetails" representedClassName=".SampleDetails" syncable="YES" codeGenerationType="class">
+        <attribute name="actionRequired" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SampleOrders" representedClassName=".SampleOrders" syncable="YES" codeGenerationType="class">
+        <attribute name="customerId" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="latestSampleRecDate" optional="YES" attributeType="String"/>
+        <attribute name="officialId" optional="YES" attributeType="String"/>
+        <attribute name="officialTag" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="orderId" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarcode" optional="YES" attributeType="String"/>
+        <attribute name="sampleCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Samples" representedClassName=".Samples" syncable="YES" codeGenerationType="class">
+        <attribute name="breedRegNumber" optional="YES" attributeType="String"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="officalTag" optional="YES" attributeType="String"/>
+        <attribute name="officialId" optional="YES" attributeType="String"/>
+        <attribute name="onFarmId" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="recivedDate" optional="YES" attributeType="String"/>
+        <attribute name="reportedDate" optional="YES" attributeType="String"/>
+        <attribute name="sampleBarcode" optional="YES" attributeType="String"/>
+        <attribute name="sampleId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatusId" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="String"/>
+        <attribute name="speciesID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SamplesStatus" representedClassName=".SamplesStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="sampleStatus" optional="YES" attributeType="String"/>
+        <attribute name="sampleStatusID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Saveprovider" representedClassName=".Saveprovider" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="fromDate" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nominater" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="specisId" optional="YES" attributeType="String"/>
+        <attribute name="specisName" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="toDate" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SelectedQuestionaire" representedClassName="SelectedQuestionaire" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="primaryBreed" optional="YES" attributeType="String"/>
+        <attribute name="primaryBreedId" optional="YES" attributeType="String"/>
+        <attribute name="secondaryBreed" optional="YES" attributeType="String"/>
+        <attribute name="secondaryBreedId" optional="YES" attributeType="String"/>
+        <attribute name="tersioryBreed" optional="YES" attributeType="String"/>
+        <attribute name="tersioryBreedId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SettingTbl" representedClassName=".SettingTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="fromDate" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nominater" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
+        <attribute name="specisId" optional="YES" attributeType="String"/>
+        <attribute name="specisName" optional="YES" attributeType="String"/>
+        <attribute name="staus" optional="YES" attributeType="String"/>
+        <attribute name="toDate" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SingleTimeToastAction" representedClassName="SingleTimeToastAction" syncable="YES" codeGenerationType="class">
+        <attribute name="actionRequired" optional="YES" attributeType="String"/>
+        <attribute name="emaild" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SingleTimeToastsample" representedClassName="SingleTimeToastsample" syncable="YES" codeGenerationType="class">
+        <attribute name="emaild" optional="YES" attributeType="String"/>
+        <attribute name="sampleTracking" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SubProductTbl" representedClassName="SubProductTbl" syncable="YES" codeGenerationType="class">
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="adonName" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="earTag" optional="YES" attributeType="String"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="textValueEnglish" optional="YES" attributeType="String"/>
+        <attribute name="textValuePortugese" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="SubProductTblBeef" representedClassName="SubProductTblBeef" syncable="YES" codeGenerationType="class">
+        <attribute name="adonId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="adonName" optional="YES" attributeType="String"/>
+        <attribute name="animalbarCodeTag" optional="YES" attributeType="String"/>
+        <attribute name="animalId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="animalTag" optional="YES" attributeType="String"/>
+        <attribute name="custId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="custmerId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="String"/>
+        <attribute name="farmId" optional="YES" attributeType="String"/>
+        <attribute name="isSync" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderstatus" optional="YES" attributeType="String"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverOrderId" optional="YES" attributeType="String"/>
+        <attribute name="serverStatus" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="textValueEnglish" optional="YES" attributeType="String"/>
+        <attribute name="textValuePortugese" optional="YES" attributeType="String"/>
+        <attribute name="udid" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="TermsHtml" representedClassName="TermsHtml" syncable="YES" codeGenerationType="class">
+        <attribute name="htmlContent" optional="YES" attributeType="Transformable"/>
+        <attribute name="urlString" optional="YES" attributeType="Transformable"/>
+    </entity>
+    <entity name="Translationslanguage" representedClassName="Translationslanguage" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="AdonServerResponse" positionX="162" positionY="198" width="128" height="193"/>
+        <element name="AdontAddTbl" positionX="18" positionY="162" width="128" height="268"/>
+        <element name="AnimaladdTbl" positionX="-9" positionY="90" width="128" height="734"/>
+        <element name="AnimalMaster" positionX="135" positionY="171" width="128" height="703"/>
+        <element name="AnimalUpdatedTime" positionX="135" positionY="171" width="128" height="73"/>
+        <element name="AusNaabBull" positionX="144" positionY="180" width="128" height="118"/>
+        <element name="BeefAnimaladdTbl" positionX="180" positionY="216" width="128" height="823"/>
+        <element name="BeefAnimalMaster" positionX="189" positionY="225" width="128" height="748"/>
+        <element name="ContactSupportTbl" positionX="153" positionY="189" width="128" height="133"/>
+        <element name="CustomerMarkets" positionX="144" positionY="180" width="128" height="88"/>
+        <element name="CustomerSettingSave" positionX="144" positionY="180" width="128" height="73"/>
+        <element name="DataEntryAnimaladdTbl" positionX="135" positionY="171" width="128" height="718"/>
+        <element name="DataEntryBeefAnimaladdTbl" positionX="135" positionY="171" width="128" height="823"/>
+        <element name="DataEntryList" positionX="135" positionY="171" width="128" height="178"/>
+        <element name="EvaluationMarkets" positionX="144" positionY="180" width="128" height="148"/>
+        <element name="GetActionRequired" positionX="144" positionY="180" width="128" height="328"/>
+        <element name="GetAdonTbl" positionX="0" positionY="99" width="128" height="223"/>
+        <element name="GetBaseTbl" positionX="-63" positionY="27" width="128" height="103"/>
+        <element name="GetBillingContact" positionX="162" positionY="198" width="128" height="163"/>
+        <element name="GetBornTypes" positionX="144" positionY="180" width="128" height="133"/>
+        <element name="GetBreedsCodes" positionX="135" positionY="171" width="128" height="103"/>
+        <element name="GetBreedSocieties" positionX="144" positionY="180" width="128" height="163"/>
+        <element name="GetBreedsTbl" positionX="18" positionY="99" width="128" height="298"/>
+        <element name="GetCountryCode" positionX="153" positionY="189" width="128" height="163"/>
+        <element name="GetCustomer" positionX="144" positionY="180" width="128" height="148"/>
+        <element name="GetDatabaseCount" positionX="135" positionY="171" width="128" height="73"/>
+        <element name="GetMarketsTbl" positionX="0" positionY="90" width="128" height="163"/>
+        <element name="GetNaabCode" positionX="144" positionY="180" width="128" height="118"/>
+        <element name="GetNominatorsTbl" positionX="-54" positionY="36" width="128" height="208"/>
+        <element name="GetPriorityBreeding" positionX="135" positionY="171" width="128" height="28"/>
+        <element name="GetProductTbl" positionX="-18" positionY="72" width="128" height="404"/>
+        <element name="GetProductTblBeef" positionX="135" positionY="171" width="128" height="328"/>
+        <element name="GetProviderTbl" positionX="-36" positionY="45" width="128" height="208"/>
+        <element name="GetSampleTbl" positionX="135" positionY="171" width="128" height="178"/>
+        <element name="GetSecondaryBreedingPrograms" positionX="144" positionY="180" width="128" height="73"/>
+        <element name="GetSpeciesTbl" positionX="36" positionY="117" width="128" height="118"/>
+        <element name="LastUpdatedDates" positionX="135" positionY="171" width="128" height="268"/>
+        <element name="LoginTbl" positionX="243" positionY="153" width="128" height="208"/>
+        <element name="ManageCustomerDownloadData" positionX="135" positionY="180" width="128" height="59"/>
+        <element name="MergeDataEntryList" positionX="135" positionY="171" width="128" height="118"/>
+        <element name="MobileVersion" positionX="135" positionY="171" width="128" height="118"/>
+        <element name="NewMarketName" positionX="135" positionY="171" width="128" height="163"/>
+        <element name="OfflineOrder" positionX="135" positionY="171" width="128" height="118"/>
+        <element name="OfflineOrderBeef" positionX="144" positionY="180" width="128" height="118"/>
+        <element name="OrderId" positionX="144" positionY="180" width="128" height="60"/>
+        <element name="OrderSettings" positionX="144" positionY="180" width="128" height="328"/>
+        <element name="OrderUserId" positionX="153" positionY="189" width="128" height="73"/>
+        <element name="ProductAddTbl" positionX="9" positionY="135" width="128" height="298"/>
+        <element name="ProductAdonAnimalTbl" positionX="532.5" positionY="128.8515625" width="128" height="478"/>
+        <element name="ProductAdonAnimlTbLBeef" positionX="144" positionY="180" width="128" height="433"/>
+        <element name="Productidentify" positionX="135" positionY="171" width="128" height="133"/>
+        <element name="ProductResonseServer" positionX="153" positionY="189" width="128" height="298"/>
+        <element name="ProductResponseTbl" positionX="144" positionY="180" width="128" height="403"/>
+        <element name="ResultAnimalGroupCust" positionX="135" positionY="171" width="128" height="73"/>
+        <element name="ResultFilterData" positionX="135" positionY="171" width="128" height="134"/>
+        <element name="ResultFIlterDataSave" positionX="135" positionY="171" width="128" height="224"/>
+        <element name="ResultGroupCreate" positionX="135" positionY="171" width="128" height="178"/>
+        <element name="ResultGroupsAnimals" positionX="144" positionY="144" width="128" height="344"/>
+        <element name="ResultGroupUpdatedTime" positionX="135" positionY="171" width="128" height="73"/>
+        <element name="ResultHideIndex" positionX="135" positionY="171" width="128" height="103"/>
+        <element name="ResultMasterPageNumber" positionX="135" positionY="171" width="128" height="73"/>
+        <element name="ResultMasterTemplate" positionX="144" positionY="180" width="128" height="359"/>
+        <element name="ResultMyHerdData" positionX="135" positionY="171" width="128" height="419"/>
+        <element name="ResultMyHerdDatasave" positionX="135" positionY="180" width="128" height="359"/>
+        <element name="ResultPageByTrait" positionX="135" positionY="171" width="128" height="209"/>
+        <element name="ResultTotalanimals" positionX="135" positionY="180" width="128" height="74"/>
+        <element name="ResultTraitHeader" positionX="135" positionY="171" width="128" height="119"/>
+        <element name="SampleDetails" positionX="144" positionY="189" width="128" height="133"/>
+        <element name="SampleOrders" positionX="144" positionY="180" width="128" height="283"/>
+        <element name="Samples" positionX="153" positionY="189" width="128" height="268"/>
+        <element name="SamplesStatus" positionX="144" positionY="180" width="128" height="73"/>
+        <element name="Saveprovider" positionX="9" positionY="117" width="128" height="208"/>
+        <element name="SelectedQuestionaire" positionX="135" positionY="171" width="128" height="163"/>
+        <element name="SettingTbl" positionX="0" positionY="72" width="128" height="208"/>
+        <element name="SingleTimeToastAction" positionX="135" positionY="171" width="128" height="28"/>
+        <element name="SingleTimeToastsample" positionX="144" positionY="189" width="128" height="73"/>
+        <element name="SubProductTbl" positionX="153" positionY="189" width="128" height="358"/>
+        <element name="SubProductTblBeef" positionX="153" positionY="189" width="128" height="343"/>
+        <element name="TermsHtml" positionX="144" positionY="180" width="128" height="73"/>
+        <element name="Translationslanguage" positionX="135" positionY="180" width="128" height="29"/>
+    </elements>
+</model>

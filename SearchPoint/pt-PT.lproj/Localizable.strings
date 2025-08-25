@@ -1,0 +1,735 @@
+/*
+ Localizable.strings
+ SearchPoint
+ 
+ Created by "" on 06/02/20.
+ 
+ */
+"Password is incorrect" = "senha é incorreta";
+
+// MARK: - DashboardVC
+// MARK: - fullsiteVC
+"Alert" = "Alerta";
+"You are offline. Please go online." = "Você está offline. Por favor, vá online.";
+// MARK: - OrderingDefaultsVC
+"Are you sure you want to change the provider?" = "Tem certeza de que deseja alterar o provedor?";
+"No" = "Não";
+"Yes" = "Sim";
+"Alert?" = "Alerta?";
+"\(strinBreed) \(StringSampleType) Do you want to remove animal(s) from the order?" = "\(strinBreed) \(StringSampleType) Deseja remover os animais em conflito da ordem atual?";
+"Select keyboard for On-Farm ID" = "Selecione o teclado para o ID na fazenda";
+"Sample Tags" = "Tags de amostra";
+"RFID Scanner" = "Scanner RFID";
+"Alphanumeric" = "Alfanumérico";
+"Numeric" = "Numérico";
+"Date of Birth Input Mode" = "Modo de entrada de data de nascimento";
+"Date Picker" = "Selecionador de Data";
+"Manual Entry" = "Entrada manual";
+"Select Product(s)" = "Selecionar Produto(s)";
+"Entering an On-Farm ID" = "Inserindo um ID na Fazenda";
+
+// MARK: - SampleTrackingDetailVC
+"No orders found" = "Nenhum pedido encontrado";
+// MARK: - SideMenuVC
+"Cancel" = "Cancelar";
+"CANCEL" = "CANCELAR";
+"Are you sure you want to logout from the app?" = "Tem certeza de que deseja sair do aplicativo?";
+"Ok" = "Sim";
+"Contact Support" = "Entre em contato com o suporte";
+"App Help"= "Ajuda do aplicativo";
+"Full Site"= "Site completo";
+"Logout" = "Sair";
+"Hello," = "Olá,";
+"Close" = "Fechar";
+// MARK: - OrderingProductSelectionVC.swift
+"Please select the product." = "Por favor, selecione o produto.";
+// MARK: - OrderProductSelectionSecondVC.
+"You have not assigned products to animal(s). Do you want to continue?" = "Você não atribuiu produtos a %d animal (es). Você quer continuar?";
+"Please select the product(s)." = "Por favor, selecione o(s) produto(s).";
+"Warning" = "Atenção";
+"The breed entered for animals is different and doesn't have common products. Do you want to remove all animals from the order to use this feature?" = "A raça inscrita para animais é diferente e não possui produtos comuns. Deseja remover animais da ordem para usar esse recurso?";
+"Changing back to \"Apply to Entire Order\" will clear all product selections. Please confirm." = "Voltar para \"Aplicar a pedido inteiro\" limpará todas as seleções de produtos. Por favor confirme.";
+// MARK: - SampleTrackingVC.swift
+"From date must be smaller than To date." = "A data de início deve ser menor que a data.";
+// MARK: -  OrderingAnimalVC
+"Enter On-Farm ID" = "Digite o ID na fazenda";
+"Scan/Enter Official Tag #" = "Digitalizar / Inserir Tag Oficial #";
+"Official Tag" = "Tag Oficial";
+"Bluetooth on this device is currently OFF." = "O Bluetooth neste dispositivo está desativado no momento.";
+"Settings" = "Configurações";
+"Please check the device bluetooth connection." = "Por favor, verifique a conexão bluetooth do dispositivo.";
+"Connected with device." = "Conectado ao dispositivo.";
+"Please add at least one animal." = "Por favor, adicione pelo menos um animal.";
+"Please fill all fields." = "Por favor preencha todos os campos.";
+"The Sire ID cannot be the same as the Official ID or the On Farm ID." = "O ID do Touro não pode ser o mesmo que o Official ID ou identificação do animal na fazenda.";
+"Animal already added in the order." = "Animal já adicionado à ordem.";
+"The product does not allow for this breed. Please change the breed or product to continue." = "O produto não permite esta raça. Mude a raça ou produto para continuar.";
+"Error" = "Erro";
+"Scanning Failed. Please try again." = "Falha na digitalização. Por favor, tente novamente.";
+"The breed of the animal doesn't exists for the selected provider. This animal cannot be added." = "A raça do animal não existe para o provedor selecionado. Este animal não pode ser adicionado.";
+"The sampleType of the animal doesn't exists for the selected provider. This animal cannot be added." = "O sampleType do animal não existe para o provedor selecionado. Este animal não pode ser adicionado.";
+
+// MARK: - LoginViewController.swift
+"Please enter your E-Mail and Password to continue." = "Digite seu e-mail e senha para continuar.";
+"Data Sync in Progress. Please Wait..." = "Sincronização de dados em andamento.Por favor, aguarde…";
+"You are offline. You must be online when loging in the first time." = "Você está offline. Você deve estar online ao fazer login pela primeira vez.";
+"Invalid E-Mail or Password." = "E-mail ou senha inválidos.";
+"Invalid loginID or password" = "ID ou senha de login inválida";
+"You have to successfully login first before you can enable Face ID." = "Você precisa fazer login com êxito primeiro antes de poder ativar o Face ID.";
+"Configure Face ID first to use this feature." = "Configure o ID da cara primeiro para usar esse recurso.";
+"Face ID is not available." = "O ID do rosto não está disponível.";
+"You have to successfully login first before you can enable Touch ID." = "Você precisa fazer login com êxito primeiro antes de poder ativar o Touch ID";
+"Configure Touch ID first to use this feature." = "Configure o Touch ID primeiro para usar esse recurso.";
+"Touch ID is Not Available." = "O Touch ID não está disponível";
+"Updating.." = "Atualizando ..";
+"Loading..." = "Carregando...";
+"Dashboard" = "Painel de controle";
+"Offline Restrictions" = "Restrições offline";
+"Connected" = "Conectado";
+"Not Connected" = "Não conectado";
+"Animal added successfully." = "Animal adicionado com sucesso.";
+"On-Farm ID can be the Herd Management #." = "O ID na fazenda pode ser o número de manejo no rebanho.";
+"Official ID can be an Official RFID Tag, Unique Metal Ear Tag, Breed Registration#." = "O ID oficial pode ser uma etiqueta RFID oficial, número exclusivo do brinco, número de registro da raça.";
+"Please contact customer support to make changes to your order." = "Entre em contato com o suporte ao cliente para fazer alterações no seu pedido.";
+"Customer support will contact you in the event there is a problem with your order." = "O atendimento ao cliente entrará em contato com você caso ocorra algum problema com o seu pedido.";
+"Once the order has passed validation and has been successfully processed,you will recieve an email with an order confirmation." = "Após o pedido ser validado e processado com sucesso, você receberá um e-mail com a confirmação do pedido.";
+
+"Ordering will be stored during offline mode. As soon as the device has an internet connection and the app is running with a green status, any pending orders will be sent." = "Os pedidos serão armazenados durante o modo offline. Assim que o dispositivo tiver uma conexão com a Internet e o aplicativo estiver executando com um status verde, todos os pedidos pendentes serão enviados.";
+
+"Actions will be as of the last time the app was online." = "As ações serão a partir da última vez que o aplicativo esteve online.";
+"Order History and Sample States will be as of the last time the app was online." = "O histórico de pedidos e os estados de amostra serão a partir da última vez que o aplicativo esteve online.";
+
+"This is which dairy genetic evaluation you normally received data from. This is automatically established by the market you are in but you can change the default if you normally order products from a different market." = "É dessa avaliação genética do leite que você normalmente recebe os dados. Isso é estabelecido automaticamente pelo mercado em que você se encontra, mas você pode alterar o padrão se normalmente encomendar produtos de um mercado diferente.";
+
+"Bluetooth on this device is currently OFF." = "O Bluetooth neste dispositivo está desativado no momento.";
+"Bluetooth device paired successfully." = "Dispositivo Bluetooth emparelhado com sucesso.";
+"Bluetooth device disconnected." = "Dispositivo Bluetooth desconectado.";
+"No records found." = "Nenhum registro foi encontrado.";
+"No actions or issues right now" = "Nenhuma ação ou problema no momento";
+"Are you sure you want to clear all order details?" = "Tem certeza de que deseja limpar todos os detalhes do pedido?";
+"Order Cleared Successfully" = "Pedido cancelado com sucesso";
+"Are you sure you want to remove animal from the order?" = "Tem certeza de que deseja excluir o animal do pedido?";
+"Animal Deleted Successfully" = "Animal eliminado com sucesso";
+"Ordering Defaults" = "Padrões do pedido";
+"Continue to Ordering" = "Continuar para pedidos";
+"Done" = "Concluído";
+"Clear Cart" = "Carrinho Clara";
+"Animal record updated successfully." = "Registro de animais atualizado com sucesso.";
+"Animal Record cannot be updated as the animal has been used for an order." = "O registro do animal não pode ser atualizado, pois o animal foi usado para um pedido.";
+"OK" = "Sim";
+"Animal removed from the order successfully" = "Animal removido do pedido com sucesso";
+"All animals removed from order" = "Todos os animais removidos do pedido";
+"On-Farm ID" = "ID na fazenda";
+"Official ID" = "ID oficial";
+"Barcode" = "Código de barras";
+"Date Ordered" = "Data da Encomenda";
+"Order ID" = "ID do pedido";
+"All" = "Todos";
+"In Progress" = "Em andamento";
+"Animal record updated and added in order successfully." = "Registro de animais atualizado e adicionado em ordem com sucesso.";
+"Breed of this animal does not exist for the selected provider." = "A raça deste animal não existe para o provedor selecionado.";
+
+"Touch the finger print sensor." = "Toque no sensor de impressão digital.";
+"Face print sensor." = "Sensor de impressão facial.";
+"Animal added successfully in order." = "Animal adicionado com sucesso em ordem.";
+"BVDV product selection cannot be applied as animals in order have sample type other than Allflex (TSU) or Caisely (TSU)." = "A seleção do produto BVDV não pode ser aplicada, pois os animais devem ter um tipo de amostra diferente de Allflex (TSU) ou Caisley (TSU).";
+"BVDV product selection cannot be applied as animals in order have age less than 35 days." = "A seleção do produto BVDV não pode ser aplicada, pois os animais em ordem têm idade inferior a 35 dias.";
+
+"BVDV product selection only applicable in 'Apply to Entire Order' state." = "A seleção do produto BVDV é aplicável apenas no estado 'Aplicar a pedido inteiro'.";
+"Animal cannot be added in order as BVDV product is selected and the animal sample type is other than Allflex (TSU) or Caisely (TSU). Do you want to save animal?" = "O animal não pode ser adicionado em ordem, pois o produto BVDV é selecionado e o tipo de amostra de animal é diferente de Allflex (TSU) ou Caisley (TSU). Você quer salvar animais?";
+"Animal cannot be added in order as BVDV product is selected and the age of animal is less than 35 days. Do you want to save animal?" = "O animal não pode ser adicionado em ordem, pois o produto BVDV é selecionado e a idade do animal é inferior a 35 dias. Você quer salvar animais?";
+"BVDV product selection cannot be applied as 10 animals in order have sample type other than Allflex (TSU) or Caisley (TSU). Do you want to remove these animal from order?" = "A seleção do produto BVDV não pode ser aplicada, pois 10 animais devem ter um tipo de amostra diferente de Allflex (TSU) ou Caisley (TSU). Deseja remover esses animais do pedido?";
+"BVDV product selection cannot be applied as 10 animals in order has age less than 35 days. Do you want to remove these animals from order?" = "A seleção do produto BVDV não pode ser aplicada, pois 10 animais em ordem têm idade inferior a 35 dias. Deseja remover esses animais do pedido?";
+"Select Breed Association" = "Selecionar Associação de Raça";
+"Select Sire Registration Association" = "Selecionar Associação de Registro de Sire";
+"Select Dam Registration Association" = "Selecionar Associação de Registro de Barragem";
+"Select Registration Association" = "Selecionar associação de registro";
+"Please select one product grouping." = "Selecione um agrupamento de produtos.";
+"Product Groupings" = "Agrupamentos de produtos";
+"Evaluation Provider" = "Provedor de Avaliação";
+"Please select the product(s)." = "Por favor, selecione o(s) produto(s).";
+"Please select one product grouping." = "Selecione um agrupamento de produtos.";
+
+"Complete Bull Names and associated IDs can be found on the DataGene website (www.datagene.com.au)" = "Bull Bull Names completos e IDs associados podem ser encontrados no site da DataGene (www.datagene.com.au)";
+"Please select the breed of the herd." = "Por Favor Selecione a raça do rebanho.";
+"Animal cannot be added in order as BVDV product is selected and the animal sample type is other than Allflex (TSU), Allflex (TST) or Caisely (TSU). Do you want to save animal?" = "O animal não pode ser adicionado em ordem, pois o produto BVDV é selecionado e o tipo de amostra de animal é diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU). Você quer salvar animais?";
+"Only 'NZ Angus Association' is allowed for this product" = "só \"NZ Angus Association\" é permitido para este produto.";
+"Animal cannot be added in order as BVDV product is selected and the age of animal is less than 35 days. Do you want to save animal?" = "O animal não pode ser adicionado em ordem, pois o produto BVDV é selecionado e a idade do animal é inferior a 35 dias. Você quer salvar animais?";
+"BVDV product selection cannot be applied as animals in order have age less than 35 days." = "A seleção do produto BVDV não pode ser aplicada, pois os animais em ordem têm idade inferior a 35 dias.";
+
+"Invalid Animal id." = "ID do animal inválido.";
+"Invalid Animal ID. Invalid Vaccination Tag." = "ID do animal inválido. Etiqueta de vacinação inválida";
+"Invalid Animal ID. Invalid Country Code." = "ID do animal inválido. Código de país inválido";
+"Invalid Animal ID. Invalid Animal RFID." = "ID do animal inválido. RFID animal inválido";
+"Invalid Animal Id. Invalid Breed Code." = "ID do animal inválido. Código de raça inválido";
+"Invalid NAAB code. Invalid Breed Code." = "Código NAAB inválido. Código de raça inválido";
+"Invalid NAAB Code. Invalid NAAB Bull Code." = "Código NAAB inválido. Código de Bull NAAB inválido";
+"Invalid Animal ID. Invalid Gender Code." = "ID do animal inválido. Código de gênero inválido";
+"Invalid Animal id. Invalid animalId17 code." = "ID do animal inválido. Código AnimID17 inválido";
+"Invalid Animal id. Invalid Code." = "AnimalID inválido. Código inválido";
+"Invalid Animal ID. Invalid Aus Nat ID." = "ID do animal inválido. ID de Aus Nat inválido";
+"Invalid Animal ID. Invalid Chilean ID." = "ID do animal inválido. ID chileno inválido";
+"Invalid Animal ID. Invalid Argentina ID" = "ID do animal inválido. ID inválido da Argentina";
+"Matching ID not found. Please contact customer service." = "ID correspondente não encontrado. Entre em contato com o atendimento ao cliente.";
+"Invalid Animal ID. Invalid AnimUSA." = "ID do animal inválido. AnimUSA inválido";
+"Invalid Animal id. Invalid Anim840." = "ID do animal inválido. Anim840 inválido";
+"Submitting E-mail Order Form. Please wait..." = "Enviar formulário de pedido por email. Por favor, espere...";
+"Submit is only available if all fields are filled out for each animal submitted." = "O envio só está disponível se todos os campos forem preenchidos para cada animal enviado.";
+"This will email me with the animals, samples and product information I have entered. I can finish the order on my computer and email to Zoetis Genetics." = "Isso me enviará um e-mail com os animais, amostras e informações do produto que eu inseri. Posso concluir o pedido no meu computador e enviar um e-mail para Zoetis Genetics.";
+"E-Mail Me Order Form" = "Enviar-me um E-mail";
+"You will receive an email with the data you entered in the app. You can copy paste this data into an order form." = "Você receberá um e-mail com os dados inseridos no aplicativo. Você pode copiar e colar esses dados em um formulário de pedido.";
+"Invalid Registration Number (Minimum Length 5)" = "Número de registro inválido (comprimento mínimo 5)";
+"Animal ID validated" = "ID do animal validado";
+"Invalid Input." = "entrada inválida";
+"Submit" = "Enviar";
+"E-Mail Me Entered Data" = "Enviar dados inseridos por e-mail";
+"Animal in order has sample type other than Allflex (TSU), Allflex (TST) or Caisley (TSU)" = "%d O animal em ordem tem um tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU)";
+
+"Animals in order have sample type other than Allflex (TSU), Allflex (TST) or Caisley (TSU)" = "%d Os animais em ordem tem um tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU)";
+"Animals in order have sample type other than Allflex (TSU), Allflex (TST) or Caisley (TSU) and age less than 35 days." = "Os animais em ordem têm um tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU) e idade inferior a 35 dias.";
+
+
+"Animal in order has sample type other than Allflex (TSU), Allflex (TST) or Caisley (TSU) and age less than 35 days." = "%d O animal em ordem tem um tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU) e idade inferior a 35 dias.";
+
+"Animals in order have age less than 35 days" = "%d Os animais  em ordem tem idade inferior a 35 dias";
+
+" Animal in order has age less than 35 days" = "%d O animal em ordem tem idade inferior a 35 dias";
+" Animals in order have age less than 35 days" = "%d Os animais em ordem têm idade inferior a 35 dias";
+"Animal in order has age less than 35 days" = "%d O animal em ordem tem idade inferior a 35 dias";
+"Are you sure you want to remove the animal from the order?" = "Tem certeza de que deseja remover o animal do pedido?";
+"All animals in conflict from the order has been cleared successfully" = "Todos os animais em conflito da ordem foram eliminados com sucesso";
+"PAP and #Profit Indexes are only available for INHERIT select. These add-ons will automatically be excluded on males (INHERIT connect)." = "Os índices PAP e #Profit estão disponíveis apenas para a seleção INHERIT. Esses complementos serão excluídos automaticamente em homens (conexão INHERIT).";
+"Duplicate Entry" = "Entrada duplicada";
+"Please select a product grouping." = "Selecione um agrupamento de produtos.";
+"Changing the product grouping will clear all current order details. Do you want to continue?" = "Alterar o agrupamento de produtos limpará todos os detalhes atuais do pedido. Deseja continuar?";
+"Are you sure you want to change the product grouping?" = "Tem certeza de que deseja alterar o agrupamento de produtos?";
+"INHERIT select will provide EPDs for replacement heifers. INHERIT connect allows for bulls to be included into the evaluation for heifer sire verification. EPDs are not provided for INHERIT connect." = "O INHERIT select fornecerá EPDs para novilhas de substituição. O INHERIT connect permite que os touros sejam incluídos na avaliação para verificação dos touros. Os EPDs não são fornecidos para o INHERIT connect.";
+
+"Please accept the order terms to proceed." = "Aceite os termos do pedido para continuar.";
+"CLARIFIDE Plus Upgrade or CLARIFIDE CDCB Upgrade or CLARIFIDE AHDB Upgrade cannot be applied as CLARIFIDE AHDB or CLARIFIDE CDCB or CLARIFIDE Plus was not ordered for this animal " = "O CLARIFIDE Plus Upgrade ou o CLARIFIDE CDCB Upgrade ou o CLARIFIDE AHDB Upgrade não podem ser aplicados, pois o CLARIFIDE AHDB ou o CLARIFIDE CDCB ou o CLARIFIDE Plus não foi solicitado para este animal";
+"You can not select  CLARIFIDE AHDB Upgrade or CLARIFIDE CDCB Upgrade or CLARIFIDE Plus Upgrade here. Please check all validation in animal listing page . " = "Não é possível selecionar a atualização CLARIFIDE AHDB ou a atualização CLARIFIDE CDCB ou a atualização CLARIFIDE Plus aqui. Por favor, verifique toda a validação na página de listagem de animais.";
+"CLARIFIDE Plus Upgrade cannot be applied as CLARIFIDE was not ordered for this animal. " = "O upgrade do CLARIFIDE Plus não pode ser aplicado, pois o CLARIFIDE não foi encomendado para este animal em pedidos anteriores.";
+
+"The product selection can only apply to the entire order." = "A seleção do produto pode ser aplicada apenas a todo o pedido.";
+"Herdbook number required for all registered animals for all test requests. Herdbook or RFID required field for CLARIFIDE CDCB (US) orders." = "Número do livro genealógico necessário para todos os animais registrados para todas as solicitações de teste. Campo obrigatório Herdbook ou RFID para pedidos do CLARIFIDE CDCB (US)";
+
+"Sire year of birth cannot be greater than year of birth." = "O ano de nascimento não pode ser maior que o ano de nascimento.";
+"Dam year of birth cannot be greater than year of birth." = "O ano de nascimento da barragem não pode ser maior que o ano de nascimento.";
+
+"Validate Device" = "Validar dispositivo";
+"Please enter the validation code received in the registered email." = "Digite o código de validação recebido no email registrado.";
+"Invalid validation code" = "Código de validação inválido";
+"You are offline. You must be online when you are validating device." = "";
+"Please enter your device validation code." = "";
+"Beta Casein A2 is bundled automatically with this product selection." = "Beta Caseína A2 é fornecido automaticamente com esta seleção de produto.";
+
+"AHDB Supports the following breeds (HO, British Friesian, JE, GU, Ayrshire)" = "AHDB Suporta as seguintes raças (HO, British Friesian, JE, GU, Ayrshire)";
+"CDCB Supports the following breeds (HO, JE, BS, GU)" = "CDCB Suporta as seguintes raças (HO, JE, BS, GU)";
+"Zoetis Evaluation Supports the following breeds (HO, JE)" = "Avaliação Zoetis Suporta as seguintes raças (HO, JE)";
+"Complete Bull Names and associated IDs can be found on the DataGene website (www.datagene.com.au)" = "Bull Bull Names completos e IDs associados podem ser encontrados no site da DataGene (www.datagene.com.au)";
+"Do you want to email entered data?" = "Deseja enviar por e-mail os dados inseridos?";
+"E-Mail Order" = "Pedido por E-mail";
+"This is the genetic evaluation body that will provide your genomic test results. This will be selected by default based upon your market, but may be switched if required to order an evaluation from a different provider. There are restrictions on being able to change this setting." = "Este é o organismo de avaliação genética que fornecerá os resultados dos seus testes genômicos. Isso será selecionado por padrão com base no seu mercado, mas poderá ser alterado, se necessário, para solicitar uma avaliação a um fornecedor diferente. Existem restrições para poder alterar essa configuração.";
+
+"Incremental Barcode" = "Código de barras incremental";
+"Date of Birth" = "Data de nascimento";
+"Please enter barcode before enabling incremental barcode feature." = "Digite o código de barras antes de ativar o recurso de código de barras incremental.";
+"Entered barcode should be end up with number for incremental autopopulate." = "O código de barras inserido deve ter o número para preenchimento automático incremental.";
+"Barcode is already used with an animal." = "O código de barras já é usado com um animal.";
+
+"CLARIFIDE Plus Upgrade cannot be applied as CLARIFIDE DataGene or CLARIFIDE CDCB to CLARIFIDE Plus was not ordered for this animal." = "A atualização do CLARIFIDE Plus não pode ser aplicada, pois o CLARIFIDE DataGene ou o CLARIFIDE CDCB para o CLARIFIDE Plus não foi solicitado para este animal";
+"Invalid Animal ID. Invalid Australian National ID." = "ID do animal inválido. ID nacional australiano inválido";
+
+"NAAB Code not found in the database." = "Código NAAB não encontrado no banco de dados.";
+"Please enter barcode before selecting 'Incremental barcode'." = "Digite o código de barras antes de selecionar 'Código de barras incremental'.";
+"Barcode must be ending with the number to use 'Incremental barcode'." = "O código de barras deve terminar com o número para usar 'Código de barras incremental'.";
+"Please complete or clear the order before updating the customer." = "Complete ou limpe o pedido antes de atualizar o cliente.";
+"This product cannot be selected because this product can only be used on samples that are Holstein or Jerseys and have previously been tested for CLARIFIDE by Zoetis." = "Este produto não pode ser selecionado porque este produto pode ser usado apenas em amostras da Holstein ou Jersey e que foram testadas anteriormente para o CLARIFIDE pela Zoetis.";
+"This product cannot be selected because this product can only be used on samples that have previously been tested for CLARIFIDE AHDB by Zoetis." = "Este produto não pode ser selecionado porque este produto pode ser usado apenas em amostras que foram testadas anteriormente para CLARIFIDE AHDB pela Zoetis.";
+"This product cannot be selected because this product can only be used on samples that have previously been tested for CLARIFIDE DataGene or CLARIFIDE CDCB to CLARIFIDE Plus by Zoetis."  = "Este produto não pode ser selecionado porque este produto pode ser usado apenas em amostras que foram testadas anteriormente para CLARIFIDE DataGene ou CLARIFIDE CDCB para CLARIFIDE Plus da Zoetis.";
+
+"Pricing" = "Preços";
+"Syncing data..." = "Sincronizando dados...";
+"Product Name" = "Nome do Produto";
+"Actions Required" = "Ação requerida";
+"Status" = "Status";
+"You are offline. You must be online while validating device first time." = "Você está offline. Você deve estar online ao validar o dispositivo pela primeira vez.";
+"You are offline. You must be online while loging-in first time." = "Você está offline. Você deve estar online durante o login pela primeira vez.";
+"You are offline. You must be online to logout." = "Você está offline. Você deve estar online para sair.";
+
+
+"Changing breed will clear product selection for this animal in order. Do you want to continue?" = "Mudar a raça limpará a seleção de produtos desse animal em ordem. Você quer continuar?";
+"This product cannot be selected because this product can only be used on samples that have previously been tested for CLARIFIDE CDCB." = "Este produto não pode ser selecionado porque este produto pode ser usado apenas em amostras que foram testadas anteriormente para CLARIFIDE CDCB.";
+"Invalid year. Length of year must be 4." = "Ano inválido. A duração do ano deve ser 4";
+"No samples found" = "Nenhuma amostra encontrada";
+"Customer: " = "Cliente:";
+"You are not connected to internet." = "Você não está conectado à internet.";
+"Bull ID for this animal does not exist." = "A identificação de touros para este animal não existe.";
+"Authorization for this user has failed.You will be logged out. Login back to continue." = "A autorização para este usuário falhou. Você será desconectado. Faça login novamente para continuar.";
+
+"This product should only be ordered for animals that have already had CLARIFIDE CDCB ordered for it." = "Este produto só deve ser encomendado para animais que já tenham recebido o CLARIFIDE CDCB.";
+"This product should only be ordered for animals that have already had CLARIFIDE AHDB ordered for it." = "Este produto só deve ser pedido para animais que já tenham recebido o CLARIFIDE AHDB.";
+"This product should only be ordered for animals that have already had CLARIFIDE ordered for it." = "Este produto só deve ser pedido para animais que já receberam o CLARIFIDE.";
+"No customer(s) associated for this user. You will be logged out. Please contact customer service." = "Nenhum cliente associado a este usuário. Você será desconectado. Entre em contato com o atendimento ao cliente.";
+
+"Unable to read Value from tag. Please try again." = "Não foi possível ler o valor da tag. Tente novamente.";
+"Value from tag not read correctly. Tag value must contain atleast 12 characters." = "O valor da tag não foi lido corretamente. O valor da tag deve conter pelo menos 12 caracteres.";
+
+"Are you sure you want to clear form values?" = "Tem certeza de que deseja limpar os valores do formulário?";
+"Customer: " = "Cliente:";
+"Clear form" = "Forma limpa";
+"Use scanned value anyways" = "Use o valor verificado de qualquer maneira";
+"Retry" = "Tentar novamente";
+"Reset" = "Redefinir";
+
+"Unable to read Value from tag. Please try again. Scanned Result" = "Incapaz de ler o valor da tag. Por favor, tente novamente.\n\r Para obter melhores resultados, concentre a câmera na marca completamente.\n\r Resultado da digitalização: (%@)";
+"Are you sure you want to reset form?" = "Tem certeza que deseja redefinir o formulário?";
+"Do you want to resend otp again ?" = "Você quer reenviar OTP novamente?";
+"Validation code sent on the registered email." = "Código de validação enviado no email cadastrado.";
+"Invalid validation code." = "Código de validação inválido.";
+"Please select a customer." = "Selecione um cliente.";
+"Alert" = "Alerta";
+"Select Customer" = "Selecionar Cliente";
+"Sire ID (NASIS Bull Name)" = "ID do pai (nome NASIS Bull)";
+"Evaluation Provider/Market" = "Provedor de Avaliação / Mercado";
+"Mobile camera (OCR)" = "Câmera móvel (OCR)";
+"Evaluation Provider/Market" = "Provedor de avaliação / mercado";
+"No associated evaluation provider found for this customer in the app." = "Nenhum fornecedor ou produto associado encontrado para o cliente no aplicativo.";
+"No associated product found for this customer in the app." = "Nenhum produto associado encontrado para este cliente no aplicativo.";
+"Please select an evaluation provider." = "Por favor, selecione um provedor de avaliação.";
+"Please connect to the internet and refresh app data." = "Conecte-se à Internet e atualize os dados do aplicativo.";
+"Data can be delayed up to 48 hours." = "Os dados podem ser atrasados ​​em até 48 horas.";
+"Please complete/clear order in progress to refresh app data." = "Conclua / limpe o pedido em andamento para atualizar os dados do aplicativo.";
+"Please sync offline orders first to refresh app data." = "Sincronize os pedidos off-line primeiro para atualizar os dados do aplicativo.";
+"Data Refresh" = "Atualização de dados";
+"Are you sure you want to forcefully refresh app data?" = "Tem certeza de que deseja forçar a atualização dos dados do aplicativo?";
+"A newer version of the app is available on App Store. Please update your app now to proceed." = "Uma versão mais recente do aplicativo está disponível na App Store. Atualize seu aplicativo agora para continuar.";
+"Please connect to the internet and refresh app data." = "Conecte-se à Internet e atualize os dados do aplicativo.";
+"Order Submitted" = "Pedido submetido";
+"Submitting E-mail Order. Please wait..." = "Enviar formulário de pedido por email. Por favor, espere...";
+"Please complete or clear the order in progress before logging out." = "Complete ou limpe o pedido em andamento antes de sair.";
+
+"Please enter a valid date for your selected date format." = "Insira uma entrada de data válida para o formato de data selecionado.";
+"Input Date cannot be greater than current date." = "A data de entrada não pode ser posterior à data atual.";
+"Invalid date format." = "Formato de data inválido.";
+"Date of birth cannot be greater than current date." = "A data de nascimento não pode ser posterior à data atual.";
+"Are you sure you want to remove all animals from the order having some missing information?" = "Tem certeza de que deseja remover todos os animais do pedido com algumas informações ausentes?";
+"Are you sure you want to remove all animals having some missing information from the order?" = "Tem certeza de que deseja remover todos os animais que tenham alguma informação faltando no pedido?";
+"Collapse Form" = "Recolher formulário";
+"Expand Form" = "Expandir formulário";
+"This list will be deleted for other users as well who associated with this customer. Do you want to continue?" = "Esta lista será excluída para todos os usuários associados a este cliente. Você quer continuar?";
+"List deleted successfully." = "Lista excluída com sucesso.";
+"List created successfully." = "Lista criada com sucesso.";
+"Data Entry Mode is not enabled for Beef currently." = "O modo de entrada de dados não está habilitado para carne atualmente.";
+"Email List option is currently not available." = "A opção Lista de e-mail não está disponível no momento.";
+"animal(s) from list are already in the order. Please select action to be performed." = "animal (s) da lista já está no pedido. Selecione a ação a ser executada.";
+"Ignore" = "Ignorar";
+"Resolve" = "Resolver";
+"Animals imported into the order." = "Animais importados para o pedido.";
+"No lists available for this customer." = "Nenhuma lista disponível para este cliente.";
+"List cannot be deleted as it is currently being used in an order." = "A lista não pode ser excluída porque está sendo usada em um pedido.";
+"Please select list to import." = "Selecione a lista para importar.";
+"This list will be deleted for all the users associated with this customer. Do you want to continue?" = "Esta lista será excluída para todos os usuários associados a este cliente. Você quer continuar?";
+
+"Are you sure you want to clear the list?" = "Tem certeza de que deseja limpar a lista?";
+"No animals added to the order." = "Nenhum animal adicionado ao pedido.";
+"animal(s) from list already added in the order. Please select action to be performed." = "animal (s) da lista já adicionado no pedido. Selecione a ação a ser executada.";
+"List saved successfully." = "Lista salva com sucesso.";
+"Import My List" = "Importar Minha Lista";
+
+
+"Select Breed Association" = "Selecionar Associação de Raça";
+"Are you sure you want to remove animal from the list?" = "Tem certeza de que deseja remover o animal da lista?";
+"Animal removed from the list successfully" = "Animal removido da lista com sucesso.";
+"No" = "Não";
+"Yes" = "Sim";
+"NO" = "NÃO";
+"YES" = "SIM";
+"Product selection will be cleared if you want to import list. Do you want to continue?" = "A seleção do produto será desmarcada se você quiser importar a lista. Você quer continuar?";
+"Removing list will remove its animals from the order as well. Do you want to continue?" = "A remoção da lista também removerá seus animais do pedido. Você quer continuar?";
+"No animals added in the list." = "Nenhum animal adicionado na lista.";
+"Please enter a list name." = "Por favor, insira um nome para a lista.";
+"Animal Tag" = "Tatuagem Animal";
+"Select Primary Breed Genotype" = "Selecione Genótipo Raça primária";
+"Select Secondary Breed Genotype" = "Selecione Genótipo Raça Secundária";
+"Select Tertiary Breed Genotype" = "Selecione Genótipo Raça Terciária";
+"Animal data cannot be loaded as animal has been saved for different product." = "Os dados do animal não podem ser carregados, pois o animal foi salvo para outro produto.";
+
+" list(s) for this customer have updated records. Please select action to proceed." = " lista (s) para este cliente têm registros atualizados. Selecione a ação para prosseguir.";
+"Keep server" = "Manter servidor";
+"Keep local" = "Mantenha o local";
+"Please connect to the internet to email list." = "Conecte-se à Internet para a lista de e-mail.";
+"List can only be deleted online. You cannot delete the list offline." = "A lista só pode ser excluída online. Você não pode excluir a lista offline.";
+"You will receive an email with the data you entered in the app. You can copy paste this data into an order form." = "Você receberá um e-mail com os dados inseridos no aplicativo. Você pode copiar e colar esses dados em um formulário de pedido.";
+"This list will be deleted for all the users associated with this customer. Do you want to continue?" = "Esta lista será excluída para todos os usuários associados a este cliente. Você quer continuar?";
+"Please connect to the internet to email the list." = "Conecte-se à Internet para enviar a lista por e-mail.";
+"Invalid E-Mail or Password" = "E-mail ou senha inválida";
+"Please select at least one list." = "Por favor selecione pelo menos uma lista.";
+"RGN" = "RGN/Nº de registro";
+"RGD or Animal ID" = "Identificação na fazenda";
+"Series" = "Série/Livro";
+"Ear Tag" = "Etiqueta auricular";
+"You will receive an email with the data you entered in the app." = "Você receberá um e-mail com os dados inseridos no aplicativo.";
+
+
+"clear_filter" = "Filtros claros";
+"notes" = "o comentário";
+"add_note" = "Adicionar nota";
+"add_photo" = "Adicionar fotos";
+"not_assigned" = "Não atribuído";
+"group_created" = "Grupo criado com sucesso";
+"search_animal_id" = "Pesquisa por ID Animal";
+"Enter Group Name" = "Digite o nome do grupo";
+"Group Name" = "Nome do grupo";
+"Enter Group Description" = "Insira a descrição do grupo";
+"group_desc" = "descrição do grupo";
+"group_type" = "Tipo de Grupo";
+ "Filter 1:" = "Filtro 1:";
+"Filter 2:" = "Filtro 2:";
+
+
+"Total Animals" = "Total de animais: %d";
+"photo" = "Foto";
+"Provider" = "o Provedor";
+"breed" ="Raça";
+"date_range" = "Intervalo de Datas";
+"Sex" = "Sexo";
+"Male" = "Macho";
+"Female" = "Fêmea";
+"hide"= "<u>Esconder</u>";
+"coming_soon" = "Em breve";
+"Data Loading..." = "Carregando Dados…";
+"No Data" = "Sem dados";
+"No results available for this customer."="Nenhum resultado disponível para este cliente.";
+"No Clarifide CDCB results available for this customer." = "Nenhum resultado do Clarifide CDCB disponível para este cliente.";
+"Animal data download in progress. \n Currently \(doubleStr)% Completed" = "Download de dados de animais em andamento. \n Atualmente \(doubleStr)% concluído";
+"LOAD AVAILABLE" = "Carga Disponível";
+"CONTINUE DOWNLOADING" = "Continue baixando";
+"delete_group" = "Os grupos só podem ser excluídos online. Você não pode excluir o grupo offline.";
+"Please connect to the internet to email the group." = "Conecte-se à Internet para enviar um e-mail ao grupo.";
+"change_group" = "Os grupos só podem ser ativados online. Você não pode atualizar o grupo offline.";
+"This Group will be deleted for all the users associated with this customer. Do you want to continue?" = "Este grupo será excluído para todos os usuários associados a este cliente. Você quer continuar?";
+"Are you sure you want to make this group active?" = "Tem certeza de que deseja tornar este grupo ativo?";
+"Group deleted successfully." = "Grupo excluído com sucesso.";
+"Group created successfully" = "Grupo criado com sucesso";
+"Group details emailed successfully" = "Detalhes do grupo enviados com sucesso.";
+"Group cannot be created as already one active group exists of this group type." = "O grupo não pode ser criado porque já existe um grupo ativo deste tipo de grupo.";
+"Group cannot be created as group already exist by the same name." = "O grupo não pode ser criado porque já existe um grupo com o mesmo nome.";
+"No active barn group exists." = "Não existe nenhum grupo de celeiro ativo.";
+"No active dollar group exists." = "Nenhum grupo de dólar ativo existe.";
+"inactive_group" = "O grupo está inativo.";
+"not_complete" = "Detalhes completos do resultado não disponíveis.";
+"photo_internet" = "Você não está conectado à internet. A foto não pode ser salva.";
+"notes_internet" = "Você não está conectado à internet. As notas não podem ser salvas.";
+"select_photo" = "Selecione a foto para enviar.";
+"result_type" = "Tipo de Resultado";
+"eval_date" = "Data de avaliação";
+"Group" = "Grupo";
+"group_label" = "Grupo:";
+"notes_success" = "Notas adicionadas com sucesso.";
+"photo_success" = "Foto enviada com sucesso.";
+"image_deleted" = "Imagem excluída";
+"Delete" = "Excluir";
+"replace" = "Substituir";
+"sync_results" = "Sincronizando dados de resultados";
+"Group_Status :" = "Status do grupo :";
+"Active" = "Activo";
+"Inactive" = "Inativo";
+"Please enter a group name." = "Este campo não pode estar vazio.";
+"Syncing results data..." = "Sincronizando dados de resultados..";
+
+"Please select at least one checkbox to submit."= "Selecione pelo menos uma caixa de seleção para enviar.";
+
+
+"connecting" = "Conectando";
+"bt_not_enabled" = "O Bluetooth não está ativado.";
+"select_device" = "Selecione um dispositivo para conectar";
+"none_paired" = "Nenhum dispositivo foi emparelhado.";
+"none_found" = "Nenhum dispositivo encontrado.";
+"title_paired_devices" = "Dispositivos emparelhados";
+"Group can only be deleted online.you cannot delete the group online." = "Os grupos só podem ser excluídos online. Você não pode excluir o grupo offline.";
+"Not Connected with Internet!" = "Não está conectado à internet!";
+"Please connect to the internet to email the group." = "Conecte-se à Internet para enviar um e-mail ao grupo.";
+
+
+"The SireID cannot be the same as the Official ID or the On Farm ID." = "O ID do Touro não pode ser o mesmo que o Official ID ou identificação do animal na fazenda.";
+"SCAN_BARCODE_TITLE" = "Digitalizar código de barras";
+"BUTTON_CLOSE" = "Fechar";
+"BUTTON_SETTINGS" = "Configurações";
+"INFO_DESCRIPTION_TEXT" = "Coloque o código de barras dentro da janela para digitalizar. A busca começará automaticamente.";
+"INFO_LOADING_TITLE" = "Procurando pelo seu produto...";
+"NO_PRODUCT_ERROR_TITLE" = "Nenhum produto encontrado.";
+"ASK_FOR_PERMISSION_TEXT" = "Para escanear os códigos de barras você deve permitir acesso a câmera nas configurações.";
+
+"Can't copy Official ID to barcode - Official ID is not an 840 number." = "Não é possível copiar a ID oficial para o código de barras - a ID oficial não é um número 840.";
+"No associated provider or product found for the customer in the app."="Nenhum fornecedor ou produto associado encontrado para o cliente no aplicativo.";
+"Sample already exists in previous order."="A amostra já existe no pedido anterior.";
+"Sample already exists in a list."= "A amostra já existe em uma lista.";
+
+"Please Add valid Country Code at the beginning" = "Adicione um código de país válido de duas letras (%@) no início.";
+
+// MARK: - Data Sample Collectors
+"Order Sample Collectors" = "Coletores de amostras de pedidos";
+"How many sample collectors do you need?" = "Quantos coletores precisa?";
+"Please enter" = "Por favor, insira";
+"Please enter your address" = "Por favor, insira o endereço para receber os coletores";
+"Address Block" = "Endereço";
+"City" = "Cidade";
+"Zip Code" = "CEP";
+"Cancel" = "Cancelar";
+"Submit" = "Enviar";
+"Order Collectors" = "Solicitar Coletores";
+"Please enter sample collectors." = "Insira os coletores de amostra.";
+"Please enter address block." = "Por favor, insira o bloco de endereço.";
+"Please enter city." = "Por favor, insira a cidade.";
+"Please enter zip code." = "Por favor, insira o CEP.";
+"Order for sample collectors has been submitted successfully." = "O pedido para coletores de amostras foi enviado com sucesso.";
+"Additional Resources" = "Recursos Adicionais";
+
+
+
+"Find My Animal" = "Encontre meu animal";
+"Sort By:" = "Ordenar por:";
+"Clear All" = "Limpar tudo";
+"Add Animal(s)" = "Adicionar Animal(s)";
+"On-Farm ID" = "ID na fazenda";
+"Official ID" = "ID oficial";
+
+
+"Date Range" = "Intervalo de Datas";
+"Start Date" = "Data de início";
+"End Date" = "Data final";
+"Sex" = "Sexo";
+"DOB" = "DOB";
+"Breed" = "Raça";
+"Duplicate barcode entry" = "Entrada de código de barras duplicada";
+"Sample barcode already exists in previous order" = "O código de barras de amostra já existe no pedido anterior";
+"Clear Filters" = "Filtros claros";
+"Please Enter Barcode" = "Por favor insira o código de barras";
+"Update" = "Atualizar";
+"Hair" = "pêlo";
+
+// Ankur
+"Genotype Only" = "Genotipagem";
+"Animal(s) in the list do not have the barcode, Please review the cart to update the animal record(s)." = "%d Animal(es) na lista não tem o código de barras, revise o carrinho para atualizar o(s) registro(s) do animal";
+
+"Dairy" = "gado de leite";
+"Beef" = "gado de corte";
+"Sheep" = "Ovino";
+"Data Entry Mode" = "Modo de entrada de dados";
+"Results" = "Resultados";
+ "Place an Order"= "Envie um pedido";
+"Ordering Add Animal(s)"= "Pedido Adicionar Animal";
+
+
+"When enabled, keyboard will be persisted while screen scrolling and when disabled, keyboard will close while scrolling the screen." = "When enabled, keyboard will be persisted while screen scrolling and when disabled, keyboard will close while scrolling the screen.";
+"Hair" = "pêlo";
+"Girolando Association" = "Associação do Girolando";
+"Blood" = "sangue";
+"Semen" = "Sêmen";
+
+
+//Rajni
+"Girolando Association" = "Associação do Girolando";
+"Blood" = "sangue";
+"Semen" = "Sêmen";
+"Animal List" = "Lista de Animais";
+"Scan/Enter Official Tag #" = "Escanear/Inserir número oficial da etiqueta";
+"Will CLARIFIDE CDCB (US) products be added to this order?\n" = "Os produtos CLARIFIDE CDCB (US) serão adicionados a este pedido?";
+"Single" = "único";
+"ET" = "Transferência \n de embriões";
+"Multiple Birth" = "Nascimentos \n múltiplos";
+"Clone" = "Clone";
+"Internal" = "Interno";
+"Split Embryo" =  "Split Embryo";
+"Select List" = "Selecione a lista";
+"Matched On-Farm ID/Barcode" = "Coincide ID na fazenda/Código de barras";
+
+"Image Selection" = "Seleção de imagem";
+"From where you want to pick this image?" = "De onde você quer pegar esta imagem?";
+"Photo Library" = "Biblioteca de fotos";
+"Camera" = " Câmera";
+"App Status:" = "Status do aplicativo:";
+"Please enter your Password." = "Por favor, insira sua senha.";
+"Please enter your E-mail and Password." = "Por favor entre com seu e-mail e senha";
+"Add-On Products" = "Produtos complementares";
+"Order Acceptance Terms" = "Termos de aceitação de pedidos";
+"Resend validation code" = "Reenviar código de validação";
+"Select Breed Herd" = "Selecione o rebanho da raça";
+"Primary\nBreed" = "Raça\nPrimária";
+"Secondary\nBreed" = "Raça\nSecundária";
+"Tertiary\nBreed" = "Raça\nTerciária";
+"Next" = "Próximo";
+"Previous" = "Anterior";
+"Done" = "Concluído";
+"View By" = "Visto por";
+"Product" = "Produto";
+"Review Order" = "Revisar pedido";
+"Select Billing Contact" = "Selecionar contato de cobrança";
+"Search" = "Procurar";
+"Search..." = "Procurar...";
+"Sort By" = "Ordenar por";
+"Back" = "<Para trás";
+"Scan/Insert sample barcode" = "Escanear/Inserir código de barras da amostra";
+"Enter EID" = "Digite EID";
+"Enter Secondary ID" = "Digite o ID secundário";
+"Date of Birth" = "Data de nascimento";
+"Enter Breed Registration Number" = "Digite o número de registro da raça";
+"Enter dam ID" = "Digite o ID da barragem";
+"Enter Sire Registration Number" = "Digite o número de registro do pai";
+"Sire Year of Birth" = "Ano de Nascimento";
+"Dam Year of Birth" = "Ano da Barragem de Nascimento";
+"Add Another Animal" = "Adicionar outro animal";
+"Review Data" = "Dados de revisão";
+"Enter Animal Name" =  "Digite o nome do animal";
+"Enter Dam registration number" = "Digite o número de registro da barragem";
+"No animals added in order." = "Nenhum animal adicionado em ordem.";
+"Cart" = "Carrinho";
+"Scanning/Entering an Official ID" = "Escaneando / Inserindo um ID Oficial";
+"Check your spam/trash folder for device validation email." = "Verifique sua pasta de spam / lixo para o e-mail de validação do dispositivo.";
+"Show me Contact Consumer Service Actions" = "Mostre-me Contato Ações de Atendimento ao Consumidor";
+"Show me Contact Breed Society Actions" = "Mostre-me as ações da sociedade de raças";
+"Show Actions I Can Act Upon" = "Mostra le azioni su cui posso agire";
+"Show Me Failed Samples" = "Mostre-me amostras com falha";
+"Show All" = "Mostre tudo";
+"Show me Parentage Corrections" = "Mostre-me correções de pais";
+"Show me Genomic Corrections" = "Mostre-me correções genômicas";
+"Show Me All" = "Mostre-me tudo";
+"Apply" = "Aplicar" ;
+"Data Sent:" = "Data Enviada:";
+"List of animals below have missing information:" = "A lista de animais abaixo não contém informações:";
+"Remove All" = "Deletar tudo";
+"List" = "Lista";
+"Animal Tag/Tattoo" = "Tatuagem Animal";
+"Ordering Product Selection(s)" = "Pedido de seleção de produtos";
+"Apply to Entire Order" = "Aplicar a todo o pedido";
+"Billing Contact:" = "Contato de cobrança:";
+"BVDV Selection Conflict" = "Conflito de seleção BVDV";
+"BVDV product selection cannot be done as: " = "A seleção do produto BVDV não pode ser feita como:";
+"Animal in order has sample type other than Allflex (TSU), Allflex (TST) or Caisley (TSU)" = " %d O animal em ordem tem um tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU)";
+"Portuguese" = "Português";
+"English" = "Inglês";
+"Italian" = "Italiano";
+" Enter List Description" = " Insira a descrição da lista";
+"Camera" = "Câmera";
+"Photo Library" = "Biblioteca de fotos";
+"Reported" = "Reportado";
+"Filter" = "Filtro";
+"Sample Tracking" = "Rastreamento da amostra";
+"Action Needed" = "Ação necessária";
+"Package Received" = "Amostras recebidas";
+"In_Progress" = "Em andamento(%d)";
+"Action_Required" = "Ação requerida(%d)";
+"Order Defaults" = "Padrões de pedidos";
+"Nominator" = "Indicador";
+"The Following products are bundled with this:" = "Os Seguintes Produtos estão incluidos neste:";
+"\nZoetis Evaluation Supports the following breeds (HO, JE)" =  "\nAvaliação Zoetis Suporta as seguintes raças (HO, JE)";
+"For information on list pricing of products, please visit the following web page. Pricing" = "Para obter informações sobre preços de lista de produtos, visite a seguinte página da web. Preços";
+"Select list from below" = "Selecione a lista abaixo";
+"Edit" = "    Editar";
+"View Add-On's" = "Ver complementos";
+"My Herd Results" = "Resultados do meu rebanho";
+"My Management Groups" = "Meus Grupos de Gestão";
+"Create Group" = "Criar Grupo";
+"Enter Group Name" = "Digite o nome do grupo";
+"Group Details" = "Detalhes do Grupo";
+"Data Entry Mode - Help" = "Modo de entrada de dados - Ajuda";
+"Acknowledge" = "Reconhecer";
+"Data Entry Mode is a focussed mode that allows you to associate an animal ID to a barcode and then email it to yourself to complete an order later." = "O modo de entrada de dados é um modo focado que permite associar a identificação de um animal a um código de barras e enviá-lo por e-mail para você mesmo para concluir um pedido mais tarde.";
+"Animal data previously provided will be added in the email output." = " Os dados do animal fornecidos anteriormente serão adicionados na saída do e-mail.";
+"For the best experience, use a device that can scan an ID (RFID or Mobile Camera (OCR)) and a sample barcode collector." = "Para obter a melhor experiência, use um dispositivo que possa digitalizar um ID (RFID ou câmera móvel (OCR)) e um coletor de código de barras de amostra.";
+"Select Scanner Type" = "Selecione o tipo de scanner";
+"Create New List" = "Criar nova lista";
+"Data Entry Mode - List" = "Modo de entrada de dados - lista";
+"Merge List" = "Lista de mesclagem";
+"Enter List Name" = "Digite o nome da lista";
+"Save List"  = "Salvar lista";
+"Total Animals Added :" = "Total de animais adicionados :";
+"Imported list(s)" = "Lista importada (s)";
+"Matched 840 ID/Barcode" = "Coincide ID 840/Código de barras";
+"Import From List" = "Importar da lista";
+"Sample Count" = "Contagem da amostra";
+"Order Default" = "Ordem Padrão";
+"Animal" = "Animal";
+"I agree to the Acceptance and Authorization, Warranty and Indemnification and Data Usage Policies." = "Concordo com as Políticas de Aceitação e Autorização, Garantia e Indenização e Uso de Dados.";
+"Select list from below" = "Selecione a lista abaixo";
+"Select Billing Contact" = "Selecionar contato de cobrança";
+"Please enter your  E-Mail." = "Por favor introduza o seu e-mail.";
+"Enter E-Mail" = "Digite o email";
+"Password" = "Senha";
+"SIGN IN" = "ENTRAR";
+"Customer Support" = "Suporte ao cliente";
+"Are you sure you want to delete the last animal? Clicking YES will delete the list as well along with the last animal." = "Are you sure you want to delete the last animal? Clicking YES will delete the list as well along with the last animal.";
+"Clear List" = "Carrinho lista";
+"Scan/Enter Sample Barcode" = "Escanear / Inserir código de barras da amostra";
+"Multiple Breeds" = "Multiple Breeds";
+"Are you sure you want to clear the list? Clicking YES will delete the list as well." = "Are you sure you want to clear the list? Clicking YES will delete the list as well.";
+//BVDV MSG
+
+"BVDV must be applied to the entire order. The product(s) you selected is not compatible with BVDV as an add-on. Please change the base product or remove animals from order." = "O BVDV deve ser aplicado a todo o pedido. O(s) produto(s) selecionado(s) não é(são) compatível(is) com o BVDV como complemento. Por favor, altere o produto base ou remova os animais do pedido.";
+
+"BVDV is already applied to the entire order. The product(s) you are selecting are not compatible with BVDV as an add-on. Please change the base product or remove animals from order." = "O BVDV já está aplicado a todo o pedido. O(s) produto(s) que você está selecionando não
+são compatíveis com o BVDV como complemento. Por favor, altere o produto base ou
+remova os animais do pedido.";
+
+"animals have the Sample Type other than Allflex (TSU), Allflex (TST) or Caisley (TSU) and the sample type is not compatible with BVDV testing. Please update the sample type or click on continue to remove all such animals from the order." = "%d Os animais têm o tipo de amostra diferente de Allflex (TSU), Allflex (TST) ou Caisley (TSU) e o tipo de amostra não é compatível com o teste BVDV. Atualize o tipo de amostra ou clique em continuar para remover todos os animais do pedido.";
+
+"animals removed from order." = "%d animais retirados da ordem.";
+
+"BVDV will be applied to the entire order." = "O BVDV será aplicado a todo o pedido.";
+"Continue" = "Continuar";
+"Continue to Product Selection" = "Continuar para a seleção de produtos";
+"< Back" = "< Para trás";
+"Email Cart" = "Carrinho de farinha";
+
+"Please enter a valid 17 character Official ID" = "Insira um ID oficial válido de 17 caracteres.";
+"No Image Available" = "Nenhuma imagem disponível";
+"Recently searched animals" = "Animais pesquisados recentemente";
+"This field cannot be empty." = "Este campo não pode ficar vazio.";
+"By Animal" = "Por Animal";
+"By Filter" = "Por filtro";
+"Search By EarTag" =  "Pesquisar por etiqueta auricular";
+"Search By Official ID" = "Pesquisar por ID Oficial";
+"Notes" = "Notas";
+"Please enter at least 3 characters." =  "Por favor insira pelo menos 3 caracteres";
+"No Notes Available" = "Nenhuma nota disponível";
+"notes" = "Notas";
+"Searching..." = "Procurando...";
+"We have found multiple results for this animal. Which one do you wish to see?"= "Encontramos vários resultados para este animal. Qual você deseja ver?";
+"Downloading app help images.Please wait.." = "Baixando imagens de ajuda do aplicativo. Aguarde..";
+
+"Menu" = "Cardápio";
+"Place an Order: Ordering Add Animal(s) Dairy" = "Fazer um pedido: pedidos e animais) laticínios";
+"Place an Order: Ordering Add Animal(s) Beef" = "Faça um pedido: pedidos e animais) Carne";
+"Place an Order: Ordering Defaults" = "Faça um pedido: padrões de pedido";
+"Actions Required" = "Ação requerida";
+"Track Samples" = "Amostras em processamento";
+"Downloading app help images.Please wait.." = "Baixando imagens de ajuda do aplicativo. Aguarde..";
+"In case of Blockyard Enrollment, data entry mode is disabled." = "No caso de Blockyard Enrollment, o modo de entrada de dados fica desabilitado.";
+"Match Unique ID/ Barcode" = "Corresponder ID/código de barras exclusivo";
+"Enter Visual ID" = "Insira o ID visual";
+"Enter Unique ID" = "Insira o ID exclusivo";
+"Matched Unique ID/Barcode" = "ID/código de barras exclusivo correspondente";
+"Please enter Unique id before selecting 'Matched Unique ID/Barcode'." = "Insira o ID exclusivo antes de selecionar 'ID/código de barras exclusivo correspondente'.";
+
+"Order submitted to Blockyard was unsuccessful. Please reference CSV file emailed to you for manual upload into Blockyard Web." = "O pedido enviado ao Blockyard não foi bem-sucedido. Consulte o arquivo CSV enviado a você por e-mail para upload manual no Blockyard Web.";
+"Blockyard user not found. Please contact Customer support and reference CSV file emailed to you for manual upload." = "Usuário Blockyard não encontrado. Entre em contato com o suporte ao cliente e faça referência ao arquivo CSV enviado a você por e-mail para upload manual.";
+"Order from Blockyard was unsuccessful. Please log into blockyard and check account settings for a connected Zoetis Genetics account." = "O pedido do Blockyard não foi bem-sucedido. Faça login no Blockyard e verifique as configurações da conta Zoetis Genetics conectada.";
+"Order request has no data." = "A solicitação de pedido não contém dados.";
+"Order submitted to Blockyard was unsuccessful." = "O pedido enviado à Blockyard não teve êxito.";
+"Unique ID length should be 15 or 16 characters." = "O comprimento do ID exclusivo deve ter 15 ou 16 caracteres.";
+"Turn on Flashlight" = "Ligue a lanterna";
+"Turn off Flashlight" = "Desligar lanterna";
+"Unique ID" = "ID único";
+"Submit Order to Blockyard" = "Enviar pedido para Blockyard";
+"We found multiple results for this Ear Tag.Please select the result details from the list below." = "Encontramos vários resultados para esta etiqueta auricular. Selecione os detalhes do resultado na lista abaixo.";
+"Animal(s) in the cart do not have the valid Unique ID. Please review the cart to update the animal record(s)." = "%d Os animais no carrinho não possuem ID exclusivo válido. Revise o carrinho para atualizar o(s) registro(s) do(s) animal(is).";
+"Retrieve" = "Recuperar";
+"Overwrite" = "Substituir";
+"Animal record(s) removed from list successfully."= "Registro(s) de animais removido(s) da lista com sucesso.";
+"Animal(s) in the cart do not have the barcode, Please review the cart to update the animal record(s)." = "%d O(s) Animal(is) no carrinho não possuem o código de barras, revise o carrinho para atualizar o(s) registro(s) do(s) animal(is).";
+"Add Dealer Code" = "Adicionar código do revendedor";
+"Enter the Dealer Code" = "Digite o código do revendedor";
+"Animal(s) in the cart do not have the Ear Tag, Please review the cart to update the animal record(s)." = "%d O(s) animal(es) no carrinho não possuem a etiqueta auricular, revise o carrinho para atualizar o(s) registro(s) do(s) animal(is).";
+"Your device is running low on memory. To prevent performance issues or disruptions, please close unused apps or free up storage space." = "Seu dispositivo está com pouca memória. Para evitar problemas de desempenho ou interrupções, feche os aplicativos não utilizados ou libere espaço de armazenamento.";
+"The animal you are searching for does not have results yet. The sample might still be in progress, or there may be an action required." = "O animal que você está procurando ainda não tem resultados. A amostra pode estar em andamento ou pode ser necessária uma ação.";
