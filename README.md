@@ -1,2 +1,0 @@
-# SearchPoint_IOS
-
