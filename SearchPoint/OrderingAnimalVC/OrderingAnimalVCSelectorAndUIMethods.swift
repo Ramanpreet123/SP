@@ -799,10 +799,10 @@ extension OrderingAnimalVC {
         
         if dateStr == "MM" {
             formatter.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             formatter.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         setUPCollectionView()

@@ -21,7 +21,7 @@ class DataEntryBeefViewAnimalController: UIViewController {
     @IBOutlet weak var networkImgStatus: UIImageView!
     @IBOutlet weak var notificationLblCount: UILabel!
     @IBOutlet weak var cartTitle: UILabel!
-    @IBOutlet weak var APPsTATUSlbl: UILabel!
+    @IBOutlet weak var appStatusTitleLabel: UILabel!
     @IBOutlet weak var noAnimalToast: UILabel!
     @IBOutlet weak var clearOrderOutlet: UIButton!
     @IBOutlet weak var offlineBtnOutlet: UIButton!
@@ -68,7 +68,7 @@ class DataEntryBeefViewAnimalController: UIViewController {
         noAnimalToast.text = LocalizedStrings.noAnimalAdded.localized
         cartTitle.text = "List".localized
         bckBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.backBtnText, comment: ""), for: .normal)
-        APPsTATUSlbl.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
+        appStatusTitleLabel.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
         UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncrementalClear.rawValue)
     }
     

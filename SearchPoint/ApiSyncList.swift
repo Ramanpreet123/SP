@@ -258,7 +258,7 @@ class ApiSyncList: NSObject {
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-        var urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
+        let urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
         
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
@@ -413,7 +413,7 @@ class ApiSyncList: NSObject {
     print(json!)
     let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
     let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-    var urlString = Configuration.Dev(packet: ApiKeys.saveUpdateLists.rawValue).getUrl()
+      let urlString = Configuration.Dev(packet: ApiKeys.saveUpdateLists.rawValue).getUrl()
     var request = URLRequest(url: URL(string: urlString)! )
     request.httpMethod = "POST"
     request.allHTTPHeaderFields = headerDict
@@ -636,7 +636,7 @@ class ApiSyncList: NSObject {
         
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-        var urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
+        let urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
        
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
@@ -711,7 +711,7 @@ class ApiSyncList: NSObject {
         
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-        var urlString = Configuration.Dev(packet: ApiKeys.emailMeList.rawValue).getUrl()
+        let urlString = Configuration.Dev(packet: ApiKeys.emailMeList.rawValue).getUrl()
        
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"

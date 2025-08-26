@@ -117,7 +117,7 @@ class ResulyByPageViewModel {
         }
         
         return [keyValue.customerId.rawValue:activeCustomerId,
-                keyValue.providerId.rawValue:providerIndexPath,"breedList":resultBreedIb.components(separatedBy: ","),
+                keyValue.providerIdText.rawValue:providerIndexPath,"breedList":resultBreedIb.components(separatedBy: ","),
                 "gender": sex,keyValue.fromdate.rawValue:datefrom,"toDate":dateto,"pageNumber":pageNumberIncrese,"pageSize":50,"indexName":traidstting,"orderByAscending": sortorder]
         
     }
@@ -401,7 +401,7 @@ class ResulyByPageViewModeliPad {
         }
         
         return [keyValue.customerId.rawValue:currentCustomerId as Any,
-                keyValue.providerId.rawValue:providerIndexPath,"breedList":resultBreedIb.components(separatedBy: ","),
+                keyValue.providerIdText.rawValue:providerIndexPath,"breedList":resultBreedIb.components(separatedBy: ","),
                 "gender": sex,keyValue.fromdate.rawValue:datefrom,"toDate":dateto,"pageNumber":pageNumberIncrese,"pageSize":50,"indexName":traidstting,"orderByAscending": sortorder]
         
     }

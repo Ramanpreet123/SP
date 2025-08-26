@@ -47,7 +47,7 @@ class BillingTableViewDelegate:NSObject, UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserDefaults.standard.set(farmAddr[indexPath.row].contactName, forKey: keyValue.farmValue.rawValue)
         UserDefaults.standard.set(farmAddr[indexPath.row].billToCustId, forKey: keyValue.billToCustomerId.rawValue)
-        delegate.UpdateUI(SelectedBillingCustomer: farmAddr[indexPath.row])
+        delegate.updateUI(selectedBillingCustomer: farmAddr[indexPath.row])
         tableView.reloadData()
     }
 }

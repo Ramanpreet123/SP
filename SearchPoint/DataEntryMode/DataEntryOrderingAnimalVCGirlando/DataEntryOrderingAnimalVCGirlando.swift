@@ -498,10 +498,10 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         animalId1 = 0

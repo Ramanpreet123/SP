@@ -46,7 +46,6 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
     var aTag:String!
     var pid = Int()
     var fethData:NSArray!
-    var farmId = Int()
     var barCodeId = Int()
     var animaId = Int()
     var clickOnDropDown = String()
@@ -604,7 +603,7 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 cell.nominatorTitle.isHidden = false
                 cell.nominatorLbl.isHidden = false
             }
-            updateUI()
+            updateUIForButtonTitle()
             return cell
         }
         
@@ -2026,7 +2025,7 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
         customPopView.removeFromSuperview()
     }
     
-    func UpdateUI(SelectedBillingCustomer: GetBillingContact) {
+    func updateUI(selectedBillingCustomer: GetBillingContact) {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let filterArr = self.farmAddr.filter({$0.isDefault })
@@ -2034,14 +2033,14 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: false, billcustomerId: filterArr[0].billToCustId ?? "0", billcustomerName: filterArr[0].contactName ?? "")
                     
                 }
-                UserDefaults.standard.set(SelectedBillingCustomer.contactName, forKey: "farmValue")
-                UserDefaults.standard.set(SelectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
+                UserDefaults.standard.set(selectedBillingCustomer.contactName, forKey: "farmValue")
+                UserDefaults.standard.set(selectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
                 
-                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: SelectedBillingCustomer.billToCustId ?? "0", billcustomerName: SelectedBillingCustomer.contactName ?? "")
+                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: selectedBillingCustomer.billToCustId ?? "0", billcustomerName: selectedBillingCustomer.contactName ?? "")
                 
                 self.farmAddr = fetchBillingCustomer(entityName: "GetBillingContact",customerID: self.custmerId) as! [GetBillingContact]
                 
-                let attributeString = NSMutableAttributedString(string: SelectedBillingCustomer.contactName ?? "", attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: selectedBillingCustomer.contactName ?? "", attributes: self.attrs)
                 cell.billingBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 
             }
@@ -2050,7 +2049,7 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
         }
         
     }
-    func updateUI() {
+    func updateUIForButtonTitle() {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let attributeString = NSMutableAttributedString(string: (UserDefaults.standard.value(forKey: "farmValue") as? String ?? ""),

@@ -20,7 +20,7 @@ class BeefViewAnimalVC: UIViewController {
     @IBOutlet weak var networkImgStatus: UIImageView!
     @IBOutlet weak var notificationLblCount: UILabel!
     @IBOutlet weak var cartTitle: UILabel!
-    @IBOutlet weak var APPsTATUSlbl: UILabel!
+    @IBOutlet weak var appStatusTitleLabel: UILabel!
     @IBOutlet weak var noAnimalToast: UILabel!
     @IBOutlet weak var clearOrderOutlet: UIButton!
     @IBOutlet weak var offlineBtnOutlet: UIButton!
@@ -73,7 +73,7 @@ class BeefViewAnimalVC: UIViewController {
         cartTitle.text = "Cart".localized
         clearOrderOutlet.setTitle("Clear Cart".localized, for: .normal)
         bckBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.backBtnText, comment: ""), for: .normal)
-        APPsTATUSlbl.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
+        appStatusTitleLabel.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
         continuetoOrderOutlet.setTitle(ButtonTitles.continueProdSelection.localized, for: .normal)
         UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncrementalClear.rawValue)
     }

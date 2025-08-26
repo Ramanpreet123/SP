@@ -123,7 +123,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
     var aTag:Int!
     var pid = Int()
     var fethData:NSArray!
-    var farmId = Int()
+    var farmIdValue = Int()
     var barCodeId = Int()
     var animaId = Int()
     var clickOnDropDown = String()
@@ -305,14 +305,14 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
             if self.clickOnDropDown == NSLocalizedString("On-Farm ID", comment: ""){
                 UserDefaults.standard.set(keyValue.farmId.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
-                if self.farmId == 0{
+                if self.farmIdValue == 0{
                     
                     self.fethData =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity,asending:true,status: "true", orderStatus: "false", orderId: self.orderId, userId: self.userId, farmId: self.serchTextField.text!)
                     
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
                     
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
-                    self.farmId = 1
+                    self.farmIdValue = 1
                     
                 }
                 else{
@@ -320,7 +320,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                     
                     self.fethData =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity,asending:false,status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId, farmId: self.serchTextField.text!)
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.farmId = 0
+                    self.farmIdValue = 0
                 }
                 
             }
@@ -1060,14 +1060,14 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
     @IBAction func dropAction(_ sender: UIButton) {
         
         if self.clickOnDropDown == NSLocalizedString("On-Farm ID", comment: ""){
-            if self.farmId == 0{
+            if self.farmIdValue == 0{
                 
                 self.fethData =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity,asending:true,status: "true", orderStatus: "false", orderId: orderId, userId: userId, farmId: serchTextField.text!)
                 
                 self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
                 
                 dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
-                self.farmId = 1
+                self.farmIdValue = 1
                 
             }
             else{
@@ -1075,7 +1075,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 
                 self.fethData =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity,asending:false,status: "true", orderStatus: "false", orderId: orderId,userId:userId, farmId: serchTextField.text!)
                 self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                self.farmId = 0
+                self.farmIdValue = 0
             }
             
         }
@@ -1756,7 +1756,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         customPopView.removeFromSuperview()
     }
     
-    func UpdateUI(SelectedBillingCustomer: GetBillingContact) {
+    func updateUI(selectedBillingCustomer: GetBillingContact) {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let filterArr = self.farmAddr.filter({$0.isDefault })
@@ -1764,14 +1764,14 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                     updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: false, billcustomerId: filterArr[0].billToCustId ?? "0", billcustomerName: filterArr[0].contactName ?? "")
                     
                 }
-                UserDefaults.standard.set(SelectedBillingCustomer.contactName, forKey: "farmValue")
-                UserDefaults.standard.set(SelectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
+                UserDefaults.standard.set(selectedBillingCustomer.contactName, forKey: "farmValue")
+                UserDefaults.standard.set(selectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
                 
-                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: SelectedBillingCustomer.billToCustId ?? "0", billcustomerName: SelectedBillingCustomer.contactName ?? "")
+                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: selectedBillingCustomer.billToCustId ?? "0", billcustomerName: selectedBillingCustomer.contactName ?? "")
                 
                 self.farmAddr = fetchBillingCustomer(entityName: "GetBillingContact",customerID: self.custmerId) as! [GetBillingContact]
                 
-                let attributeString = NSMutableAttributedString(string: SelectedBillingCustomer.contactName ?? "", attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: selectedBillingCustomer.contactName ?? "", attributes: self.attrs)
                 cell.billingBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 
             }
@@ -1780,7 +1780,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         }
         
     }
-    func updateUI() {
+    func updateUIForButtonTitle() {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let attributeString = NSMutableAttributedString(string: (UserDefaults.standard.value(forKey: "farmValue") as? String ?? ""),

@@ -17,15 +17,6 @@ struct SaveListModel: Codable {
     var updateAnimals = [Animal]()
     var deleteAnimals = [Animal]()
 
-//    enum CodingKeys: String, CodingKey {
-//        case customerID = keyValue.customerId.rawValue
-//        case listName
-//        case saveListDescription = "description"
-//        case speciesID = "speciesId"
-//        case providerID = keyValue.providerId.rawValue
-//        case productID = keyValue.smallProductId.rawValue
-//        case addAnimals, updateAnimals, deleteAnimals
-//    }
      init() {
         
      }
@@ -44,7 +35,6 @@ struct Animal: Codable {
     var sex: String?
     var bornTypeId: Int?
     var nationalHerdId: String?
-    var sireId: String?
     var dob: String?
     var officialSireId : String?
     var officialDamId : String?
@@ -73,28 +63,5 @@ struct Animal: Codable {
     var tertiaryPriorityProgramId: String?
     var uniqueId : String?
 
-//    enum CodingKeys: String, CodingKey {
-//        case animalID, onFarmID, officialTag, sampleBarCode
-//        case speciesID = "speciesId"
-//        case breedID = keyValue.breedId.rawValue
-//        case sampleTypeID = "sampleTypeId"
-//        case sex
-//        case bornTypeID = "bornTypeId"
-//        case nationalHerdID = "nationalHerdId"
-//        case animalSireID = "sireId"
-//        case dob
-//        case officialSireID = "officialSireId"
-//        case officialDamID = "officialDamId"
-//        case earTag, animalTag, breedRegNumber
-//        case breedAssociationID = "breedAssociationId"
-//        case animalName, sireRegNumber
-//        case sireAssociationID = "sireAssociationId"
-//        case damRegNumber
-//        case damAssociationID = "damAssociationId"
-//        case sireID, sireNAAB, damID, mbc, breedRegistrationNumber, sireYOB
-//        case animalDamID = "damId"
-//        case damYOB, series, rgd, rgn
-//        case primaryPriorityProgramID = "primaryPriorityProgramId"
-//        case secondaryPriorityProgramID = "secondaryPriorityProgramId"
-//    }
+
 }

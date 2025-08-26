@@ -1395,7 +1395,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 let tissue = items  as? GetSampleTbl
                 let checkdefault  = tissue?.isDefault
                 
-                if checkdefault == true
+                if checkdefault ?? false
                 {
                     self.tissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
                     self.tissuId =  Int(tissue?.sampleId ?? 4)
@@ -1428,7 +1428,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let tissue = items  as? GetSampleTbl
             let checkdefault  = tissue?.isDefault
             
-            if checkdefault == true
+            if checkdefault ?? false
             {
                 genotypeTissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
                 tissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
@@ -1779,7 +1779,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let tissue = items  as? GetSampleTbl
             let checkdefault  = tissue?.isDefault
             
-            if checkdefault == true
+            if checkdefault ?? false
             {
                 genotypeTissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
                 tissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
@@ -1904,7 +1904,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         
         let identyCheck = UserDefaults.standard.value(forKey: keyValue.identifyStore.rawValue) as? Bool
         
-        if  identyCheck == false || identyCheck == nil{
+        if identyCheck != true{
             if data1.count > 0 {
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
                     if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
@@ -1936,7 +1936,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         navigateToBeefOrderingScreen()
                         
                     } else {
-                        if identyCheck == false || identyCheck == nil {
+                        if identyCheck != true {
                             if  UserDefaults.standard.value(forKey: keyValue.page.rawValue) == nil {
                                 self.navigateToBeefOrderingScreen()
                             }
@@ -1957,7 +1957,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         if success {
                             
                             let identyCheck = UserDefaults.standard.value(forKey: keyValue.identifyStore.rawValue) as? Bool
-                            if  identyCheck == true {
+                            if identyCheck ?? false {
                                 self.navigateToBeefOrderingScreen(screenType: 2)
                                 
                                 
@@ -2122,7 +2122,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         selectTitleLbl.text = NSLocalizedString("Select List", comment: "")
     }
     
-    func autoPop(animalData:NSArray) {
+    func autoPop(animalData:NSArray = [], genoAnimalData : NSArray = []) {
         if animalData.count > 0 {
             isautoPopulated = true
             barAutoPopu = true
@@ -2229,7 +2229,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             UserDefaults.standard.set(false, forKey: "isBarCodeIncrementalClear")
             
         }
-        if animalData.count > 0 {
+        else if genoAnimalData.count > 0 {
             isautoPopulated = true
             barAutoPopu = true
             updateOrder = true
@@ -2365,7 +2365,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                     let animalFetch = fetchAllDataWithAnimalId(entityName: "BeefAnimalMaster", animalId: self.idAnimal, customerID: self.custmerId)
-                    self.autoPop(animalData: animalFetch)
+                    self.autoPop(animalData: animalFetch, genoAnimalData: [])
                     self.barcodeEnable = false
                 }
                 alertController.addAction(okAction)
@@ -2378,7 +2378,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
       
         let selctionAuProvider = UserDefaults.standard.value(forKey: keyValue.clickAuProvider.rawValue) as? Bool
         
-        if selctionAuProvider == true {
+        if selctionAuProvider ?? false {
             if !isGenotypeOnlyAdded {
                 if serieTextfield.text == "" && rGNTextfield.text == "" && rGDTextfield.text == ""{
                     requiredflag = 0
@@ -2781,7 +2781,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         
         let animalData = fetchAnimaldataValidateAnimalTag(entityName: Entities.beefAnimalAddTblEntity, animalTag:scanBarcodeTextfield.text!, orderId: orderId, userId: userIdAddAnimal, animalId: animalId1)
         
-        if animalData.count > 0 {
+        incrementalBarCode = scanBarcodeTextfield.text ?? ""
+        
+        if animalData.count > 0  {
+            
             let existAnimalData = animalData.lastObject as! BeefAnimaladdTbl
             if existAnimalData.orderstatus == "true" &&
                (existAnimalData.date != dateVale ||
@@ -2793,7 +2796,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
                         let animalFetch = fetchAllDataWithAnimalId(entityName: "BeefAnimalMaster", animalId: self.idAnimal, customerID: self.custmerId)
-                        self.autoPop(animalData: animalFetch)
+                        self.autoPop(animalData: animalFetch, genoAnimalData: [])
                         self.barcodeEnable = false
                     }
                     alertController.addAction(okAction)
@@ -2802,11 +2805,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     self.scrolView.contentOffset.y = 0.0
                     return
             }
-        }
-        
-        incrementalBarCode = scanBarcodeTextfield.text ?? ""
-        
-        if animalData.count > 0  {
+            
             let data12333 =  fetchProductAdonDataStatusBVDV(entityName: Entities.subProductBeefTblEntity, adonId: "BVDV", status: "true",ordrId:orderId, customerID: custmerId)
             if data12333.count > 0 {
                 if  tissueBttn.titleLabel!.text! != "Allflex (TSU)" || tissueBttn.titleLabel!.text! != "Allflex (TST)" || tissueBttn.titleLabel!.text! != "Caisley (TSU)" {
@@ -3308,7 +3307,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
                         let animalFetch = fetchAllDataWithAnimalId(entityName: "BeefAnimalMaster", animalId: self.idAnimal, customerID: self.custmerId)
-                        self.autoPop(animalData: animalFetch)
+                        self.autoPop(animalData: [], genoAnimalData: animalFetch)
                         self.barcodeEnable = false
                     }
                     alertController.addAction(okAction)
@@ -3717,7 +3716,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         
         let identyCheck = UserDefaults.standard.value(forKey: keyValue.identifyStore.rawValue) as? Bool
         
-        if  identyCheck == false || identyCheck == nil{
+        if identyCheck != true {
             if data1.count > 0 {
                 if serieTextfield.text == "" && rGNTextfield.text == "" && rGDTextfield.text == ""{
                     requiredflag = 0
@@ -3766,7 +3765,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         if success {
                             
                             let identyCheck = UserDefaults.standard.value(forKey: keyValue.identifyStore.rawValue) as? Bool
-                            if  identyCheck == true {
+                            if identyCheck ?? false {
                                 self.navigateToBeefOrderingScreen(screenType: 2)
                                 
                             }  else {
@@ -4583,7 +4582,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     let tissue = items  as? GetSampleTbl
                     let checkdefault  = tissue?.isDefault
                     
-                    if checkdefault == true
+                    if checkdefault ?? false
                     {
                         self.genotypeTissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
                         self.tissuId =  Int(tissue?.sampleId ?? 4)
@@ -5692,13 +5691,11 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     let tissue = items  as? GetSampleTbl
                     let checkdefault  = tissue?.isDefault
                     
-                    if checkdefault == true
+                    if checkdefault ?? false
                     {
                         self.tissueBttn.setTitle(tissue?.sampleName?.localized, for: .normal)
                         self.tissuId =  Int(tissue?.sampleId ?? 4)
                     }
-                    
-                    
                 }
                 
             }
@@ -6045,7 +6042,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
         }
    
         if textField == dateTextField {
-            if dateTextField.text!.isEmpty == true{
+            if dateTextField.text!.isEmpty{
                 dobView.layer.borderColor = UIColor.red.cgColor
                 validateDateFlag = false
             }  else {

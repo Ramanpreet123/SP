@@ -38,7 +38,7 @@ class SampleTypeViewModel{
             
             for sample in item.sampleTypes {
                 
-                let saveObject : [String:Any] = ["lastUpdated":sample.lastUpdated as Any,"isDefault":sample.isDefault as Any,"responseCode": dataModel.responseCode as Any,keyValue.sampleId.rawValue:sample.sampleTypeID as Any,"sampleName":sample.sampleType as Any,keyValue.errorDetail.rawValue:dataModel.errorDetail as Any,keyValue.messageKey.rawValue: dataModel.message as Any, keyValue.providerId.rawValue: item.providerID as Any]
+                let saveObject : [String:Any] = ["lastUpdated":sample.lastUpdated as Any,"isDefault":sample.isDefault as Any,"responseCode": dataModel.responseCode as Any,keyValue.sampleId.rawValue:sample.sampleTypeID as Any,"sampleName":sample.sampleType as Any,keyValue.errorDetail.rawValue:dataModel.errorDetail as Any,keyValue.messageKey.rawValue: dataModel.message as Any, keyValue.providerIdText.rawValue: item.providerID as Any]
                 
                 
                 insert(entity: Entities.getSampleTblEntity, attributeKey: nil, objectToSave: saveObject)

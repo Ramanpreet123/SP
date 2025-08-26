@@ -1857,11 +1857,11 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            globalDateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            globalDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         }
         else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            globalDateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            globalDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
         }
         
         expanBtnOutlet.alpha = 0.4

@@ -1503,10 +1503,10 @@ class DashboardVC: UIViewController {
             
         } else {
             if UIDevice().userInterfaceIdiom == .phone {
-                UserDefaults.standard.set(keyValue.placeorder.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
+                UserDefaults.standard.set(keyValue.placeOrderText.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.orderingDefaultVC)), animated: true)
             } else {
-                UserDefaults.standard.set(keyValue.placeorder.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
+                UserDefaults.standard.set(keyValue.placeOrderText.rawValue, forKey: keyValue.dataEntryScreenSave.rawValue)
                 
                 let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "SettingsVC")), animated: true)

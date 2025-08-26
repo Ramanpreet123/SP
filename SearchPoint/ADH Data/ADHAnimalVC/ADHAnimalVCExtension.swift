@@ -166,11 +166,13 @@ extension ADHAnimalVC:UITableViewDelegate,UITableViewDataSource {
     private func toggleTextFields(for selectedIndex: Int, isSearchResult: Bool) {
         if isSearchResult {
             for index in viewModel.filterAdhAnimalData.indices {
-                viewModel.filterAdhAnimalData[index].showTextField = (index == selectedIndex) ? !viewModel.filterAdhAnimalData[index].showTextField : false
+                viewModel.filterAdhAnimalData[index].showTextField =
+                    index == selectedIndex && !viewModel.filterAdhAnimalData[index].showTextField
             }
         } else {
             for index in viewModel.adhAnimalData.indices {
-                viewModel.adhAnimalData[index].showTextField = (index == selectedIndex) ? !viewModel.adhAnimalData[index].showTextField : false
+                viewModel.adhAnimalData[index].showTextField =
+                    index == selectedIndex && !viewModel.adhAnimalData[index].showTextField
             }
         }
     }

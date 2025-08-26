@@ -233,10 +233,10 @@ extension BeefAnimalGlobalHD50KVC {
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            globalDateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            globalDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            globalDateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            globalDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         inheriSireRedOutlet.isEnabled = false

@@ -61,10 +61,10 @@ extension DataEntryBeefAnimalGlobalHD50KVC {
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            inheritDateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            inheritDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            inheritDateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            inheritDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         animalId1 = 0

@@ -69,7 +69,7 @@ extension OrderProductSelectionSecondVC {
             
             if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "") {
                 UserDefaults.standard.set(keyValue.farmId.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
-                if self.farmId == 0{
+                if self.farmIdValue == 0{
                     if pvid == 3 && UserDefaults.standard.value(forKey: keyValue.isAuSelected.rawValue) as? String == keyValue.noNeedAuPopUp.rawValue {
                         self.fethData =  fetchAllDataFarmIdisCdcbProduct(entityName: Entities.productAdonAnimalTblEntity,asending:true,orderId:self.orderId,userId:self.userId, farmId: self.serchTextField.text!)
                     }
@@ -78,7 +78,7 @@ extension OrderProductSelectionSecondVC {
                     }
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
-                    self.farmId = 1
+                    self.farmIdValue = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingImg), for: .normal)
@@ -89,7 +89,7 @@ extension OrderProductSelectionSecondVC {
                         self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:false,orderId:self.orderId,userId:self.userId, farmId: self.serchTextField.text!)
                     }
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.farmId = 0
+                    self.farmIdValue = 0
                 }
                 
             }
@@ -199,7 +199,7 @@ extension OrderProductSelectionSecondVC {
     
     @IBAction func dropAction(_ sender: UIButton) {
         if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: ""){
-            if self.farmId == 0{
+            if self.farmIdValue == 0{
                 if pvid == 3 && UserDefaults.standard.value(forKey: keyValue.isAuSelected.rawValue) as? String == keyValue.noNeedAuPopUp.rawValue {
                     
                     self.fethData =  fetchAllDataFarmIdisCdcbProduct(entityName: Entities.productAdonAnimalTblEntity,asending:true,orderId:orderId,userId:userId, farmId: serchTextField.text!)
@@ -209,7 +209,7 @@ extension OrderProductSelectionSecondVC {
                 }
                 self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
                 dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
-                self.farmId = 1
+                self.farmIdValue = 1
             }
             else{
                 dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingImg), for: .normal)
@@ -221,7 +221,7 @@ extension OrderProductSelectionSecondVC {
                     self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:false,orderId:orderId,userId:userId, farmId: serchTextField.text!)
                 }
                 self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                self.farmId = 0
+                self.farmIdValue = 0
             }
             
         }

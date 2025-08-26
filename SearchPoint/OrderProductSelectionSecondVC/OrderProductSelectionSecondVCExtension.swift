@@ -232,7 +232,7 @@ extension OrderProductSelectionSecondVC : UITableViewDelegate, UITableViewDataSo
                     cell.nominatorTitle.isHidden = false
                     cell.nominatorLbl.isHidden = false
                 }
-                updateUI()
+                updateUIForButtonTitle()
                 return cell
             }
             

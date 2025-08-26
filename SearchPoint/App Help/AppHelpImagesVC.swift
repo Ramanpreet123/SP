@@ -255,7 +255,7 @@ class AppHelpImagesVC: UIViewController {
 extension AppHelpImagesVC: UIPageViewControllerDelegate {
     
     @objc func changePage(_ sender: UIPageControl) {
-        var page: Int = sender.currentPage
+        let page: Int = sender.currentPage
         print("PAGE ----->>>>>>>  \(page)")
         
           imgView?.image = UIImage(named: imagesArray[page])

@@ -238,7 +238,7 @@ extension OrderingAnimalVCGirlandoIpad {
             textFieldBackroungWhite()
             UserDefaults.standard.set(0, forKey: keyValue.animalIdSelectionCart.rawValue)
             dataPopulateInScreen(animalId: temp)
-            if UserDefaults.standard.integer(forKey: keyValue.placeorder.rawValue) == 1{
+            if UserDefaults.standard.integer(forKey: keyValue.placeOrderText.rawValue) == 1{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     if self.dateBttnOutlet.titleLabel?.text == ""{
                         self.dateBttnOutlet.layer.borderColor = UIColor.red.cgColor
@@ -248,7 +248,7 @@ extension OrderingAnimalVCGirlandoIpad {
                         self.animalNameTextfield.layer.borderColor = UIColor.red.cgColor
                     }
                 }
-                UserDefaults.standard.set(0, forKey: keyValue.placeorder.rawValue)
+                UserDefaults.standard.set(0, forKey: keyValue.placeOrderText.rawValue)
             }
         }
         if !UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncrementalClear.rawValue) {
@@ -674,10 +674,10 @@ extension OrderingAnimalVCGirlandoIpad {
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         dobLbl.textColor = UIColor.gray

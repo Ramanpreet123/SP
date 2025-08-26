@@ -73,8 +73,6 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
     var myFilterController : MyHerdFilterController?
     var saveResulyByPageViewModel: ResulyByPageViewModel?
     var dasboard :  DashboardVC?
-    var fromDaten = Date()
-    var ToDaten = Date()
     let dropDown = DropDown()
     var lastIndex = -1
     var tempArray = Bool()
@@ -85,14 +83,13 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
         }
     }
     var autoD = Int()
-    var BttnTag = Int()
     var datePicker : UIDatePicker!
     let toolBar = UIToolbar()
     var dateFrom = String()
     var dateTo = String()
     var fromdatecheck = String()
     var currentdate = String()
-    var  todatecheck = String()
+    var todatecheck = String()
     let dateFormatter3 = DateFormatter()
     var searchFound = Bool()
     var cellIndexForScanner : IndexPath?
@@ -167,12 +164,76 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
         showTotalCount()
         
     }
-    @objc func searchDidChange(sender: UITextField) {
-        self.searchForADHAnimal(seachText: sender.text ?? "")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCartCount()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        hideIndicator()
+        super.viewDidAppear(animated)
+        tblView.reloadData()
+        tblView.estimatedRowHeight = 40.0
+        tblView.rowHeight = UITableView.automaticDimension
+        tblView.separatorStyle = .none
+        fetchFilterData = fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,customerId: Int(customerId ))
+        fetchTempObj1new = fetchAllData(entityName: Entities.resultPageByTraitTblEntity)
+        if fetchFilterData.count == 0 && !bckRetain{
+            navigateToADHFilterControler()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.removeObject(forKey: keyValue.fromManagement.rawValue)
+    }
+    
+    //MARK: UI METHODS
+    func initialNetworkCheck(){
+        NotificationCenter.default.addObserver(self, selector:#selector(self.checkForReachability), name: NSNotification.Name.reachabilityChanged, object: nil)
+        let del = UIApplication.shared.delegate as? AppDelegate
+        self.statusText?.text = NSLocalizedString((del?.status)!, comment: "")
+        if statusText?.text == ButtonTitles.connectedText.localized {
+            self.connectedBtnOutlet.isHidden = true
+            self.connectionImg.image = UIImage(named: ImageNames.statusOnlineSign)
+        }
+        else {
+            self.connectedBtnOutlet.isHidden = false
+            self.connectionImg.image = UIImage(named: ImageNames.statusOfflineImg)
+        }
+    }
+    
+    func updateCartCount() {
+        let orderId  = UserDefaults.standard.integer(forKey: keyValue.orderId.rawValue)
+        let pvIdUser = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
+        let animalCount =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: 1,orderId:orderId,orderStatus:"false", providerId: pvIdUser)
+        self.cartCountLbl.text = String(animalCount.count)
+        if animalCount.count == 0 {
+            self.cartCountLbl.isHidden = true
+            self.cartButton.isHidden = true
+        } else {
+            self.cartCountLbl.isHidden = false
+            self.cartButton.isHidden = false
+        }
+    }
+    
+    func tablereload(){
+        myHerdArray   = fetchResultpagenumberMyHerdData(entityName: Entities.resultMyherdDataTblEntity,customerId:Int64(customerId)) as! [ResultMyHerdData]
+        totalAnimalCount.text = ButtonTitles.totalAnimalsText.localized(with: myHerdArray.count)
+        tblView.isHidden = true
+        tblView.reloadData()
+    }
+    
+    
+    func breednameset(){
+        // This method is intentionally left empty.
+        // It will be implemented in the future to handle navigation logic.
+    }
+    
+    
     func setupLangaugeBR() {
-        
         screenTitleLbl.text = NSLocalizedString(LocalizedStrings.findMyAnimalText, comment: "")
         lblTitleSortBy.text = NSLocalizedString(ButtonTitles.sortByText, comment: "")
         
@@ -201,10 +262,6 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
     
     func hideAllEmptyTextFields() {
         self.viewModel.updateADhListToHideExpansion()
-    }
-    
-    func fetchADHAnimalData() {
-        self.viewModel.fetchADHAnimalList(userId: self.userId!, customerID: Int(self.customerId))
     }
     
     func showTotalCount() {
@@ -242,12 +299,121 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
         }
     }
     
+    //MARK: SELECTOR METHODS
+    
     @objc func scanButtonAction() {
         barcodeScreen = true
         let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.cameraViewControllerVC) as? CameraViewController
         vc?.delegate = self
         self.present(vc!, animated: true, completion: nil)
+    }
+    
+    @objc func searchDidChange(sender: UITextField) {
+        self.searchForADHAnimal(seachText: sender.text ?? "")
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification){
+        if value == 0{
+            UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
+            let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
+            self.navigationController?.pushViewController(newViewController, animated: true)
+            self.hideIndicator()
+            value = value + 1
+        }
+    }
+    
+    @objc func buttonbgPressed (){
+        buttonbg.removeFromSuperview()
+        customPopView.removeFromSuperview()
+    }
+    
+    @objc func checkForReachability(notification:Notification){
+        let del =  UIApplication.shared.delegate as? AppDelegate
+        self.statusText?.text = NSLocalizedString((del?.status)!, comment: "")
+        
+        if statusText?.text == ButtonTitles.connectedText.localized{
+            self.connectedBtnOutlet.isHidden = true
+            self.connectionImg.image = UIImage(named: ImageNames.statusOnlineSign)
+        }
+        else {
+            self.connectedBtnOutlet.isHidden = false
+            self.connectionImg.image = UIImage(named: ImageNames.statusOfflineImg)
+        }
+    }
+    
+    //MARK: NAVIGATION METHODS
+    
+    func navigateTosaveanimal(){
+        datasource.removeAll()
+        myHerdArray   = fetchResultpagenumberMyHerdData(entityName: Entities.resultMyherdDataTblEntity,customerId:Int64(customerId)) as! [ResultMyHerdData]
+        if myHerdArray.count != 0 {
+            for i in 0...myHerdArray.count - 1{
+                let ab = callSwipeStruct(name: [myHerdArray[i]], color: .white, image: UIImage(named:ImageNames.threeDotsInactiveImg)!, backgroundGroup: UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0))
+                datasource.append(ab)
+            }
+        }
+        
+        DispatchQueue.main.async { [self] in
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.hideIndicator()
+            self.totalAnimalCount.text = ButtonTitles.totalAnimalsText.localized(with: self.myHerdArray.count)
+            self.view.isUserInteractionEnabled = true
+            self.tblView.reloadData()
+        }
+    }
+    
+    func navigateToADHFilterControler(){
+        if Connectivity.isConnectedToInternet() {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.adhFilterVC) as! ADHFilterVC
+            vc.delegate = self
+            vc.adhFilterDelegate = self
+            if UserDefaults.standard.value(forKey: keyValue.checkFilter.rawValue) == nil {
+                self.navigationController?.present(vc, animated: false, completion: nil)
+            }
+            else{
+                let filteredData = fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,customerId: Int(customerId ))
+                for items in filteredData{
+                    let newfetch = items as? ResultFIlterDataSave
+                    let headerstring = newfetch?.header ?? ""
+                    let traidstting = newfetch?.trait ?? ""
+                    UserDefaults.standard.set(headerstring, forKey: keyValue.headerValue.rawValue)
+                    UserDefaults.standard.set(traidstting, forKey: keyValue.traitValue.rawValue)
+                    UserDefaults.standard.synchronize()
+                }
+                self.navigationController?.present(vc, animated: false, completion: nil)
+            }
+        }
+        else{
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.connectToInternetStr, comment: ""))
+        }
+    }
+    
+    func navigateToOCRScanner() {
+        let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC {
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func dissmissbackcall(){
+        UserDefaults.standard.removeObject(forKey: keyValue.ADHFilterApplied.rawValue)
+        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+    }
+    
+    //MARK: DATA HANDLING
+    
+    func fetchADHAnimalData() {
+        self.viewModel.fetchADHAnimalList(userId: self.userId!, customerID: Int(self.customerId))
     }
     
     func removeAnimalInGroup(groupId:String,animalIds: String, completionHandler: @escaping  CompletionHandler){
@@ -276,108 +442,16 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
                 }
             }
         }
-        return
     }
     
     func getToDateFromDate() {
         let dateFormatter = DateFormatter()
-        if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM"{
-            dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
-        } else {
-            dateFormatter.dateFormat = DateFormatters.ddMMyyyyFormat
-        }
         
         if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM"{
             dateFormatter.dateFormat = DateFormatters.MMddyyyy0000Format
         } else {
             dateFormatter.dateFormat = DateFormatters.ddMMyyyy0000Format
         }
-    }
-    
-    func breednameset(){
-        // This method is intentionally left empty.
-        // It will be implemented in the future to handle navigation logic.
-    }
-    
-    @objc func methodOfReceivedNotification(notification: Notification){
-        if value == 0{
-            UserDefaults.standard.set("false", forKey: keyValue.firstLogin.rawValue)
-            let storyBoard: UIStoryboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: ClassIdentifiers.loginViewController) as! LoginViewController
-            self.navigationController?.pushViewController(newViewController, animated: true)
-            self.hideIndicator()
-            value = value + 1
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateCartCount()
-    }
-    
-    func navigateTosaveanimal(){
-        datasource.removeAll()
-        myHerdArray   = fetchResultpagenumberMyHerdData(entityName: Entities.resultMyherdDataTblEntity,customerId:Int64(customerId)) as! [ResultMyHerdData]
-        if myHerdArray.count != 0 {
-            for i in 0...myHerdArray.count - 1{
-                let ab = callSwipeStruct(name: [myHerdArray[i]], color: .white, image: UIImage(named:ImageNames.threeDotsInactiveImg)!, backgroundGroup: UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0))
-                datasource.append(ab)
-            }
-        }
-        
-        DispatchQueue.main.async { [self] in
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.hideIndicator()
-            self.totalAnimalCount.text = ButtonTitles.totalAnimalsText.localized(with: self.myHerdArray.count)
-            self.view.isUserInteractionEnabled = true
-            self.tblView.reloadData()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        hideIndicator()
-        super.viewDidAppear(animated)
-        tblView.reloadData()
-        tblView.estimatedRowHeight = 40.0
-        tblView.rowHeight = UITableView.automaticDimension
-        tblView.separatorStyle = .none
-        fetchFilterData = fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,customerId: Int(customerId ))
-        fetchTempObj1new = fetchAllData(entityName: Entities.resultPageByTraitTblEntity)
-        if fetchFilterData.count == 0 && !bckRetain{
-            navigateToADHFilterControler()
-        }
-    }
-    
-    func updateCartCount() {
-        let orderId  = UserDefaults.standard.integer(forKey: keyValue.orderId.rawValue)
-        let pvIdUser = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
-        let animalCount =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: 1,orderId:orderId,orderStatus:"false", providerId: pvIdUser)
-        self.cartCountLbl.text = String(animalCount.count)
-        if animalCount.count == 0 {
-            self.cartCountLbl.isHidden = true
-            self.cartButton.isHidden = true
-        } else {
-            self.cartCountLbl.isHidden = false
-            self.cartButton.isHidden = false
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UserDefaults.standard.removeObject(forKey: keyValue.fromManagement.rawValue)
-    }
-    
-    func dissmissbackcall(){
-        UserDefaults.standard.removeObject(forKey: keyValue.ADHFilterApplied.rawValue)
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
     }
     
     func swipeLeft(index: Int) {
@@ -501,229 +575,6 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
         tblView.reloadData()
     }
     
-    func tablereload(){
-        myHerdArray   = fetchResultpagenumberMyHerdData(entityName: Entities.resultMyherdDataTblEntity,customerId:Int64(customerId)) as! [ResultMyHerdData]
-        totalAnimalCount.text = ButtonTitles.totalAnimalsText.localized(with: myHerdArray.count)
-        tblView.isHidden = true
-        tblView.reloadData()
-    }
-    
-    func navigateToADHFilterControler(){
-        if Connectivity.isConnectedToInternet() {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.adhFilterVC) as! ADHFilterVC
-            vc.delegate = self
-            vc.adhFilterDelegate = self
-            if UserDefaults.standard.value(forKey: keyValue.checkFilter.rawValue) == nil {
-                self.navigationController?.present(vc, animated: false, completion: nil)
-            }
-            else{
-                let filteredData = fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,customerId: Int(customerId ))
-                for items in filteredData{
-                    let newfetch = items as? ResultFIlterDataSave
-                    let headerstring = newfetch?.header ?? ""
-                    let traidstting = newfetch?.trait ?? ""
-                    UserDefaults.standard.set(headerstring, forKey: keyValue.headerValue.rawValue)
-                    UserDefaults.standard.set(traidstting, forKey: keyValue.traitValue.rawValue)
-                    UserDefaults.standard.synchronize()
-                }
-                self.navigationController?.present(vc, animated: false, completion: nil)
-            }
-        }
-        else{
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.connectToInternetStr, comment: ""))
-        }
-        
-    }
-    
-     func isOCRScannerSelected() -> Bool {
-        return UserDefaults.standard.string(forKey: keyValue.scannerSelection.rawValue) == keyValue.ocrKey.rawValue
-    }
-
-     func navigateToOCRScanner() {
-        let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC {
-            vc.delegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-
-     func isBluetoothOff() -> Bool {
-        return BluetoothCentre.shared.manager.state == .poweredOff
-    }
-
-     func presentBluetoothOffAlert() {
-        let alertController = UIAlertController(
-            title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
-            message: NSLocalizedString(AlertMessagesStrings.bluetoothOffText, comment: ""),
-            preferredStyle: .alert
-        )
-        
-        let settingsAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.settingsText, comment: ""), style: .default) { _ in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
-                  UIApplication.shared.canOpenURL(settingsUrl) else { return }
-            
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(settingsUrl)
-            } else {
-                UIApplication.shared.openURL(settingsUrl)
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default)
-        
-        alertController.addAction(settingsAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true)
-    }
-
-     func handleBluetoothState() {
-        guard let state = BluetoothCentre.shared.smartBowPeripheral?.state else {
-            showPairedList()
-            return
-        }
-        
-        switch state {
-        case .disconnected:
-            showPairedList()
-        case .connected, .connecting:
-            BluetoothCentre.shared.manager.scanForPeripherals(withServices: nil, options: nil)
-            showPairedList()
-        default:
-            break
-        }
-    }
-
-    func showPairedList() {
-        pairedBackroundView.isHidden = false
-        pairedTableView.reloadData()
-    }
-    
-    func setVisionTextRecognizeImage(image: UIImage) {
-        var textStr = ""
-        
-        func cleanText(_ rawText: String) -> String {
-            let trimmed = String(rawText.compactMap({ $0.isWhitespace ? nil : $0 }))
-            return String(trimmed.filter { !"\n\t\r(),.-[]:}{".contains($0) })
-        }
-        
-        func presentAlert(with text: String, useScannedValueHandler: @escaping () -> Void) {
-            let message = LocalizedStrings.unableToReadValue.localized(with: text)
-            let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
-                                          message: message,
-                                          preferredStyle: .alert)
-            
-            let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment: ""), style: .default) { _ in
-                let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC
-                vc?.delegate = self
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-            
-            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default)
-            
-            let useScannedValueAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""),
-                                                      style: .default) { _ in
-                useScannedValueHandler()
-            }
-            
-            alert.addAction(retryAction)
-            alert.addAction(cancelAction)
-            alert.addAction(useScannedValueAction)
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        request = VNRecognizeTextRequest { (request, error) in
-            guard let observations = request.results as? [VNRecognizedTextObservation] else {
-                fatalError("Received invalid observation")
-            }
-            
-            for observation in observations {
-                guard let topCandidate = observation.topCandidates(1).first else {
-                    continue
-                }
-                textStr += "\n\(topCandidate.string)"
-            }
-            
-            DispatchQueue.main.async {
-                let processedText = cleanText(textStr)
-                
-                // Clear textField & hide imageView early
-                self.searchTextField.text = ""
-                self.imageView.isHidden = true
-                
-                if self.searchTextField.tag == 0 {
-                    presentAlert(with: processedText) {
-                        self.searchTextField.text = processedText
-                        self.imageView.isHidden = true
-                        self.searchTextField.returnKeyType = .done
-                        self.searchTextField.delegate = self
-                        self.searchTextField.tag = 1
-                        self.textFieldDidEndEditing(self.searchTextField)
-                    }
-                } else {
-                    presentAlert(with: processedText) {
-                        self.searchTextField.text = processedText
-                        self.imageView.isHidden = true
-                        self.textFieldDidEndEditing(self.searchTextField)
-                        self.searchTextField.delegate = self
-                    }
-                }
-                
-                self.searchTextField.becomeFirstResponder()
-            }
-        }
-        
-        // Configure the request
-        request.customWords = ["custOm"]
-        request.minimumTextHeight = 0.03125
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["en_US"]
-        request.usesLanguageCorrection = true
-        
-        // Perform request asynchronously
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard let cgImage = image.cgImage else {
-                fatalError("Missing image to scan")
-            }
-            let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-            try? handler.perform([self.request])
-        }
-    }
-    
-    func initialNetworkCheck(){
-        NotificationCenter.default.addObserver(self, selector:#selector(self.checkForReachability), name: NSNotification.Name.reachabilityChanged, object: nil)
-        let del = UIApplication.shared.delegate as? AppDelegate
-        self.statusText?.text = NSLocalizedString((del?.status)!, comment: "")
-        if statusText?.text == ButtonTitles.connectedText.localized {
-            self.connectedBtnOutlet.isHidden = true
-            self.connectionImg.image = UIImage(named: ImageNames.statusOnlineSign)
-        }
-        else {
-            self.connectedBtnOutlet.isHidden = false
-            self.connectionImg.image = UIImage(named: ImageNames.statusOfflineImg)
-        }
-    }
-    
-    @objc func buttonbgPressed (){
-        buttonbg.removeFromSuperview()
-        customPopView.removeFromSuperview()
-    }
-    
-    @objc func checkForReachability(notification:Notification){
-        let del =  UIApplication.shared.delegate as? AppDelegate
-        self.statusText?.text = NSLocalizedString((del?.status)!, comment: "")
-        
-        if statusText?.text == ButtonTitles.connectedText.localized{
-            self.connectedBtnOutlet.isHidden = true
-            self.connectionImg.image = UIImage(named: ImageNames.statusOnlineSign)
-        }
-        else {
-            self.connectedBtnOutlet.isHidden = false
-            self.connectionImg.image = UIImage(named: ImageNames.statusOfflineImg)
-        }
-    }
     
     func searchForADHAnimal (seachText: String) {
         var filteredData = [AnimalMaster]()
@@ -825,42 +676,42 @@ class ADHAnimalVC: BaseViewController, VNDocumentCameraViewControllerDelegate{
             let autoIncrement = fetchFromAutoIncrement()
             let data12333 =  fetchProductAdonDataStatusBVDV(entityName: Entities.subProductTblEntity, adonId: LocalizedStrings.bvdvAddOnId, status: "true",ordrId:autoIncrement, customerID: UserDefaults.standard.integer(forKey: keyValue.currentActiveCustomerId.rawValue))
             if data12333.count > 0 && !addedd {
-                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalCannotBeAddedBVDV, comment: ""), preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalCannotBeAddedBVDV, comment: ""), preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    deleteDataWithProduct(Int(dataGet.animalId ))
+                    deleteDataWithSubProduct(Int(dataGet.animalId ))
+                    deleteDataWithAnimal(Int(dataGet.animalId ))
                     
-                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
-                        UIAlertAction in
-                        deleteDataWithProduct(Int(dataGet.animalId ))
-                        deleteDataWithSubProduct(Int(dataGet.animalId ))
-                        deleteDataWithAnimal(Int(dataGet.animalId ))
-                        
-                        let animalCount =  fetchAllDataAnimalDatarderIdDateEntryWithoutOrderId(entityName: Entities.animalAddTblEntity, userId: Int(userIdPrivate),orderId:orderID,orderStatus:"false",listid: Int64(dataGet.listId), custmerId: Int64(dataGet.custmerId ), providerId: pvIdPrivate )
-                        var bredidd123 = String ()
-                        if animalCount.count > 0 {
-                            let breeid1 = animalCount.object(at: 0) as! AnimaladdTbl
+                    let animalCount =  fetchAllDataAnimalDatarderIdDateEntryWithoutOrderId(entityName: Entities.animalAddTblEntity, userId: Int(userIdPrivate),orderId:orderID,orderStatus:"false",listid: Int64(dataGet.listId), custmerId: Int64(dataGet.custmerId ), providerId: pvIdPrivate )
+                    var bredidd123 = String ()
+                    if animalCount.count > 0 {
+                        let breeid1 = animalCount.object(at: 0) as! AnimaladdTbl
+                        bredidd123 = breeid1.breedName ?? ""
+                    }
+                    
+                    for i in 0 ..< animalCount.count{
+                        let breeid1 = animalCount.object(at: i) as! AnimaladdTbl
+                        if bredidd123 == breeid1.breedName {
                             bredidd123 = breeid1.breedName ?? ""
-                        }
-                        
-                        for i in 0 ..< animalCount.count{
-                            let breeid1 = animalCount.object(at: i) as! AnimaladdTbl
-                            if bredidd123 == breeid1.breedName {
-                                bredidd123 = breeid1.breedName ?? ""
-                                UserDefaults.standard.set(breeid1.breedId, forKey: keyValue.breedId.rawValue)
-                            }
+                            UserDefaults.standard.set(breeid1.breedId, forKey: keyValue.breedId.rawValue)
                         }
                     }
+                }
+                
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    deleteDataWithProduct(Int(dataGet.animalId ))
+                    deleteDataWithSubProduct(Int(dataGet.animalId ))
+                    deleteDataWithAnimal(Int(dataGet.animalId ))
+                    UserDefaults.standard.set("", forKey: keyValue.tsuKey.rawValue)
                     
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
-                        UIAlertAction in
-                        deleteDataWithProduct(Int(dataGet.animalId ))
-                        deleteDataWithSubProduct(Int(dataGet.animalId ))
-                        deleteDataWithAnimal(Int(dataGet.animalId ))
-                        UserDefaults.standard.set("", forKey: keyValue.tsuKey.rawValue)
-                        
-                    }
-                    alertController.addAction(okAction)
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    return
+                }
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                return
             }
         }
         createDataList()

@@ -519,7 +519,7 @@ extension DataEntryModeListVC : syncApi {
         }
         let emailId = UserDefaults.standard.value(forKey:keyValue.userName.rawValue) as! String
         self.hideIndicator()
-        self.objApiSync.postEmailList(listId:Int64(listId1),custmerId:Int64(self.currentCustomerId),emailAdress :[emailId],providerId: arrayGet1.value(forKey: keyValue.providerId.rawValue) as? Int ?? 0)
+        self.objApiSync.postEmailList(listId:Int64(listId1),custmerId:Int64(self.currentCustomerId),emailAdress :[emailId],providerId: arrayGet1.value(forKey: keyValue.providerIdText.rawValue) as? Int ?? 0)
         self.view.makeToast(NSLocalizedString(LocalizedStrings.receiveDataInEmail, comment: ""), duration: 2, position: .bottom)
     }
     

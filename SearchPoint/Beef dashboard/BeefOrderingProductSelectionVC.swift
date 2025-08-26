@@ -65,9 +65,6 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
     var sampTypeArr = NSMutableArray()
     var bothCom = NSMutableArray()
     var ageCom = NSMutableArray()
-    var TempArrsam = NSMutableArray()
-    var TempArrage = NSMutableArray()
-    
     var arr = NSArray()
     var breedId = String()
     var productArr  = NSArray()

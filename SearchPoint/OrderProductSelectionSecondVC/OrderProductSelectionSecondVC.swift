@@ -69,7 +69,7 @@ class OrderProductSelectionSecondVC: UIViewController {
     var aTag:Int!
     var pid = Int()
     var fethData:NSArray!
-    var farmId = Int()
+    var farmIdValue = Int()
     var barCodeId = Int()
     var earTagID = Int()
     var animaId = Int()
@@ -952,7 +952,7 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
 
 //MARK: BILLING DELEGATE EXTENSION
 extension OrderProductSelectionSecondVC : BillingDelegate {
-    func UpdateUI(SelectedBillingCustomer:GetBillingContact) {
+    func updateUI(selectedBillingCustomer:GetBillingContact) {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let filterArr = self.farmAddr.filter({$0.isDefault })
@@ -960,12 +960,12 @@ extension OrderProductSelectionSecondVC : BillingDelegate {
                     updateBillingCustomer(entity: Entities.getBillingContactEntity, customerID: self.custmerId, isDefault: false, billcustomerId: filterArr[0].billToCustId ?? "0", billcustomerName: filterArr[0].contactName ?? "")
                     
                 }
-                UserDefaults.standard.set(SelectedBillingCustomer.contactName, forKey: keyValue.farmValue.rawValue)
-                UserDefaults.standard.set(SelectedBillingCustomer.billToCustId, forKey: keyValue.billToCustomerId.rawValue)
-                updateBillingCustomer(entity: Entities.getBillingContactEntity, customerID: self.custmerId, isDefault: true, billcustomerId: SelectedBillingCustomer.billToCustId ?? "0", billcustomerName: SelectedBillingCustomer.contactName ?? "")
+                UserDefaults.standard.set(selectedBillingCustomer.contactName, forKey: keyValue.farmValue.rawValue)
+                UserDefaults.standard.set(selectedBillingCustomer.billToCustId, forKey: keyValue.billToCustomerId.rawValue)
+                updateBillingCustomer(entity: Entities.getBillingContactEntity, customerID: self.custmerId, isDefault: true, billcustomerId: selectedBillingCustomer.billToCustId ?? "0", billcustomerName: selectedBillingCustomer.contactName ?? "")
                 self.farmAddr = fetchBillingCustomer(entityName: Entities.getBillingContactEntity,customerID: self.custmerId) as! [GetBillingContact]
                 
-                let attributeString = NSMutableAttributedString(string: SelectedBillingCustomer.contactName ?? "", attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: selectedBillingCustomer.contactName ?? "", attributes: self.attrs)
                 cell.billingBtnOutlet.setAttributedTitle(attributeString, for: .normal)
             }
             self.transparentView.isHidden = true
@@ -973,7 +973,7 @@ extension OrderProductSelectionSecondVC : BillingDelegate {
         }
     }
     
-    func updateUI() {
+    func updateUIForButtonTitle() {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let attributeString = NSMutableAttributedString(string: (UserDefaults.standard.value(forKey: keyValue.farmValue.rawValue) as! String), attributes: self.attrs)

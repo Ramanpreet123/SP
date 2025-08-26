@@ -25,9 +25,9 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     @IBOutlet weak var dropUpDownBtn: UIButton!
     @IBOutlet weak var networkStatusLbl: UILabel!
     @IBOutlet weak var networkStatusImg: UIImageView!
-    @IBOutlet weak var OffLineBtn: UIButton!
-    var rGN_ID = 0
-    var rGD_ID = 0
+    @IBOutlet weak var offLineBtn: UIButton!
+    var rgnId = 0
+    var rgdId = 0
     
     let buttonbg1 = UIButton ()
     var customPopView1 :TipPopUp!
@@ -58,7 +58,6 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     var aTag:String!
     var pid = Int()
     var fethData:NSArray!
-    var farmId = Int()
     var barCodeId = Int()
     var animaId = Int()
     var clickOnDropDown = String()
@@ -276,7 +275,6 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     @IBAction func termsInfoBtnAction(_ sender: UIButton) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "ProductWiseTermsController") as! ProductWiseTermsController
         self.navigationController?.present(vc, animated: false, completion: nil)
-        return
     }
     
     @IBAction func submitInfoBtnAction(_ sender: UIButton) {
@@ -362,17 +360,13 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 break
             }
         }
-        if found ==  false && data.count > 0{
+        if !found && data.count > 0{
             selection.append (["animalTag":animaltag,"addon":data,"row":index])
         }
-        
-        
         reloadTable()
-        
-        
     }
-    func fetchAdonData(indexPath:IndexPath, collectionView:UICollectionView)
-    {
+    
+    func fetchAdonData(indexPath:IndexPath, collectionView:UICollectionView){
         
         pid =  Int(arr1[values[collectionView.tag]]![indexPath.row].productId)
         aTag = arr1[values[collectionView.tag]]![indexPath.row].animalTag
@@ -388,7 +382,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 break
             }
         }
-        if found ==  false && data!.count > 0{
+        if !found && data!.count > 0{
             selection.append (["animalTag":aTag as Any,"addon":data as Any,"row":collectionView.tag])
             
         }
@@ -513,38 +507,38 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 }
                 if self.clickOnDropDown == NSLocalizedString("RGN", comment: ""){
                     UserDefaults.standard.set("rgn", forKey: "InheritFOSampleTrackingDetailVC")
-                    if self.rGN_ID == 0{
+                    if self.rgnId == 0{
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGNStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                         self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                        self.rGN_ID = 1
+                        self.rgnId = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGNStatus(entityName: "ProductAdonAnimlTbLBeef", asending: false,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                         self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                        self.rGN_ID = 0
+                        self.rgnId = 0
                     }
                     
                 }
                 
                 if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
                     UserDefaults.standard.set("rgd", forKey: "InheritFOSampleTrackingDetailVC")
-                    if self.rGD_ID == 0{
+                    if self.rgdId == 0{
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                         self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                        self.rGD_ID = 1
+                        self.rgdId = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: false,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                         self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                        self.rGD_ID = 0
+                        self.rgdId = 0
                     }
                     
                 }
@@ -714,13 +708,9 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     
                 }
             }
+            updateUIForButtonTitle()
         }
-        
-        
-        if farmAddr.count > 0 {
-            updateUI()
-        }
-        
+  
     }
     
     @IBAction func crossClick(_ sender: UIButton) {
@@ -774,9 +764,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 let dealerCode = UserDefaults.standard.value(forKey: "dealerCode") as? String
                 
                 let addDealerCodeCheck = UserDefaults.standard.value(forKey: "addDealerCodeCheck") as? Bool
-                if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                {
-                    if addDealerCodeCheck == false {
+                if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck, !(addDealerCodeCheck ?? true){
+                 
                         cell.addDealerCodeOutlet.setImage(UIImage(named: "check"), for: .normal)
                         
                         if  dealerCode == "" || dealerCode == nil {
@@ -794,21 +783,9 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             cell.dealerCodeView.isUserInteractionEnabled = true
                             cell.addDealerCodeTextField.isHidden = true
                         }
-                    }
-                    else {
-                        cell.addDealerCodeOutlet.setImage(UIImage(named: "Uncheck"), for: .normal)
-                        cell.addDealerCodeTextField.isHidden = true
-                        if  dealerCode == "" || dealerCode == nil {
-                            cell.dealerCodeView.isHidden = true
-                        } else {
-                            cell.dealerCodeView.isHidden = false
-                            cell.dealerCodeLabel.text = dealerCode
-                            cell.dealerCodeView.alpha = 0.6
-                            cell.dealerCodeView.isUserInteractionEnabled = false
-                            cell.addDealerCodeTextField.isHidden = true
-                        }
-                    }
-                } else{
+                }
+                
+                else{
                     cell.addDealerCodeOutlet.setImage(UIImage(named: "Uncheck"), for: .normal)
                     cell.addDealerCodeTextField.isHidden = true
                     if dealerCode == "" || dealerCode == nil{
@@ -820,7 +797,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         cell.dealerCodeView.isUserInteractionEnabled = false
                         cell.addDealerCodeTextField.isHidden = true
                     }
-                } }
+                }
+            }
             
             let marketId = UserDefaults.standard.value(forKey: "currentActiveMarketId") as! String
             let markeData = fetchdataFromMarketId(marketId: marketId)
@@ -846,7 +824,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     
                     UserDefaults.standard.setValue("emailMe", forKey: "submitTypeSelection")
                     UserDefaults.standard.setValue("email", forKey: "emailFlag")
-                    if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                    if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                     {
                         cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                     }
@@ -854,8 +832,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     {
                         cell.beefEmailSelectionOutlet.setImage(UIImage(named: "Uncheck"), for: .normal)
                     }
-                    if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                    {
+                    if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                         
                         cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                         cell.addDealerCodeLabel.alpha = 1
@@ -870,7 +847,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     }
                     
                 } else {
-                    if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                    if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                     {
                         cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                     }
@@ -878,8 +855,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     {
                         cell.beefEmailSelectionOutlet.setImage(UIImage(named: "Uncheck"), for: .normal)
                     }
-                    if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                    {
+                    if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                         
                         cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                         cell.addDealerCodeLabel.alpha = 1
@@ -913,8 +889,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         cell.beefPlaceanOrderCheckboxTopConstraint.constant = 5
                         cell.beefEmailMeCheckboxHeightConstraint.constant = 0
                         cell.beefEmailMeTopSelectionConstraint.constant = 0
-                        if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                        {
+                        if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                             
                             cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             cell.addDealerCodeLabel.alpha = 1
@@ -927,7 +902,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             cell.addDealerCodeLabel.alpha = 0.6
                             cell.addDealerCodeOutlet.alpha = 0.6
                         }
-                        if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                        if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                         {
                             cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                         }
@@ -948,8 +923,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         cell.beefPlaceanOrderCheckboxTopConstraint.constant = 0
                         cell.beefEmailMeCheckboxHeightConstraint.constant = 0
                         
-                        if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                        {
+                        if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                             
                             cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             cell.addDealerCodeLabel.alpha = 1
@@ -962,7 +936,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             cell.addDealerCodeLabel.alpha = 0.6
                             cell.addDealerCodeOutlet.alpha = 0.6
                         }
-                        if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                        if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                         {
                             cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                         }
@@ -993,8 +967,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             
                             cell.beefPlaceAnSelectionTitle.alpha = 1
                             cell.beefPlaceSelectionOutlet.alpha = 1
-                            if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                            {
+                            if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                                 
                                 cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                                 cell.addDealerCodeLabel.alpha = 1
@@ -1007,7 +980,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                                 cell.addDealerCodeLabel.alpha = 0.6
                                 cell.addDealerCodeOutlet.alpha = 0.6
                             }
-                            if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                            if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                             {
                                 cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             }
@@ -1021,8 +994,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         } else {
                             cell.beefPlaceAnSelectionTitle.alpha = 0.6
                             cell.beefPlaceSelectionOutlet.alpha = 0.6
-                            if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                            {
+                            if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                                 
                                 cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                                 cell.addDealerCodeLabel.alpha = 1
@@ -1035,7 +1007,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                                 cell.addDealerCodeLabel.alpha = 0.6
                                 cell.addDealerCodeOutlet.alpha = 0.6
                             }
-                            if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                            if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                             {
                                 cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             }
@@ -1075,8 +1047,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             cell.beefPlaceAnSelectionTitle.alpha = 1
                             cell.beefPlaceSelectionOutlet.alpha = 1
                             
-                            if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                            {
+                            if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                                 
                                 cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                                 cell.addDealerCodeLabel.alpha = 1
@@ -1089,7 +1060,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                                 cell.addDealerCodeLabel.alpha = 0.6
                                 cell.addDealerCodeOutlet.alpha = 0.6
                             }
-                            if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                            if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                             {
                                 cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             }
@@ -1103,8 +1074,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             cell.beefPlaceSelectionOutlet.alpha = 0.6
                             
                             
-                            if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true
-                            {
+                            if let beefPlaceOrderCheck = UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool, beefPlaceOrderCheck {
                                 
                                 cell.beefPlaceSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                                 cell.addDealerCodeLabel.alpha = 1
@@ -1117,7 +1087,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                                 cell.addDealerCodeLabel.alpha = 0.6
                                 cell.addDealerCodeOutlet.alpha = 0.6
                             }
-                            if  UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                            if let beefEmailCheckValue = UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool, beefEmailCheckValue
                             {
                                 cell.beefEmailSelectionOutlet.setImage(UIImage(named: "check"), for: .normal)
                             }
@@ -1222,7 +1192,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         if URL.absoluteString == "1"{
             
             let url =  NSURL(string: pricingLinkC) as! URL
-            UIApplication.shared.open(url) { (Bool) in
+            UIApplication.shared.open(url) { (bool) in
                 
             }
         }
@@ -1307,38 +1277,38 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             }
             if self.clickOnDropDown == NSLocalizedString("RGN", comment: ""){
                 
-                if self.rGN_ID == 0{
+                if self.rgnId == 0{
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGNStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.rGN_ID = 1
+                    self.rgnId = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGNStatus(entityName: "ProductAdonAnimlTbLBeef", asending: false,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.rGN_ID = 0
+                    self.rgnId = 0
                 }
                 
             }
             
             if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
                 
-                if self.rGD_ID == 0{
+                if self.rgdId == 0{
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.rGD_ID = 1
+                    self.rgdId = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: false,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
-                    self.rGD_ID = 0
+                    self.rgdId = 0
                 }
                 
             }
@@ -1618,8 +1588,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     
     @IBAction func reviewOrder(_ sender: UIButton) {
         
-        DispatchQueue.main.async
-        {
+        DispatchQueue.main.async{
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell
             {
                 if cell.billingBtnOutlet.titleLabel?.text == "N/A"
@@ -1630,12 +1599,11 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 }
                 else
                 {
-                    if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true &&
-                        UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true {
+                    if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool ?? false &&
+                        UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool ?? false {
                         updateAnimalOrderEmailStatus(entity: "BeefAnimaladdTbl", IsEmailId: false)
                         updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
-                        if (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == false) || (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == nil)
-                        {
+                        if UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool != true {
                             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
                             return
                         }
@@ -1660,14 +1628,12 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         }
                         
                     }
-                    else if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == true &&
-                                UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == false
-                                
+                    else if (UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool ?? false) &&
+                            !(UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool ?? false)
                     {
                         updateAnimalOrderEmailStatus(entity: "BeefAnimaladdTbl", IsEmailId: false)
                         updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
-                        if (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == false) || (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == nil)
-                        {
+                        if UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool != true {
                             
                             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
                             return
@@ -1693,8 +1659,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         }
                         
                     }
-                    else if UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool == false &&
-                                UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool == true
+                    else if !(UserDefaults.standard.value(forKey: "beefplaceordercheck") as? Bool ?? false) &&
+                             (UserDefaults.standard.value(forKey: "beefemailcheckvalue") as? Bool ?? false)
                     {
                         updateAnimalOrderEmailStatus(entity: "BeefAnimaladdTbl", IsEmailId: true)
                         updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: true)
@@ -1778,12 +1744,12 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         self.networkStatusLbl?.text = NSLocalizedString((del?.status)!, comment: "")
         
         if networkStatusLbl?.text == "Connected".localized {
-            self.OffLineBtn.isHidden = true
+            self.offLineBtn.isHidden = true
             self.networkStatusImg.image = UIImage(named: "status_online_sign")
         }
         else {
             
-            self.OffLineBtn.isHidden = false
+            self.offLineBtn.isHidden = false
             self.networkStatusImg.image = UIImage(named: "status_offline")
             
         }
@@ -1798,11 +1764,11 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         self.networkStatusLbl?.text = NSLocalizedString((del?.status)!, comment: "")
         
         if networkStatusLbl?.text == "Connected".localized {
-            self.OffLineBtn.isHidden = true
+            self.offLineBtn.isHidden = true
             self.networkStatusImg.image = UIImage(named: "status_online_sign")
         }
         else{
-            self.OffLineBtn.isHidden = false
+            self.offLineBtn.isHidden = false
             self.networkStatusImg.image = UIImage(named: "status_offline")
             
         }
@@ -1836,7 +1802,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         customPopView.removeFromSuperview()
     }
     
-    func UpdateUI(SelectedBillingCustomer: GetBillingContact) {
+    func updateUI(selectedBillingCustomer: GetBillingContact) {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let filterArr = self.farmAddr.filter({$0.isDefault == true })
@@ -1844,14 +1810,14 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: false, billcustomerId: filterArr[0].billToCustId ?? "0", billcustomerName: filterArr[0].contactName ?? "")
                     
                 }
-                UserDefaults.standard.set(SelectedBillingCustomer.contactName, forKey: "farmValue")
-                UserDefaults.standard.set(SelectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
+                UserDefaults.standard.set(selectedBillingCustomer.contactName, forKey: "farmValue")
+                UserDefaults.standard.set(selectedBillingCustomer.billToCustId, forKey: "billToCustomerId")
                 
-                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: SelectedBillingCustomer.billToCustId ?? "0", billcustomerName: SelectedBillingCustomer.contactName ?? "")
+                updateBillingCustomer(entity: "GetBillingContact", customerID: self.custmerId, isDefault: true, billcustomerId: selectedBillingCustomer.billToCustId ?? "0", billcustomerName: selectedBillingCustomer.contactName ?? "")
                 
                 self.farmAddr = fetchBillingCustomer(entityName: "GetBillingContact",customerID: self.custmerId) as! [GetBillingContact]
                 
-                let attributeString = NSMutableAttributedString(string: SelectedBillingCustomer.contactName ?? "", attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: selectedBillingCustomer.contactName ?? "", attributes: self.attrs)
                 cell.billingBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 
             }
@@ -1860,7 +1826,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         }
         
     }
-    func updateUI() {
+    func updateUIForButtonTitle() {
         DispatchQueue.main.async {
             if let cell = self.tblView.cellForRow(at: IndexPath(row: self.arr1.keys.count, section: 0) ) as? BillingCell{
                 let attributeString = NSMutableAttributedString(string: (UserDefaults.standard.value(forKey: "farmValue") as! String), attributes: self.attrs)

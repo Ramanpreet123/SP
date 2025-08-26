@@ -382,6 +382,7 @@
 		BC598B572D6A5C3700701661 /* ReviewOrderVCIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B562D6A5C3700701661 /* ReviewOrderVCIpad.swift */; };
 		BC598B592D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B582D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift */; };
 		BC598B5B2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC598B5A2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift */; };
+		BC5ACD9D2E5DEA9800428836 /* ADHAnimalVCBluetoothExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5ACD9C2E5DEA9800428836 /* ADHAnimalVCBluetoothExtension.swift */; };
 		BC668ABE2DDA437A00B5CE9E /* MyHerdCollectionViewCelliPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC668ABD2DDA437A00B5CE9E /* MyHerdCollectionViewCelliPad.swift */; };
 		BC804BB22DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC804BB12DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift */; };
 		BC804BB42DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC804BB32DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift */; };
@@ -904,6 +905,7 @@
 		BC598B562D6A5C3700701661 /* ReviewOrderVCIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpad.swift; sourceTree = "<group>"; };
 		BC598B582D6A5C5300701661 /* ReviewOrderVCIpadActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpadActionMethods.swift; sourceTree = "<group>"; };
 		BC598B5A2D6A5C6A00701661 /* ReviewOrderVCIpadExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderVCIpadExtensions.swift; sourceTree = "<group>"; };
+		BC5ACD9C2E5DEA9800428836 /* ADHAnimalVCBluetoothExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHAnimalVCBluetoothExtension.swift; sourceTree = "<group>"; };
 		BC668ABD2DDA437A00B5CE9E /* MyHerdCollectionViewCelliPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHerdCollectionViewCelliPad.swift; sourceTree = "<group>"; };
 		BC804BB12DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackingDeetailCellIpad.swift; sourceTree = "<group>"; };
 		BC804BB32DC0C3D100F9499F /* SampleTrackDetailCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTrackDetailCollectionCell.swift; sourceTree = "<group>"; };
@@ -1341,6 +1343,7 @@
 			children = (
 				0028C464285308DD00E5F566 /* ADHAnimalVC.swift */,
 				00CEE32B2B998AA80034CFCB /* ADHAnimalVCExtension.swift */,
+				BC5ACD9C2E5DEA9800428836 /* ADHAnimalVCBluetoothExtension.swift */,
 				00CEE32D2B999C070034CFCB /* ADHAnimalVCActionMethods.swift */,
 			);
 			path = ADHAnimalVC;
@@ -2512,6 +2515,7 @@
 				BC02223A2D605B4F007D9685 /* OPSSecondVCExtensions.swift in Sources */,
 				0002DC292590A5DC005E5AEE /* DataEntryViewAnimalController.swift in Sources */,
 				BCDD6A902D93DF4D007AD8AF /* DEBrazilBeefActionMethods.swift in Sources */,
+				BC5ACD9D2E5DEA9800428836 /* ADHAnimalVCBluetoothExtension.swift in Sources */,
 				B1472C34243CC77000C386C7 /* CoreDataManager.swift in Sources */,
 				65CFB83D2D82C190006C697F /* DataEntryModeListiPadVC.swift in Sources */,
 				00E43C922B8757D20097A0E5 /* DEOrderingAnimalVCGirlandoExtension.swift in Sources */,

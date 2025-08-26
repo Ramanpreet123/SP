@@ -109,8 +109,8 @@ protocol swipeCell {
 }
 
 protocol BillingDelegate {
-    func UpdateUI(SelectedBillingCustomer:GetBillingContact)
-    func updateUI()
+    func updateUI(selectedBillingCustomer:GetBillingContact)
+    func updateUIForButtonTitle()
 }
 
 @objc protocol objectPickfromConfilict {

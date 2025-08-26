@@ -102,6 +102,89 @@ class ADHFilterVC: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    
+    //MARK: IB ACTIONS
+    @IBAction func maleBtnAction(_ sender: Any){
+        genderRetain = "M"
+        UserDefaults.standard.setValue("M", forKey: keyValue.savesex.rawValue)
+        maleBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
+        femaleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        allBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        maleBtnOutlet.setTitleColor(.white, for: .normal)
+        femaleBtnOutlet.setTitleColor(.black, for: .normal)
+        allBtnOutlet.setTitleColor(.black, for: .normal)
+    }
+    
+    @IBAction func femaleBtnAction(_ sender: Any) {
+        genderRetain = "F"
+        UserDefaults.standard.setValue("F", forKey: keyValue.savesex.rawValue)
+        maleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        femaleBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
+        allBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        maleBtnOutlet.setTitleColor(.black, for: .normal)
+        femaleBtnOutlet.setTitleColor(.white, for: .normal)
+        allBtnOutlet.setTitleColor(.black, for: .normal)
+    }
+    
+    @IBAction func allBtnACTION(_ sender: Any) {
+        genderRetain = "A"
+        UserDefaults.standard.setValue("A", forKey: keyValue.savesex.rawValue)
+        maleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        femaleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
+        allBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
+        maleBtnOutlet.setTitleColor(.black, for: .normal)
+        femaleBtnOutlet.setTitleColor(.black, for: .normal)
+        allBtnOutlet.setTitleColor(.white, for: .normal)
+    }
+    
+    @IBAction func clearFilterBtnAction(_ sender: Any) {
+        removeAppliedFilters()
+    }
+    
+    @IBAction func cancleBtnFilterScreenAction(_ sender: Any){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneBtnFilterScreenAction(_ sender: Any) {
+        let dateFromNw = dateFromBttn.titleLabel?.text ?? ""
+        UserDefaults.standard.setValue(dateFromNw, forKey: keyValue.from_date_adh.rawValue)
+        let dateToNw = dateToBttn.titleLabel?.text ?? ""
+        UserDefaults.standard.setValue(dateToNw, forKey: keyValue.to_date_adh.rawValue)
+        let dateToVariable = dateToBttn.titleLabel?.text ?? ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale =  NSLocale(localeIdentifier: "nl_NL" ) as Locale
+        UserDefaults.standard.set(breedIndexPath, forKey: keyValue.breedindexADH.rawValue)
+        UserDefaults.standard.setValue(dateFromNw, forKey: keyValue.from_date_adh.rawValue)
+        UserDefaults.standard.setValue(dateToVariable, forKey: keyValue.to_date_adh.rawValue)
+        UserDefaults.standard.setValue(genderRetain, forKey: keyValue.savesex.rawValue)
+        UserDefaults.standard.synchronize()
+        let filterBreedID = breedIDArray[UserDefaults.standard.integer(forKey: keyValue.breedindexADH.rawValue)]
+        self.dismiss(animated: true) {
+            self.adhFilterDelegate?.applyFilterData(fromDate: dateFromNw, toDate: dateToVariable, gender: self.genderRetain, breed: filterBreedID)
+        }
+        UserDefaults.standard.set(true, forKey: keyValue.ADHFilterApplied.rawValue)
+    }
+    
+    @IBAction func fromDateAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        calenderView.isHidden = false
+        calendarViewBkg.isHidden = false
+        calenderView.layer.cornerRadius = 30
+        calenderView.layer.masksToBounds = true
+        bttnTagClass =  0
+        doFromDatePicker()
+    }
+    
+    @IBAction func toDateAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        calenderView.isHidden = false
+        calendarViewBkg.isHidden = false
+        calenderView.layer.cornerRadius = 30
+        calenderView.layer.masksToBounds = true
+        bttnTagClass =  1
+        doFromDatePicker()
+    }
+    
     //MARK: METHODS AND FUNCTIONS
     func removeDup(arr: [String]) -> [String] {
         var temp = [String]()
@@ -425,88 +508,6 @@ class ADHFilterVC: UIViewController {
                 self.dateToBttn.setTitle(toDate, for: .normal)
             }
         }
-    }
-    
-    //MARK: IB ACTIONS
-    @IBAction func maleBtnAction(_ sender: Any){
-        genderRetain = "M"
-        UserDefaults.standard.setValue("M", forKey: keyValue.savesex.rawValue)
-        maleBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
-        femaleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        allBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        maleBtnOutlet.setTitleColor(.white, for: .normal)
-        femaleBtnOutlet.setTitleColor(.black, for: .normal)
-        allBtnOutlet.setTitleColor(.black, for: .normal)
-    }
-    
-    @IBAction func femaleBtnAction(_ sender: Any) {
-        genderRetain = "F"
-        UserDefaults.standard.setValue("F", forKey: keyValue.savesex.rawValue)
-        maleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        femaleBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
-        allBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        maleBtnOutlet.setTitleColor(.black, for: .normal)
-        femaleBtnOutlet.setTitleColor(.white, for: .normal)
-        allBtnOutlet.setTitleColor(.black, for: .normal)
-    }
-    
-    @IBAction func allBtnACTION(_ sender: Any) {
-        genderRetain = "A"
-        UserDefaults.standard.setValue("A", forKey: keyValue.savesex.rawValue)
-        maleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        femaleBtnOutlet.layer.backgroundColor = UIColor.white.cgColor
-        allBtnOutlet.backgroundColor = UIColor(red: 29/255, green: 131/255, blue: 174/255, alpha:1.0)
-        maleBtnOutlet.setTitleColor(.black, for: .normal)
-        femaleBtnOutlet.setTitleColor(.black, for: .normal)
-        allBtnOutlet.setTitleColor(.white, for: .normal)
-    }
-    
-    @IBAction func clearFilterBtnAction(_ sender: Any) {
-        removeAppliedFilters()
-    }
-    
-    @IBAction func cancleBtnFilterScreenAction(_ sender: Any){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func doneBtnFilterScreenAction(_ sender: Any) {
-        let dateFromNw = dateFromBttn.titleLabel?.text ?? ""
-        UserDefaults.standard.setValue(dateFromNw, forKey: keyValue.from_date_adh.rawValue)
-        let dateToNw = dateToBttn.titleLabel?.text ?? ""
-        UserDefaults.standard.setValue(dateToNw, forKey: keyValue.to_date_adh.rawValue)
-        let dateToVariable = dateToBttn.titleLabel?.text ?? ""
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale =  NSLocale(localeIdentifier: "nl_NL" ) as Locale
-        UserDefaults.standard.set(breedIndexPath, forKey: keyValue.breedindexADH.rawValue)
-        UserDefaults.standard.setValue(dateFromNw, forKey: keyValue.from_date_adh.rawValue)
-        UserDefaults.standard.setValue(dateToVariable, forKey: keyValue.to_date_adh.rawValue)
-        UserDefaults.standard.setValue(genderRetain, forKey: keyValue.savesex.rawValue)
-        UserDefaults.standard.synchronize()
-        let filterBreedID = breedIDArray[UserDefaults.standard.integer(forKey: keyValue.breedindexADH.rawValue)]
-        self.dismiss(animated: true) {
-            self.adhFilterDelegate?.applyFilterData(fromDate: dateFromNw, toDate: dateToVariable, gender: self.genderRetain, breed: filterBreedID)
-        }
-        UserDefaults.standard.set(true, forKey: keyValue.ADHFilterApplied.rawValue)
-    }
-    
-    @IBAction func fromDateAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        calenderView.isHidden = false
-        calendarViewBkg.isHidden = false
-        calenderView.layer.cornerRadius = 30
-        calenderView.layer.masksToBounds = true
-        bttnTagClass =  0
-        doFromDatePicker()
-    }
-    
-    @IBAction func toDateAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        calenderView.isHidden = false
-        calendarViewBkg.isHidden = false
-        calenderView.layer.cornerRadius = 30
-        calenderView.layer.masksToBounds = true
-        bttnTagClass =  1
-        doFromDatePicker()
     }
 }
 

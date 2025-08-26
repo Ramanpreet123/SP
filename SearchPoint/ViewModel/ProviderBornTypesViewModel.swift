@@ -39,7 +39,7 @@ class ProviderBornTypesViewModel {
         
         for providerBornTypes in dataModel.providerBornTypes {
             for bornType in providerBornTypes.bornTypes {
-                let saveObject : [String:Any] = [keyValue.providerId.rawValue: providerBornTypes.providerID as Any as Any as Any,
+                let saveObject : [String:Any] = [keyValue.providerIdText.rawValue: providerBornTypes.providerID as Any as Any as Any,
                                                  "provider": providerBornTypes.provider as Any as Any as Any,
                                                  "bornTypeID": bornType.bornTypeID as Any as Any as Any,
                                                  "bornTypeName": bornType.name as Any as Any as Any,

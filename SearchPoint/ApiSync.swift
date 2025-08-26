@@ -293,7 +293,7 @@ class ApiSync :NSObject {
         let addDealerCodeCheck = UserDefaults.standard.value(forKey: keyValue.addDealerCodeCheck.rawValue) as? Bool
         let dealerCode = UserDefaults.standard.value(forKey: keyValue.dealerCode.rawValue) as? String
         
-        if addDealerCodeCheck == false {
+        if !(addDealerCodeCheck ?? false) {
           if dealerCode == "" || dealerCode == nil{
               apiSyncClass.dealerCode = ""
           } else{
@@ -320,7 +320,7 @@ class ApiSync :NSObject {
         _ = loginData.object(at: 0) as! LoginTbl
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + " " + (accessToken ?? "")]
-        var urlString = Configuration.Dev(packet: ApiKeys.blockYardSubmitOrder.rawValue).getUrl()
+        let urlString = Configuration.Dev(packet: ApiKeys.blockYardSubmitOrder.rawValue).getUrl()
         
         NSLog("urlString= ",urlString)
         var request = URLRequest(url: URL(string: urlString)! )
@@ -795,7 +795,7 @@ class ApiSync :NSObject {
         let addDealerCodeCheck = UserDefaults.standard.value(forKey: keyValue.addDealerCodeCheck.rawValue) as? Bool
         let dealerCode = UserDefaults.standard.value(forKey: keyValue.dealerCode.rawValue) as? String
         
-        if addDealerCodeCheck == false {
+        if !(addDealerCodeCheck ?? false) {
           if dealerCode == "" || dealerCode == nil{
               apiSyncClass.dealerCode = ""
           } else {
@@ -914,10 +914,10 @@ class ApiSync :NSObject {
         var dateString = String()
         if dateFormat == "MM" {
             
-            dateString = DateFormatters.MMDDYYYYFormat
+            dateString = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             
-            dateString = DateFormatters.DDMMYYYYFormat
+            dateString = DateFormatters.DDMMYYYYAllCapsFormat
         }
         let adonDictOnServer = NSMutableDictionary()
         adonDictOnServer.setValue(userId, forKey: keyValue.capsUserId.rawValue)

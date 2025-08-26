@@ -39,7 +39,7 @@ class GetProviderViewModel {
         deleteRecordFromDatabase(entityName: Entities.evaluationMarketsTblEntity)
         
         for item in dataModel.providers {
-            let saveObject : [String:Any] = ["lastUpdated": item.lastUpdated as Any,"isDefault": item.isDefault as Any,"providerGroup": item.providerGroup as Any,"providerGroupId": item.providerGroupID as Any,keyValue.providerId.rawValue: item.providerID as Any, "providerName": item.provider as Any,"species": item.species as Any,"speciesId": item.speciesID as Any,"responseCode": dataModel.responseCode,keyValue.errorDetail.rawValue: dataModel.errorDetail,keyValue.messageKey.rawValue: dataModel.message]
+            let saveObject : [String:Any] = ["lastUpdated": item.lastUpdated as Any,"isDefault": item.isDefault as Any,"providerGroup": item.providerGroup as Any,"providerGroupId": item.providerGroupID as Any,keyValue.providerIdText.rawValue: item.providerID as Any, "providerName": item.provider as Any,"species": item.species as Any,"speciesId": item.speciesID as Any,"responseCode": dataModel.responseCode,keyValue.errorDetail.rawValue: dataModel.errorDetail,keyValue.messageKey.rawValue: dataModel.message]
             
             insert(entity: Entities.getProviderTblEntity, attributeKey: nil, objectToSave: saveObject)
             

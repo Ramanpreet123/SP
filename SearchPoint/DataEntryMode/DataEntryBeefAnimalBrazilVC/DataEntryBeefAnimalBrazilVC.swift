@@ -1018,12 +1018,12 @@ class DataEntryBeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate {
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
-            genotypeDateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
-            genotypeDateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         dateBttnOutlet.setTitle("", for: .normal)
@@ -1057,12 +1057,12 @@ class DataEntryBeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate {
         
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
-            genotypeDateTextField.placeholder = DateFormatters.MMDDYYYYFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
-            genotypeDateTextField.placeholder = DateFormatters.DDMMYYYYFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         dateOfLbl.textColor = UIColor.gray

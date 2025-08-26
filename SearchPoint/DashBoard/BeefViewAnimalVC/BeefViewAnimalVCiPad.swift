@@ -20,7 +20,6 @@ class BeefViewAnimalVCiPad: UIViewController {
     @IBOutlet weak var networkImgStatus: UIImageView!
     @IBOutlet weak var notificationLblCount: UILabel!
     @IBOutlet weak var cartTitle: UILabel!
-    @IBOutlet weak var APPsTATUSlbl: UILabel!
     @IBOutlet weak var noAnimalToast: UILabel!
     @IBOutlet weak var clearOrderOutlet: UIButton!
     @IBOutlet weak var offlineBtnOutlet: UIButton!

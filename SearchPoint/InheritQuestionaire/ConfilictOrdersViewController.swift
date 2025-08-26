@@ -248,7 +248,7 @@ extension ConfilictOrdersViewController :UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let animalVal  =  conficlitOrders[indexPath.section] as! AnimaladdTbl
         UserDefaults.standard.set(Int(animalVal.animalId), forKey: keyValue.animalIdSelectionCart.rawValue)
-        UserDefaults.standard.set(1, forKey: keyValue.placeorder.rawValue)
+        UserDefaults.standard.set(1, forKey: keyValue.placeOrderText.rawValue)
         self.delegateCustom1?.selectionObject!(check: true)
         self.dismiss(animated: false, completion: nil)
     }

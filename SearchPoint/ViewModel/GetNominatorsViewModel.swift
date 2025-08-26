@@ -36,7 +36,7 @@ class GetNominatorsViewModel{
         deleteRecordFromDatabase(entityName: "GetNominatorsTbl")
         for nomi in dataModel.nominators {
             
-            let saveObject : [String:Any] = ["nominatorId" :nomi.nominatorID as Any, "nominator":nomi.nominator as Any,"isDefault":nomi.isDefault as Any,keyValue.providerId.rawValue:nomi.providerID as Any, "provider":nomi.provider as Any, "providerGroupId":nomi.providerGroupID as Any,"providerGroup":nomi.providerGroup as Any,"lastUpdated":nomi.lastUpdated as Any,"responseCode":dataModel.responseCode as Any,keyValue.errorDetail.rawValue:dataModel.errorDetail as Any,keyValue.messageKey.rawValue:dataModel.message as Any]
+            let saveObject : [String:Any] = ["nominatorId" :nomi.nominatorID as Any, "nominator":nomi.nominator as Any,"isDefault":nomi.isDefault as Any,keyValue.providerIdText.rawValue:nomi.providerID as Any, "provider":nomi.provider as Any, "providerGroupId":nomi.providerGroupID as Any,"providerGroup":nomi.providerGroup as Any,"lastUpdated":nomi.lastUpdated as Any,"responseCode":dataModel.responseCode as Any,keyValue.errorDetail.rawValue:dataModel.errorDetail as Any,keyValue.messageKey.rawValue:dataModel.message as Any]
             insert(entity: "GetNominatorsTbl", attributeKey: nil, objectToSave: saveObject)
         }
     }

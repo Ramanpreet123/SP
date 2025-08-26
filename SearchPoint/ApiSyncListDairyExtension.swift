@@ -101,7 +101,7 @@ extension ApiSyncList {
             
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
             let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-            var urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
+            let urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
             var request = URLRequest(url: URL(string: urlString)! )
             request.httpMethod = "POST"
             request.allHTTPHeaderFields = headerDict
@@ -245,7 +245,7 @@ extension ApiSyncList {
             print(json!)
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
             let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-            var urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
+            let urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
             var request = URLRequest(url: URL(string: urlString)! )
             request.httpMethod = "POST"
             request.allHTTPHeaderFields = headerDict
@@ -358,7 +358,7 @@ extension ApiSyncList {
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-        var urlString = Configuration.Dev(packet: ApiKeys.emailMeGroup.rawValue).getUrl()
+        let urlString = Configuration.Dev(packet: ApiKeys.emailMeGroup.rawValue).getUrl()
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict

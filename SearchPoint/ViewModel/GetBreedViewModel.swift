@@ -60,7 +60,7 @@ class GetBreedViewModel{
                     bredName = breedArray.name ?? ""
                 }
                
-                var saveObject : [String:Any] = [keyValue.breedId.rawValue:breedArray.breedID as Any , keyValue.capsBreedName.rawValue:breedArray.name as Any ,keyValue.alpha2.rawValue: breedArray.alpha2 as Any,keyValue.threeCharCode.rawValue:bredName as Any,"abbrev":"","isdefault" :breedArray.isDefault as Any,"speciesId":breedArray.speciesID as Any,"speciesName":breedArray.species as Any,"provideName" :productN.provider as Any, keyValue.providerId.rawValue:productN.providerID as Any,"breedCode":"","productId":productN.productID as Any
+                var saveObject : [String:Any] = [keyValue.breedId.rawValue:breedArray.breedID as Any , keyValue.capsBreedName.rawValue:breedArray.name as Any ,keyValue.alpha2.rawValue: breedArray.alpha2 as Any,keyValue.threeCharCode.rawValue:bredName as Any,"abbrev":"","isdefault" :breedArray.isDefault as Any,"speciesId":breedArray.speciesID as Any,"speciesName":breedArray.species as Any,"provideName" :productN.provider as Any, keyValue.providerIdText.rawValue:productN.providerID as Any,"breedCode":"","productId":productN.productID as Any
                                                  , "market": productN.market as Any,"marketId":productN.marketID as Any,"lastUpdated":breedArray.lastUpdated as Any]
                 
                 
