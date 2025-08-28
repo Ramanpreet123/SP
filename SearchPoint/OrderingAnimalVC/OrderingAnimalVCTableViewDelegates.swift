@@ -62,7 +62,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
         
         if btnTag == 10 {
             let breeedData = self.breedArr[indexPath.row]  as! GetBreedsTbl
-            if breeedData.breedId == "1f263617-923b-450f-825b-1489bfb42d7f" && breeedData.alpha2?.isEmpty == true {
+            if breeedData.breedId == LocalizedStrings.burkinaFasoBreedId && breeedData.alpha2?.isEmpty == true {
                 cell.textLabel?.text = "BF"
             } else {
                 cell.textLabel?.text = breeedData.alpha2
@@ -263,7 +263,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                         UserDefaults.standard.set(self.breedId, forKey: "breed")
                         self.breedBtnOutlet.setTitleColor(.black, for: .normal)
                         
-                        if breeedData.breedId == "1f263617-923b-450f-825b-1489bfb42d7f" && breeedData.alpha2?.isEmpty == true {
+                        if breeedData.breedId == LocalizedStrings.burkinaFasoBreedId && breeedData.alpha2?.isEmpty == true {
                             self.breedBtnOutlet.setTitle("BF", for: .normal)
                             UserDefaults.standard.set("BF", forKey: "breedName")
                             
@@ -280,7 +280,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else
                                 {
-                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("You are trying to select a breed which is different from the Official ID. Do you want to proceed?", comment: ""), preferredStyle: .alert)
+                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.selectedDiffBreed, comment: ""), preferredStyle: .alert)
                                     
                                     alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { (_) in
                                         self.breedBtnOutlet.setTitle(breeedData.alpha2, for: .normal)
@@ -323,7 +323,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else
                                 {
-                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("You are trying to select a breed which is different from the Official ID. Do you want to proceed?", comment: ""), preferredStyle: .alert)
+                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.selectedDiffBreed, comment: ""), preferredStyle: .alert)
                                     
                                     alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { (_) in
                                         self.breedBtnOutlet.setTitle(breeedData.alpha2, for: .normal)
@@ -405,7 +405,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                     
                     UserDefaults.standard.set(self.breedId, forKey: "breed")
                     self.breedBtnOutlet.setTitleColor(.black, for: .normal)
-                    if breeedData.breedId == "1f263617-923b-450f-825b-1489bfb42d7f" && breeedData.alpha2?.isEmpty == true {
+                    if breeedData.breedId == LocalizedStrings.burkinaFasoBreedId && breeedData.alpha2?.isEmpty == true {
                         self.breedBtnOutlet.setTitle("BF", for: .normal)
                         UserDefaults.standard.set("BF", forKey: "breedName")
                     } else {
@@ -424,7 +424,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                             }
                             else
                             {
-                                let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("You are trying to select a breed which is different from the Official ID. Do you want to proceed?", comment: ""), preferredStyle: .alert)
+                                let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.selectedDiffBreed, comment: ""), preferredStyle: .alert)
                                 
                                 alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (_) in
                                     
@@ -469,7 +469,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else
                                 {
-                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("You are trying to select a breed which is different from the Official ID. Do you want to proceed?", comment: ""), preferredStyle: .alert)
+                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.selectedDiffBreed, comment: ""), preferredStyle: .alert)
                                     
                                     alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (_) in
                                         
@@ -511,7 +511,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else
                                 {
-                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("You are trying to select a breed which is different from the Official ID. Do you want to proceed?", comment: ""), preferredStyle: .alert)
+                                    let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.selectedDiffBreed, comment: ""), preferredStyle: .alert)
                                     
                                     alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (_) in
                                         
@@ -586,7 +586,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 self.breedBtnOutlet.setTitleColor(.black, for: .normal)
-                if breeedData.breedId == "1f263617-923b-450f-825b-1489bfb42d7f" && breeedData.alpha2?.isEmpty == true {
+                if breeedData.breedId == LocalizedStrings.burkinaFasoBreedId && breeedData.alpha2?.isEmpty == true {
                     self.breedBtnOutlet.setTitle("BF", for: .normal)
                     UserDefaults.standard.set("BF", forKey: "breedName")
                     UserDefaults.standard.set( breeedData.breedId, forKey: "breed")

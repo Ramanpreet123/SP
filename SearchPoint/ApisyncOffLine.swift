@@ -446,8 +446,19 @@ class ApisyncOffLine :NSObject {
         
         do {
             let jsonEncoder = JSONEncoder()
-            let jsonData = try! jsonEncoder.encode(apiSyncClass)
-            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            var jsonData: Data?
+            do {
+                jsonData = try jsonEncoder.encode(apiSyncClass)
+                // use jsonData safely
+            } catch {
+                print("Failed to encode updateGroup: \(error.localizedDescription)")
+            }
+            
+            guard let body = jsonData else {
+                print("No JSON data to send")
+                return
+            }
+            let json = String(data: body, encoding: String.Encoding.utf8)
             print(json!)
             let _: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
@@ -465,7 +476,7 @@ class ApisyncOffLine :NSObject {
             request.httpMethod = "POST"
             request.allHTTPHeaderFields = headerDict
             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = jsonData
+            request.httpBody = body
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -603,8 +614,19 @@ class ApisyncOffLine :NSObject {
         
         do {
             let jsonEncoder = JSONEncoder()
-            let jsonData = try! jsonEncoder.encode(apiSyncClass)
-            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            var jsonData: Data?
+            do {
+                jsonData = try jsonEncoder.encode(apiSyncClass)
+                // use jsonData safely
+            } catch {
+                print("Failed to encode updateGroup: \(error.localizedDescription)")
+            }
+            
+            guard let body = jsonData else {
+                print("No JSON data to send")
+                return
+            }
+            let json = String(data: body, encoding: String.Encoding.utf8)
             print(json!)
             let _: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
@@ -622,7 +644,7 @@ class ApisyncOffLine :NSObject {
             request.httpMethod = "POST"
             request.allHTTPHeaderFields = headerDict
             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = jsonData
+            request.httpBody = body
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -721,20 +743,27 @@ class ApisyncOffLine :NSObject {
         
         adonDictOnServer.setValue(adonServerArray, forKey: keyValue.productDetails.rawValue)
         do {
-            
-            let jsonData = try! JSONSerialization.data(withJSONObject: adonDictOnServer, options: JSONSerialization.WritingOptions.prettyPrinted)
-            var jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-            jsonString = jsonString.trimmingCharacters(in: CharacterSet.whitespaces)
-            print(jsonString)
-            
-            let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"BEARER" + " " + "ea4369e9-d4a9-4322-856b-5323e21ff351"]
-            let urlString: String = Configuration.Dev(packet: ApiKeys.productSave.rawValue).getUrl()
-            var request = URLRequest(url: URL(string: urlString)! )
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = headerDict
-            request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = try! JSONSerialization.data(withJSONObject: adonDictOnServer, options: [])
-            
+             let jsonData = try JSONSerialization.data(withJSONObject: adonDictOnServer,
+                                                       options: .prettyPrinted)
+             if var jsonString = String(data: jsonData, encoding: .utf8) {
+                 jsonString = jsonString.trimmingCharacters(in: .whitespacesAndNewlines)
+                 print("JSON Payload:", jsonString)
+             }
+             let headerDict: [String:String] = [
+                 LocalizedStrings.authorizationHeader: "BEARER ea4369e9-d4a9-4322-856b-5323e21ff351"
+             ]
+             
+             let urlString = Configuration.Dev(packet: ApiKeys.productSave.rawValue).getUrl()
+             guard let url = URL(string: urlString) else {
+                 print("Invalid URL: \(urlString)")
+                 return
+             }
+             
+             var request = URLRequest(url: url)
+             request.httpMethod = "POST"
+             request.allHTTPHeaderFields = headerDict
+             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
+             request.httpBody = jsonData
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -774,6 +803,9 @@ class ApisyncOffLine :NSObject {
                     }
                 }
             }
+        }
+        catch {
+            print("Failed to serialize JSON:", error.localizedDescription)
         }
     }
     
@@ -824,20 +856,29 @@ class ApisyncOffLine :NSObject {
         adonDictOnServer.setValue(adonServerArray, forKey: keyValue.addOnDetails.rawValue)
         do {
             
-            let jsonData = try! JSONSerialization.data(withJSONObject: adonDictOnServer, options: JSONSerialization.WritingOptions.prettyPrinted)
-            var jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-            jsonString = jsonString.trimmingCharacters(in: CharacterSet.whitespaces)
-            print(jsonString)
+            let jsonData = try JSONSerialization.data(withJSONObject: adonDictOnServer,
+                                                       options: .prettyPrinted)
             
-            let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"BEARER" + " " + "ea4369e9-d4a9-4322-856b-5323e21ff351"]
-            
-            let urlString: String = Configuration.Dev(packet: ApiKeys.adonSave.rawValue).getUrl()
-            var request = URLRequest(url: URL(string: urlString)! )
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = headerDict
-            request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = try! JSONSerialization.data(withJSONObject: adonDictOnServer, options: [])
-            
+            if var jsonString = String(data: jsonData, encoding: .utf8) {
+                 jsonString = jsonString.trimmingCharacters(in: .whitespacesAndNewlines)
+                 print("JSON Payload:", jsonString)
+             }
+             
+             let headerDict: [String:String] = [
+                 LocalizedStrings.authorizationHeader: "BEARER ea4369e9-d4a9-4322-856b-5323e21ff351"
+             ]
+             
+             let urlString = Configuration.Dev(packet: ApiKeys.adonSave.rawValue).getUrl()
+             guard let url = URL(string: urlString) else {
+                 print("Invalid URL:", urlString)
+                 return
+             }
+             
+             var request = URLRequest(url: url)
+             request.httpMethod = "POST"
+             request.allHTTPHeaderFields = headerDict
+             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
+             request.httpBody = jsonData
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -873,6 +914,9 @@ class ApisyncOffLine :NSObject {
                     }
                 }
             }
+        }
+        catch {
+            print("Failed to serialize JSON:", error.localizedDescription)
         }
     }
 }

@@ -178,14 +178,14 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
         }
         
         self.speiecCountCheck = fetchSpeciesAllData(entityName: "GetSpeciesTbl")
-        if UserDefaults.standard.value(forKey: "name") as? String == "CLARIFIDE CDCB (US)" {
+        if UserDefaults.standard.value(forKey: "name") as? String == byDefaultProvider {
             UserDefaults.standard.setValue("Dairy", forKey: "name")
         }
         if UserDefaults.standard.value(forKey: "name") as? String == "Dairy" ||  UserDefaults.standard.value(forKey: "name") as? String == nil  {
-            self.provideCountCheck = fetchdataOfProvider(specisId: "074dc82b-2b82-4ee6-99c6-f9691937394d") as! [GetProviderTbl]
+            self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.dairySpeciesId) as! [GetProviderTbl]
             getListProvider = providerEvaliuater(arr: provideCountCheck)
             if getListProvider.count == 0 {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated evaluation provider found for this customer in the app.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(LocalizedStrings.noEvalProvider, comment: ""))
                 marketView.isHidden = true
                 providerTitleLbl.isHidden = true
             } else {
@@ -200,7 +200,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
         
         else if UserDefaults.standard.value(forKey: "name") as? String == "Beef" {
             
-            self.provideCountCheck = fetchdataOfProvider(specisId: "151e2230-9a01-4828-a105-d87a92b5be2f") as! [GetProviderTbl]
+            self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.beefSpeciesId) as! [GetProviderTbl]
             
             getListProvider = providerEvaliuater(arr: provideCountCheck)
             if getListProvider.count == 0 {
@@ -292,7 +292,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
             let beefScanner = fetchDat?.beefUSscannerSelection
             let keyboardSelection = fetchDat?.keyboardSelection
             let defaultDatePicker = fetchDat?.defaultDatePicker
-            if fetchDat?.speciesName == "Dairy" && fetchDat?.providerName == "US Dairy Products"{
+            if fetchDat?.speciesName == "Dairy" && fetchDat?.providerName == keyValue.USDairyProducts.rawValue{
                 UserDefaults.standard.set(fetchDat1, forKey: "scannerSelection")
                 if fetchDat1 == "ocr"  {
                     ocrBtnOutlet.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
@@ -310,8 +310,8 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                     UserDefaults.standard.set("rfid", forKey: "scannerSelection")
                 }
                 
-            } else if (fetchDat?.speciesName == "Beef" && fetchDat?.providerName == "US Dairy Products") || (fetchDat?.speciesName == "Beef" && fetchDat?.providerName == "CLARIFIDE CDCB (US)")  {
-                if beefScanner == "ocr" && fetchDat?.providerName == "US Dairy Products" {
+            } else if (fetchDat?.speciesName == "Beef" && fetchDat?.providerName == keyValue.USDairyProducts.rawValue) || (fetchDat?.speciesName == "Beef" && fetchDat?.providerName == byDefaultProvider)  {
+                if beefScanner == "ocr" && fetchDat?.providerName == keyValue.USDairyProducts.rawValue {
                     ocrBtnOutlet.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
                     rfidBtnOutlet.layer.borderColor = UIColor.lightGray.cgColor
                     ocrBtnOutlet.layer.borderWidth = 2
@@ -661,7 +661,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                 let selectedProduct = fetchAllData(entityName: "GetProductTblBeef")
                 let name = "GeneSTAR\u{00ae} Black"
                 for product in selectedProduct as? [GetProductTblBeef] ?? [] {
-                    if product.productName?.uppercased() == "Genotype Only".uppercased() {
+                    if product.productName?.uppercased() == keyValue.genoTypeOnly.rawValue.uppercased() {
                         UserDefaults.standard.set(Int(product.productId), forKey: "BfProductId")
                         isGenotypeOnlyAdded = true
                     }
@@ -685,7 +685,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                         UserDefaults.standard.set("GenotypeStarblack", forKey: "beefProduct")
                     }
                     else{
-                        UserDefaults.standard.set("Genotype Only", forKey: "beefProduct")
+                        UserDefaults.standard.set(keyValue.genoTypeOnly.rawValue, forKey: "beefProduct")
                     }
                     
                 }
@@ -696,7 +696,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                     }
                     else
                     {
-                        UserDefaults.standard.set("Non-Genotype", forKey: "beefProduct")
+                        UserDefaults.standard.set(keyValue.nonGenoType.rawValue, forKey: "beefProduct")
                     }
                 }
             }
@@ -719,7 +719,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                                 
                             }
                             else{
-                                UserDefaults.standard.set("Global HD50K", forKey: "beefProduct")
+                                UserDefaults.standard.set(keyValue.globalHD50K.rawValue, forKey: "beefProduct")
                             }
                             
                             UserDefaults.standard.set("true", forKey: "settingDone")
@@ -770,7 +770,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                                 
                             }
                             else {
-                                UserDefaults.standard.set("Global HD50K", forKey: "beefProduct")
+                                UserDefaults.standard.set(keyValue.globalHD50K.rawValue, forKey: "beefProduct")
                             }
                             
                             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: "DashboardVC")), animated: true)
@@ -848,7 +848,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
         
         if UserDefaults.standard.value(forKey: "name") as? String  == "Beef"{
             if (UserDefaults.standard.integer(forKey:"BeefPvid") as? Int)! == 0 {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr:NSLocalizedString("Please select a product grouping.", comment: "") )
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr:NSLocalizedString(AlertMessagesStrings.selectProductGrouping, comment: "") )
                 return
             }
         } else {
@@ -888,7 +888,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
             if UserDefaults.standard.string(forKey: "name") == "Beef" {
                 
                 guard UserDefaults.standard.integer(forKey: "BeefPvid") != 0 else {
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr:NSLocalizedString("Please select a product grouping.", comment: "") )
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr:NSLocalizedString(AlertMessagesStrings.selectProductGrouping, comment: "") )
                     return
                 }
                 let  pvid = UserDefaults.standard.integer(forKey: "BeefPvid")
@@ -1072,7 +1072,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
             if UserDefaults.standard.string(forKey: "name") == "Beef"{
                 
                 guard UserDefaults.standard.integer(forKey: "BeefPvid") != 0 else {
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please select a product grouping.", comment: ""))
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.selectProductGrouping, comment: ""))
                     return
                 }
                 
@@ -1452,10 +1452,10 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                 
             }
             
-            if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (US)" || UserDefaults.standard.string(forKey: "providerNameUS") == "US Dairy Products" {
+            if UserDefaults.standard.string(forKey: "providerNameUS") == byDefaultProvider || UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.USDairyProducts.rawValue {
                 nominatorHeightConst.constant = 100
                 
-            }else  if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (BR)"{
+            }else  if UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.clarifideCDCBBR.rawValue{
                 nominatorHeightConst.constant = 100
                 
             }
@@ -1504,7 +1504,7 @@ class OrderingDefaultsVC: UIViewController ,offlineCustomView1 {
                 providerTitleLbl.isHidden = false
             }
             
-            if UserDefaults.standard.integer(forKey:"BeefPvid") == 13 || UserDefaults.standard.integer(forKey:"BeefPvid") == 5 && (UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (US)" || UserDefaults.standard.string(forKey: "providerNameUS") == "US Dairy Products")  {
+            if UserDefaults.standard.integer(forKey:"BeefPvid") == 13 || UserDefaults.standard.integer(forKey:"BeefPvid") == 5 && (UserDefaults.standard.string(forKey: "providerNameUS") == byDefaultProvider || UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.USDairyProducts.rawValue)  {
                 self.scannerViewHeight.constant = 100
                 idScannerTitle.isHidden = false
                 rfidBtnOutlet.isHidden = false
@@ -1929,11 +1929,11 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
             if spName == "Dairy" {
                 let item = evalutionProviderCV.dequeueReusableCell(withReuseIdentifier: "provider", for: indexPath) as! EvaluationProviderViewCell
                 
-                if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (US)" || UserDefaults.standard.string(forKey: "providerNameUS") == "US Dairy Products"{
+                if UserDefaults.standard.string(forKey: "providerNameUS") == byDefaultProvider || UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.USDairyProducts.rawValue{
                     nominatorHeightConst.constant = 100
                     
                 }
-                else  if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (BR)"{
+                else  if UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.clarifideCDCBBR.rawValue{
                     nominatorHeightConst.constant = 100
                     
                 }else  {
@@ -1945,7 +1945,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 item.EcalutionProviderBttn.setTitle("\(arrData.providerName!)", for: .normal )
                 item.EcalutionProviderBttn.setTitleColor(UIColor.gray, for: .normal)
                 item.EcalutionProviderBttn.titleLabel?.lineBreakMode = .byWordWrapping
-                self.provideCountCheck = fetchdataOfProvider(specisId: "074dc82b-2b82-4ee6-99c6-f9691937394d") as! [GetProviderTbl]
+                self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.dairySpeciesId) as! [GetProviderTbl]
                 getListProvider = providerEvaliuater(arr: provideCountCheck)
                 
                 if getListProvider.count == 1 || getListProvider.count == 2 {
@@ -1982,7 +1982,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 return item
                 
             } else {
-                self.provideCountCheck = fetchdataOfProvider(specisId: "151e2230-9a01-4828-a105-d87a92b5be2f") as! [GetProviderTbl]
+                self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.beefSpeciesId) as! [GetProviderTbl]
                 getListProvider = providerEvaliuater(arr: provideCountCheck)
                 let item = evalutionProviderCV.dequeueReusableCell(withReuseIdentifier: "provider", for: indexPath) as! EvaluationProviderViewCell
                 item.EcalutionProviderBttn.tag = indexPath.row
@@ -2040,15 +2040,15 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
             if sender.layer.borderColor == UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor {
                 return
             }
-            self.provideCountCheck = fetchdataOfProvider(specisId: "074dc82b-2b82-4ee6-99c6-f9691937394d") as! [GetProviderTbl]
+            self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.dairySpeciesId) as! [GetProviderTbl]
             if providerEvaliuater(arr: provideCountCheck).count == 0{
                 
                 self.evalutionProviderCV.reloadData()
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated evaluation provider found for this customer in the app.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(LocalizedStrings.noEvalProvider, comment: ""))
                 
                 
-                self.provideCountCheck = fetchdataOfProvider(specisId: "151e2230-9a01-4828-a105-d87a92b5be2f") as! [GetProviderTbl]
+                self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.beefSpeciesId) as! [GetProviderTbl]
                 getListProvider = providerEvaliuater(arr: provideCountCheck)
                 
                 return
@@ -2058,7 +2058,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 getListProvider = providerEvaliuater(arr: provideCountCheck)
             }
             if getListProvider.count == 0 {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated evaluation provider found for this customer in the app.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(LocalizedStrings.noEvalProvider, comment: ""))
                 return
                 
             } else {
@@ -2121,11 +2121,11 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 primarlyHeightConst.constant = 0
             }
             
-            if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (US)" || UserDefaults.standard.string(forKey: "providerNameUS") == "US Dairy Products"{
+            if UserDefaults.standard.string(forKey: "providerNameUS") == byDefaultProvider || UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.USDairyProducts.rawValue{
                 self.nominatorHeightConst.constant = 100
                 
             }
-            else if  UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (BR)"{
+            else if  UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.clarifideCDCBBR.rawValue{
                 self.nominatorHeightConst.constant = 100
                 
             }
@@ -2172,12 +2172,12 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
             let marketId = UserDefaults.standard.object(forKey: "currentActiveMarketId") as? String ?? ""
             
             
-            self.provideCountCheck = fetchdataOfProvider(specisId: "151e2230-9a01-4828-a105-d87a92b5be2f") as! [GetProviderTbl]
+            self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.beefSpeciesId) as! [GetProviderTbl]
             let providercheck = providerEvaliuater(arr: provideCountCheck)
             
             if providercheck.count == 0 {
                 CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated product found for this customer in the app.", comment: ""))
-                self.provideCountCheck = fetchdataOfProvider(specisId: "074dc82b-2b82-4ee6-99c6-f9691937394d") as! [GetProviderTbl]
+                self.provideCountCheck = fetchdataOfProvider(specisId: SpeciesID.dairySpeciesId) as! [GetProviderTbl]
                 getListProvider = providerEvaliuater(arr: provideCountCheck)
                 return
                 
@@ -2186,7 +2186,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 let selectedProvider = getListProvider.filter({$0.isDefault })
                 if selectedProvider.count > 0 {
                     if UserDefaults.standard.integer(forKey:"BeefPvid") == 13 || UserDefaults.standard.integer(forKey:"BeefPvid") == 5 {
-                        if UserDefaults.standard.object(forKey: "beefScannerSelection") as? String ==  nil && UserDefaults.standard.string(forKey: "ProviderName") == "US Dairy Products" {
+                        if UserDefaults.standard.object(forKey: "beefScannerSelection") as? String ==  nil && UserDefaults.standard.string(forKey: "ProviderName") == keyValue.USDairyProducts.rawValue {
                             UserDefaults.standard.set("ocr", forKey: "beefScannerSelection")
                         }
                     }
@@ -2556,10 +2556,10 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                         self.updateProviderId()
                     }
                     
-                    if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (US)" || UserDefaults.standard.string(forKey: "providerNameUS") == "US Dairy Products"{
+                    if UserDefaults.standard.string(forKey: "providerNameUS") == self.byDefaultProvider || UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.USDairyProducts.rawValue{
                         self.nominatorHeightConst.constant = 100
                         
-                    }else  if UserDefaults.standard.string(forKey: "providerNameUS") == "CLARIFIDE CDCB (BR)"{
+                    }else  if UserDefaults.standard.string(forKey: "providerNameUS") == keyValue.clarifideCDCBBR.rawValue{
                         self.nominatorHeightConst.constant = 100
                         
                     }
@@ -2832,7 +2832,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 
                 let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
-                    NSLog("Cancel Pressed")
+                    print(LocalizedStrings.cancelPressed)
                     return
                 }
                 alertController.addAction(cancelAction)
@@ -2979,7 +2979,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                             }
                             let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertAction.Style.default) {
                                 UIAlertAction in
-                                NSLog("Cancel Pressed")
+                                print(LocalizedStrings.cancelPressed)
                             }
                             alertController.addAction(cancelAction)
                             alertController.addAction(okAction)
@@ -3113,7 +3113,7 @@ extension OrderingDefaultsVC : UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "beefproducts", for: indexPath) as! BeefProductsTableViewCell
         let product =  self.productArr.object(at: indexPath.row) as! GetProductTbl
         
-        if product.productName == "Genotype Only"
+        if product.productName == keyValue.genoTypeOnly.rawValue
         {
             let langId = UserDefaults.standard.value(forKey: "lngId") as? Int
             if langId == 2{
@@ -3396,7 +3396,7 @@ extension OrderingDefaultsVC : UITableViewDelegate,UITableViewDataSource{
                 }
                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
-                    NSLog("Cancel Pressed")
+                    print(LocalizedStrings.cancelPressed)
                 }
                 
                 alertController.addAction(okAction)
@@ -3618,7 +3618,7 @@ extension OrderingDefaultsVC{
     func deleteList(listName: String, customerId: Int64, listID: Int) {
         
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as? String
-        let headerDict = ["Authorization": accessToken!,"Content-Type" : "application/x-www-form-urlencoded"]
+        let headerDict = ["Authorization": accessToken!,LocalizedStrings.contentType : "application/x-www-form-urlencoded"]
         
         let urlString = Configuration.Dev(packet: ApiKeys.deleteList.rawValue).getUrl()
         let parameters : [String: Any] = ["customerId": customerId,"listName":listName]
@@ -3626,7 +3626,7 @@ extension OrderingDefaultsVC{
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = headerDict
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: LocalizedStrings.contentType)
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {

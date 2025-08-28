@@ -55,7 +55,7 @@ extension LoginScreenSetViewModel:ResponseDelegate{
         }
         else{
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(LoginScreenSetModel.self, from: data!)
+            modalObject = try? decoder.decode(LoginScreenSetModel.self, from: data!)
             
             
             if modalObject != nil {

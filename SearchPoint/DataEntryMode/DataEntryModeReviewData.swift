@@ -81,7 +81,7 @@ class DataEntryModeReviewData: UIViewController{
         reviewDataTitle.text = NSLocalizedString(ButtonTitles.reviewDataText, comment: "")
         sortByTtitle.text = ButtonTitles.sortByText.localized
         totalAnimalTitleLbl.text = LocalizedStrings.totalAnimalsAdded.localized
-        emailMeEnterData.text = LocalizedStrings.emailEnteredData.localized
+        emailMeEnterData.text = ButtonTitles.emailEnteredData.localized
         appStatusText.text = NSLocalizedString(ButtonTitles.appStatusText, comment: "")
         saveListOutlet.setTitle(LocalizedStrings.saveList.localized, for: .normal)
         bckkkBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.backBtnText, comment: ""), for: .normal)

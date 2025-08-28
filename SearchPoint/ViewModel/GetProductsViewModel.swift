@@ -104,7 +104,7 @@ extension GetProductsViewModel: ResponseDelegate {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(GetProductsModel.self, from: data!)
+        modalObject = try? decoder.decode(GetProductsModel.self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {

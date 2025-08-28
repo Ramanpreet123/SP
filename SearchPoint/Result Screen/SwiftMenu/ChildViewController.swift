@@ -105,7 +105,6 @@ class ChildViewController: UIViewController {
                 if fetchTempObj.count > 1{
                 }
                 let objFetch = fetchTempObj.object(at: 0) as! ResultMasterTemplate
-                print("breedid = ",selectedBreedID)
                 print(objFetch.breedFilter as Any)
                 let breedFilter : [String] = objFetch.breedFilter as! [String]
                 if breedFilter.count > 0 {
@@ -186,7 +185,6 @@ class ChildViewController: UIViewController {
             if resultHideIndex.count == 0 {
                 let fetchTempObj = fetchResultTraitIdTemplate1(entityName: Entities.resultMasterTemplateTblEntity,traitId: traitId ?? "")
                 let objFetch = fetchTempObj.object(at: 0) as! ResultMasterTemplate
-                print("breedid = ",selectedBreedID)
                 let breedFilter : [String] = objFetch.breedFilter as! [String]
                 if breedFilter.count > 0 {
                     let breedArray = breedFilter.filter{$0 == selectedBreedID}
@@ -506,7 +504,7 @@ class ChildViewController: UIViewController {
                                                 _ = deletGroupInfoResultGroupDetail(entityName: "ResultGroupsAnimals", groupName: groupnamecheck, customerId: self.custmerID, onFarmId: onFarmid ?? "", officalId: officialID ?? "")
                                                 let dateFormatter = DateFormatter()
                                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                                dateFormatter.dateFormat = "MM/dd/yyyy"
+                                                dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                                 
                                                 let date:Date? = dateFormatter.date(from:dob ?? "")
                                                 
@@ -521,7 +519,7 @@ class ChildViewController: UIViewController {
                                     {
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                                        dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                         
                                         let date:Date? = dateFormatter.date(from:dob ?? "")
                                         saveAnimaldataResult(entity: "ResultGroupsAnimals", serverGroupId: groupServerId, groupName: groupName, groupStatusId: Int(groupStatusId), groupStatus: groupStatus, groupTypeId: 0, groupTypeName: groupTypeName, animalID: animalID ?? "" , onFarmId: onFarmid ?? "", officalId:officialID ?? "", dob: dob ?? "", sex:sex ?? "", breedId: breedID ?? "", breedName: breedName ?? "", name: name ?? "", groupId: 0, customerId: self.custmerID,datedob: date ?? Date())
@@ -552,7 +550,7 @@ class ChildViewController: UIViewController {
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                dateFormatter.dateFormat = "MM/dd/yyyy"
+                                dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                 
                                 let date:Date? = dateFormatter.date(from:dob ?? "")
                                 
@@ -646,7 +644,7 @@ class ChildViewController: UIViewController {
                                                 _ = deletGroupInfoResultGroupDetail(entityName: "ResultGroupsAnimals", groupName: groupnamecheck, customerId: self.custmerID, onFarmId: onFarmid ?? "", officalId: officialID ?? "")
                                                 let dateFormatter = DateFormatter()
                                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                                dateFormatter.dateFormat = "MM/dd/yyyy"
+                                                dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                                 
                                                 let date:Date? = dateFormatter.date(from:dob ?? "")
                                                 
@@ -661,7 +659,7 @@ class ChildViewController: UIViewController {
                                     {
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                                        dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                         
                                         let date:Date? = dateFormatter.date(from:dob ?? "")
                                         saveAnimaldataResult(entity: "ResultGroupsAnimals", serverGroupId: groupServerId, groupName: groupName, groupStatusId: Int(groupStatusId), groupStatus: groupStatus, groupTypeId: 0, groupTypeName: groupTypeName, animalID: animalID ?? "" , onFarmId: onFarmid ?? "", officalId:officialID ?? "", dob: dob ?? "", sex:sex ?? "", breedId: breedID ?? "", breedName: breedName ?? "", name: name ?? "", groupId: 0, customerId: self.custmerID,datedob: date ?? Date())
@@ -693,7 +691,7 @@ class ChildViewController: UIViewController {
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                                dateFormatter.dateFormat = "MM/dd/yyyy"
+                                dateFormatter.dateFormat = DateFormatters.MMddyyyyFormat
                                 
                                 let date:Date? = dateFormatter.date(from:dob ?? "")
                                 
@@ -826,14 +824,25 @@ class ChildViewController: UIViewController {
         updateGruop.groupStatusId = groupStatusId
         updateGruop.description = decs
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(updateGruop)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(updateGruop)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
         let urlString = Configuration.Dev(packet: ApiKeys.update.rawValue).getUrl()
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -875,7 +884,6 @@ class ChildViewController: UIViewController {
                 
                 let fetchTempObj = fetchResultTraitIdTemplate1(entityName: Entities.resultMasterTemplateTblEntity,traitId: traitId ?? "")
                 let objFetch = fetchTempObj.object(at: 0) as! ResultMasterTemplate
-                print("breedid = ",selectedBreedID)
                 let breedFilter : [String] = objFetch.breedFilter as! [String]
                 if breedFilter.count > 0 {
                     let breedArray = breedFilter.filter{$0 == selectedBreedID}

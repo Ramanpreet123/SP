@@ -95,8 +95,19 @@ extension ApiSyncList {
             
             let jsonEncoder = JSONEncoder()
             
-            let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            var jsonData: Data?
+            do {
+                jsonData = try jsonEncoder.encode(apiSyncListClass)
+                // use jsonData safely
+            } catch {
+                print("Failed to encode updateGroup: \(error.localizedDescription)")
+            }
+            
+            guard let body = jsonData else {
+                print("No JSON data to send")
+                return
+            }
+            let json = String(data: body, encoding: String.Encoding.utf8)
             print(json!)
             
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
@@ -106,7 +117,7 @@ extension ApiSyncList {
             request.httpMethod = "POST"
             request.allHTTPHeaderFields = headerDict
             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = jsonData
+            request.httpBody = body
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -240,8 +251,19 @@ extension ApiSyncList {
             apiSyncListClass.speciesId = SpeciesID.dairySpeciesId
             apiSyncListClass.providerId = pvid
             let jsonEncoder = JSONEncoder()
-            let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            var jsonData: Data?
+            do {
+                jsonData = try jsonEncoder.encode(apiSyncListClass)
+                // use jsonData safely
+            } catch {
+                print("Failed to encode updateGroup: \(error.localizedDescription)")
+            }
+            
+            guard let body = jsonData else {
+                print("No JSON data to send")
+                return
+            }
+            let json = String(data: body, encoding: String.Encoding.utf8)
             print(json!)
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
             let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -251,7 +273,7 @@ extension ApiSyncList {
             request.allHTTPHeaderFields = headerDict
             
             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = jsonData
+            request.httpBody = body
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -301,7 +323,7 @@ extension ApiSyncList {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(SavingResponseModel.self, from: data!)
+        modalObject = try? decoder.decode(SavingResponseModel.self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {
@@ -353,8 +375,19 @@ extension ApiSyncList {
         emailApisyncGroup.emailAddresses = emailAdress
         
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(emailApisyncGroup)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(emailApisyncGroup)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -363,7 +396,7 @@ extension ApiSyncList {
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode

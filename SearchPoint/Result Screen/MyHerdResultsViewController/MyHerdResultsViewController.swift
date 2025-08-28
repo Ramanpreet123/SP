@@ -754,7 +754,9 @@ extension MyHerdResultsViewController : swipeCell {
 // MARK: - OBJECT PICK CART SCREEN
 extension MyHerdResultsViewController : objectPickCartScreen {
     func objectGetOnSelection(temp: Int) {
-        
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
     }
 }
 

@@ -20,6 +20,7 @@ import Security
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let messageType = "gcm.notification.messagetype"
     static let sharedInstance = AppDelegate()
     let gcmMessageIDKey = "gcm.Message_ID"
     var mobileVersionVM:MobileVersionViewModel?
@@ -67,7 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let authOptions: UNAuthorizationOptions = [.badge]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
-                completionHandler: { _,_ in }
+                completionHandler: { _,_ in
+                    print("Completion handler called")
+                }
                 
             )
         } else {
@@ -96,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-  
+    
     func initialNetworkCheck() {
         
         NotificationCenter.default.addObserver(self, selector:#selector(self.checkForReachability), name: NSNotification.Name.reachabilityChanged, object: nil)
@@ -128,7 +131,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {}
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Intentionally left empty.
+        // Override this method if you need to pause ongoing tasks,
+        // disable timers, or throttle down frame rates when the app
+        // is about to become inactive (e.g., incoming call or SMS).
+    }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         let farmValue = UserDefaults.standard.value(forKey: keyValue.farmValue.rawValue) as? String
@@ -179,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Access token missing.")
             return
         }
-
+        
         let headerDict: [String: String] = ["Authorization": " \(accessToken)"]
         let network = NetworkManager()
         network.delegate = self
@@ -191,7 +199,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ))
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {}
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Intentionally left empty.
+            // Override this method if you need to pause ongoing tasks,
+            // disable timers, or throttle down frame rates when the app
+            // is about to become inactive (e.g., incoming call or SMS).
+    }
     
     var customerOrderSetting = CustomerOrderSetting()
     
@@ -202,17 +215,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func applicationDidTimeout(notification: NSNotification) {
         if UserDefaults.standard.object(forKey: keyValue.firstLogin.rawValue) as? String ?? "" == "true" && Connectivity.isConnectedToInternet() {
-                self.showAlertForLogin()
-                print("application did timeout, perform actions")
+            self.showAlertForLogin()
+            print("application did timeout, perform actions")
         }
     }
     
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
-     
+        
         let container = NSPersistentContainer(name: "SearchPoint")
-      
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -229,35 +242,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-             
+                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-  
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
-        let aps = userInfo[AnyHashable("gcm.notification.messagetype")]!
+        let aps = userInfo[AnyHashable(messageType)]!
         print("get it",aps)
-        if let aps1 = (userInfo[AnyHashable("gcm.notification.messagetype")] as? NSString)?.integerValue, aps1 == 2{
-           
-                if let messageID = userInfo[gcmMessageIDKey] {
-                    print("Message ID: \(messageID)")
-                }
-                print(userInfo)
-                guard let idToDelete = userInfo["messageID"] as? String else {
-                    completionHandler(.noData)
-                    return
-                }
-                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [idToDelete])
+        if let aps1 = (userInfo[AnyHashable(messageType)] as? NSString)?.integerValue, aps1 == 2{
+            
+            if let messageID = userInfo[gcmMessageIDKey] {
+                print("Message ID: \(messageID)")
+            }
+            print(userInfo)
+            guard let idToDelete = userInfo["messageID"] as? String else {
                 completionHandler(.noData)
                 return
+            }
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [idToDelete])
+            completionHandler(.noData)
+            return
         }
         completionHandler(UIBackgroundFetchResult.newData)
     }
-  
+    
     
     func getDeviceIdentifierFromKeychain() -> String {
         
@@ -301,9 +314,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         
         print(userInfo)
-        let aps = userInfo[AnyHashable("gcm.notification.messagetype")]!
+        let aps = userInfo[AnyHashable(messageType)]!
         print("get it",aps)
-        if let aps1 = (userInfo[AnyHashable("gcm.notification.messagetype")] as? NSString)?.integerValue
+        if let aps1 = (userInfo[AnyHashable(messageType)] as? NSString)?.integerValue
         {
             if aps1 == 2
             {
@@ -414,7 +427,7 @@ extension AppDelegate {
     
     func logoutSuccess(){
         NotificationCenter.default.post(name: Notification.Name(keyValue.notificationIdentifier.rawValue), object: nil)
- 
+        
     }
     
     func navigateToAnotherVc(){}

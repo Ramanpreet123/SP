@@ -125,7 +125,7 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
 
         let providerName = UserDefaults.standard.value(forKey: "ProviderName") as? String
         
-        if providerName == "AU Dairy Products" {
+        if providerName == keyValue.auDairyProducts.rawValue {
             
             if textField == sireIdTextField {
                 if let char = string.cString(using: String.Encoding.utf8) {

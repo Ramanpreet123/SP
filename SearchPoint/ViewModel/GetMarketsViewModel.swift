@@ -57,7 +57,7 @@ extension GetMarketsViewModel: ResponseDelegate {
         }
         
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(GetMarketsModel.self, from: data!)
+        modalObject = try? decoder.decode(GetMarketsModel.self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {

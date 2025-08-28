@@ -99,6 +99,8 @@ class MyManagementGroupController: UIViewController {
             let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.groupWillBeDeleted, comment: ""), preferredStyle: UIAlertController.Style.alert)
             
             let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+                // Intentionally left empty.
+                // we don’t need custom behavior here (for now).
             })
             alert.addAction(no)
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { action in
@@ -170,6 +172,8 @@ class MyManagementGroupController: UIViewController {
         let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(AlertMessagesStrings.makeGroupActive, comment: ""), preferredStyle: UIAlertController.Style.alert)
         
         let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            // Intentionally left empty.
+            // we don’t need custom behavior here (for now).
         })
         alert.addAction(no)
         let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { action in
@@ -378,14 +382,25 @@ class MyManagementGroupController: UIViewController {
         updateGruop.groupStatusId = groupStatusId
         updateGruop.description = decs
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(updateGruop)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(updateGruop)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
         let urlString = Configuration.Dev(packet: ApiKeys.update.rawValue).getUrl()
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode

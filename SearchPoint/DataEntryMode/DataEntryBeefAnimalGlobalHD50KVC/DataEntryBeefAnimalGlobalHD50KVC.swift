@@ -2114,7 +2114,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
                     if UserDefaults.standard.string(forKey: keyValue.beefProduct.rawValue) == keyValue.globalHD50K.rawValue {
                         
                         let trimmed = (textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.removedCharFromString.contains($0)})
                         self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             

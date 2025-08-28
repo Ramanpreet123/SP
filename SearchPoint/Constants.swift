@@ -207,6 +207,12 @@ struct AlertMessagesStrings {
 // MARK: - LOCALIZED STRINGS
 
 struct LocalizedStrings {
+    static let burkinaFasoBreedId = "1f263617-923b-450f-825b-1489bfb42d7f"
+    static let removedCharFromString = "\n\t\r(),.-[]:}{/"
+    static let animalBarcodeTagContainsValue = " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@"
+    static let productNameContainsValue = "animalTag contains[cd] %@ || productName contains[cd] %@"
+    static let cancelPressed = "Cancel Pressed"
+    static let bluetoothPairedSuccessfully = "Bluetooth device paired successfully."
     static let actionsRequiredText = "Actions Required"
     static let contactSupportText = "Contact Support"
     static let dashboardText = "Dashboard"
@@ -286,7 +292,6 @@ struct LocalizedStrings {
     static let importLists = "Imported list(s)"
     static let removeAllStr = "Remove All"
     static let totalAnimalsAdded = "Total Animals Added :"
-    static let emailEnteredData = "E-Mail Me Entered Data"
     static let saveList = "Save List"
     static let officialIDText = "Official ID"
     static let noDataFound = "No data found."

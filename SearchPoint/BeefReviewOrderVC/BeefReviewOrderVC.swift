@@ -194,14 +194,9 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
             appHelpBtn.isHidden = true
         }
         if UserDefaults.standard.string(forKey: "InheritFOReviewOrderVC") == nil{
-            if pvid == 13 {
-                self.clickOnDropDown = "Unique ID".localized
-            }
-            if pvid == 7{
-                self.clickOnDropDown =  NSLocalizedString("Animal Tag", comment: "")
-            }
+           
             if pvid == 5{
-                self.clickOnDropDown =  NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown =  NSLocalizedString(ButtonTitles.earTagText, comment: "")
             }
             if pvid == 6{
                 self.clickOnDropDown =  NSLocalizedString("Barcode", comment: "")
@@ -210,14 +205,9 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
         }
         if UserDefaults.standard.string(forKey: "InheritFOReviewOrderVC") == "officialid" {
             UserDefaults.standard.set(true, forKey: "brazilBarcodeReviewVC")
-            if pvid == 13 {
-                self.clickOnDropDown = "Unique ID".localized
-            }
-            if pvid == 7{
-                self.clickOnDropDown = NSLocalizedString("Animal Tag", comment: "")
-            }
+           
             if pvid == 5{
-                self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             }
             if pvid == 6{
                 self.clickOnDropDown = NSLocalizedString("Barcode", comment: "")
@@ -247,7 +237,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
             self.dropDownBtn.setTitle(self.clickOnDropDown, for: .normal)
         }
         if UserDefaults.standard.string(forKey: "InheritFOReviewOrderVC") == "rgd"{
-            self.clickOnDropDown = NSLocalizedString("RGD or Animal ID", comment: "")
+            self.clickOnDropDown = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
             self.dropDownBtn.setTitle(self.clickOnDropDown, for: .normal)
         }
         
@@ -324,7 +314,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
             
             let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default) {
                 UIAlertAction in
-                NSLog("Cancel Pressed")
+                print(LocalizedStrings.cancelPressed)
                 
                 return
             }
@@ -451,7 +441,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
             updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
             if (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == false) || (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == nil)
             {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                 return
             }
             
@@ -484,7 +474,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
             updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
             if (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == false) || (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == nil)
             {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                 return
             }
             
@@ -516,7 +506,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                 updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
                 if (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == false) || (UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool == nil)
                 {
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                     return
                 }
                 
@@ -548,7 +538,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     
                     let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
-                        NSLog("Cancel Pressed")
+                        print(LocalizedStrings.cancelPressed)
                         
                         return
                     }
@@ -663,17 +653,12 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
         dropDown.cellHeight = 37
         searchTxt.resignFirstResponder()
         let pvid = UserDefaults.standard.integer(forKey: "BeefPvid")
-        if  pvid == 13 {
-            dropDown.dataSource = [NSLocalizedString("Unique ID", comment: ""),NSLocalizedString("Barcode", comment: "")]
-        }
-        if pvid == 7{
-            dropDown.dataSource = [NSLocalizedString("Animal Tag", comment: ""), NSLocalizedString("Barcode", comment: "")]
-        }
+       
         if pvid == 5{
-            dropDown.dataSource = [NSLocalizedString("Ear Tag", comment: ""), NSLocalizedString("Barcode", comment: "")]
+            dropDown.dataSource = [NSLocalizedString(ButtonTitles.earTagText, comment: ""), NSLocalizedString("Barcode", comment: "")]
         }
         if pvid == 6{
-            dropDown.dataSource = [NSLocalizedString("Barcode", comment: ""), NSLocalizedString("Series", comment: ""), NSLocalizedString("RGN", comment: ""), NSLocalizedString("RGD or Animal ID", comment: "")]
+            dropDown.dataSource = [NSLocalizedString("Barcode", comment: ""), NSLocalizedString("Series", comment: ""), NSLocalizedString("RGN", comment: ""), NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")]
         }
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             
@@ -687,9 +672,9 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                 
                 if self.searchTxt.text != ""{
                     
-                    if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "") || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag".localized || self.clickOnDropDown == "Unique ID".localized {
+                    if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "")   {
                         UserDefaults.standard.set("officialid", forKey: "InheritFOReviewOrderVC")
-                        let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                        let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                         let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                         if fetchcustRep.count > 0 {
                             
@@ -708,12 +693,12 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         } else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.4, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.4, position: .center)
                         }
                     }
                     if self.clickOnDropDown == NSLocalizedString("Barcode", comment: ""){
                         UserDefaults.standard.set("barcode", forKey: "InheritFOReviewOrderVC")
-                        let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                        let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                         let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                         if fetchcustRep.count > 0 {
                             
@@ -731,7 +716,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         }else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                         }
                     }
                     
@@ -739,7 +724,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     if self.clickOnDropDown == NSLocalizedString("Barcode" , comment: ""){
                         UserDefaults.standard.set("barcode", forKey: "InheritFOReviewOrderVC")
                     }
-                    if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "") || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag"{
+                    if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "") {
                         UserDefaults.standard.set("officialid", forKey: "InheritFOReviewOrderVC")
                     }
                     self.search()
@@ -754,7 +739,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     if self.clickOnDropDown == NSLocalizedString("Barcode" , comment: ""){
                         UserDefaults.standard.set(true, forKey: "brazilBarcodeReviewVC")
                         UserDefaults.standard.set("officialid", forKey: "InheritFOReviewOrderVC")
-                        let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                        let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                         let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                         if fetchcustRep.count > 0 {
                             
@@ -772,7 +757,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         } else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.4, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.4, position: .center)
                             
                         }
                     }
@@ -780,7 +765,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         UserDefaults.standard.set(false, forKey: "brazilBarcodeReviewVC")
                         UserDefaults.standard.set(true, forKey: "seriesReviewVC")
                         UserDefaults.standard.set("barcode", forKey: "InheritFOReviewOrderVC")
-                        let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                        let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                         let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                         if fetchcustRep.count > 0 {
                             
@@ -797,7 +782,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         } else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                             
                         }
                     }
@@ -821,12 +806,12 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         } else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                             
                         }
                     }
                     
-                    if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
+                    if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                         UserDefaults.standard.set("rgd", forKey: "InheritFOReviewOrderVC")
                         let bPredicate = NSPredicate(format: " rgd contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
                         let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
@@ -845,7 +830,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         } else {
                             self.reviewOrderListObject.set.removeAll()
                             self.tblView.reloadData()
-                            self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                             
                         }
                         
@@ -863,7 +848,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     if self.clickOnDropDown == NSLocalizedString("RGN", comment: "") {
                         UserDefaults.standard.set("rgn", forKey: "InheritFOReviewOrderVC")
                     }
-                    if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
+                    if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                         UserDefaults.standard.set("rgd", forKey: "InheritFOReviewOrderVC")
                     }
                     self.search()
@@ -899,9 +884,9 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
         tblView.isHidden = false
         let pvid = UserDefaults.standard.integer(forKey: "BeefPvid")
         if newString != ""{
-            if pvid == 5 || pvid == 7 || pvid == 13{
-                if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "") || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag".localized || self.clickOnDropDown == "Unique ID".localized{
-                    let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", newString,newString)
+            if pvid == 5 {
+                if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "")  {
+                    let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, newString,newString)
                     let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                     if fetchcustRep.count > 0 {
                         
@@ -919,11 +904,11 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         
                         reviewOrderListObject.set.removeAll()
                         tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                     }
                 }
                 if self.clickOnDropDown == NSLocalizedString("Barcode" , comment: ""){
-                    let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", newString,newString)
+                    let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, newString,newString)
                     let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                     if fetchcustRep.count > 0 {
                         
@@ -941,7 +926,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                         
                         reviewOrderListObject.set.removeAll()
                         tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                     }
                 }
             }
@@ -949,7 +934,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                 
                 if self.clickOnDropDown == NSLocalizedString("Barcode" , comment: ""){
                     UserDefaults.standard.set("officialid", forKey: "InheritFOReviewOrderVC")
-                    let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                    let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                     let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                     if fetchcustRep.count > 0 {
                         
@@ -967,12 +952,12 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     } else {
                         self.reviewOrderListObject.set.removeAll()
                         self.tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.4, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.4, position: .center)
                     }
                 }
                 if self.clickOnDropDown == NSLocalizedString("Series", comment: "") {
                     UserDefaults.standard.set("barcode", forKey: "InheritFOReviewOrderVC")
-                    let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                    let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                     let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
                     if fetchcustRep.count > 0 {
                         
@@ -990,7 +975,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     } else {
                         self.reviewOrderListObject.set.removeAll()
                         self.tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                     }
                 }
                 
@@ -1013,7 +998,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     } else {
                         self.reviewOrderListObject.set.removeAll()
                         self.tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                         
                         
                     }
@@ -1021,7 +1006,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     
                 }
                 
-                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
+                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                     UserDefaults.standard.set("rgd", forKey: "InheritFOReviewOrderVC")
                     let bPredicate = NSPredicate(format: " rgd contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
                     let fetchcustRep =   BeefFetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimlTbLBeef]
@@ -1040,7 +1025,7 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
                     } else {
                         self.reviewOrderListObject.set.removeAll()
                         self.tblView.reloadData()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 0.8, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 0.8, position: .center)
                         
                     }
                 }

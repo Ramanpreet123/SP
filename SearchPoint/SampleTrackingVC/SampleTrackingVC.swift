@@ -33,6 +33,7 @@ class SampleTrackingVC: UIViewController {
     @IBOutlet weak var SORTbYlBL: UILabel!
     
     //MARK: VARIABLES AND CONSTANTS
+    var dateOrderedPortugueseText = "Data da Encomenda"
     let dropDown = DropDown()
     var sampleTrack = NSArray()
     var datePicker : UIDatePicker!
@@ -108,13 +109,13 @@ class SampleTrackingVC: UIViewController {
             self.dateOrderedOutlet.setTitle(self.clickOnDropDown, for: .normal)
         }
         
-        if  UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == LocalizedStrings.dateOrderedStr || UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == "Data da Encomenda"{
+        if UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == LocalizedStrings.dateOrderedStr || UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == dateOrderedPortugueseText{
             sampleOrders = fetchOrdersWithFilter(entityName: Entities.sampleOrdersTblEntity, ascending: false, sortingKey: LocalizedStrings.orderedDateStr, searchText :self.searchTxtfield.text ?? "", fromDate: fromDate as NSDate, toDate: ToDate as NSDate, customerId: customerId) as! [SampleOrders]
             self.clickOnDropDown = NSLocalizedString(LocalizedStrings.dateOrderedStr, comment: "")
             self.dateOrderedOutlet.setTitle(self.clickOnDropDown, for: .normal)
         }
         
-        if  UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == NSLocalizedString(LocalizedStrings.orderIdStr, comment: ""){
+        if UserDefaults.standard.string(forKey: ScreenNames.sampleTrackVC.rawValue) == NSLocalizedString(LocalizedStrings.orderIdStr, comment: ""){
             sampleOrders = fetchOrdersWithFilter(entityName: Entities.sampleOrdersTblEntity, ascending: false, sortingKey: keyValue.orderId.rawValue, searchText :self.searchTxtfield.text ?? "", fromDate: fromDate as NSDate, toDate: ToDate as NSDate, customerId: customerId) as! [SampleOrders]
             self.clickOnDropDown = NSLocalizedString(LocalizedStrings.orderIdStr, comment: "")
             self.dateOrderedOutlet.setTitle(self.clickOnDropDown, for: .normal)
@@ -221,7 +222,7 @@ class SampleTrackingVC: UIViewController {
             }
         }
         
-        if self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == "Data da Encomenda"{
+        if self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == dateOrderedPortugueseText{
             if self.barCodeId == 0 {
                 self.sampleOrders = fetchOrdersWithFilter(entityName: Entities.sampleOrdersTblEntity, ascending: false, sortingKey: LocalizedStrings.orderedDateStr, searchText: searchTxtfield.text ?? "", fromDate: self.fromDate as NSDate, toDate: self.ToDate as NSDate, customerId: customerId) as! [SampleOrders]
             } else {
@@ -384,7 +385,7 @@ class SampleTrackingVC: UIViewController {
                     self.sampleOrders = fetchOrdersWithFilter(entityName: Entities.sampleOrdersTblEntity, ascending: false, sortingKey: keyValue.orderId.rawValue, searchText: self.searchTxtfield.text ?? "", fromDate: self.fromDate as NSDate, toDate: self.ToDate as NSDate, customerId: self.customerId) as! [SampleOrders]
                 }
             }
-            if  self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == "Data da Encomenda"{
+            if  self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == dateOrderedPortugueseText{
                 UserDefaults.standard.set(self.clickOnDropDown, forKey: ScreenNames.sampleTrackVC.rawValue)
                 if self.barCodeId == 0{
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
@@ -441,7 +442,7 @@ class SampleTrackingVC: UIViewController {
                 }
             }
             
-            if self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == "Data da Encomenda"{
+            if self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == dateOrderedPortugueseText{
                 if self.barCodeId == 0 {
                     self.sampleOrders = fetchOrdersWithFilter(entityName: Entities.sampleOrdersTblEntity, ascending: true, sortingKey: LocalizedStrings.orderedDateStr, searchText: searchTxtfield.text ?? "", fromDate: self.fromDate as NSDate, toDate: self.ToDate as NSDate, customerId: customerId) as! [SampleOrders]
                 } else {
@@ -473,7 +474,7 @@ class SampleTrackingVC: UIViewController {
                 }}
         }
         
-        if  self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == "Data da Encomenda"{
+        if  self.clickOnDropDown == LocalizedStrings.dateOrderedStr || self.clickOnDropDown == dateOrderedPortugueseText{
             if self.barCodeId == 0 {
                 
                 if fromDate < ToDate || fromDate == ToDate{

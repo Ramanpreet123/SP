@@ -33,57 +33,60 @@ class BluetoothCentre :NSObject{
     }
 }
 extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        
         switch central.state {
         case .poweredOff:
-            if let vc = navController as? OrderingAnimalVC{
-                if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
-                    
-                    vc.bleBttn.setImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
-                    vc.view.makeToast(NSLocalizedString(AlertMessagesStrings.bluetoothOffText, comment: "") )
-                }
-            }
-            if let vc = navController as? MyHerdResultsViewController
-            {
-                if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
-                    vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
-                    vc.view.makeToast(NSLocalizedString(AlertMessagesStrings.bluetoothOffText, comment: "") )
-                }
-            }
-            if let vc = navController as? GroupDetailsViewController
-            {
-                if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
-                    vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
-                    vc.view.makeToast(NSLocalizedString(AlertMessagesStrings.bluetoothOffText, comment: "") )
-                }
-            }
+            handleBluetoothPoweredOff()
+            
         case .unsupported:
-            print( "This device does not support Bluetooth Low Energy.")
+            print("This device does not support Bluetooth Low Energy.")
+            
         case .unauthorized:
-            print( "This app is not authorized to use Bluetooth Low Energy.")
+            print("This app is not authorized to use Bluetooth Low Energy.")
+            
         case .resetting:
             print("The BLE Manager is resetting; a state update is pending.")
+            
         case .unknown:
             print("The state of the BLE Manager is unknown.")
+            
         case .poweredOn:
-            print( "Bluetooth LE is turned on and ready for communication.")
-            //Initiate Scan for Peripherals
-            //Option 1: Scan for all devices
-            //manager.scanForPeripherals(withServices: nil, options: nil)
-            //Option 2: Scan for devices that have the service you're interested in...
-            let sensorTagAdvertisingUUID = CBUUID(string: "00001101-0000-1000-8000-00805F9B34FB")//"725F8937-7F98-96E5-C54F-B48A18AD68B9")
-            print("Scanning for SensorTag adverstising with UUID: \(sensorTagAdvertisingUUID)")
+            print("Bluetooth LE is turned on and ready for communication.")
+            let sensorTagAdvertisingUUID = CBUUID(string: "00001101-0000-1000-8000-00805F9B34FB")
+            print("Scanning for SensorTag advertising with UUID: \(sensorTagAdvertisingUUID)")
             manager.scanForPeripherals(withServices: nil, options: nil)
+        @unknown default:
+            print("Unhandled Bluetooth state")
         }
     }
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    
+    private func handleBluetoothPoweredOff() {
+        guard UserDefaults.standard.string(forKey: keyValue.scannerSelection.rawValue) != keyValue.ocrKey.rawValue else { return }
         
-        let pName = peripheral.name ?? ""
+        let toastMsg = NSLocalizedString(AlertMessagesStrings.bluetoothOffText, comment: "")
+        let image = UIImage(named: ImageNames.scanIconActiveImg)
+        
+        if let vc = navController as? OrderingAnimalVC {
+            vc.bleBttn.setImage(image, for: .normal)
+            vc.view.makeToast(toastMsg)
+        }
+        
+        if let vc = navController as? MyHerdResultsViewController {
+            vc.blebttn1.setBackgroundImage(image, for: .normal)
+            vc.view.makeToast(toastMsg)
+        }
+        
+        if let vc = navController as? GroupDetailsViewController {
+            vc.blebttn1.setBackgroundImage(image, for: .normal)
+            vc.view.makeToast(toastMsg)
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         cbPerpgerialArray.append(peripheral)
         cbPerpgerialArray = cbPerpgerialArray.removeDuplicates()
         nearByDeviceDelegate?.deviceNear(deviceName: cbPerpgerialArray)
-        
     }
     
     func ConnectArgument(peripheral :CBPeripheral){
@@ -100,7 +103,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
             smartBowPeripheral?.discoverServices(nil)
             if let vc = navController as? OrderingAnimalVC{
                 if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device paired successfully.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(LocalizedStrings.bluetoothPairedSuccessfully, comment: ""))
                     vc.bleBttn.setImage(UIImage(named: ImageNames.forma1Copy2Img), for: .normal)
                     vc.blebttn1.setImage(UIImage(named: ImageNames.forma1Copy2Img), for: .normal)
                     
@@ -110,7 +113,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
             {
                 if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
                     
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device paired successfully.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(LocalizedStrings.bluetoothPairedSuccessfully, comment: ""))
                     vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.forma1Copy2Img), for: .normal)
                     
                 }
@@ -119,7 +122,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
             {
                 if UserDefaults.standard.value(forKey: keyValue.scannerSelection.rawValue) as? String != keyValue.ocrKey.rawValue {
                     
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device paired successfully.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(LocalizedStrings.bluetoothPairedSuccessfully, comment: ""))
                     vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.forma1Copy2Img), for: .normal)
                 }
             }

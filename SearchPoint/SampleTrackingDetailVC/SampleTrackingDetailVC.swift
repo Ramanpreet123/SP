@@ -50,6 +50,7 @@ class SampleTrackingDetailVC: UIViewController {
     @IBOutlet weak var bckBtnOutlet: customButton!
     
     //MARK: VARIABLES AND CONSTANTS
+    let earTagPortugueseText = "marca de orelha"
     var actionNeddTag = 0
     var farmId = Int()
     var barCodeId = Int()
@@ -183,7 +184,7 @@ class SampleTrackingDetailVC: UIViewController {
                 self.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: self.filterName, sampleStatusId: sampleStatusId, ascending: false, sortingKey: keyValue.capsOfficialId.rawValue, searchText: searchTextField.text ?? "", orderId: serverOrderId) as! [Samples]
             }
         }
-        else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == "marca de orelha" {
+        else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == earTagPortugueseText {
             
             if self.earTag == 0 {
                 dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
@@ -332,7 +333,7 @@ class SampleTrackingDetailVC: UIViewController {
                 self.animaId = 0
             }
         }
-        else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == "marca de orelha" {
+        else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == earTagPortugueseText {
             if self.earTag == 0{
                 dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                 self.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: self.filterName, sampleStatusId: sampleStatusId, ascending: true, sortingKey: keyValue.earTagKey.rawValue, searchText: searchTextField.text ?? "", orderId: serverOrderId) as! [Samples]
@@ -510,7 +511,7 @@ class SampleTrackingDetailVC: UIViewController {
                     weakSelf.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: weakSelf.filterName, sampleStatusId: weakSelf.sampleStatusId, ascending: false, sortingKey: keyValue.capsOfficialId.rawValue, searchText: weakSelf.searchTextField.text ?? "", orderId: weakSelf.serverOrderId) as! [Samples]
                 }
             }
-            else if weakSelf.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "")  || weakSelf.clickOnDropDown == "marca de orelha"{
+            else if weakSelf.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "")  || weakSelf.clickOnDropDown == self!.earTagPortugueseText{
                 
                 UserDefaults.standard.set(keyValue.earTagKey.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 if weakSelf.earTag == 0 {
@@ -573,7 +574,7 @@ extension SampleTrackingDetailVC : UITextFieldDelegate {
                     self.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: self.filterName, sampleStatusId: sampleStatusId, ascending: false, sortingKey: keyValue.capsOfficialId.rawValue, searchText:  newString as String, orderId: serverOrderId) as! [Samples]
                 }
             }
-            else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == "marca de orelha" {
+            else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == earTagPortugueseText {
                 if self.earTag == 0 {
                     dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                     self.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: self.filterName, sampleStatusId: sampleStatusId, ascending: true, sortingKey: keyValue.earTagKey.rawValue,searchText:  newString as String, orderId: serverOrderId) as! [Samples]
@@ -613,7 +614,7 @@ extension SampleTrackingDetailVC : UITextFieldDelegate {
                     self.samples = fetchSamplesWithFilter(entityName: Entities.sampleTblEntity, sampleStatus: self.filterName, sampleStatusId: sampleStatusId, ascending: false, sortingKey: keyValue.capsOfficialId.rawValue, orderId: serverOrderId) as! [Samples]
                 }
             }
-            else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == "marca de orelha" {
+            else if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == earTagPortugueseText {
                 
                 if self.earTag == 0 {
                     dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)

@@ -89,6 +89,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
     @IBOutlet weak var nonGenotypeclearFormOutlet: UIButton!
     
     // MARK: - VARIABLES AND CONSTANTS
+    let brazilCompanyNamePortText = "Cia de Melhoramento"
     let buttonbg = UIButton ()
     var customPopView :OfflinePopUp!
     var pvid :Int = UserDefaults.standard.integer(forKey: "BeefPvid")
@@ -354,7 +355,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if dataFetc.count == 0 {
                 UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)
-                let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
                 self.genotypeImportFromBtnBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 genotypeImportFromBtnBtnOutlet.isEnabled = true
                 genotypeCrossBtnOutlet.isHidden = true
@@ -371,7 +372,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     
                     genotypeCrossBtnOutlet.isHidden = false
                     self.genotypeImportFromBtnBtnOutlet.isEnabled = true
-                    let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+                    let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
                     self.genotypeImportFromBtnBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                     
                 }
@@ -428,7 +429,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if dataFetc.count == 0 {
                 UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)
-                let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+                let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
                 self.nongenotypeImportFromBtnBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 nongenotypeImportFromBtnBtnOutlet.isEnabled = true
                 nongenotypeCrossBtnOutlet.isHidden = true
@@ -443,7 +444,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 if fetchName.count != 0{
                     nongenotypeCrossBtnOutlet.isHidden = false
                     self.nongenotypeImportFromBtnBtnOutlet.isEnabled = true
-                    let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+                    let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
                     self.nongenotypeImportFromBtnBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                     
                 }
@@ -724,11 +725,11 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         let dateStr = UserDefaults.standard.value(forKey: "date") as? String
         if dateStr == "MM"{
             
-            dateFormatterGet.dateFormat = "MM/dd/yyyy"
+            dateFormatterGet.dateFormat = DateFormatters.MMddyyyyFormat
             
             
         } else {
-            dateFormatterGet.dateFormat = "dd/MM/yyyy"
+            dateFormatterGet.dateFormat = DateFormatters.ddMMyyyyFormat
             
         }
         if let dateGet = dateFormatterGet.date(from: dateString) {
@@ -741,7 +742,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             }
             
             
-            return "Correct Format"
+            return LocalizedStrings.correctFormatStr
         } else {
             return  "invalid format"
         }
@@ -796,7 +797,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             
                             
                         }
-                        formatter.dateFormat = "MM/dd/yyyy"
+                        formatter.dateFormat = DateFormatters.MMddyyyyFormat
                     }
                     else {
                         var dateVale = ""
@@ -814,7 +815,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             dateBttnOutlet.setTitle(dateVale, for: .normal)
                             
                         }
-                        formatter.dateFormat = "dd/MM/yyyy"
+                        formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                     }
                     if UserDefaults.standard.value(forKey: keyValue.defaultDatePicker.rawValue) as? String != keyValue.defaultEntry.rawValue {
                         if dateBttnOutlet.titleLabel!.text != nil{
@@ -895,7 +896,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 dateVale = month + "/" + date + "/" + year
                             }
                             dateBttnOutlet.setTitle(dateVale, for: .normal)
-                            formatter.dateFormat = "MM/dd/yyyy"
+                            formatter.dateFormat = DateFormatters.MMddyyyyFormat
                         }
                         else {
                             var dateVale = ""
@@ -907,7 +908,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 dateVale = date + "/" + month + "/" + year
                             }
                             dateBttnOutlet.setTitle(dateVale, for: .normal)
-                            formatter.dateFormat = "dd/MM/yyyy"
+                            formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                         }
                         if dateBttnOutlet.titleLabel!.text != nil{
                             self.selectedDate = formatter.date(from: dateBttnOutlet.titleLabel!.text!)!
@@ -997,7 +998,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             genotypeDOBBttn.setTitle(dateVale, for: .normal)
                             
                         }
-                        formatter.dateFormat = "MM/dd/yyyy"
+                        formatter.dateFormat = DateFormatters.MMddyyyyFormat
                     }
                     else {
                         var dateVale = ""
@@ -1016,7 +1017,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             genotypeDOBBttn.setTitle(dateVale, for: .normal)
                             
                         }
-                        formatter.dateFormat = "dd/MM/yyyy"
+                        formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                     }
                     
                     if UserDefaults.standard.value(forKey: keyValue.defaultDatePicker.rawValue) as? String != keyValue.defaultEntry.rawValue {
@@ -1038,7 +1039,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     {
                         priorityBreeingBtnOutlet.setTitle(primary as? String ,for: .normal)
                     } else{
-                        priorityBreeingBtnOutlet.setTitle(NSLocalizedString("Select Primary Breed Genotype", comment: "") ,for: .normal)
+                        priorityBreeingBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectPrimaryBreed, comment: "") ,for: .normal)
                     }
                 } else {
                     priorityBreeingBtnOutlet.setTitle(data.sireIDAU ,for: .normal)
@@ -1053,7 +1054,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     {
                         secondaryBreddingOutlet.setTitle(secondary as? String ,for: .normal)
                     } else{
-                        secondaryBreddingOutlet.setTitle(NSLocalizedString("Select Secondary Breed Genotype", comment: ""), for: .normal)
+                        secondaryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectSecondaryBreed, comment: ""), for: .normal)
                     }
                     
                 } else {
@@ -1065,7 +1066,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     {
                         territoryBreddingOutlet.setTitle(territory as? String ,for: .normal)
                     } else{
-                        territoryBreddingOutlet.setTitle(NSLocalizedString("Select Tertiary Breed Genotype", comment: "") ,for: .normal)
+                        territoryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectTertiaryBreed, comment: "") ,for: .normal)
                     }
                     
                 } else {
@@ -1160,7 +1161,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 dateVale = month + "/" + date + "/" + year
                             }
                             genotypeDOBBttn.setTitle(dateVale, for: .normal)
-                            formatter.dateFormat = "MM/dd/yyyy"
+                            formatter.dateFormat = DateFormatters.MMddyyyyFormat
                         }
                         else {
                             var dateVale = ""
@@ -1172,7 +1173,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 dateVale = date + "/" + month + "/" + year
                             }
                             genotypeDOBBttn.setTitle(dateVale, for: .normal)
-                            formatter.dateFormat = "dd/MM/yyyy"
+                            formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                         }
                         if genotypeDOBBttn.titleLabel!.text != nil{
                             self.selectedDate = formatter.date(from: genotypeDOBBttn.titleLabel!.text!)!
@@ -1339,13 +1340,13 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         let dateStr = UserDefaults.standard.value(forKey: "date") as? String
         
         if dateStr == "MM" {
-            dateformt.dateFormat = "MM/dd/yyyy"
-            dateTextField.placeholder = "MM/DD/YYYY"
-            genotypeDateTextField.placeholder = "MM/DD/YYYY"
+            dateformt.dateFormat = DateFormatters.MMddyyyyFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
         } else {
-            dateformt.dateFormat = "dd/MM/yyyy"
-            dateTextField.placeholder = "DD/MM/YYYY"
-            genotypeDateTextField.placeholder = "DD/MM/YYYY"
+            dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
+            genotypeDateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
             
         }
         dateOfLbl.textColor = UIColor.gray
@@ -1729,21 +1730,21 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         {
             priorityBreeingBtnOutlet.setTitle(primary as? String ,for: .normal)
         } else{
-            priorityBreeingBtnOutlet.setTitle(NSLocalizedString("Select Primary Breed Genotype", comment: "") ,for: .normal)
+            priorityBreeingBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectPrimaryBreed, comment: "") ,for: .normal)
         }
         
         if let secondary = UserDefaults.standard.object(forKey: keyValue.secondaryGenoType.rawValue)
         {
             secondaryBreddingOutlet.setTitle(secondary as? String ,for: .normal)
         } else{
-            secondaryBreddingOutlet.setTitle(NSLocalizedString("Select Secondary Breed Genotype", comment: ""), for: .normal)
+            secondaryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectSecondaryBreed, comment: ""), for: .normal)
         }
         
         if let tertiray = UserDefaults.standard.object(forKey: keyValue.tertirayGenoType.rawValue)
         {
             territoryBreddingOutlet.setTitle(tertiray as? String ,for: .normal)
         } else{
-            territoryBreddingOutlet.setTitle(NSLocalizedString("Select Tertiary Breed Genotype", comment: ""), for: .normal)
+            territoryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectTertiaryBreed, comment: ""), for: .normal)
         }
         
         genotypeDOBBttn.titleLabel?.text = ""
@@ -1907,7 +1908,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         if identyCheck != true{
             if data1.count > 0 {
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     } else {
                         requiredflag = 0
@@ -1926,7 +1927,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
 
                             CommonClass.showAlertMessage(self,
                                 titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
-                                messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             return
                         }
                     }
@@ -1993,7 +1994,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         } else {
                             
                             self.textFieldValidation()
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             return
                             
                         }
@@ -2010,7 +2011,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 }
                             })
                         } else {
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             self.textFieldValidation()
                             
                             return
@@ -2037,7 +2038,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if data1.count > 0 {
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     }else{
                         requiredflag = 0
@@ -2077,7 +2078,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         }
         
         if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" {
-            if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+            if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                 requiredflag = 1
             }else{
                 requiredflag = 0
@@ -2099,7 +2100,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         dobLbl.text = NSLocalizedString("Date of Birth", comment: "")
         dateOfLbl.text = NSLocalizedString("Date of Birth", comment: "")
         maleFemaleBttn.setTitle("",for: .normal)
-        rGDTextfield.placeholder = NSLocalizedString("RGD or Animal ID", comment: "")
+        rGDTextfield.placeholder = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
         rGNTextfield.placeholder = NSLocalizedString("RGN", comment: "")
         serieTextfield.placeholder = NSLocalizedString("Series", comment: "")
         scanBarcodeTextfield.placeholder = NSLocalizedString("Scan/Enter Sample Barcode", comment: "")
@@ -2108,10 +2109,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         genotypeSerieTextfield.placeholder = NSLocalizedString("Series", comment: "")
         genotypeRgnTextfield.placeholder = NSLocalizedString("RGN", comment: "")
         genotypeAnimalNameTextfield.placeholder = NSLocalizedString("Enter Animal Name", comment: "")
-        genotypeRgdTextfield.placeholder = NSLocalizedString("RGD or Animal ID", comment: "")
-        priorityBreeingBtnOutlet.setTitle(NSLocalizedString("Select Primary Breed Genotype", comment: ""),for: .normal)
-        secondaryBreddingOutlet.setTitle(NSLocalizedString("Select Secondary Breed Genotype", comment: ""),for: .normal)
-        territoryBreddingOutlet.setTitle(NSLocalizedString("Select Tertiary Breed Genotype", comment: ""),for: .normal)
+        genotypeRgdTextfield.placeholder = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
+        priorityBreeingBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectPrimaryBreed, comment: ""),for: .normal)
+        secondaryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectSecondaryBreed, comment: ""),for: .normal)
+        territoryBreddingOutlet.setTitle(NSLocalizedString(LocalizedStrings.selectTertiaryBreed, comment: ""),for: .normal)
         
         addAnotherBtnTtile.text = NSLocalizedString("Ordering Add Animal(s)", comment: "")
         addAnotherTtile.setTitle(NSLocalizedString("Add Another Animal", comment: ""), for: .normal)
@@ -2146,7 +2147,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         dateVale = month + "/" + date + "/" + year
                     }
                     dateBttnOutlet.setTitle(dateVale, for: .normal)
-                    formatter.dateFormat = "MM/dd/yyyy"
+                    formatter.dateFormat = DateFormatters.MMddyyyyFormat
                 }
                 else {
                     var dateVale = ""
@@ -2158,7 +2159,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         dateVale = date + "/" + month + "/" + year
                     }
                     dateBttnOutlet.setTitle(dateVale, for: .normal)
-                    formatter.dateFormat = "dd/MM/yyyy"
+                    formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                 }
                 if dateBttnOutlet.titleLabel!.text != nil{
                     self.selectedDate = formatter.date(from: dateBttnOutlet.titleLabel!.text!)!
@@ -2255,7 +2256,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         dateVale = month + "/" + date + "/" + year
                     }
                     genotypeDOBBttn.setTitle(dateVale, for: .normal)
-                    formatter.dateFormat = "MM/dd/yyyy"
+                    formatter.dateFormat = DateFormatters.MMddyyyyFormat
                 }
                 else {
                     var dateVale = ""
@@ -2267,7 +2268,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         dateVale = date + "/" + month + "/" + year
                     }
                     genotypeDOBBttn.setTitle(dateVale, for: .normal)
-                    formatter.dateFormat = "dd/MM/yyyy"
+                    formatter.dateFormat = DateFormatters.ddMMyyyyFormat
                 }
                 if  genotypeDOBBttn.titleLabel!.text != nil {
                     if  genotypeDOBBttn.titleLabel?.text != "" && formatter.date(from: genotypeDOBBttn.titleLabel?.text ?? "") != nil {
@@ -2325,7 +2326,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 messageCheck = true
             }
             if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                     requiredflag = 1
                 }else{
                     requiredflag = 0
@@ -2360,7 +2361,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let orederStatus = fetchAllDataWithAnimalIdstatus(entityName: "BeefAnimalMaster", animalId: idAnimal,orderststus:"true", customerId: self.custmerId)
             if orederStatus.count > 0 {
                 
-                let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""), preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""), preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
@@ -2392,13 +2393,13 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         
                         
                         self.validation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         completionHandler(false)
                         return
                         
                     } else if serieTextfield.text == "" && rGNTextfield.text == "" && rGDTextfield.text == ""{
                         self.validation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please enter the value in any one of these fields: Series, RGN or RGD.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.enterValueInSeries, comment: ""))
                         completionHandler(false)
                         return
                     }
@@ -2415,7 +2416,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             }
             else{
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     } else {
                         requiredflag = 0
@@ -2428,7 +2429,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     
                     if genotypeScanBarcodeTextField.text == "" {
                         self.textFieldValidation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         completionHandler(false)
                         return
                         
@@ -2436,7 +2437,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     } else if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == "" {
                         
                         self.textFieldValidation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please enter the value in any one of these fields: Series, RGN or RGD.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.enterValueInSeries, comment: ""))
                         completionHandler(false)
                         return
                         
@@ -2493,7 +2494,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         }
                         
                         rGDTextfield.layer.borderColor = UIColor.red.cgColor
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         completionHandler(false)
                         return
                         
@@ -2504,13 +2505,13 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     if scanBarcodeTextfield.text == "" {
                         
                         self.validation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         completionHandler(false)
                         return
                         
                     } else if serieTextfield.text == "" && rGNTextfield.text == "" && rGDTextfield.text == ""{
                         self.validation()
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please enter the value in any one of these fields: Series, RGN or RGD.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.enterValueInSeries, comment: ""))
                         completionHandler(false)
                         return
                     }
@@ -2539,7 +2540,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     if genotypeScanBarcodeTextField.text?.count == 0 {
                         self.textFieldValidation()
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         completionHandler(false)
                         return
                         
@@ -2561,7 +2562,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 
                                 
                                 
-                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                 completionHandler(false)
                                 return                            }
                             
@@ -2570,7 +2571,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 genotypeSerieTextfield.layer.borderColor = UIColor.red.cgColor
                                 genotypeRgnTextfield.layer.borderColor = UIColor.gray.cgColor
                                 
-                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                 completionHandler(false)
                                 return
                             }
@@ -2578,14 +2579,14 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 genotypeSerieTextfield.layer.borderColor = UIColor.gray.cgColor
                                 genotypeRgnTextfield.layer.borderColor = UIColor.red.cgColor
                                 
-                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                 completionHandler(false)
                                 return
                             }
                         }
                         
                         
-                        if priorityBreeingBtnOutlet.titleLabel?.text! == "Cia De Melhoramento" {
+                        if priorityBreeingBtnOutlet.titleLabel?.text! == brazilCompanyNamePortText {
                             
                             genotypeAddBtnCondtion(completionHandler: { (success) -> Void in
                                 if success {
@@ -2594,7 +2595,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             })
                         } else {
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please enter the value in any one of these fields: Series, RGN or RGD.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.enterValueInSeries, comment: ""))
                             self.textFieldValidation()
                             
                             completionHandler(false)
@@ -2662,7 +2663,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         }
         
         if checkBarcode {
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Barcode must be ending with the number to use 'Incremental barcode'.", comment: ""))
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeMustEndWithNumAlert, comment: ""))
             return
         }
         var dateVale = ""
@@ -2712,7 +2713,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 let validate = isValidDate(dateString: dateTextField.text ?? "")
                 
                 
-                if validate == "Correct Format" {
+                if validate == LocalizedStrings.correctFormatStr {
                     dobView.layer.borderColor = UIColor.gray.cgColor
                     dobView.layer.borderWidth = 0.5
                     validateDateFlag = true
@@ -2721,10 +2722,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     validateDateFlag = false
                     if validate == "GreaterThenDate" {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Date of birth cannot be greater than current date.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.dobSmallerthanCurrDate, comment: ""))
                         return
                     } else {
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                         return
                     }
                     
@@ -2732,7 +2733,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             } else {
                 dobView.layer.borderColor = UIColor.red.cgColor
                 validateDateFlag = false
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                 return
                 
             }
@@ -2747,7 +2748,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             if barCode.count > 0 {
                 
                 barcodeView.layer.borderColor = UIColor.red.cgColor
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
                 return
             }
         }
@@ -2765,7 +2766,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             if rGDCheck.count > 0
             {
                 rGDTextfield.layer.borderColor = UIColor.red.cgColor
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
                 return
                 
             }
@@ -2775,7 +2776,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         if rGDCheckMasterData.count > 0 {
             rGDTextfield.layer.borderColor = UIColor.red.cgColor
             
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
             return
         }
         
@@ -2791,7 +2792,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 existAnimalData.breedId != breedId ||
                 existAnimalData.gender?.localized != genderString){
               
-                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""), preferredStyle: .alert)
+                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""), preferredStyle: .alert)
                     
                     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
@@ -2808,7 +2809,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             let data12333 =  fetchProductAdonDataStatusBVDV(entityName: Entities.subProductBeefTblEntity, adonId: "BVDV", status: "true",ordrId:orderId, customerID: custmerId)
             if data12333.count > 0 {
-                if  tissueBttn.titleLabel!.text! != "Allflex (TSU)" || tissueBttn.titleLabel!.text! != "Allflex (TST)" || tissueBttn.titleLabel!.text! != "Caisley (TSU)" {
+                if  tissueBttn.titleLabel!.text! != ButtonTitles.allflexTSUText || tissueBttn.titleLabel!.text! != ButtonTitles.allflexTSTText || tissueBttn.titleLabel!.text! != ButtonTitles.caisleyTSUText {
                     let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Animal cannot be updated in order as BVDV product is selected and the animal sample type is other than Allflex (TSU), Allflex (TST) or Caisely (TSU). Do you want to save animal?", comment: ""), preferredStyle: .alert)
                     
                     let okAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default) {
@@ -2849,7 +2850,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 
                 if adata.count > 0{
                     
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                     byDefaultSetting()
                     
                     
@@ -2863,7 +2864,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         
                     }
                     else{
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                         byDefaultSetting()
                         
                     }
@@ -2912,7 +2913,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if adata.count > 0{
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 byDefaultSetting()
                 
                 
@@ -2925,7 +2926,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 
             }
             else{
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 byDefaultSetting()
                 
             }
@@ -3043,10 +3044,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let formatter = DateFormatter()
             
             if dateStr == "MM"{
-                formatter.dateFormat = "MM/dd/yyyy"
+                formatter.dateFormat = DateFormatters.MMddyyyyFormat
             }
             else {
-                formatter.dateFormat = "dd/MM/yyyy"
+                formatter.dateFormat = DateFormatters.ddMMyyyyFormat
             }
             dateBttnOutlet.titleLabel?.text = ""
             barAutoPopu = false
@@ -3077,14 +3078,14 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         if !self.msgAnimalSucess {
             if self.addContiuneBtn == 1 {
                 if self.msgcheckk  {
-                    self.view.makeToast(NSLocalizedString("Animal record updated and added in order successfully.", comment: ""), duration: 1, position: .bottom)
+                    self.view.makeToast(NSLocalizedString(AlertMessagesStrings.animalRecordUpdatedAdded, comment: ""), duration: 1, position: .bottom)
                 }
                 else {
                     
                     if self.isautoPopulated {
-                        self.view.makeToast(NSLocalizedString("Animal added successfully in order.", comment: ""), duration: 1, position: .bottom)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""), duration: 1, position: .bottom)
                     } else {
-                        self.view.makeToast(NSLocalizedString("Animal added successfully.", comment: ""), duration: 1, position: .bottom)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAdded, comment: ""), duration: 1, position: .bottom)
                     }
                 }
             } else if self.addContiuneBtn == 2{
@@ -3094,11 +3095,11 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 else{
                     if self.isautoPopulated {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal added successfully in order.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""))
                         
                     } else {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal added successfully.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAdded, comment: ""))
                     }
                 }
             }else {
@@ -3108,11 +3109,11 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 else{
                     if self.isautoPopulated {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal added successfully in order.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""))
                         
                     } else {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal added successfully.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAdded, comment: ""))
                     }
                 }
                 
@@ -3124,9 +3125,9 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             }
             else{
                 if self.isautoPopulated {
-                    self.view.makeToast(NSLocalizedString("Animal added successfully in order.", comment: ""), duration: 1, position: .bottom)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""), duration: 1, position: .bottom)
                 }else {
-                    self.view.makeToast(NSLocalizedString("Animal added successfully.", comment: ""), duration: 1, position: .bottom)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAdded, comment: ""), duration: 1, position: .bottom)
                     
                 }
             }
@@ -3168,7 +3169,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         }
         
         if checkBarcode {
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Barcode must be ending with the number to use 'Incremental barcode'.", comment: ""))
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeMustEndWithNumAlert, comment: ""))
             return
         }
         var dateVale = ""
@@ -3216,7 +3217,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 let validate = isValidDate(dateString: genotypeDateTextField.text ?? "")
                 
                 
-                if validate == "Correct Format" {
+                if validate == LocalizedStrings.correctFormatStr {
                     dateBttnOutlet.layer.borderColor = UIColor.gray.cgColor
                     dateBttnOutlet.layer.borderWidth = 0.5
                     validateDateFlag = true
@@ -3225,10 +3226,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     validateDateFlag = false
                     if validate == "GreaterThenDate" {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Date of birth cannot be greater than current date.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.dobSmallerthanCurrDate, comment: ""))
                         return
                     } else {
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                         return
                     }
                     
@@ -3236,7 +3237,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             } else {
                 dateBttnOutlet.layer.borderColor = UIColor.red.cgColor
                 validateDateFlag = false
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                 return
                 
             }
@@ -3262,7 +3263,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let barCode = fetchAnimaldataValidateAnimalBarcodeanimalIdOrderIdEarTag(entityName: Entities.beefAnimalAddTblEntity, animalbarCodeTag: genotypeScanBarcodeTextField.text ?? "", userId: userIdGenoAddCondition, animalId: animalId1,orderSatatus:"false",orderid:orderId )
             if barCode.count > 0 {
                 genotypeScanBarcodeView.layer.borderColor = UIColor.red.cgColor
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
                 return
             }
         }
@@ -3270,7 +3271,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         if animaBarcOde.count > 0 {
             genotypeScanBarcodeView.layer.borderColor = UIColor.red.cgColor
             
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
             return
         }
         
@@ -3280,7 +3281,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             if rGDCheck.count > 0
             {
                 genotypeRgdTextfield.layer.borderColor = UIColor.red.cgColor
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
                 return
                 
             }
@@ -3291,7 +3292,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             if rGDCheckMasterData.count > 0 {
                 genotypeRgdTextfield.layer.borderColor = UIColor.red.cgColor
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Sample already exists in previous order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.sampleAlreadyExists, comment: ""))
                 return
             }
         }
@@ -3302,7 +3303,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             if existAnimalData.orderstatus == "true" {
                 if existAnimalData.date != dateVale || existAnimalData.breedId != breedId || existAnimalData.gender?.localized != genderString {
                     
-                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""), preferredStyle: .alert)
+                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""), preferredStyle: .alert)
                     
                     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
@@ -3344,7 +3345,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if adata.count > 0{
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 genotypeByDefaultScreen()
                 
                 
@@ -3373,7 +3374,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     }
             }
             else{
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 genotypeByDefaultScreen()
                 
             }
@@ -3422,7 +3423,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             
             if adata.count > 0{
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 genotypeByDefaultScreen()
                 
                 
@@ -3436,7 +3437,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                 
             }
             else{
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Animal already added in the order.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyAdded, comment: ""))
                 genotypeByDefaultScreen()
                 
             }
@@ -3533,10 +3534,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             let formatter = DateFormatter()
             
             if dateStr == "MM"{
-                formatter.dateFormat = "MM/dd/yyyy"
+                formatter.dateFormat = DateFormatters.MMddyyyyFormat
             }
             else {
-                formatter.dateFormat = "dd/MM/yyyy"
+                formatter.dateFormat = DateFormatters.ddMMyyyyFormat
             }
             
             dateVale = ""
@@ -3659,10 +3660,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         dateFormatter1.timeStyle = .none
         let dateFormatter3 = DateFormatter()
         if date == "MM"{
-            dateFormatter3.dateFormat = "MM/dd/yyyy"
+            dateFormatter3.dateFormat = DateFormatters.MMddyyyyFormat
         }
         else {
-            dateFormatter3.dateFormat = "dd/MM/yyyy"
+            dateFormatter3.dateFormat = DateFormatters.ddMMyyyyFormat
         }
         self.selectedDate = datePicker.date
         
@@ -3683,10 +3684,10 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         dateFormatter1.timeStyle = .none
         let dateFormatter3 = DateFormatter()
         if date == "MM"{
-            dateFormatter3.dateFormat = "MM/dd/yyyy"
+            dateFormatter3.dateFormat = DateFormatters.MMddyyyyFormat
         }
         else {
-            dateFormatter3.dateFormat = "dd/MM/yyyy"
+            dateFormatter3.dateFormat = DateFormatters.ddMMyyyyFormat
         }
         self.selectedDate = datePicker.date
         
@@ -3731,7 +3732,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                     if scanBarcodeTextfield.text != ""{
                         if rGDTextfield.text == "" {
                             rGDTextfield.layer.borderColor = UIColor.red.cgColor
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         }
                     }
                     
@@ -3801,7 +3802,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                         CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please add at least one animal.", comment: ""))
                         self.validation()
                     } else {
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         self.validation()
                     }
                 }
@@ -4454,7 +4455,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         guard isBarcodeEndingWithNumberAndGetIncremented(scanBarcodeTextfield.text ?? "").isBarCodeEndsWithNumber else {
             if !checkBarcode{
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Barcode must be ending with the number to use 'Incremental barcode'.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeMustEndWithNumAlert, comment: ""))
                 
             }
             else {
@@ -4498,7 +4499,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         guard isBarcodeEndingWithNumberAndGetIncremented(genotypeScanBarcodeTextField.text ?? "").isBarCodeEndsWithNumber else {
             if !checkBarcode{
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Barcode must be ending with the number to use 'Incremental barcode'.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeMustEndWithNumAlert, comment: ""))
                 
             }
             else {
@@ -4560,7 +4561,8 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString("Are you sure you want to reset form?", comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            
+            // Intentionally left empty.
+            // we don’t need custom behavior here (for now).
         })
         alert.addAction(cancel)
         
@@ -4748,7 +4750,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                     genotypeImportFromBtnBtnOutlet.isEnabled = true
                                     self.importBackroundView.isHidden = true
                                     self.importListMainView.isHidden = true
-                                    self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                                    self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                                     
                                     
                                     if fetchMergeDataListId(entityName: "MergeDataEntryList",listId: Int64(dataGet.listId),customerId: Int64(self.custmerId)).count == 0 {
@@ -4853,7 +4855,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 UserDefaults.standard.set(Int64(dataGet.listId), forKey: "dataEnteryListId")
                                 genotypeImportFromBtnBtnOutlet.isEnabled = true
                                 self.importBackroundView.isHidden = true
-                                self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                                self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                                 
                                 self.importListMainView.isHidden = true
                                 
@@ -4956,7 +4958,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             genotypeImportFromBtnBtnOutlet.isEnabled = true
                             self.importBackroundView.isHidden = true
                             self.importListMainView.isHidden = true
-                            self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                             
                             if fetchMergeDataListId(entityName: "MergeDataEntryList",listId: Int64(dataGet.listId),customerId: Int64(self.custmerId)).count == 0 {
                                 
@@ -5098,7 +5100,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                     nongenotypeImportFromBtnBtnOutlet.isEnabled = true
                                     self.importBackroundView.isHidden = true
                                     self.importListMainView.isHidden = true
-                                    self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                                    self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                                     if fetchMergeDataListId(entityName: "MergeDataEntryList",listId: Int64(dataGet.listId),customerId: Int64(self.custmerId)).count == 0 {
                                         
                                         let fetchList = fetchMergeDataListId(entityName: Entities.dataEntryListTblEntity,listId: Int64(dataGet.listId),customerId:Int64(self.custmerId))
@@ -5205,7 +5207,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                                 nongenotypeImportFromBtnBtnOutlet.isEnabled = true
                                 self.importBackroundView.isHidden = true
                                 self.importListMainView.isHidden = true
-                                self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                                self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                                 if fetchMergeDataListId(entityName: "MergeDataEntryList",listId: Int64(dataGet.listId),customerId: Int64(self.custmerId)).count == 0 {
                                     
                                     let fetchList = fetchMergeDataListId(entityName: Entities.dataEntryListTblEntity,listId: Int64(dataGet.listId),customerId:Int64(self.custmerId))
@@ -5305,7 +5307,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
                             nongenotypeImportFromBtnBtnOutlet.isEnabled = true
                             self.importBackroundView.isHidden = true
                             self.importListMainView.isHidden = true
-                            self.view.makeToast(NSLocalizedString("Animals imported into the order.", comment: ""), duration: 2, position: .top)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.animalsImportedIntoOrder, comment: ""), duration: 2, position: .top)
                             
                             if fetchMergeDataListId(entityName: "MergeDataEntryList",listId: Int64(dataGet.listId),customerId: Int64(self.custmerId)).count == 0 {
                                 
@@ -5446,7 +5448,8 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Removing list will remove its animals from the order as well. Do you want to continue?", comment: ""), preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-            
+            // Intentionally left empty.
+            // we don’t need custom behavior here (for now).
         })
         
         alert.addAction(cancel)
@@ -5594,7 +5597,8 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Removing list will remove its animals from the order as well. Do you want to continue?", comment: ""), preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-            
+            // Intentionally left empty.
+            // we don’t need custom behavior here (for now).
         })
         
         alert.addAction(cancel)
@@ -5623,7 +5627,7 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
             deleteDataWithPvidCustomerId(entityString: "MergeDataEntryList" ,providerId: Int64(UserDefaults.standard.integer(forKey: "BeefPvid")),customerId: Int64(self.custmerId))
             
             
-            let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+            let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
             self.nongenotypeImportFromBtnBtnOutlet.setAttributedTitle(attributeString, for: .normal)
             
             UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)
@@ -5672,7 +5676,8 @@ class BeefAnimalBrazilVC: UIViewController,UIScrollViewDelegate{
         
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString("Are you sure you want to reset form?", comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            
+            // Intentionally left empty.
+            // we don’t need custom behavior here (for now).
         })
         alert.addAction(cancel)
         
@@ -6025,7 +6030,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
                     
                     let validate = isValidDate(dateString: genotypeDateTextField.text ?? "")
                     
-                    if validate == "Correct Format" {
+                    if validate == LocalizedStrings.correctFormatStr {
                         genotypeDOBBttn.layer.borderColor = UIColor.gray.cgColor
                         genotypeDOBBttn.layer.borderWidth = 0.5
                         validateDateFlag = true
@@ -6051,7 +6056,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
                     
                     let validate = isValidDate(dateString: dateTextField.text ?? "")
                     
-                    if validate == "Correct Format" {
+                    if validate == LocalizedStrings.correctFormatStr {
                         dobView.layer.borderColor = UIColor.gray.cgColor
                         dobView.layer.borderWidth = 0.5
                         validateDateFlag = true
@@ -6112,7 +6117,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
             requiredflag = 1
             if genotypeSerieTextfield.text == ""{
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     }else{
                         requiredflag = 0
@@ -6156,7 +6161,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
             if genotypeRgnTextfield.text == ""{
                 
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     }else{
                         requiredflag = 0
@@ -6199,7 +6204,7 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
             requiredflag = 1
             if genotypeRgdTextfield.text == ""{
                 if genotypeSerieTextfield.text == "" && genotypeRgnTextfield.text == "" && genotypeRgdTextfield.text == ""{
-                    if priorityBreeingBtnOutlet.titleLabel?.text  == "Cia de Melhoramento"{
+                    if priorityBreeingBtnOutlet.titleLabel?.text  == brazilCompanyNamePortText{
                         requiredflag = 1
                     }else{
                         requiredflag = 0
@@ -6601,7 +6606,9 @@ extension BeefAnimalBrazilVC: UITextFieldDelegate{
 }
 extension BeefAnimalBrazilVC : SideMenuUI,objectPickCartScreen{
     func objectGetOnSelection(temp: Int) {
-        
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
     }
     func anOptionalMethod(check :Bool){
         

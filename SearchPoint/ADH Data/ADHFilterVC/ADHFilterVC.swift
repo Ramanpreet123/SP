@@ -312,156 +312,116 @@ class ADHFilterVC: UIViewController {
         }
     }
     
-    func doFromDatePicker(){
-        let langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
-        if langId == 2{
-            self.datePicker?.locale = Locale(identifier: Languages.portuguese)
-        }
-        else if langId == 3{
-            self.datePicker?.locale = Locale(identifier: Languages.italian)
-        }
-        else{
-            self.datePicker?.locale = Locale(identifier: Languages.eng)
+    func doFromDatePicker() {
+        // 1. Locale setup
+        configureDatePickerLocale()
+
+        // 2. Case: No fromDate set
+        if let fromDateStr = UserDefaults.standard.string(forKey: keyValue.fromdate.rawValue),
+           fromDateStr.isEmpty {
+            setupDatePicker(defaultDate: bttnTagClass == 0 ? fromDate : toDateClass)
         }
         
-        if UserDefaults.standard.value(forKey: keyValue.fromdate.rawValue) as! String == "" {
-            self.datePicker = UIDatePicker(frame:CGRect(x: 20, y: 40, width: self.calenderView.frame.size.width, height: 260))
-            self.datePicker?.backgroundColor = UIColor.white
-            self.datePicker?.datePickerMode = UIDatePicker.Mode.date
-            if bttnTagClass == 0{
-                self.datePicker.setDate(fromDate, animated: true)
-            }
-            else{
-                self.datePicker.setDate(toDateClass, animated: true)
-            }
-            
-            if #available(iOS 14, *) {
-                self.datePicker?.preferredDatePickerStyle = .wheels
-            }
-            let langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
-            if langId == 2{
-                self.datePicker?.locale = Locale(identifier: Languages.portuguese)
-            }
-            else if langId == 3{
-                self.datePicker?.locale = Locale(identifier: Languages.italian)
-            }
-            else{
-                self.datePicker?.locale = Locale(identifier: Languages.eng)
-            }
-            
-            calenderView.backgroundColor = UIColor.white
-            calenderView.addSubview(self.datePicker)
-            toolBar.barStyle = .default
-            toolBar.isTranslucent = true
-            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 1, alpha: 1)
-            toolBar.sizeToFit()
-            self.datePicker.maximumDate = Date()
-            let doneButton = UIBarButtonItem(title: LocalizedStrings.doneStr.localized, style: .plain, target: self, action: #selector(self.doneClick) )
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel".localized, style: .plain, target: self, action: #selector(self.cancelClick))
-            cancelButton.tintColor = UIColor.black
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
-            toolBar.isUserInteractionEnabled = true
-            toolBar.frame = CGRect(x: 0, y: 0, width: self.calenderView.frame.size.width, height: 40)
-            self.calenderView.addSubview(toolBar)
-            self.toolBar.isHidden = false
+        // 3. Case: CheckDate == newKey
+        else if UserDefaults.standard.string(forKey: keyValue.checkDate.rawValue) == keyValue.newKey.rawValue {
+            setupDatePicker(defaultDate: bttnTagClass == 0 ? fromDate : toDateClass)
         }
-        else  if UserDefaults.standard.value(forKey: keyValue.checkDate.rawValue) as! String == keyValue.newKey.rawValue{
-            self.datePicker = UIDatePicker(frame:CGRect(x: 20, y: 40, width: self.calenderView.frame.size.width, height: 260))
-            self.datePicker?.backgroundColor = UIColor.white
-            
-            self.datePicker?.datePickerMode = UIDatePicker.Mode.date
-            if bttnTagClass == 0{
-                self.datePicker.setDate(fromDate, animated: true)
-            }
-            else{
-                self.datePicker.setDate(toDateClass, animated: true)
-            }
-            
-            if #available(iOS 14, *) {
-                self.datePicker?.preferredDatePickerStyle = .wheels
-            }
-            calenderView.backgroundColor = UIColor.white
-            calenderView.addSubview(self.datePicker)
-            toolBar.barStyle = .default
-            toolBar.isTranslucent = true
-            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 1, alpha: 1)
-            toolBar.sizeToFit()
-            self.datePicker.maximumDate = Date()
-            let doneButton = UIBarButtonItem(title: LocalizedStrings.doneStr.localized, style: .plain, target: self, action: #selector(self.doneClick) )
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel".localized, style: .plain, target: self, action: #selector(self.cancelClick))
-            cancelButton.tintColor = UIColor.black
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
-            toolBar.isUserInteractionEnabled = true
-            toolBar.frame = CGRect(x: 0, y: 0, width: self.calenderView.frame.size.width, height: 40)
-            self.calenderView.addSubview(toolBar)
-            self.toolBar.isHidden = false
+        
+        // 4. Case: Fallback – fetch saved filter data
+        else {
+            let defaultDate = resolveSavedFilterDates()
+            setupDatePicker(defaultDate: bttnTagClass == 0 ? defaultDate.from : defaultDate.to)
         }
-        else{
-            let resultFIlterDataSave =  fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,customerId: Int(custmerID))
-            if resultFIlterDataSave.count != 0 {
-                let resultObject = resultFIlterDataSave.object(at: 0) as! ResultFIlterDataSave
-                let todateget = resultObject.dateto ?? ""
-                let fromdateget = resultObject.datefrom ?? ""
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = DateFormatters.yyyyMMddTHHmmssFormat
-                dateFormatter.timeZone = TimeZone.current
-                dateFormatter.locale = Locale.current
-                
-                if fromdateget != ""{
-                    fromDaten = dateFormatter.date(from: fromdateget)!
-                }
-                
-                if todateget != ""{
-                    toDaten = dateFormatter.date(from: todateget)!
-                }
-                
-                let fmt = DateFormatter()
-                fmt.dateFormat = DateFormatters.MMddyyyyFormat
-                let fromdatecheck = fmt.string(from: fromDaten)
-                let todatecheck = fmt.string(from: toDaten)
-                
-                if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM"{
-                    dateFormatter.dateFormat = DateFormatters.MMddyyyy0000Format
-                }
-                else {
-                    dateFormatter.dateFormat = DateFormatters.ddMMyyyy0000Format
-                }
-                fromDaten = dateFormatter.date(from: fromdatecheck )!
-                toDaten = dateFormatter.date(from: todatecheck )!
-            }
-            
-            self.datePicker = UIDatePicker(frame:CGRect(x: 20, y: 40, width: self.calenderView.frame.size.width, height: 260))
-            self.datePicker?.backgroundColor = UIColor.white
-            self.datePicker?.datePickerMode = UIDatePicker.Mode.date
-            if bttnTagClass == 0{
-                self.datePicker.setDate(fromDaten, animated: true)
-            }
-            else{
-                self.datePicker.setDate(toDaten, animated: true)
-            }
-            
-            if #available(iOS 14, *) {
-                self.datePicker?.preferredDatePickerStyle = .wheels
-            }
-            calenderView.backgroundColor = UIColor.white
-            calenderView.addSubview(self.datePicker)
-            toolBar.barStyle = .default
-            toolBar.isTranslucent = true
-            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 1, alpha: 1)
-            toolBar.sizeToFit()
-            self.datePicker.maximumDate = Date()
-            let doneButton = UIBarButtonItem(title: LocalizedStrings.doneStr.localized, style: .plain, target: self, action: #selector(self.doneClick) )
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel".localized, style: .plain, target: self, action: #selector(self.cancelClick))
-            cancelButton.tintColor = UIColor.black
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
-            toolBar.isUserInteractionEnabled = true
-            toolBar.frame = CGRect(x: 0, y: 0, width: self.calenderView.frame.size.width, height: 40)
-            self.calenderView.addSubview(toolBar)
-            self.toolBar.isHidden = false
+    }
+    
+    private func configureDatePickerLocale() {
+        let langId = UserDefaults.standard.value(forKey: keyValue.lngId.rawValue) as? Int
+        switch langId {
+        case 2: self.datePicker?.locale = Locale(identifier: Languages.portuguese)
+        case 3: self.datePicker?.locale = Locale(identifier: Languages.italian)
+        default: self.datePicker?.locale = Locale(identifier: Languages.eng)
         }
+    }
+
+    private func setupDatePicker(defaultDate: Date) {
+        self.datePicker = UIDatePicker(
+            frame: CGRect(x: 20, y: 40, width: calenderView.frame.size.width, height: 260)
+        )
+        self.datePicker?.backgroundColor = .white
+        self.datePicker?.datePickerMode = .date
+        self.datePicker?.setDate(defaultDate, animated: true)
+        if #available(iOS 14, *) {
+            self.datePicker?.preferredDatePickerStyle = .wheels
+        }
+        self.datePicker?.maximumDate = Date()
+        
+        setupToolbar()
+        
+        calenderView.backgroundColor = .white
+        calenderView.addSubview(self.datePicker!)
+        calenderView.addSubview(toolBar)
+        toolBar.isHidden = false
+    }
+
+    private func setupToolbar() {
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 1, alpha: 1)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: LocalizedStrings.doneStr.localized,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(cancelClick))
+        cancelButton.tintColor = .black
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.frame = CGRect(x: 0, y: 0, width: calenderView.frame.size.width, height: 40)
+    }
+
+    private func resolveSavedFilterDates() -> (from: Date, to: Date) {
+        var fromDate = Date()
+        var toDate = Date()
+        
+        // Safely cast NSArray to [ResultFIlterDataSave]
+        if let resultFilterData = fetchResultFilterData(entityName: Entities.resultFIlterDataSaveTblEntity,
+                                                        customerId: Int(custmerID)) as? [ResultFIlterDataSave],
+           let resultObject = resultFilterData.first {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = DateFormatters.yyyyMMddTHHmmssFormat
+            dateFormatter.timeZone = .current
+            dateFormatter.locale = .current
+            
+            if let fromStr = resultObject.datefrom, !fromStr.isEmpty {
+                fromDate = dateFormatter.date(from: fromStr) ?? fromDate
+            }
+            if let toStr = resultObject.dateto, !toStr.isEmpty {
+                toDate = dateFormatter.date(from: toStr) ?? toDate
+            }
+            
+            let fmt = DateFormatter()
+            fmt.dateFormat = DateFormatters.MMddyyyyFormat
+            let fromCheck = fmt.string(from: fromDate)
+            let toCheck = fmt.string(from: toDate)
+            
+            if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM" {
+                dateFormatter.dateFormat = DateFormatters.MMddyyyy0000Format
+            } else {
+                dateFormatter.dateFormat = DateFormatters.ddMMyyyy0000Format
+            }
+            
+            fromDate = dateFormatter.date(from: fromCheck) ?? fromDate
+            toDate = dateFormatter.date(from: toCheck) ?? toDate
+        }
+        
+        return (fromDate, toDate)
     }
     
     func byDefaultValueSet(){

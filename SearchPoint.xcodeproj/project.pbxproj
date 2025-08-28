@@ -139,7 +139,6 @@
 		00DC288C2B9E326D009FAB3B /* OrderingAnimalVCGirlandoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC288B2B9E326D009FAB3B /* OrderingAnimalVCGirlandoExtension.swift */; };
 		00DC288E2B9E327C009FAB3B /* OrderingAnimalVCGirlandoActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC288D2B9E327C009FAB3B /* OrderingAnimalVCGirlandoActionMethods.swift */; };
 		00DC28902B9E5AE6009FAB3B /* OrderingAnimalVCGirlandoSelectorUIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC288F2B9E5AE6009FAB3B /* OrderingAnimalVCGirlandoSelectorUIMethods.swift */; };
-		00DDAFF226032C3900EAB4A8 /* MyTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDAFF126032C3900EAB4A8 /* MyTransformer.swift */; };
 		00E362482C70E4D400C0EA7A /* OrderingAnimalVCOkButtonClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E362472C70E4D400C0EA7A /* OrderingAnimalVCOkButtonClickAction.swift */; };
 		00E43C922B8757D20097A0E5 /* DEOrderingAnimalVCGirlandoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E43C912B8757D20097A0E5 /* DEOrderingAnimalVCGirlandoExtension.swift */; };
 		00EF4D1A2CFF32A800687307 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00EF4D192CFF32A800687307 /* iPad.storyboard */; };
@@ -163,7 +162,7 @@
 		0C860CDD2714E04400B904A6 /* Resulttotalanimalupdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C860CDC2714E04400B904A6 /* Resulttotalanimalupdate.swift */; };
 		0C8728E026BD347200488A06 /* ResulttotalanimalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8728DF26BD347200488A06 /* ResulttotalanimalsViewModel.swift */; };
 		0C893B252757874B007B6D67 /* Translationslanguageviewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C893B242757874B007B6D67 /* Translationslanguageviewmodel.swift */; };
-		0CA9571E278B5766001BEC27 /* Singletone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA9571D278B5766001BEC27 /* Singletone.swift */; };
+		0CA9571E278B5766001BEC27 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA9571D278B5766001BEC27 /* Singleton.swift */; };
 		0CF071D027A3E66B00772811 /* MakeDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF071CF27A3E66B00772811 /* MakeDropDown.swift */; };
 		0CF071D427A3E6CA00772811 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CF071D227A3E6CA00772811 /* DropDownTableViewCell.xib */; };
 		0CF071D527A3E6CA00772811 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF071D327A3E6CA00772811 /* DropDownTableViewCell.swift */; };
@@ -637,7 +636,6 @@
 		00DC288B2B9E326D009FAB3B /* OrderingAnimalVCGirlandoExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoExtension.swift; sourceTree = "<group>"; };
 		00DC288D2B9E327C009FAB3B /* OrderingAnimalVCGirlandoActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoActionMethods.swift; sourceTree = "<group>"; };
 		00DC288F2B9E5AE6009FAB3B /* OrderingAnimalVCGirlandoSelectorUIMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCGirlandoSelectorUIMethods.swift; sourceTree = "<group>"; };
-		00DDAFF126032C3900EAB4A8 /* MyTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTransformer.swift; sourceTree = "<group>"; };
 		00E362472C70E4D400C0EA7A /* OrderingAnimalVCOkButtonClickAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderingAnimalVCOkButtonClickAction.swift; sourceTree = "<group>"; };
 		00E43C912B8757D20097A0E5 /* DEOrderingAnimalVCGirlandoExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEOrderingAnimalVCGirlandoExtension.swift; sourceTree = "<group>"; };
 		00E6E29D2BBC730A0096201A /* SearchPoint1.10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SearchPoint1.10.xcdatamodel; sourceTree = "<group>"; };
@@ -666,7 +664,7 @@
 		0C860CDC2714E04400B904A6 /* Resulttotalanimalupdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resulttotalanimalupdate.swift; sourceTree = "<group>"; };
 		0C8728DF26BD347200488A06 /* ResulttotalanimalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResulttotalanimalsViewModel.swift; sourceTree = "<group>"; };
 		0C893B242757874B007B6D67 /* Translationslanguageviewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translationslanguageviewmodel.swift; sourceTree = "<group>"; };
-		0CA9571D278B5766001BEC27 /* Singletone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singletone.swift; sourceTree = "<group>"; };
+		0CA9571D278B5766001BEC27 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		0CD712312799A41500DFE79E /* SearchPoint1.4.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SearchPoint1.4.1.xcdatamodel; sourceTree = "<group>"; };
 		0CF071CF27A3E66B00772811 /* MakeDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeDropDown.swift; sourceTree = "<group>"; };
 		0CF071D227A3E6CA00772811 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
@@ -1673,8 +1671,7 @@
 				2740B8BF234DFB0600CC285E /* TextFieldCommanClass.swift */,
 				BCEC551C23533DD700B31A42 /* ApiKeys.swift */,
 				BDCEDB4D23509062009A240B /* CommanExtension.swift */,
-				00DDAFF126032C3900EAB4A8 /* MyTransformer.swift */,
-				0CA9571D278B5766001BEC27 /* Singletone.swift */,
+				0CA9571D278B5766001BEC27 /* Singleton.swift */,
 			);
 			path = "App Delegate";
 			sourceTree = "<group>";
@@ -2741,7 +2738,7 @@
 				0080833728588A0800BF20F1 /* UserServiceHelper.swift in Sources */,
 				BC804BB22DC0A88A00F9499F /* SampleTrackingDeetailCellIpad.swift in Sources */,
 				00159E662B91E75700B14B56 /* ReviewOrderItemCell.swift in Sources */,
-				0CA9571E278B5766001BEC27 /* Singletone.swift in Sources */,
+				0CA9571E278B5766001BEC27 /* Singleton.swift in Sources */,
 				00D78B4C2BAACF5200402F8D /* BeefAnimalGlobalHD50KVCInheritMethods.swift in Sources */,
 				BCF97D192DDCD39E0092A9D6 /* GroupDeetailsVCiPad.swift in Sources */,
 				00D38F9F2B964B190005F0C1 /* SampleTrackingDetailVCExtension.swift in Sources */,
@@ -2910,7 +2907,6 @@
 				0080833528588A0800BF20F1 /* APIService.swift in Sources */,
 				B18D53EA244ED89E00B54E9D /* OrderingAnimalVCGirlando.swift in Sources */,
 				B1F29C9C24AB3B5F00549A67 /* ReviewAddonsCell.swift in Sources */,
-				00DDAFF226032C3900EAB4A8 /* MyTransformer.swift in Sources */,
 				BC22E44A2DAE5E8600ABD6CA /* OrderSaveVCiPad.swift in Sources */,
 				BCDD6A892D93BB50007AD8AF /* BeefDataEntryReviewDataIpad.swift in Sources */,
 				00F078E32B8F2FDD00B29880 /* MyHerdResultsByAnimalVCExtensions.swift in Sources */,

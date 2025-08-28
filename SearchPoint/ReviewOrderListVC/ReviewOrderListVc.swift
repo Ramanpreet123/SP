@@ -39,7 +39,9 @@ class ReviewOrderListVc: NSObject,UITextViewDelegate, objectPickfromConfilict {
             
             let url =  NSURL(string: pricingLinkc ?? "")! as URL
             UIApplication.shared.open(url) { (Bool) in
-                
+                // Intentionally left empty.
+                // This delegate method is required by the protocol,
+                // we add pricing link here
             }
         }
         return true

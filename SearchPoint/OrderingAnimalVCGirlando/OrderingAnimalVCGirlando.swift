@@ -1129,7 +1129,7 @@ class OrderingAnimalVCGirlando: UIViewController,UIImagePickerControllerDelegate
                 DispatchQueue.main.async {
                     
                     let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                    let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
+                    let test = String(trimmed.filter{!LocalizedStrings.removedCharFromString.contains($0)})
                     self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                     
                     if self.methReturn == LocalizedStrings.againClick {
@@ -1198,7 +1198,7 @@ class OrderingAnimalVCGirlando: UIViewController,UIImagePickerControllerDelegate
         let stringResult = idAnimal.contains("UK")
         if stringResult  {
             let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
+            let test = String(trimmedString.filter{!LocalizedStrings.removedCharFromString.contains($0)})
             
             let dropTwelveElement = test.suffix(12).uppercased()
             let totalString =  dropTwelveElement
@@ -1210,7 +1210,7 @@ class OrderingAnimalVCGirlando: UIViewController,UIImagePickerControllerDelegate
             
             if stringResultUS  && stringResult840  {
                 let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-                let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
+                let test = String(trimmedString.filter{!LocalizedStrings.removedCharFromString.contains($0)})
                 if test.count < 15 {
                     return LocalizedStrings.againClick
                 }

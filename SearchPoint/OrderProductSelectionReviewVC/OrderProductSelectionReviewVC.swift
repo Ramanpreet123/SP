@@ -287,11 +287,11 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         dropDown.textFont = UIFont.systemFont(ofSize: 13)
         dropDown.cellHeight = 30
         
-        dropDown.dataSource = [ NSLocalizedString("On-Farm ID", comment: ""),NSLocalizedString("Official ID", comment: ""), NSLocalizedString("Barcode", comment: "")]
+        dropDown.dataSource = [ NSLocalizedString(LocalizedStrings.onFarmIdText, comment: ""),NSLocalizedString(LocalizedStrings.officialIDText, comment: ""), NSLocalizedString("Barcode", comment: "")]
         let pviduser = (UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue) as? Int)!
         
         if pviduser == 4 {
-            dropDown.dataSource = [ NSLocalizedString("Ear Tag", comment: ""),NSLocalizedString("Barcode", comment: "")]
+            dropDown.dataSource = [ NSLocalizedString(ButtonTitles.earTagText, comment: ""),NSLocalizedString("Barcode", comment: "")]
             
         }
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -303,7 +303,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             self.farmIdDisplyOutlet.layer.borderColor = UIColor.gray.cgColor
             
             
-            if self.clickOnDropDown == NSLocalizedString("On-Farm ID", comment: ""){
+            if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: ""){
                 UserDefaults.standard.set(keyValue.farmId.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 if self.farmIdValue == 0{
                     
@@ -325,8 +325,8 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 
             }
             
-            else if self.clickOnDropDown == "Ear Tag" || self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: ""){
-                UserDefaults.standard.set("Ear Tag", forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
+            else if self.clickOnDropDown == ButtonTitles.earTagText || self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: ""){
+                UserDefaults.standard.set(ButtonTitles.earTagText, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 if self.earTagID == 0{
                     self.earTagID = 1
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -341,7 +341,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                     self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
                 }
             }
-            else if self.clickOnDropDown == NSLocalizedString("Official ID", comment: ""){
+            else if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
                 UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 if self.animaId == 0{
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -517,7 +517,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
             UserDefaults.standard.set(keyValue.farmId.rawValue, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
             
-            self.clickOnDropDown = NSLocalizedString("On-Farm ID", comment: "")
+            self.clickOnDropDown = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
             
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             
@@ -526,9 +526,9 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
             if pviduser == 4 {
                 
-                UserDefaults.standard.set("Ear Tag", forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
+                UserDefaults.standard.set(ButtonTitles.earTagText, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 
-                self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
                 
                 self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
                 
@@ -540,7 +540,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         
         if pviduser == 4 {
             
-            self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+            self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             
@@ -548,7 +548,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
         }else{
             
-            self.clickOnDropDown = NSLocalizedString("On-Farm ID", comment: "")
+            self.clickOnDropDown = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
             
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             
@@ -558,7 +558,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         
         if UserDefaults.standard.string(forKey: keyValue.fOSampleTrackingDetailVC.rawValue) == keyValue.farmId.rawValue {
             
-            self.clickOnDropDown = NSLocalizedString("On-Farm ID", comment: "")
+            self.clickOnDropDown = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
             
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             
@@ -566,9 +566,9 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
             if pviduser == 4 {
                 
-                UserDefaults.standard.set("Ear Tag", forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
+                UserDefaults.standard.set(ButtonTitles.earTagText, forKey: keyValue.fOSampleTrackingDetailVC.rawValue)
                 
-                self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
                 
                 self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
                 
@@ -582,7 +582,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         
         if UserDefaults.standard.string(forKey: keyValue.fOSampleTrackingDetailVC.rawValue) == keyValue.officialId.rawValue {
             
-            self.clickOnDropDown = NSLocalizedString("Official ID", comment: "")
+            self.clickOnDropDown = NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
             
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             
@@ -611,7 +611,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 cell.delegateCustom = self
                 if UserDefaults.standard.value(forKey: "name") as? String  == "Dairy"{
                     
-                    cell.emailOrderBtnOutlet.setTitle(NSLocalizedString("E-Mail Me Entered Data", comment: ""), for: .normal)
+                    cell.emailOrderBtnOutlet.setTitle(NSLocalizedString(ButtonTitles.emailEnteredData, comment: ""), for: .normal)
                     cell.pricingTextView.delegate = self
                     cell.submitOrderOutlet.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
                     if UserDefaults.standard.bool(forKey: keyValue.submitBtnFlag.rawValue) {
@@ -753,7 +753,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             }
             
             if UserDefaults.standard.value(forKey: "name") as? String  == "Dairy"{
-                cell.emailOrderBtnOutlet.setTitle(NSLocalizedString("E-Mail Me Entered Data", comment: ""), for: .normal)
+                cell.emailOrderBtnOutlet.setTitle(NSLocalizedString(ButtonTitles.emailEnteredData, comment: ""), for: .normal)
                 
                 cell.submitOrderOutlet.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
                 
@@ -824,7 +824,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
             cell.nominatorTitle.text = "Nominator".localized
             cell.placeAnotrderTitle.text = "Place an Order".localized
-            cell.emailMeEnterTtitle.text = "E-Mail Me Entered Data".localized
+            cell.emailMeEnterTtitle.text = ButtonTitles.emailEnteredData.localized
             
             
             
@@ -1013,8 +1013,8 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         cell.deleteBttn.addTarget(nil, action: #selector(deleteButton(_:)), for: .touchUpInside)
         cell.vollView.reloadData()
         
-        cell.onFarmIDTitle.text = NSLocalizedString("On-Farm ID", comment: "")
-        cell.officalIdTitle.text = NSLocalizedString("Official ID", comment: "")
+        cell.onFarmIDTitle.text = NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "")
+        cell.officalIdTitle.text = NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
         cell.barcodeTitleleft.text  = NSLocalizedString("Barcode", comment: "")
         
         let pviduser = (UserDefaults.standard.integer(forKey:keyValue.providerID.rawValue) as? Int)!
@@ -1025,7 +1025,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             cell.barcodeTitleleft.isHidden = true
             cell.thirdColonLbl.isHidden = true
             cell.OnFarmId.text =  String(earTag[indexPath.row])
-            cell.onFarmIDTitle.text = NSLocalizedString("Ear Tag", comment: "")
+            cell.onFarmIDTitle.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             cell.officalIdTitle.text = NSLocalizedString("Barcode", comment: "")
             
         }else{
@@ -1059,7 +1059,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
     }
     @IBAction func dropAction(_ sender: UIButton) {
         
-        if self.clickOnDropDown == NSLocalizedString("On-Farm ID", comment: ""){
+        if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: ""){
             if self.farmIdValue == 0{
                 
                 self.fethData =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity,asending:true,status: "true", orderStatus: "false", orderId: orderId, userId: userId, farmId: serchTextField.text!)
@@ -1079,7 +1079,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             }
             
         }
-        else if self.clickOnDropDown == NSLocalizedString("Official ID", comment: ""){
+        else if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
             if self.animaId == 0{
                 dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                 
@@ -1097,7 +1097,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             
         }
         
-        else if self.clickOnDropDown == "Ear Tag" || self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: ""){
+        else if self.clickOnDropDown == ButtonTitles.earTagText || self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: ""){
             
             if self.earTagID == 0{
                 self.earTagID = 1
@@ -1140,7 +1140,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
         currentString.replacingCharacters(in: range, with: string) as NSString
         tblView.isHidden = false
         if newString != ""{
-            if self.clickOnDropDown == NSLocalizedString("On-Farm ID", comment: "") {
+            if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: "") {
                 
                 let fetchcustRep = fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity, asending: true, status: "true", orderStatus: "false",orderId: orderId,userId:userId, farmId: newString as String) as NSArray
                 if fetchcustRep.count > 0 {
@@ -1149,10 +1149,10 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 else{
                     arr1.removeAll()
                     reloadTable()
-                    self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                 }
             }
-            if self.clickOnDropDown == NSLocalizedString("Official ID", comment: ""){
+            if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
                 let bPredicate: NSPredicate = NSPredicate(format: "farmId contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString)
                 
                 let fetchcustRep = fetchAllDataanimalTagStatus(entityName: Entities.productAdonAnimalTblEntity, asending: true, status: "true", orderStatus: "false",animalTag: newString as String).filtered(using: bPredicate) as NSArray
@@ -1162,7 +1162,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 else{
                     arr1.removeAll()
                     reloadTable()
-                    self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                 }
             }
             if self.clickOnDropDown == NSLocalizedString("Barcode", comment: "")  {
@@ -1175,10 +1175,10 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                 else{
                     arr1.removeAll()
                     reloadTable()
-                    self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                 }
             }
-            if clickOnDropDown == "Ear Tag"{
+            if clickOnDropDown == ButtonTitles.earTagText{
                 let fetchcustRep =    fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity, asending: true, orderId: orderId, userId: userId, animalTag:  newString as String)
                 if fetchcustRep.count > 0 {
                     fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
@@ -1187,7 +1187,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                     arr1.removeAll()
                     reloadTable()
                     
-                    self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                    self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                 }
             }
         }else{
@@ -1421,7 +1421,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
             let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Do you want to email entered data?", comment: ""), preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.cancel) {
                 UIAlertAction in
-                NSLog("Cancel Pressed")
+                print(LocalizedStrings.cancelPressed)
                 
                 return
             }
@@ -1539,7 +1539,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                         updateAnimalOrderEmailStatus(entity: Entities.animalAddTblEntity, IsEmailId: false)
                         if (UserDefaults.standard.value(forKey: keyValue.isAgreeForSubmit.rawValue) as? Bool == false) || (UserDefaults.standard.value(forKey: keyValue.isAgreeForSubmit.rawValue) as? Bool == nil)
                         {
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                             return
                         }
                         
@@ -1571,7 +1571,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                         updateAnimalOrderEmailStatus(entity: Entities.animalAddTblEntity, IsEmailId: false)
                         if (UserDefaults.standard.value(forKey: keyValue.isAgreeForSubmit.rawValue) as? Bool == false) || (UserDefaults.standard.value(forKey: keyValue.isAgreeForSubmit.rawValue) as? Bool == nil)
                         {
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                             return
                         }
                         
@@ -1607,7 +1607,7 @@ class OrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,UITa
                             
                             let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default) {
                                 UIAlertAction in
-                                NSLog("Cancel Pressed")
+                                print(LocalizedStrings.cancelPressed)
                                 
                                 return
                             }

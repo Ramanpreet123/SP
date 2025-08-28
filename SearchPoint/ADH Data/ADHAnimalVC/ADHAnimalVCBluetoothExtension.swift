@@ -74,79 +74,75 @@ extension ADHAnimalVC {
         var textStr = ""
         
         func cleanText(_ rawText: String) -> String {
-            let trimmed = String(rawText.compactMap({ $0.isWhitespace ? nil : $0 }))
+            let trimmed = String(rawText.compactMap { $0.isWhitespace ? nil : $0 })
             return String(trimmed.filter { !"\n\t\r(),.-[]:}{".contains($0) })
         }
         
         func presentAlert(with text: String, useScannedValueHandler: @escaping () -> Void) {
             let message = LocalizedStrings.unableToReadValue.localized(with: text)
-            let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
-                                          message: message,
-                                          preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
+                message: message,
+                preferredStyle: .alert
+            )
             
             let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment: ""), style: .default) { _ in
                 let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC
-                vc?.delegate = self
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-            
-            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default)
-            
-            let useScannedValueAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""),
-                                                      style: .default) { _ in
-                useScannedValueHandler()
+                if let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC {
+                    vc.delegate = self
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
             
             alert.addAction(retryAction)
-            alert.addAction(cancelAction)
-            alert.addAction(useScannedValueAction)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""),
+                style: .default
+            ) { _ in useScannedValueHandler() })
             
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true)
         }
         
-        request = VNRecognizeTextRequest { (request, error) in
+        func applyScannedText(_ processedText: String, updateTag: Bool) {
+            self.searchTextField.text = processedText
+            self.imageView.isHidden = true
+            self.searchTextField.delegate = self
+            if updateTag {
+                self.searchTextField.returnKeyType = .done
+                self.searchTextField.tag = 1
+            }
+            self.textFieldDidEndEditing(self.searchTextField)
+        }
+        
+        request = VNRecognizeTextRequest { request, _ in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 fatalError("Received invalid observation")
             }
             
             for observation in observations {
-                guard let topCandidate = observation.topCandidates(1).first else {
-                    continue
+                if let topCandidate = observation.topCandidates(1).first {
+                    textStr += "\n\(topCandidate.string)"
                 }
-                textStr += "\n\(topCandidate.string)"
             }
             
             DispatchQueue.main.async {
                 let processedText = cleanText(textStr)
                 
-                // Clear textField & hide imageView early
+                // Reset before presenting alert
                 self.searchTextField.text = ""
                 self.imageView.isHidden = true
                 
-                if self.searchTextField.tag == 0 {
-                    presentAlert(with: processedText) {
-                        self.searchTextField.text = processedText
-                        self.imageView.isHidden = true
-                        self.searchTextField.returnKeyType = .done
-                        self.searchTextField.delegate = self
-                        self.searchTextField.tag = 1
-                        self.textFieldDidEndEditing(self.searchTextField)
-                    }
-                } else {
-                    presentAlert(with: processedText) {
-                        self.searchTextField.text = processedText
-                        self.imageView.isHidden = true
-                        self.textFieldDidEndEditing(self.searchTextField)
-                        self.searchTextField.delegate = self
-                    }
+                let shouldUpdateTag = (self.searchTextField.tag == 0)
+                presentAlert(with: processedText) {
+                    applyScannedText(processedText, updateTag: shouldUpdateTag)
                 }
                 
                 self.searchTextField.becomeFirstResponder()
             }
         }
         
-        // Configure the request
+        // Configure request
         request.customWords = ["custOm"]
         request.minimumTextHeight = 0.03125
         request.recognitionLevel = .accurate

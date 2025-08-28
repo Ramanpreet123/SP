@@ -12,6 +12,8 @@ class Singleton {
     static let shared = Singleton()
     
     private init() {
-        
+        // Intentionally left empty.
+           // This initializer exists in case we need
+           // to add custom setup logic in the future.
     }
 }

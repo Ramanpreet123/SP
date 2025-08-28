@@ -350,7 +350,7 @@ extension ReviewOrderVC {
                 
                 if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
                     UserDefaults.standard.set(keyValue.officialId.rawValue, forKey: keyValue.foReviewOrderVC.rawValue)
-                    let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                    let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                     let fetchcustRep =   fetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimalTbl]
                     if fetchcustRep.count > 0 {
                         
@@ -374,7 +374,7 @@ extension ReviewOrderVC {
                 
                 if self.clickOnDropDown == NSLocalizedString(ButtonTitles.barcodeText, comment: "")  {
                     UserDefaults.standard.set(keyValue.barcode.rawValue, forKey: keyValue.foReviewOrderVC.rawValue)
-                    let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", self.searchTxt.text!,self.searchTxt.text!)
+                    let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, self.searchTxt.text!,self.searchTxt.text!)
                     let fetchcustRep =   fetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimalTbl]
                     if fetchcustRep.count > 0 {
                         var productNameArray = [String]()

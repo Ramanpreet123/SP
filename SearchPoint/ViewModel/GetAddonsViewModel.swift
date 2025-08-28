@@ -40,7 +40,7 @@ extension GetAddonsViewModel: ResponseDelegate {
     
     func responseRecieved(_ data: Data?, status: Bool) {
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode([GetAddonsModel].self, from: data!)
+        modalObject = try? decoder.decode([GetAddonsModel].self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {

@@ -266,9 +266,17 @@ extension ADHAnimalVC: ADHFilterProtocol, ADHCellProtocol {
         self.tblView.reloadData()
     }
     
-    func textField(editingDidBeginIn cell: ADHListCell) {}
+    func textField(editingDidBeginIn cell: ADHListCell) {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
     
-    func textField(editingChangedInTextField newText: String, in cell: ADHListCell) {}
+    func textField(editingChangedInTextField newText: String, in cell: ADHListCell) {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
     
     func textFieldEndedEditing(finalText barCode: String, in cell: ADHListCell) {
         if searchFound {
@@ -372,7 +380,11 @@ extension ADHAnimalVC: QrScannerProtocol {
 
 //MARK: SCANNED OCR PROTOCOL EXTENSION
 extension ADHAnimalVC: scannedOCRProtocol {
-    func ocrDetected(_ scannedResult: String) {}
+    func ocrDetected(_ scannedResult: String) {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
 }
 
 //MARK: FETCH AND CREATE DATA LIST
@@ -501,7 +513,11 @@ extension ADHAnimalVC : UITextFieldDelegate {
 
 //MARK: OBJECT PICK CART SCREEN EXTENSION
 extension ADHAnimalVC : objectPickCartScreen {
-    func objectGetOnSelection(temp: Int) {}
+    func objectGetOnSelection(temp: Int) {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
 }
 
 //MARK: IMAGE PICKER CONTROLLER DELEGATE

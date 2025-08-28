@@ -1588,7 +1588,7 @@ extension OrderingAnimalVC {
                 let alert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("The entered information has matched the OnFarmID for a previously saved animal. Select action to proceed.", comment: ""), preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: ""), style: .default, handler: { [self]  (_) in
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""))
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""))
                     self.fetchrecord = true
                 }))
                 alert.addAction(UIAlertAction(title: "Retrieve", style: .default, handler: { (_) in
@@ -1688,7 +1688,7 @@ extension OrderingAnimalVC {
                         let orederStatus = fetchAllDataWithAnimalIdstatus(entityName: "AnimalMaster", animalId: self.idAnimal,orderststus:"true", customerId: self.custmerId)
                         if orederStatus.count > 0 {
                             
-                            let alertController = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""), preferredStyle: .alert)
+                            let alertController = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""), preferredStyle: .alert)
                             
                             let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                                 UIAlertAction in
@@ -1734,7 +1734,7 @@ extension OrderingAnimalVC {
                             let validate = self.isValidDate(dateString: self.dateTextField.text ?? "")
                             
                             
-                            if validate == "Correct Format" {
+                            if validate == LocalizedStrings.correctFormatStr {
                                 self.dateBtnOutlet.layer.borderColor = UIColor.gray.cgColor
                                 self.dateBtnOutlet.layer.borderWidth = 0.5
                                 self.validateDateFlag = true
@@ -1744,10 +1744,10 @@ extension OrderingAnimalVC {
                                 
                                 if validate == "GreaterThenDate" {
                                     
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Date of birth cannot be greater than current date.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.dobSmallerthanCurrDate, comment: ""))
                                     return
                                 } else {
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                                     return
                                 }
                                 
@@ -1755,7 +1755,7 @@ extension OrderingAnimalVC {
                         } else {
                             self.dateBtnOutlet.layer.borderColor = UIColor.red.cgColor
                             self.validateDateFlag = false
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                             return
                             
                         }
@@ -1814,7 +1814,7 @@ extension OrderingAnimalVC {
                                 }
                             }
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             return
                             
                         } else {
@@ -1828,7 +1828,7 @@ extension OrderingAnimalVC {
                                 
                                 if self.farmIdTextField.text?.count == 0 && !isCheckCountryUK(){
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                     return
                                     
                                 } else if self.farmIdTextField.text?.count == 17 {
@@ -1940,7 +1940,7 @@ extension OrderingAnimalVC {
                                     
                                     
                                     if self.borderRedCheck {
-                                        self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                        self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                         self.farmIdView.layer.borderColor = UIColor.red.cgColor
                                     }
                                     
@@ -2004,13 +2004,13 @@ extension OrderingAnimalVC {
                                 if self.farmIdTextField.text?.count == 0 && !isCheckCountryUK() {
                                     
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                     
                                     return
                                     
                                     
                                 } else  {
-                                    self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                    self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
                                     
                                     return
@@ -2038,7 +2038,7 @@ extension OrderingAnimalVC {
                                 self.scanBarcodeText.textColor = UIColor.black
                             }
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             completionHandler(false)
                             return
                             
@@ -2078,7 +2078,7 @@ extension OrderingAnimalVC {
                                                 if self.pvid == 3 {
                                                     
                                                     self.sireIdTextField.layer.borderColor = UIColor.red.cgColor
-                                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Bull ID for this animal does not exist.", comment: ""))
+                                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.bullIdDoesNotExist, comment: ""))
                                                     return
                                                     
                                                     
@@ -2111,7 +2111,7 @@ extension OrderingAnimalVC {
                                     if self.borderRedCheck {
                                         
                                         self.officalTagView.layer.borderColor = UIColor.red.cgColor
-                                        self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                        self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                         
                                         
                                     }
@@ -2128,7 +2128,7 @@ extension OrderingAnimalVC {
                             if self.borderRedCheck {
                                 
                                 self.officalTagView.layer.borderColor = UIColor.red.cgColor
-                                self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                 
                                 return
                             } else {
@@ -2207,7 +2207,7 @@ extension OrderingAnimalVC {
                 let alert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("The entered information has matched the OfficialID for a previously saved animal. Select action to proceed.", comment: ""), preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: ""), style: .default, handler: { [self]  (_) in
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""))
+                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""))
                     self.mainrecord = true
                 }))
                 alert.addAction(UIAlertAction(title: "Retrieve", style: .default, handler: { (_) in
@@ -2334,7 +2334,7 @@ extension OrderingAnimalVC {
                             let validate = self.isValidDate(dateString: self.dateTextField.text ?? "")
                             
                             
-                            if validate == "Correct Format" {
+                            if validate == LocalizedStrings.correctFormatStr {
                                 self.dateBtnOutlet.layer.borderColor = UIColor.gray.cgColor
                                 self.dateBtnOutlet.layer.borderWidth = 0.5
                                 self.validateDateFlag = true
@@ -2344,10 +2344,10 @@ extension OrderingAnimalVC {
                                 
                                 if validate == "GreaterThenDate" {
                                     
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Date of birth cannot be greater than current date.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.dobSmallerthanCurrDate, comment: ""))
                                     return
                                 } else {
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                                     return
                                 }
                                 
@@ -2356,7 +2356,7 @@ extension OrderingAnimalVC {
                         } else {
                             self.dateBtnOutlet.layer.borderColor = UIColor.red.cgColor
                             self.validateDateFlag = false
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                             return
                             
                         }
@@ -2415,7 +2415,7 @@ extension OrderingAnimalVC {
                                 }
                             }
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             return
                             
                         } else {
@@ -2429,7 +2429,7 @@ extension OrderingAnimalVC {
                                 
                                 if self.farmIdTextField.text?.count == 0 && !self.isCheckCountryUK() {
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                     return
                                     
                                 } else if self.farmIdTextField.text?.count == 17 {
@@ -2544,7 +2544,7 @@ extension OrderingAnimalVC {
                                     
                                     
                                     if self.borderRedCheck {
-                                        self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                        self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                         self.farmIdView.layer.borderColor = UIColor.red.cgColor
                                     }
                                     
@@ -2608,13 +2608,13 @@ extension OrderingAnimalVC {
                                 if self.farmIdTextField.text?.count == 0 && !self.isCheckCountryUK() {
                                     
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
-                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                                     
                                     return
                                     
                                     
                                 } else  {
-                                    self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                    self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                     self.farmIdView.layer.borderColor = UIColor.red.cgColor
                                     
                                     return
@@ -2643,7 +2643,7 @@ extension OrderingAnimalVC {
                             }
                             
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                             completionHandler(false)
                             return
                             
@@ -2680,7 +2680,7 @@ extension OrderingAnimalVC {
                                                 if self.pvid == 3 {
                                                     
                                                     self.sireIdTextField.layer.borderColor = UIColor.red.cgColor
-                                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Bull ID for this animal does not exist.", comment: ""))
+                                                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.bullIdDoesNotExist, comment: ""))
                                                     return
                                                     
                                                     
@@ -2713,7 +2713,7 @@ extension OrderingAnimalVC {
                                     if self.borderRedCheck {
                                         
                                         self.officalTagView.layer.borderColor = UIColor.red.cgColor
-                                        self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                        self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                         
                                     }
                                     
@@ -2729,7 +2729,7 @@ extension OrderingAnimalVC {
                             if self.borderRedCheck {
                                 
                                 self.officalTagView.layer.borderColor = UIColor.red.cgColor
-                                self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                                self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                                 
                                 return
                             } else {
@@ -2847,7 +2847,7 @@ extension OrderingAnimalVC {
                 let validate = isValidDate(dateString: dateTextField.text ?? "")
                 
                 
-                if validate == "Correct Format" {
+                if validate == LocalizedStrings.correctFormatStr {
                     dateBtnOutlet.layer.borderColor = UIColor.gray.cgColor
                     dateBtnOutlet.layer.borderWidth = 0.5
                     validateDateFlag = true
@@ -2857,10 +2857,10 @@ extension OrderingAnimalVC {
                     
                     if validate == "GreaterThenDate" {
                         
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Date of birth cannot be greater than current date.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.dobSmallerthanCurrDate, comment: ""))
                         return
                     } else {
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                         return
                     }
                     
@@ -2868,7 +2868,7 @@ extension OrderingAnimalVC {
             } else {
                 dateBtnOutlet.layer.borderColor = UIColor.red.cgColor
                 validateDateFlag = false
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Invalid date format.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                 return
                 
             }
@@ -2927,7 +2927,7 @@ extension OrderingAnimalVC {
                     }
                 }
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                 return
                 
             } else {
@@ -2941,7 +2941,7 @@ extension OrderingAnimalVC {
                     
                     if farmIdTextField.text?.count == 0 && !isCheckCountryUK() {
                         farmIdView.layer.borderColor = UIColor.red.cgColor
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         return
                         
                     } else if farmIdTextField.text?.count == 17 {
@@ -3053,7 +3053,7 @@ extension OrderingAnimalVC {
                         
                         
                         if borderRedCheck {
-                            self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                            self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                             farmIdView.layer.borderColor = UIColor.red.cgColor
                         }
                         
@@ -3115,13 +3115,13 @@ extension OrderingAnimalVC {
                     if farmIdTextField.text?.count == 0 && !isCheckCountryUK() {
                         
                         farmIdView.layer.borderColor = UIColor.red.cgColor
-                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                         
                         return
                         
                         
                     } else  {
-                        self.view.makeToast(NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                         farmIdView.layer.borderColor = UIColor.red.cgColor
                         
                         return
@@ -3149,7 +3149,7 @@ extension OrderingAnimalVC {
                     scanBarcodeText.textColor = UIColor.black
                 }
                 
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please fill all fields.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.pleaseFillFields, comment: ""))
                 completionHandler(false)
                 return
                 
@@ -3189,7 +3189,7 @@ extension OrderingAnimalVC {
                                     if pvid == 3 {
                                         
                                         sireIdTextField.layer.borderColor = UIColor.red.cgColor
-                                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Bull ID for this animal does not exist.", comment: ""))
+                                        CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.bullIdDoesNotExist, comment: ""))
                                         return
                                         
                                         
@@ -3222,7 +3222,7 @@ extension OrderingAnimalVC {
                         if borderRedCheck {
                             
                             officalTagView.layer.borderColor = UIColor.red.cgColor
-                            self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                            self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                             
                             
                         }
@@ -3239,7 +3239,7 @@ extension OrderingAnimalVC {
                 if borderRedCheck {
                     
                     officalTagView.layer.borderColor = UIColor.red.cgColor
-                    self.view.makeToast( NSLocalizedString("Invalid Animal id.", comment: ""), duration: 2, position: .top)
+                    self.view.makeToast( NSLocalizedString(LocalizedStrings.invalidAnimalIDStr, comment: ""), duration: 2, position: .top)
                     
                     return
                 } else {
@@ -3487,7 +3487,7 @@ extension OrderingAnimalVC {
             let existAnimalData = animalData.first
             if existAnimalData?.orderstatus == "true" {
                 if existAnimalData?.date != dateVale || existAnimalData?.eT != etBtn || existAnimalData?.breedId != breedId || existAnimalData?.gender?.localized != genderString || existAnimalData?.farmId != farmIdValue || existAnimalData?.animalTag != animalTagValue {
-                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString("Animal Record cannot be updated as the animal has been used for an order.", comment: ""), preferredStyle: .alert)
+                    let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalAlreadyUsedStr, comment: ""), preferredStyle: .alert)
                     
                     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) { [self]
                         UIAlertAction in

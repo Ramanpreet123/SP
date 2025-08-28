@@ -40,7 +40,7 @@ extension TermsConditionViewModel: ResponseDelegate {
             delegate?.responseRecieved(status: status)
         } else {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(TermsAcceptanceModel.self, from: data!)
+            modalObject = try? decoder.decode(TermsAcceptanceModel.self, from: data!)
             DispatchQueue.main.async {
                 self.completion()
             }

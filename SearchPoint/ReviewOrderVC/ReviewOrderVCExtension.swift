@@ -146,7 +146,7 @@ extension ReviewOrderVC : UITextFieldDelegate {
             }
             
             if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
-                let bPredicate = NSPredicate(format: "animalTag contains[cd] %@ || productName contains[cd] %@", newString,newString)
+                let bPredicate = NSPredicate(format: LocalizedStrings.productNameContainsValue, newString,newString)
                 let fetchcustRep =   fetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimalTbl]
                 if fetchcustRep.count > 0 {
                     var productNameArray = [String]()
@@ -167,7 +167,7 @@ extension ReviewOrderVC : UITextFieldDelegate {
             }
             
             if self.clickOnDropDown == NSLocalizedString(ButtonTitles.barcodeText, comment: "")  {
-                let bPredicate = NSPredicate(format: " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@", newString,newString)
+                let bPredicate = NSPredicate(format: LocalizedStrings.animalBarcodeTagContainsValue, newString,newString)
                 let fetchcustRep =   fetchproductData(status: "true", orderStatus: "false", orderId: self.orderId,userId:self.userId).filtered(using: bPredicate) as! [ProductAdonAnimalTbl]
                 if fetchcustRep.count > 0 {
                     var productNameArray = [String]()
@@ -252,10 +252,18 @@ extension ReviewOrderVC : objectPickforcellDelegate {
 
 //MARK: OFFLINE CUSTOM VIEW1 EXTENSION
 extension ReviewOrderVC : offlineCustomView1 {
-    func crossBtn() { }
+    func crossBtn() {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
 }
 
 //MARK: OBJECT PICK CART SCREEN EXTENSION
 extension ReviewOrderVC : objectPickCartScreen {
-    func objectGetOnSelection(temp: Int) {}
+    func objectGetOnSelection(temp: Int) {
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
+    }
 }

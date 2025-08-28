@@ -58,7 +58,7 @@ extension GetNaabCodeVM: ResponseDelegate {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(GetNaabCodeModel.self, from: data!)
+        modalObject = try? decoder.decode(GetNaabCodeModel.self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {

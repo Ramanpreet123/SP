@@ -63,7 +63,7 @@ extension GetCustomerViewModel: ResponseDelegate {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(GetCustomerModel.self, from: data!)
+        modalObject = try? decoder.decode(GetCustomerModel.self, from: data!)
         
         DispatchQueue.main.async {
             

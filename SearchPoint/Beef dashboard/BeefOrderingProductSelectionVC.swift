@@ -293,16 +293,16 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 break
             case 1334:
                 
-                if  UserDefaults.standard.string(forKey: "beefProduct") == "Genotype Only"{
+                if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.genoTypeOnly.rawValue{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Global HD50K"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.globalHD50K.rawValue{
                     scrollview1.contentSize.height = 770
                 }
                 else if  UserDefaults.standard.string(forKey: "beefProduct") == "INHERIT"{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Non-Genotype"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.nonGenoType.rawValue{
                     scrollview1.contentSize.height = 420
                 }
                 else {
@@ -313,16 +313,16 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 
             case 1920, 2208:
                 
-                if  UserDefaults.standard.string(forKey: "beefProduct") == "Genotype Only"{
+                if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.genoTypeOnly.rawValue{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Global HD50K"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.globalHD50K.rawValue{
                     scrollview1.contentSize.height = 770
                 }
                 else if  UserDefaults.standard.string(forKey: "beefProduct") == "INHERIT"{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Non-Genotype"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.nonGenoType.rawValue{
                     scrollview1.contentSize.height = 420
                 }
                 else {
@@ -332,16 +332,16 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 
             case 2436:
                 
-                if  UserDefaults.standard.string(forKey: "beefProduct") == "Genotype Only"{
+                if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.genoTypeOnly.rawValue{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Global HD50K"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.globalHD50K.rawValue{
                     scrollview1.contentSize.height = 770
                 }
                 else if  UserDefaults.standard.string(forKey: "beefProduct") == "INHERIT"{
                     scrollview1.contentSize.height = 420
                 }
-                else if  UserDefaults.standard.string(forKey: "beefProduct") == "Non-Genotype"{
+                else if  UserDefaults.standard.string(forKey: "beefProduct") == keyValue.nonGenoType.rawValue{
                     scrollview1.contentSize.height = 420
                 }
                 else {
@@ -762,8 +762,8 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
             if adonId == "BVDV" {
                 
                 if beefPvid == 7 {
-                    sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: beefPvid).mutableCopy() as! NSMutableArray
-                    bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)", age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
+                    sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: beefPvid).mutableCopy() as! NSMutableArray
+                    bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText, age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
                     ageCom =   fetchAllDataAnimalDataBeefSampleTypeAnimaTagNZ(entityName: "BeefAnimaladdTbl", aTag: 35,orderId:orderId).mutableCopy() as! NSMutableArray
                     
                     if bothCom.count > 0 {
@@ -845,7 +845,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                     }
                 }
                 else {
-                    sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: beefPvid).mutableCopy() as! NSMutableArray
+                    sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: beefPvid).mutableCopy() as! NSMutableArray
                     if sampTypeArr.count > 0 {
                         self.parentViewAlert.isHidden = false
                         self.transparentView.isHidden = false
@@ -1174,7 +1174,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 cell1.firstAnimalTag?.text = datavale.animalTag
                 cell1.firstBarcode?.text = datavale.animalbarCodeTag
                 cell1.titleBarcode?.text = NSLocalizedString("Barcode", comment: "")
-                cell1.earTagLbl?.text = NSLocalizedString("Ear Tag", comment: "")
+                cell1.earTagLbl?.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
                 
                 return cell1
                 
@@ -1193,11 +1193,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 let datavale  = ageCom[indexPath.row] as! BeefAnimaladdTbl
                 cell1.thirdAnimalTag?.text = datavale.animalTag
                 cell1.thirdBarcode?.text = datavale.animalbarCodeTag
-                if UserDefaults.standard.integer(forKey: "BeefPvid") == 7 {
-                    cell1.thirdEartagTitleLbl?.text = "Animal Tag"
-                }
-                
-                
+              
                 return cell1
                 
             }
@@ -1330,7 +1326,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                         let animalCount =  fetchAllDataAnimalDatarderId(entityName: "BeefAnimaladdTbl", userId: self.userId,orderId:orderId,orderStatus:"false", providerId: UserDefaults.standard.integer(forKey: "BeefPvid"))
                         self.notificationLblCount.text = String(animalCount.count)
                         
-                        self.view.makeToast(NSLocalizedString("Animal removed from the order successfully", comment: ""), duration: 1, position: .bottom)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.removedAnimalSuccessfully, comment: ""), duration: 1, position: .bottom)
                        
                     }
                     
@@ -1345,7 +1341,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                         let animalCount =  fetchAllDataAnimalDatarderId(entityName: "BeefAnimaladdTbl", userId: self.userId,orderId:orderId,orderStatus:"false", providerId: UserDefaults.standard.integer(forKey: "BeefPvid"))
                         self.notificationLblCount.text = String(animalCount.count)
                         
-                        self.view.makeToast(NSLocalizedString("Animal removed from the order successfully", comment: ""), duration: 1, position: .bottom)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.removedAnimalSuccessfully, comment: ""), duration: 1, position: .bottom)
                         
                     }
                     else  {
@@ -1359,7 +1355,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                         
                         
                         
-                        self.view.makeToast(NSLocalizedString("Animal removed from the order successfully", comment: ""), duration: 1, position: .bottom)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.removedAnimalSuccessfully, comment: ""), duration: 1, position: .bottom)
                       
                     }
                     
@@ -1367,8 +1363,8 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                     self.bothCom.removeAllObjects()
                     self.ageCom.removeAllObjects()
                     if UserDefaults.standard.value(forKey: "screenBeef") as? String == "NZ"{
-                        self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
-                        self.bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)", age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
+                        self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
+                        self.bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText, age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
                         self.ageCom =   fetchAllDataAnimalDataBeefSampleTypeAnimaTagNZ(entityName: "BeefAnimaladdTbl", aTag: 35,orderId:orderId).mutableCopy() as! NSMutableArray
                         
                         if self.bothCom.count > 0 {
@@ -1419,7 +1415,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                         }
                     }
                     else {
-                        self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
+                        self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
                         
                         if self.sampTypeArr.count == 0{
                             self.parentViewAlert.isHidden = true
@@ -1499,8 +1495,8 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                 self.bothCom.removeAllObjects()
                 self.ageCom.removeAllObjects()
                 
-                self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
-                self.bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)", age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
+                self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
+                self.bothCom = fetchAllDataAnimalDataBeefSampleTypewithAge(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText, age: 35, orderId: orderId).mutableCopy() as! NSMutableArray
                 self.ageCom =   fetchAllDataAnimalDataBeefSampleTypeAnimaTagNZ(entityName: "BeefAnimaladdTbl", aTag: 35,orderId:orderId).mutableCopy() as! NSMutableArray
                 
                 if self.bothCom.count > 0 {
@@ -1555,7 +1551,7 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                         self.deleteSigalAnimalFromList(animalbarCode: animalVal.animalbarCodeTag ?? "")
                     }
                 }
-                self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: "Caisley (TSU)", sampleType2: "Allflex (TSU)",sampleType3: "Allflex (TST)",orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
+                self.sampTypeArr = fetchAllDataAnimalDataBeefSampleType(entityName: "BeefAnimaladdTbl", sampleType1: ButtonTitles.caisleyTSUText, sampleType2: ButtonTitles.allflexTSUText,sampleType3: ButtonTitles.allflexTSTText,orderId: orderId, pvid: self.pvid).mutableCopy() as! NSMutableArray
                 
                 
                 if self.sampTypeArr.count == 0  {
@@ -1918,7 +1914,7 @@ extension DeleteDataListHelper {
                 if filterdatalistAnimal.count > 0 {
                     let animalVal = filterdatalistAnimal[0]
                     if !Connectivity.isConnectedToInternet() {
-                        saveDeletedDataListAnimal(entity: "DataEntryOfflineDeletedAnimal", animalID: Int(animalVal.animalId), listID: Int(fetchDataEntry[0].listId), customerID: Int64(UserDefaults.standard.integer(forKey: "currentActiveCustomerId")), serverAnimalID: animalVal.serverAnimalId ?? "", speciesID: "151e2230-9a01-4828-a105-d87a92b5be2f")
+                        saveDeletedDataListAnimal(entity: "DataEntryOfflineDeletedAnimal", animalID: Int(animalVal.animalId), listID: Int(fetchDataEntry[0].listId), customerID: Int64(UserDefaults.standard.integer(forKey: "currentActiveCustomerId")), serverAnimalID: animalVal.serverAnimalId ?? "", speciesID: SpeciesID.beefSpeciesId)
                     }
                     self.objApiSync.postListDataDeleteBeef(listId:fetchDataEntry[0].listId,custmerId:Int64(UserDefaults.standard.integer(forKey: "currentActiveCustomerId")), clearOrder: false, animalId: Int(animalVal.animalId))
                     deleteAnimalfromdataEntry(enitityName:Entities.dataEntryBeefAnimalAddTblEntity, Int(animalVal.animalId), listId: Int(animalVal.listId))
@@ -1937,7 +1933,7 @@ extension DeleteDataListHelper {
     }
     func deleteList(listName: String, customerId: Int64, listID: Int) {
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as? String
-        let headerDict = ["Authorization": accessToken!,"Content-Type" : "application/x-www-form-urlencoded"]
+        let headerDict = ["Authorization": accessToken!,LocalizedStrings.contentType : "application/x-www-form-urlencoded"]
         
         let urlString = Configuration.Dev(packet: ApiKeys.deleteList.rawValue).getUrl()
         let parameters : [String: Any] = ["customerId": customerId,"listName":listName]
@@ -1945,7 +1941,7 @@ extension DeleteDataListHelper {
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = headerDict
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: LocalizedStrings.contentType)
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {

@@ -544,7 +544,7 @@ class OrderProductSelectionSecondVC: UIViewController {
                         }
                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                             UIAlertAction in
-                            NSLog("Cancel Pressed")
+                            print(LocalizedStrings.cancelPressed)
                         }
                         
                         alertController.addAction(okAction)
@@ -573,20 +573,20 @@ class OrderProductSelectionSecondVC: UIViewController {
                             
                             if data.count > 0{
                                 let providerName = UserDefaults.standard.value(forKey: "ProviderName") as? String
-                                if providerName == "AU Dairy Products"{
+                                if providerName == keyValue.auDairyProducts.rawValue{
                                     
-                                    if adonId == "CLARIFIDE CDCB" || adonId == "CLARIFIDE Plus CDCB"{
-                                        let clarifide =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: "CLARIFIDE CDCB", animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
+                                    if adonId == LocalizedStrings.clarifideCDCB || adonId == LocalizedStrings.clarifidePlusCDCBAddOnId{
+                                        let clarifide =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: LocalizedStrings.clarifideCDCB, animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
                                         
-                                        let clarifidPlus =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: "CLARIFIDE Plus CDCB", animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
+                                        let clarifidPlus =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: LocalizedStrings.clarifidePlusCDCBAddOnId, animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
                                         if clarifidPlus.count > 0 {
-                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: "CLARIFIDE CDCB", status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
-                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: "CLARIFIDE CDCB", status: "false",productId: self.pid)
+                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: LocalizedStrings.clarifideCDCB, status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
+                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: LocalizedStrings.clarifideCDCB, status: "false",productId: self.pid)
                                             
                                         }
                                         if clarifide.count > 0 {
-                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: "CLARIFIDE Plus CDCB", status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
-                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: "CLARIFIDE Plus CDCB", status: "false",productId: self.pid)
+                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: LocalizedStrings.clarifidePlusCDCBAddOnId, status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
+                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: LocalizedStrings.clarifidePlusCDCBAddOnId, status: "false",productId: self.pid)
                                             
                                         }
                                     }
@@ -600,20 +600,20 @@ class OrderProductSelectionSecondVC: UIViewController {
                             else{
                                 
                                 let providerName = UserDefaults.standard.value(forKey: "ProviderName") as? String
-                                if providerName == "AU Dairy Products"{
+                                if providerName == keyValue.auDairyProducts.rawValue{
                                     
-                                    if adonId == "CLARIFIDE CDCB" || adonId == "CLARIFIDE Plus CDCB"{
-                                        let clarifide =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: "CLARIFIDE CDCB", animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
+                                    if adonId == LocalizedStrings.clarifideCDCB || adonId == LocalizedStrings.clarifidePlusCDCBAddOnId{
+                                        let clarifide =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: LocalizedStrings.clarifideCDCB, animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
                                         
-                                        let clarifidPlus =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: "CLARIFIDE Plus CDCB", animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
+                                        let clarifidPlus =  fetchSubProductDataStatusUpdateDairychkpValidation(productId: LocalizedStrings.clarifidePlusCDCBAddOnId, animalId: self.aTag!, status: "false" ,orderId :orderId, userId: userId)
                                         if clarifidPlus.count > 0 {
-                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: "CLARIFIDE CDCB", status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
-                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: "CLARIFIDE CDCB", status: "false",productId: self.pid)
+                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: LocalizedStrings.clarifideCDCB, status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
+                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: LocalizedStrings.clarifideCDCB, status: "false",productId: self.pid)
                                             
                                         }
                                         if clarifide.count > 0 {
-                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: "CLARIFIDE Plus CDCB", status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
-                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: "CLARIFIDE Plus CDCB", status: "false",productId: self.pid)
+                                            updateAdonDataDairyFalseClarifide(entity: "SubProductTbl", adonId: LocalizedStrings.clarifidePlusCDCBAddOnId, status: "false", animaltag: self.aTag! ,orderId :orderId, userId: userId)
+                                            updateAdoonTablClarifide(entity: "GetAdonTbl", AdonId: LocalizedStrings.clarifidePlusCDCBAddOnId, status: "false",productId: self.pid)
                                             
                                         }
                                     }
@@ -647,7 +647,7 @@ class OrderProductSelectionSecondVC: UIViewController {
                         }
                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                             UIAlertAction in
-                            NSLog("Cancel Pressed")
+                            print(LocalizedStrings.cancelPressed)
                         }
                         
                         alertController.addAction(okAction)
@@ -663,7 +663,7 @@ class OrderProductSelectionSecondVC: UIViewController {
                         }
                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                             UIAlertAction in
-                            NSLog("Cancel Pressed")
+                            print(LocalizedStrings.cancelPressed)
                         }
                         
                         alertController.addAction(okAction)
@@ -759,18 +759,18 @@ class OrderProductSelectionSecondVC: UIViewController {
                 let pid = item.productId
                 let animalID = item.animalId
                 switch providerName {
-                case "AU Dairy Products":
-                    if PName == "CLARIFIDE Plus Upgrade"  || PName == "CLARIFIDE DataGene Upgrade" ||  PName == "CLARIFIDE CDCB Upgrade" {
+                case keyValue.auDairyProducts.rawValue:
+                    if PName == LocalizedStrings.providerClarifidePlusUpgrade  || PName == "CLARIFIDE DataGene Upgrade" ||  PName == LocalizedStrings.providerClarifideCDCBUpgrade {
                         unselectNonBVDVProduct(productID: Int(pid), animalId: Int(animalID))
                     }
                 case "CLARIFIDE AHDB (UK)" :
-                    if PName == "CLARIFIDE Plus Upgrade" || PName == "CLARIFIDE CDCB Upgrade" || PName == "CLARIFIDE AHDB Upgrade"{
+                    if PName == LocalizedStrings.providerClarifidePlusUpgrade || PName == LocalizedStrings.providerClarifideCDCBUpgrade || PName == "CLARIFIDE AHDB Upgrade"{
                         
                         unselectNonBVDVProduct(productID: Int(pid), animalId: Int(animalID))
                         
                     }
                 default:
-                    if PName == "CLARIFIDE Plus Upgrade"  || PName == "CLARIFIDE DataGene Upgrade" ||  PName == "CLARIFIDE CDCB Upgrade" {
+                    if PName == LocalizedStrings.providerClarifidePlusUpgrade  || PName == "CLARIFIDE DataGene Upgrade" ||  PName == LocalizedStrings.providerClarifideCDCBUpgrade {
                         unselectNonBVDVProduct(productID: Int(pid), animalId: Int(animalID))
                         
                     }

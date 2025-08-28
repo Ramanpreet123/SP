@@ -56,7 +56,7 @@ extension SampleTypeViewModel: ResponseDelegate {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(SampleTypeModel.self, from: data!)
+        modalObject = try? decoder.decode(SampleTypeModel.self, from: data!)
         
         DispatchQueue.main.async {
             

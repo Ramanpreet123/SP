@@ -54,7 +54,7 @@ extension RegisterDeviceViewModel: ResponseDelegate {
             delegate?.responseRecievedStatusForRegisterDevice(status: status)
         } else {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(RegisterDeviceModel.self, from: data!)
+            modalObject = try? decoder.decode(RegisterDeviceModel.self, from: data!)
             DispatchQueue.main.async {
                 
                 if self.modalObject != nil {

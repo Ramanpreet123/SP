@@ -768,7 +768,7 @@ extension DeleteDataListHelper  {
     
     func deleteList(listName: String, customerId: Int64, listID: Int) {
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as? String
-        let headerDict = ["Authorization": accessToken!,"Content-Type" : "application/x-www-form-urlencoded"]
+        let headerDict = ["Authorization": accessToken!,LocalizedStrings.contentType : "application/x-www-form-urlencoded"]
         
         let urlString = Configuration.Dev(packet: ApiKeys.deleteList.rawValue).getUrl()
         let parameters : [String: Any] = ["customerId": customerId,"listName":listName]
@@ -776,7 +776,7 @@ extension DeleteDataListHelper  {
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = headerDict
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: LocalizedStrings.contentType)
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {

@@ -1115,7 +1115,7 @@ extension OrderingAnimalVC {
             }
             deleteDataWithPvidCustomerId(entityString: Entities.mergeDataEntryListTblEntity ,providerId: Int64(self.pvid),customerId: Int64(self.custmerId ))
             
-            let attributeString = NSMutableAttributedString(string: NSLocalizedString("Import My List", comment: ""), attributes: self.attrs)
+            let attributeString = NSMutableAttributedString(string: NSLocalizedString(LocalizedStrings.importMyListStr, comment: ""), attributes: self.attrs)
             self.mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
             
             UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)

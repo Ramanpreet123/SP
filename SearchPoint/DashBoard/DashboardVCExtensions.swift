@@ -621,10 +621,10 @@ extension DashboardVC{
         }
         
         if UserDefaults.standard.value(forKey: "name") as? String == "Dairy" ||  UserDefaults.standard.value(forKey: "name") as? String == nil  {
-            self.provideCountCheckDairy = fetchdataOfProvider(specisId: "074dc82b-2b82-4ee6-99c6-f9691937394d") as! [GetProviderTbl]
-            getListProvider = providerEvaliuater(arr: provideCountCheckDairy) 
+            self.provideCountCheckDairy = fetchdataOfProvider(specisId: SpeciesID.dairySpeciesId) as! [GetProviderTbl]
+            getListProvider = providerEvaliuater(arr: provideCountCheckDairy)
             if getListProvider.count == 0 {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("No associated evaluation provider found for this customer in the app.", comment: ""))
+                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(LocalizedStrings.noEvalProvider, comment: ""))
                 self.customerTblView.isHidden = false
                 self.searchTextField.text = ""
                 UserDefaults.standard.removeObject(forKey: keyValue.currentActiveCustomerId.rawValue)
@@ -644,7 +644,7 @@ extension DashboardVC{
         
         else if UserDefaults.standard.value(forKey: "name") as? String == "Beef" {
             
-            self.provideCountCheckDairy = fetchdataOfProvider(specisId: "151e2230-9a01-4828-a105-d87a92b5be2f") as! [GetProviderTbl]
+            self.provideCountCheckDairy = fetchdataOfProvider(specisId: SpeciesID.beefSpeciesId) as! [GetProviderTbl]
             
             getListProvider = providerEvaliuater(arr: provideCountCheckDairy) 
             if getListProvider.count == 0 {

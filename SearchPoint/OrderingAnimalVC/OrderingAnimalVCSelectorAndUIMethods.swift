@@ -460,10 +460,10 @@ extension OrderingAnimalVC {
         let dateStr = UserDefaults.standard.value(forKey: "date") as? String
         
         if dateStr == "MM" {
-            dateformt.dateFormat = "MM/dd/yyyy"
+            dateformt.dateFormat = DateFormatters.MMddyyyyFormat
             
         } else {
-            dateformt.dateFormat = "dd/MM/yyyy"
+            dateformt.dateFormat = DateFormatters.ddMMyyyyFormat 
         }
         
         animalId1 = 0
@@ -553,8 +553,8 @@ extension OrderingAnimalVC {
                     switch country  {
                         
                     case countryName.Belgium.title, countryName.Luxembourg.title :
-                        saveSampleNameandID(sampleNameStr: "Allflex (TSU)", sampleID: 1)
-                        self.tissueBtnOutlet.setTitle("Allflex (TSU)", for: .normal)
+                        saveSampleNameandID(sampleNameStr: ButtonTitles.allflexTSUText, sampleID: 1)
+                        self.tissueBtnOutlet.setTitle(ButtonTitles.allflexTSUText, for: .normal)
                         
                     case countryName.Netherlands.title :
                         saveSampleNameandID(sampleNameStr: "Hair", sampleID: 4)
@@ -611,8 +611,8 @@ extension OrderingAnimalVC {
                         
                         switch country  {
                         case countryName.Belgium.title, countryName.Luxembourg.title :
-                            saveSampleNameandID(sampleNameStr: "Allflex (TSU)", sampleID: 1)
-                            self.tissueBtnOutlet.setTitle("Allflex (TSU)", for: .normal)
+                            saveSampleNameandID(sampleNameStr: ButtonTitles.allflexTSUText, sampleID: 1)
+                            self.tissueBtnOutlet.setTitle(ButtonTitles.allflexTSUText, for: .normal)
                             
                         case countryName.Netherlands.title :
                             saveSampleNameandID(sampleNameStr: "Hair", sampleID: 4)

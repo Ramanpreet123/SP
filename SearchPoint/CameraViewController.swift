@@ -146,7 +146,7 @@ class CameraViewController: UIViewController {
         weak var weakSelf = self
         DispatchQueue.main.sync {
             guard let strongSelf = weakSelf else {
-                print("Self is nil!")
+                
                 return
             }
             strongSelf.updatePreviewOverlayViewWithLastFrame()
@@ -210,7 +210,6 @@ class CameraViewController: UIViewController {
         weak var weakSelf = self
         DispatchQueue.main.sync {
             guard let strongSelf = weakSelf else {
-                print("Self is nil!")
                 return
             }
             strongSelf.updatePreviewOverlayViewWithLastFrame()
@@ -279,7 +278,6 @@ class CameraViewController: UIViewController {
         weak var weakSelf = self
         sessionQueue.async {
             guard let strongSelf = weakSelf else {
-                print("Self is nil!")
                 return
             }
             strongSelf.captureSession.beginConfiguration()
@@ -305,7 +303,6 @@ class CameraViewController: UIViewController {
         weak var weakSelf = self
         sessionQueue.async {
             guard let strongSelf = weakSelf else {
-                print("Self is nil!")
                 return
             }
             
@@ -340,7 +337,6 @@ class CameraViewController: UIViewController {
         weak var weakSelf = self
         sessionQueue.async {
             guard let strongSelf = weakSelf else {
-                print("Self is nil!")
                 return
             }
             strongSelf.captureSession.startRunning()
@@ -414,7 +410,6 @@ class CameraViewController: UIViewController {
                 guard let value = action.title else { return }
                 guard let detector = Detector(rawValue: value) else { return }
                 guard let strongSelf = weakSelf else {
-                    print("Self is nil!")
                     return
                 }
                 strongSelf.currentDetector = detector

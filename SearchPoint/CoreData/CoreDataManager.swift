@@ -11891,12 +11891,21 @@ func fetchGroupchildstatuscheck(entityName: String,customerId:Int64,Onfarmid:Str
 }
 
 func isEntityAttributeExist(id: String, entityName: String) -> Bool {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let managedContext = appDelegate.persistentContainer.viewContext
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        return false
+    }
+    
+    let context = appDelegate.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
     fetchRequest.predicate = NSPredicate(format: "onFarmID == %@", id)
-    let res = try! managedContext.fetch(fetchRequest)
-    return res.count > 0 ? true : false
+    
+    do {
+        let count = try context.count(for: fetchRequest)
+        return count > 0
+    } catch {
+        print("Core Data fetch error: \(error.localizedDescription)")
+        return false
+    }
 }
 
 var bridIdArray = [Int]()

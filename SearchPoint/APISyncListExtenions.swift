@@ -48,88 +48,6 @@ extension ApiSyncList {
             var ob = Animal()
             if let value = item as? DataEntryBeefAnimaladdTbl{
                 
-                if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 13  {
-                    ob.deviceAnimalID = Int(value.animalId)
-                    let serverAnimalId = value.serverAnimalId
-                    if serverAnimalId != "" {
-                        ob.animalID = serverAnimalId
-                    }
-                    
-                    if value.date != "" {
-                        print(value)
-                        datee = getOrderDateChange(date: value.date ?? "")
-                    }
-                    let medbreedRegArr = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 52, association: value.eT ?? "")
-                    if medbreedRegArr.count != 0 {
-                        
-                        let medbreedRegArr1 = medbreedRegArr.object(at: 0) as? GetBreedSocieties
-                        breedAssociationIdInherit =   medbreedRegArr1!.associationId ?? ""
-                        ob.breedAssociationId = breedAssociationIdInherit
-                        
-                    }
-                    
-                    let sireRegAssocation = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 52, association: value.sireRegAssocation ?? "")
-                    if sireRegAssocation.count != 0 {
-                        
-                        let medbreedRegArr1 = sireRegAssocation.object(at: 0) as? GetBreedSocieties
-                        sireRegAssocationbreedAssociationId =   medbreedRegArr1!.associationId ?? ""
-                        ob.sireAssociationId = sireRegAssocationbreedAssociationId
-                    }
-                    
-                    ob.earTag = value.animalTag //barcode genotype
-                    ob.sampleBarCode = value.animalbarCodeTag ///animal genotype
-                    
-                    if value.offsireId != ""{
-                        ob.sireRegNumber = value.offsireId
-                    }
-                    if value.offPermanentId != ""{
-                        ob.breedRegNumber = value.offPermanentId
-                    }
-                    
-                    let numberFromString = value.sireYOB ?? "0"
-                    let inTd = Int(numberFromString)
-                    if numberFromString != "" {
-                        ob.sireYOB = inTd ?? 0
-                    }
-                    
-                    if value.offDamId != "" {
-                        ob.damId = value.offDamId
-                    }
-                    
-                    let damYOBString = value.damYOB ?? "0"
-                    let inTddamYOB = Int(damYOBString)
-                    if numberFromString != "" {
-                        ob.damYOB = inTddamYOB ?? 0
-                        
-                    }
-                    ob.speciesId = SpeciesID.beefSpeciesId
-                    if value.breedId != "" {
-                        ob.breedId = value.breedId
-                    }
-                    
-                    ob.sampleTypeId = Int(value.tissuId)
-                    let sexName = value.gender ?? ""
-                    
-                    if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
-                        
-                        nameSex = "F"
-                    } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
-                        nameSex = "M"
-                        
-                    } else {
-                        nameSex = "F"
-                    }
-                    
-                    ob.sex = nameSex
-                    ob.dob = datee
-                    ob.nationalHerdId = value.nationHerdAU
-                    ob.breedRegistrationNumber = value.sireIDAU
-                    //Rajni update this value
-                    ob.uniqueId = value.animalTag
-                    ////ob.sireI
-                    
-                }
-                
                 if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 5  {
                     if UserDefaults.standard.string(forKey: keyValue.beefProduct.rawValue) == keyValue.globalHD50K.rawValue {
                         
@@ -188,7 +106,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -358,7 +276,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -441,7 +359,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -493,7 +411,7 @@ extension ApiSyncList {
                         }
                         ob.speciesId = SpeciesID.beefSpeciesId
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -558,72 +476,7 @@ extension ApiSyncList {
                         ob.sex = nameSex
                     }
                 }
-                if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 7  {
-                    
-                    ob.deviceAnimalID = Int(value.animalId)
-                    let serverAnimalId = value.serverAnimalId
-                    if serverAnimalId != "" {
-                        ob.animalID = serverAnimalId
-                    }
-                    
-                    
-                    if value.date != "" {
-                        print(value)
-                        datee = getOrderDateChange(date: value.date ?? "")
-                        ob.dob = datee
-                    }
-                    if value.animalTag != "" {
-                        ob.animalTag = value.animalTag
-                    }
-                    
-                    if value.animalbarCodeTag != ""{
-                        ob.sampleBarCode = value.animalbarCodeTag ///animal genotype
-                    }
-                    
-                    if value.eT != "" {
-                        ob.animalName = value.eT
-                    }
-                    
-                    if value.offsireId != "" {
-                        ob.sireRegNumber = value.offsireId
-                    }
-                    if value.offDamId != ""{
-                        ob.damRegNumber = value.offDamId
-                    }
-                    ob.speciesId = SpeciesID.beefSpeciesId
-                    if value.offPermanentId != ""{
-                        ob.breedRegNumber = value.offPermanentId
-                    }
-                    
-                    let sireRegAssocation = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 25, association: value.sireIDAU ?? "")
-                    if sireRegAssocation.count != 0 {
-                        
-                        let medbreedRegArr1 = sireRegAssocation.object(at: 0) as? GetBreedSocieties
-                        sireRegAssocationbreedAssociationId =   medbreedRegArr1!.associationId ?? ""
-                        ob.breedAssociationId = sireRegAssocationbreedAssociationId
-                    }
-                    
-                    if value.breedId == "" {
-                        ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
-                    } else {
-                        ob.breedId = value.breedId
-                    }
-                    
-                    ob.sampleTypeId = Int(value.tissuId)
-                    let sexName = value.gender ?? ""
-                    
-                    if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
-                        
-                        nameSex = "F"
-                    } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
-                        nameSex = "M"
-                        
-                    }  else {
-                        nameSex = "F"
-                    }
-                    
-                    ob.sex = nameSex
-                }
+           
             }
             apiSyncListClass.addAnimals.append(ob)
             ob = Animal()
@@ -634,90 +487,7 @@ extension ApiSyncList {
             var ob = Animal()
             if let value = item as? DataEntryBeefAnimaladdTbl{
                 
-                if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 13  {
-                    
-                    
-                    ob.deviceAnimalID = Int(value.animalId)
-                    let serverAnimalId = value.serverAnimalId
-                    if serverAnimalId != "" {
-                        ob.animalID = serverAnimalId
-                    }
-                    
-                    if value.date != "" {
-                        print(value)
-                        datee = getOrderDateChange(date: value.date ?? "")
-                    }
-                    let medbreedRegArr = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 52, association: value.eT ?? "")
-                    if medbreedRegArr.count != 0 {
-                        
-                        let medbreedRegArr1 = medbreedRegArr.object(at: 0) as? GetBreedSocieties
-                        breedAssociationIdInherit =   medbreedRegArr1!.associationId ?? ""
-                        ob.breedAssociationId = breedAssociationIdInherit
-                        
-                    }
-                    
-                    let sireRegAssocation = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 52, association: value.sireRegAssocation ?? "")
-                    if sireRegAssocation.count != 0 {
-                        
-                        let medbreedRegArr1 = sireRegAssocation.object(at: 0) as? GetBreedSocieties
-                        sireRegAssocationbreedAssociationId =   medbreedRegArr1!.associationId ?? ""
-                        ob.sireAssociationId = sireRegAssocationbreedAssociationId
-                    }
-                    
-                    ob.earTag = value.animalTag //barcode genotype
-                    ob.sampleBarCode = value.animalbarCodeTag ///animal genotype
-                    
-                    if value.offsireId != ""{
-                        ob.sireRegNumber = value.offsireId
-                    }
-                    if value.offPermanentId != ""{
-                        ob.breedRegNumber = value.offPermanentId
-                    }
-                    
-                    let numberFromString = value.sireYOB ?? "0"
-                    let inTd = Int(numberFromString)
-                    if numberFromString != "" {
-                        ob.sireYOB = inTd ?? 0
-                    }
-                    
-                    if value.offDamId != "" {
-                        ob.damId = value.offDamId
-                    }
-                    
-                    let damYOBString = value.damYOB ?? "0"
-                    let inTddamYOB = Int(damYOBString)
-                    if numberFromString != "" {
-                        ob.damYOB = inTddamYOB ?? 0
-                        
-                    }
-                    ob.speciesId = SpeciesID.beefSpeciesId
-                    if value.breedId != "" {
-                        ob.breedId = value.breedId
-                    }
-                    
-                    ob.sampleTypeId = Int(value.tissuId)
-                    let sexName = value.gender ?? ""
-                    
-                    if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
-                        
-                        nameSex = "F"
-                    } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
-                        nameSex = "M"
-                        
-                    } else {
-                        nameSex = "F"
-                    }
-                    
-                    ob.sex = nameSex
-                    ob.dob = datee
-                    ob.nationalHerdId = value.nationHerdAU
-                    ob.breedRegistrationNumber = value.sireIDAU
-                    //Rajni update this value
-                    ob.uniqueId = value.animalTag
-                    
-                }
-                
-                else if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 5  {
+                 if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 5  {
                     if UserDefaults.standard.string(forKey: keyValue.beefProduct.rawValue) == keyValue.globalHD50K.rawValue {
                         
                         ob.deviceAnimalID = Int(value.animalId)
@@ -775,7 +545,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -940,7 +710,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -1023,7 +793,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -1075,7 +845,7 @@ extension ApiSyncList {
                         }
                         ob.speciesId = SpeciesID.beefSpeciesId
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -1141,72 +911,6 @@ extension ApiSyncList {
                         ob.sex = nameSex
                     }
                 }
-                else if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 7  {
-                    
-                    ob.deviceAnimalID = Int(value.animalId)
-                    let serverAnimalId = value.serverAnimalId
-                    if serverAnimalId != "" {
-                        ob.animalID = serverAnimalId
-                    }
-                    
-                    
-                    if value.date != "" {
-                        print(value)
-                        datee = getOrderDateChange(date: value.date ?? "")
-                        ob.dob = datee
-                    }
-                    if value.animalTag != "" {
-                        ob.animalTag = value.animalTag
-                    }
-                    
-                    if value.animalbarCodeTag != ""{
-                        ob.sampleBarCode = value.animalbarCodeTag ///animal genotype
-                    }
-                    
-                    if value.eT != "" {
-                        ob.animalName = value.eT
-                    }
-                    
-                    if value.offsireId != "" {
-                        ob.sireRegNumber = value.offsireId
-                    }
-                    if value.offDamId != ""{
-                        ob.damRegNumber = value.offDamId
-                    }
-                    ob.speciesId = SpeciesID.beefSpeciesId
-                    if value.offPermanentId != ""{
-                        ob.breedRegNumber = value.offPermanentId
-                    }
-                    
-                    let sireRegAssocation = fetchAllDataProductBeefBreedSocietyNAME(entityName: Entities.getBreedSocietiesTblEntity, productId: 25, association: value.sireIDAU ?? "")
-                    if sireRegAssocation.count != 0 {
-                        
-                        let medbreedRegArr1 = sireRegAssocation.object(at: 0) as? GetBreedSocieties
-                        sireRegAssocationbreedAssociationId =   medbreedRegArr1!.associationId ?? ""
-                        ob.breedAssociationId = sireRegAssocationbreedAssociationId
-                    }
-                    
-                    if value.breedId == "" {
-                        ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
-                    } else {
-                        ob.breedId = value.breedId
-                    }
-                    
-                    ob.sampleTypeId = Int(value.tissuId)
-                    let sexName = value.gender ?? ""
-                    
-                    if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
-                        
-                        nameSex = "F"
-                    } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
-                        nameSex = "M"
-                        
-                    }  else {
-                        nameSex = "F"
-                    }
-                    
-                    ob.sex = nameSex
-                }
             }
             apiSyncListClass.updateAnimals.append(ob)
             ob = Animal()
@@ -1239,15 +943,21 @@ extension ApiSyncList {
                 apiSyncListClass.productId = 24
             }
         }
-        if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 7  {
-            apiSyncListClass.productId = 25
-        }
-        if UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue) == 13  {
-            apiSyncListClass.productId = 52
-        }
+      
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -1256,7 +966,7 @@ extension ApiSyncList {
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -1305,7 +1015,7 @@ extension ApiSyncList {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(SavingResponseModel.self, from: data!)
+        modalObject = try? decoder.decode(SavingResponseModel.self, from: data!)
         if self.modalObject != nil {
             self.saveApiResponseBeef(dataModel:self.modalObject!,listId: listId)
         }
@@ -1420,8 +1130,19 @@ extension ApiSyncList {
         apiSyncListClass.speciesId = SpeciesID.beefSpeciesId
         apiSyncListClass.providerId = beefpvid
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -1431,7 +1152,7 @@ extension ApiSyncList {
         request.allHTTPHeaderFields = headerDict
         
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -1513,8 +1234,19 @@ extension ApiSyncList {
             apiSyncListClass.speciesId = species
             apiSyncListClass.providerId = providerId
             let jsonEncoder = JSONEncoder()
-            let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            var jsonData: Data?
+            do {
+                jsonData = try jsonEncoder.encode(apiSyncListClass)
+                // use jsonData safely
+            } catch {
+                print("Failed to encode updateGroup: \(error.localizedDescription)")
+            }
+            
+            guard let body = jsonData else {
+                print("No JSON data to send")
+                return
+            }
+            let json = String(data: body, encoding: String.Encoding.utf8)
             print(json!)
             let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
             let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -1524,7 +1256,7 @@ extension ApiSyncList {
             request.allHTTPHeaderFields = headerDict
             
             request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-            request.httpBody = jsonData
+            request.httpBody = body
             
             AF.request(request as URLRequestConvertible).responseJSON { response in
                 let statusCode =  response.response?.statusCode
@@ -1609,8 +1341,19 @@ extension ApiSyncList {
         }
         
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -1619,7 +1362,7 @@ extension ApiSyncList {
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -1756,7 +1499,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -1924,7 +1667,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2007,7 +1750,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2059,7 +1802,7 @@ extension ApiSyncList {
                         }
                         ob.speciesId = SpeciesID.beefSpeciesId
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2107,7 +1850,7 @@ extension ApiSyncList {
                             ob.rgn = value.offPermanentId
                         }
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2175,7 +1918,7 @@ extension ApiSyncList {
                     }
                     
                     if value.breedId == "" {
-                        ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                        ob.breedId = brazilianBreedId
                     } else {
                         ob.breedId = value.breedId
                     }
@@ -2233,8 +1976,19 @@ extension ApiSyncList {
             apiSyncListClass.productId = 25
         }
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -2244,7 +1998,7 @@ extension ApiSyncList {
         request.allHTTPHeaderFields = headerDict
         
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -2377,7 +2131,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2543,7 +2297,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2626,7 +2380,7 @@ extension ApiSyncList {
                         }
                         
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2678,7 +2432,7 @@ extension ApiSyncList {
                         }
                         ob.speciesId = SpeciesID.beefSpeciesId
                         if value.breedId == "" {
-                            ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                            ob.breedId = brazilianBreedId
                         } else {
                             ob.breedId = value.breedId
                             
@@ -2787,7 +2541,7 @@ extension ApiSyncList {
                     }
                     
                     if value.breedId == "" {
-                        ob.breedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
+                        ob.breedId = brazilianBreedId
                     } else {
                         ob.breedId = value.breedId
                     }
@@ -2843,8 +2597,19 @@ extension ApiSyncList {
         }
         
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -2853,7 +2618,7 @@ extension ApiSyncList {
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode

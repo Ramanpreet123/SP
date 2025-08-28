@@ -13,6 +13,8 @@ import CoreData
 
 class ApiSyncList: NSObject {
     
+    let girolandoAssociation = "a40549b9-beae-4c0c-8e48-5147f18333d9"
+    let brazilianBreedId = "d352c4c2-2ff9-451a-9c00-4f0f5604b387"
     var delegeteSyncApi : syncApi?
     let loginData = fetchAllData(entityName: Entities.LoginTblEntity)
     var userId = Int()
@@ -33,7 +35,7 @@ class ApiSyncList: NSObject {
     var getGroupName = String()
     var emailApisyncGroup = EmailGroupModel()
     var animaltbl1 = NSArray()
-
+    
     override init() {
         super.init()
         userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
@@ -46,7 +48,7 @@ class ApiSyncList: NSObject {
         let animaltbl = fetchAllDataAnimalDaWithOutOrderIdserverAnimalId(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
         
         let editCaseDataWithoutServerId = fetchAllDataEditConditionWithoutServerId(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
-       
+        
         let editCaseData = fetchAllDataEditCondition(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
         
         if animaltbl.count == 0 && editCaseData.count == 0 {
@@ -114,7 +116,7 @@ class ApiSyncList: NSObject {
                 ob.rgd  = ""
                 ob.rgn  = value.breedAssocation
                 if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
-                    ob.breedAssociationId = "a40549b9-beae-4c0c-8e48-5147f18333d9"
+                    ob.breedAssociationId = girolandoAssociation
                 }
             }
             apiSyncListClass.addAnimals.append(ob)
@@ -172,14 +174,14 @@ class ApiSyncList: NSObject {
                 ob.rgd  = ""
                 ob.rgn  = value.breedAssocation
                 if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
-                    ob.breedAssociationId = "a40549b9-beae-4c0c-8e48-5147f18333d9"
+                    ob.breedAssociationId = girolandoAssociation
                 }
             }
             apiSyncListClass.addAnimals.append(ob)
             ob = Animal()
         }
         
-      // get the list name and check farmid and official id animal list and update that list
+        // get the list name and check farmid and official id animal list and update that list
         for item in editCaseData{
             
             var ob = Animal()
@@ -238,7 +240,7 @@ class ApiSyncList: NSObject {
                 ob.rgn  = value.breedAssocation
                 if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
                     
-                    ob.breedAssociationId = "a40549b9-beae-4c0c-8e48-5147f18333d9"
+                    ob.breedAssociationId = girolandoAssociation
                     
                 }
                 ob.sireID  = value.offsireId
@@ -253,8 +255,19 @@ class ApiSyncList: NSObject {
         apiSyncListClass.speciesId = SpeciesID.dairySpeciesId
         apiSyncListClass.providerId = pvid
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
@@ -265,7 +278,7 @@ class ApiSyncList: NSObject {
         request.allHTTPHeaderFields = headerDict
         
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -314,161 +327,172 @@ class ApiSyncList: NSObject {
             }
         }
     }
-  // Update animal list and merge list together
-  func updateAnimalLists(listId:Int64,custmerId:Int64){
-   
-    
-    let editCaseData = fetchAllDataEditCondition(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
-    
-    if editCaseData.count == 0 {
-        self.delegeteSyncApi?.didFinishApi(response: "true")
-        return
-    }
-    
-    let fetchName = fetchListNameAccordingToListId(entityName: Entities.dataEntryListTblEntity,customerId:Int(custmerId ),listId:listId,providerId:pvid)
-    if fetchName.count != 0{
-        let getName = fetchName.object(at: 0) as? DataEntryList
-        self.getListName = getName?.listName ?? ""
-        self.descriptionName = getName?.listDesc ?? ""
-    }
-    
-      apiSyncListClass.addAnimals.removeAll()
-   
-  // get the list name and check farmid and official id animal list and update that list
-    for item in editCaseData{
+    // Update animal list and merge list together
+    func updateAnimalLists(listId:Int64,custmerId:Int64){
         
-        var ob = Animal()
-        if let value = item as? DataEntryAnimaladdTbl{
-            if value.date != "" {
-                print(value)
-                ob.dob = getOrderDateChange(date: value.date ?? "")
-            }
-            //Mandotry Fields
-            ob.deviceAnimalID = Int(value.animalId)
-            ob.onFarmID = value.farmId ?? ""
-            ob.officialTag = value.animalTag
-            ob.sampleBarCode = value.animalbarCodeTag
-            ob.breedId = value.breedId ?? ""
-            ob.sampleTypeId = Int(value.tissuId)
-            
-            let sexName = value.gender ?? ""
-            if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
-                nameSex = "F"
-            } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
-                nameSex = "M"
-            }  else {
-                nameSex = "F"
-            }
-            
-            ob.sex = nameSex
-            
-            ob.bornTypeId = Int(value.selectedBornTypeId)
-            ob.officialSireId = value.offsireId
-            ob.officialDamId  = value.offDamId
-            ob.earTag  = value.earTag
-            ob.animalName  = value.animalName
-            
-            let serverAnimalId = value.serverAnimalId
-            if serverAnimalId != "" {
-                
-                ob.animalID = serverAnimalId
-            }
-            ob.speciesId = SpeciesID.dairySpeciesId
-            ob.breedId = value.breedId ?? ""
-            ob.earTag  = value.earTag
-            ob.animalTag  = ""
-            ob.breedRegNumber  = value.breedRegNumber
-            ob.animalName  = value.animalName
-            ob.sireRegNumber  = value.offsireId
-            ob.damRegNumber  = value.offDamId
-            
-            ob.sireNAAB = ""
-            ob.mbc  = value.eT
-            ob.breedRegistrationNumber = ""
-            ob.sireYOB = 0
-            ob.animalDamID = ""
-            ob.damYOB = 0
-            ob.series  = ""
-            ob.rgd  = ""
-            ob.rgn  = value.breedAssocation
-            if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
-                
-                ob.breedAssociationId = "a40549b9-beae-4c0c-8e48-5147f18333d9"
-                
-            }
-            ob.sireID  = value.offsireId
-            ob.damId = value.offDamId
-        }
-        apiSyncListClass.updateAnimals.append(ob)
-        ob = Animal()
-    }
-      apiSyncListClass.customerId = custId
-      apiSyncListClass.listName = getListName
-      apiSyncListClass.description = descriptionName
-      apiSyncListClass.speciesId = SpeciesID.dairySpeciesId
-      apiSyncListClass.providerId = pvid
-    let jsonEncoder = JSONEncoder()
-    let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-    let json = String(data: jsonData, encoding: String.Encoding.utf8)
-    print(json!)
-    let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
-    let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
-      let urlString = Configuration.Dev(packet: ApiKeys.saveUpdateLists.rawValue).getUrl()
-    var request = URLRequest(url: URL(string: urlString)! )
-    request.httpMethod = "POST"
-    request.allHTTPHeaderFields = headerDict
-    
-    request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-    request.httpBody = jsonData
-    
-    AF.request(request as URLRequestConvertible).responseJSON { response in
-        let statusCode =  response.response?.statusCode
         
-        NotificationCenter.default.post(name: Notification.Name(LocalizedStrings.sessionExpiredStr), object: nil, userInfo: [LocalizedStrings.statusCodeText:"\(String(describing: response.response?.statusCode ?? 0))"])
-        if statusCode == 401  {
-            
-            self.delegeteSyncApi?.failWithError(statusCode: statusCode!)
-        }
-        else if statusCode == 500 || statusCode == 503 ||  statusCode == 403 ||  statusCode==501 || statusCode == 502 || statusCode == 400 || statusCode == 504 || statusCode == 404 || statusCode == 408 {
-            self.delegeteSyncApi?.failWithErrorInternal()
-            self.delegeteSyncApi?.failWithError(statusCode: statusCode!)
+        let editCaseData = fetchAllDataEditCondition(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:listId,custmerId:custmerId,providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
+        
+        if editCaseData.count == 0 {
+            self.delegeteSyncApi?.didFinishApi(response: "true")
+            return
         }
         
-        switch response.result {
+        let fetchName = fetchListNameAccordingToListId(entityName: Entities.dataEntryListTblEntity,customerId:Int(custmerId ),listId:listId,providerId:pvid)
+        if fetchName.count != 0{
+            let getName = fetchName.object(at: 0) as? DataEntryList
+            self.getListName = getName?.listName ?? ""
+            self.descriptionName = getName?.listDesc ?? ""
+        }
+        
+        apiSyncListClass.addAnimals.removeAll()
+        
+        // get the list name and check farmid and official id animal list and update that list
+        for item in editCaseData{
             
-        case .success(let responseObject):
-            // internet works.saveProductData
-            let data = response.data
-            print(response.data as Any)
-            //let decoder = JSONDecoder()
-            let response = responseObject as! NSDictionary
-            self.apiSyncListClass.addAnimals.removeAll()
-            self.apiSyncListClass.updateAnimals.removeAll()
-            self.apiSyncListClass.deleteAnimals.removeAll()
-            self.responseRecieved1(data, status: true, listId: Int(listId))
+            var ob = Animal()
+            if let value = item as? DataEntryAnimaladdTbl{
+                if value.date != "" {
+                    print(value)
+                    ob.dob = getOrderDateChange(date: value.date ?? "")
+                }
+                //Mandotry Fields
+                ob.deviceAnimalID = Int(value.animalId)
+                ob.onFarmID = value.farmId ?? ""
+                ob.officialTag = value.animalTag
+                ob.sampleBarCode = value.animalbarCodeTag
+                ob.breedId = value.breedId ?? ""
+                ob.sampleTypeId = Int(value.tissuId)
+                
+                let sexName = value.gender ?? ""
+                if sexName == ButtonTitles.femaleText.localized || sexName == "female"{
+                    nameSex = "F"
+                } else if sexName == ButtonTitles.maleText.localized || sexName == "male" {
+                    nameSex = "M"
+                }  else {
+                    nameSex = "F"
+                }
+                
+                ob.sex = nameSex
+                
+                ob.bornTypeId = Int(value.selectedBornTypeId)
+                ob.officialSireId = value.offsireId
+                ob.officialDamId  = value.offDamId
+                ob.earTag  = value.earTag
+                ob.animalName  = value.animalName
+                
+                let serverAnimalId = value.serverAnimalId
+                if serverAnimalId != "" {
+                    
+                    ob.animalID = serverAnimalId
+                }
+                ob.speciesId = SpeciesID.dairySpeciesId
+                ob.breedId = value.breedId ?? ""
+                ob.earTag  = value.earTag
+                ob.animalTag  = ""
+                ob.breedRegNumber  = value.breedRegNumber
+                ob.animalName  = value.animalName
+                ob.sireRegNumber  = value.offsireId
+                ob.damRegNumber  = value.offDamId
+                
+                ob.sireNAAB = ""
+                ob.mbc  = value.eT
+                ob.breedRegistrationNumber = ""
+                ob.sireYOB = 0
+                ob.animalDamID = ""
+                ob.damYOB = 0
+                ob.series  = ""
+                ob.rgd  = ""
+                ob.rgn  = value.breedAssocation
+                if value.breedAssocation == LocalizedStrings.girolandoAssociationStr {
+                    
+                    ob.breedAssociationId = girolandoAssociation
+                    
+                }
+                ob.sireID  = value.offsireId
+                ob.damId = value.offDamId
+            }
+            apiSyncListClass.updateAnimals.append(ob)
+            ob = Animal()
+        }
+        apiSyncListClass.customerId = custId
+        apiSyncListClass.listName = getListName
+        apiSyncListClass.description = descriptionName
+        apiSyncListClass.speciesId = SpeciesID.dairySpeciesId
+        apiSyncListClass.providerId = pvid
+        let jsonEncoder = JSONEncoder()
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
+        print(json!)
+        let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
+        let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
+        let urlString = Configuration.Dev(packet: ApiKeys.saveUpdateLists.rawValue).getUrl()
+        var request = URLRequest(url: URL(string: urlString)! )
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headerDict
+        
+        request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
+        request.httpBody = body
+        
+        AF.request(request as URLRequestConvertible).responseJSON { response in
+            let statusCode =  response.response?.statusCode
             
-            print(response)
+            NotificationCenter.default.post(name: Notification.Name(LocalizedStrings.sessionExpiredStr), object: nil, userInfo: [LocalizedStrings.statusCodeText:"\(String(describing: response.response?.statusCode ?? 0))"])
+            if statusCode == 401  {
+                
+                self.delegeteSyncApi?.failWithError(statusCode: statusCode!)
+            }
+            else if statusCode == 500 || statusCode == 503 ||  statusCode == 403 ||  statusCode==501 || statusCode == 502 || statusCode == 400 || statusCode == 504 || statusCode == 404 || statusCode == 408 {
+                self.delegeteSyncApi?.failWithErrorInternal()
+                self.delegeteSyncApi?.failWithError(statusCode: statusCode!)
+            }
             
-        case .failure(let encodingError):
-            
-            if let err = encodingError as? URLError, err.code == .notConnectedToInternet {
-                self.delegeteSyncApi?.failWithInternetConnection()
-                print(err)
-            } else if let data = response.data, let responseString = String(data: data, encoding: String.Encoding.utf8) {
-                print (encodingError)
-                print (responseString)
-                if let s = statusCode {
-                    self.delegeteSyncApi?.failWithError(statusCode: s)
+            switch response.result {
+                
+            case .success(let responseObject):
+                // internet works.saveProductData
+                let data = response.data
+                print(response.data as Any)
+                //let decoder = JSONDecoder()
+                let response = responseObject as! NSDictionary
+                self.apiSyncListClass.addAnimals.removeAll()
+                self.apiSyncListClass.updateAnimals.removeAll()
+                self.apiSyncListClass.deleteAnimals.removeAll()
+                self.responseRecieved1(data, status: true, listId: Int(listId))
+                
+                print(response)
+                
+            case .failure(let encodingError):
+                
+                if let err = encodingError as? URLError, err.code == .notConnectedToInternet {
+                    self.delegeteSyncApi?.failWithInternetConnection()
+                    print(err)
+                } else if let data = response.data, let responseString = String(data: data, encoding: String.Encoding.utf8) {
+                    print (encodingError)
+                    print (responseString)
+                    if let s = statusCode {
+                        self.delegeteSyncApi?.failWithError(statusCode: s)
+                    } else {
+                        self.delegeteSyncApi?.failWithErrorInternal()
+                    }
                 } else {
                     self.delegeteSyncApi?.failWithErrorInternal()
                 }
-            } else {
-                self.delegeteSyncApi?.failWithErrorInternal()
             }
         }
     }
-}
-  
+    
     func getOrderDateChange(date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatters.ddMMyyyyFormat
@@ -486,7 +510,7 @@ class ApiSyncList: NSObject {
             return
         }
         let decoder = JSONDecoder()
-        modalObject = try! decoder.decode(SavingResponseModel.self, from: data!)
+        modalObject = try? decoder.decode(SavingResponseModel.self, from: data!)
         DispatchQueue.main.async {
             
             if self.modalObject != nil {
@@ -501,14 +525,14 @@ class ApiSyncList: NSObject {
         let animaltbl = fetchAllDataAnimalDaWithOutOrderIdserverAnimalId(entityName: Entities.dataEntryAnimalAddTbl,userId:userId,orderStatus:"false",listid:Int64(listId),custmerId:Int64(UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as! Int),providerId:UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue),serverAnimalId:"")
         
         var duplicateAnimalData = [AnimalResponse]()
-      let filteredAnimals = dataModel.customerList.animals.uniqueElement { $0.onFarmID == $1.onFarmID && $0.animalTag == $1.animalTag && $0.sampleBarCode == $1.sampleBarCode }
+        let filteredAnimals = dataModel.customerList.animals.uniqueElement { $0.onFarmID == $1.onFarmID && $0.animalTag == $1.animalTag && $0.sampleBarCode == $1.sampleBarCode }
         
         if dataModel.customerList.animals.count < animaltbl.count {
             if animaltbl.count > 0 {
                 self.postListData(listId: Int64(listId), custmerId: Int64(UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as! Int))
             }
         } else  if dataModel.customerList.animals.count > filteredAnimals.count {
-
+            
             for animal in filteredAnimals {
                 
                 let duplicateAnimal = dataModel.customerList.animals.filter({$0.onFarmID == animal.onFarmID &&  $0.animalTag == animal.animalTag && $0.sampleBarCode == animal.sampleBarCode})
@@ -535,7 +559,7 @@ class ApiSyncList: NSObject {
             
             for animal  in filteredAnimals {
                 
-              updateDataInSaveClick(entity: Entities.dataEntryAnimalAddTbl,serverAnimalId:animal.animalID ?? "",farmId:animal.onFarmID ?? "",animalTag:animal.officialTag ?? "",custmerId:custId ,animalId:animal.deviceAnimalID ?? 0,listId: listId)
+                updateDataInSaveClick(entity: Entities.dataEntryAnimalAddTbl,serverAnimalId:animal.animalID ?? "",farmId:animal.onFarmID ?? "",animalTag:animal.officialTag ?? "",custmerId:custId ,animalId:animal.deviceAnimalID ?? 0,listId: listId)
                 updateDataInSaveClick(entity: Entities.animalAddTblEntity,serverAnimalId:animal.animalID ?? "",farmId:animal.onFarmID ?? "",animalTag:animal.officialTag ?? "",custmerId:custId ,animalId:animal.deviceAnimalID ?? 0,listId: listId)
                 updateDataInSaveClick(entity: Entities.animalMasterTblEntity,serverAnimalId:animal.animalID ?? "",farmId:animal.onFarmID ?? "",animalTag:animal.officialTag ?? "",custmerId:custId ,animalId:animal.deviceAnimalID ?? 0,listId: listId)
                 updadeOfflineSyncInfo(entity: Entities.dataEntryListTblEntity,customerId:custId,offlineSync:true,listid: listId)
@@ -558,7 +582,7 @@ class ApiSyncList: NSObject {
                 self.postListData(listId: Int64(listId), custmerId: Int64(UserDefaults.standard.value(forKey: keyValue.currentActiveCustomerId.rawValue) as! Int))
             }
         } else  if dataModel.customerList.animals.count > filteredAnimals.count {
-      
+            
             for animal  in filteredAnimals {
                 let duplicateAnimal = dataModel.customerList.animals.filter({$0.earTag == animal.earTag &&  $0.sampleBarCode == animal.sampleBarCode})
                 
@@ -591,7 +615,7 @@ class ApiSyncList: NSObject {
             self.delegeteSyncApi?.didFinishApi(response: "true")
         }
     }
-        
+    
     func postListDataDelete(listId:Int64,custmerId:Int64,clearOrder :Bool,animalId :Int) {
         self.apiSyncListClass.deleteAnimals.removeAll()
         self.apiSyncListClass.addAnimals.removeAll()
@@ -630,20 +654,31 @@ class ApiSyncList: NSObject {
         apiSyncListClass.speciesId = SpeciesID.dairySpeciesId
         apiSyncListClass.providerId = pvid
         let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(apiSyncListClass)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(apiSyncListClass)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
         let urlString = Configuration.Dev(packet: ApiKeys.saveList.rawValue).getUrl()
-       
+        
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -705,20 +740,31 @@ class ApiSyncList: NSObject {
         
         let jsonEncoder = JSONEncoder()
         
-        let jsonData = try! jsonEncoder.encode(emailApisyncList)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        var jsonData: Data?
+        do {
+            jsonData = try jsonEncoder.encode(emailApisyncList)
+            // use jsonData safely
+        } catch {
+            print("Failed to encode updateGroup: \(error.localizedDescription)")
+        }
+        
+        guard let body = jsonData else {
+            print("No JSON data to send")
+            return
+        }
+        let json = String(data: body, encoding: String.Encoding.utf8)
         print(json!)
         
         let accessToken = UserDefaults.standard.value(forKey: keyValue.accessToken.rawValue) as? String
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]
         let urlString = Configuration.Dev(packet: ApiKeys.emailMeList.rawValue).getUrl()
-       
+        
         var request = URLRequest(url: URL(string: urlString)! )
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headerDict
         
         request.setValue(LocalizedStrings.appJson, forHTTPHeaderField: LocalizedStrings.contentType)
-        request.httpBody = jsonData
+        request.httpBody = body
         
         AF.request(request as URLRequestConvertible).responseJSON { response in
             let statusCode =  response.response?.statusCode
@@ -757,6 +803,6 @@ class ApiSyncList: NSObject {
             }
         }
     }
-  
+    
 }
 

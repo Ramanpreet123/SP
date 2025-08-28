@@ -28,7 +28,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     @IBOutlet weak var offLineBtn: UIButton!
     var rgnId = 0
     var rgdId = 0
-    
+    let checkValueInAllFields = "rgn contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || rgd contains[cd] %@ || productName contains[cd] %@"
     let buttonbg1 = UIButton ()
     var customPopView1 :TipPopUp!
     
@@ -72,7 +72,11 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     var langId = UserDefaults.standard.value(forKey: "lngId") as? Int
     var heartBeatViewModel:HeartBeatViewModel?
     let pvid = UserDefaults.standard.integer(forKey: "BeefPvid")
+    
     func navigateToAnotherVc(){
+        // Intentionally left empty.
+        // This delegate method is required by the protocol,
+        // but we don’t need custom behavior here (for now).
     }
     func dataReload(check :Bool){
         if !check{
@@ -190,7 +194,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             let alertController = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("Do you want to email entered data?", comment: ""), preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default) {
                 UIAlertAction in
-                NSLog("Cancel Pressed")
+                print(LocalizedStrings.cancelPressed)
                 
                 return
             }
@@ -407,17 +411,11 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         dropDown.cornerRadius = 10
         dropDown.textFont = UIFont.systemFont(ofSize: 13)
         dropDown.cellHeight = 37
-        if pvid == 13 {
-            dropDown.dataSource  = ["Unique ID".localized, NSLocalizedString("Barcode", comment: "")]
-        }
-        if pvid == 7 {
-            dropDown.dataSource = [ NSLocalizedString("Animal Tag", comment: ""), NSLocalizedString("Barcode", comment: "")]
-        }
         if pvid  == 5{
-            dropDown.dataSource = [ NSLocalizedString("Ear Tag", comment: ""), NSLocalizedString("Barcode", comment: "")]
+            dropDown.dataSource = [ NSLocalizedString(ButtonTitles.earTagText, comment: ""), NSLocalizedString("Barcode", comment: "")]
         }
         if pvid == 6{
-            dropDown.dataSource = [NSLocalizedString("Barcode", comment: ""), NSLocalizedString("Series", comment: ""), NSLocalizedString("RGN", comment: ""), NSLocalizedString("RGD or Animal ID", comment: "")]
+            dropDown.dataSource = [NSLocalizedString("Barcode", comment: ""), NSLocalizedString("Series", comment: ""), NSLocalizedString("RGN", comment: ""), NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")]
         }
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             
@@ -427,8 +425,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             self.farmIdDisplyOutlet.setTitle(item, for: .normal)
             self.farmIdDisplyOutlet.layer.borderColor = UIColor.gray.cgColor
             
-            if pvid == 5 || pvid == 7 || pvid == 13{
-                if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "") || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag".localized || self.clickOnDropDown == "Unique ID".localized {
+            if pvid == 5 {
+                if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "")  {
                     UserDefaults.standard.set("officialid", forKey: "InheritFOSampleTrackingDetailVC")
                     if self.animaId == 0{
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -524,7 +522,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     
                 }
                 
-                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
+                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                     UserDefaults.standard.set("rgd", forKey: "InheritFOSampleTrackingDetailVC")
                     if self.rgdId == 0{
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -600,14 +598,9 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         
         if  UserDefaults.standard.string(forKey: "InheritFOSampleTrackingDetailVC") == nil {
             UserDefaults.standard.set("officialid", forKey: "InheritFOSampleTrackingDetailVC")
-            if pvid == 13 {
-                self.clickOnDropDown = "Unique ID".localized
-            }
-            if pvid == 7{
-                self.clickOnDropDown = NSLocalizedString("Animal Tag", comment: "")
-            }
+           
             if pvid == 5{
-                self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             }
             if pvid == 6{
                 self.clickOnDropDown = NSLocalizedString("Barcode", comment: "")
@@ -618,14 +611,9 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         
         if UserDefaults.standard.string(forKey: "InheritFOSampleTrackingDetailVC") == "officialid" {
             UserDefaults.standard.set(true, forKey: "brazilBarcode")
-            if pvid == 13 {
-                self.clickOnDropDown = "Unique ID".localized
-            }
-            if pvid == 7 {
-                self.clickOnDropDown = NSLocalizedString("Animal Tag", comment: "")
-            }
+          
             if pvid == 5{
-                self.clickOnDropDown = NSLocalizedString("Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(ButtonTitles.earTagText, comment: "")
             }
             if pvid == 6{
                 self.clickOnDropDown = NSLocalizedString("Barcode", comment: "")
@@ -639,17 +627,14 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 if selected == "barcode" {
                     selected = "Barcode"
                 }
-                self.clickOnDropDown = NSLocalizedString(selected ?? "Ear Tag", comment: "")
+                self.clickOnDropDown = NSLocalizedString(selected ?? ButtonTitles.earTagText, comment: "")
             }
             if pvid == 6{
                 UserDefaults.standard.set(false, forKey: "brazilBarcode")
                 UserDefaults.standard.set(true, forKey: "series")
                 self.clickOnDropDown =  NSLocalizedString("Series", comment: "")
             }
-            if pvid == 13{
-                
-                self.clickOnDropDown = "Unique ID".localized
-            }
+         
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             self.fethData =  fetchAllDataBarcOdeStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: serchTextField.text!)
         }
@@ -660,7 +645,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             
         }
         if UserDefaults.standard.string(forKey: "InheritFOSampleTrackingDetailVC") == "rgd" {
-            self.clickOnDropDown =  NSLocalizedString("RGD or Animal ID", comment: "")
+            self.clickOnDropDown =  NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
             self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
             self.fethData =  fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true,status: "true", orderStatus: "false", barcode: self.serchTextField.text!)
         }
@@ -1113,7 +1098,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             }
             
             cell.beefPlaceAnSelectionTitle.text = "Place an Order".localized
-            cell.emailMeSelectionTtile.text = "E-Mail Me Entered Data".localized
+            cell.emailMeSelectionTtile.text = ButtonTitles.emailEnteredData.localized
             cell.bilingLLbl.text = NSLocalizedString("Billing Contact:", comment: "")
             let pviduser = (UserDefaults.standard.integer(forKey:"BeefPvid") as? Int)!
             if pviduser == 13 && UserDefaults.standard.value(forKey: "name") as? String  == "Beef" {
@@ -1133,15 +1118,11 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "OPSTableViewCell", for: indexPath) as! OPSTableViewCell
-        if pvid == 13 {
             cell.barcodeTitle.text = NSLocalizedString("Barcode", comment: "")
-            cell.earTagTtitle.text = NSLocalizedString("Unique ID", comment: "")
-        } else {
-            cell.barcodeTitle.text = NSLocalizedString("Barcode", comment: "")
-            cell.earTagTtitle.text = NSLocalizedString("Ear Tag", comment: "")
-        }
+            cell.earTagTtitle.text = NSLocalizedString(ButtonTitles.earTagText, comment: "")
         
-        if pvid == 5 || pvid == 13 {
+        
+        if pvid == 5 {
             
             cell.OfficialId.text =  String(values[indexPath.row])
             cell.Barcode.text =  String(barCode[indexPath.row])
@@ -1168,7 +1149,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
             cell.vollView.tag = indexPath.row
             cell.deleteBttn.tag = indexPath.row
             cell.deleteBttn.addTarget(nil, action: #selector(deleteButton(_:)), for: .touchUpInside)
-            cell.rgdOrAnimalID.text = NSLocalizedString("RGD or Animal ID", comment: "")
+            cell.rgdOrAnimalID.text = NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: "")
         }
         if pvid == 7 {
             cell.earTagTtitle.text = NSLocalizedString("Animal Tag/Tattoo", comment: "")
@@ -1201,8 +1182,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
     
     @IBAction func dropAction(_ sender: UIButton) {
         
-        if pvid == 5 || pvid == 7 ||  pvid == 13{
-            if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "") || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag".localized || self.clickOnDropDown == "Unique ID".localized
+        if pvid == 5 || pvid == 7{
+            if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "")
             {
                 if self.animaId == 0{
                     dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -1294,7 +1275,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                 
             }
             
-            if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
+            if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                 
                 if self.rgdId == 0{
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
@@ -1325,8 +1306,8 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
         tblView.isHidden = false
         if newString != ""{
             
-            if pvid == 5 || pvid == 7 || pvid == 13 {
-                if self.clickOnDropDown == NSLocalizedString("Ear Tag", comment: "")  || self.clickOnDropDown == NSLocalizedString("Official ID", comment: "") || self.clickOnDropDown == "Animal Tag" || self.clickOnDropDown == "Unique ID".localized{
+            if pvid == 5 {
+                if self.clickOnDropDown == NSLocalizedString(ButtonTitles.earTagText, comment: "")  || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: "")  {
                     let bPredicate: NSPredicate = NSPredicate(format: "farmId contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString)
                     
                     let fetchcustRep = fetchAllDataanimalTagStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false",animalTag: newString as String).filtered(using: bPredicate) as NSArray
@@ -1336,7 +1317,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
                 if self.clickOnDropDown == NSLocalizedString("Barcode", comment: ""){
@@ -1349,14 +1330,14 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
             }
             else{
                 
                 if self.clickOnDropDown == NSLocalizedString("Barcode", comment: ""){
-                    let bPredicate: NSPredicate = NSPredicate(format: "rgn contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || rgd contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString,newString)
+                    let bPredicate: NSPredicate = NSPredicate(format: checkValueInAllFields, newString,newString,newString,newString,newString)
                     
                     let fetchcustRep = fetchAllDataanimalTagStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false",animalTag: newString as String).filtered(using: bPredicate) as NSArray
                     if fetchcustRep.count > 0 {
@@ -1365,12 +1346,12 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
                 
                 if self.clickOnDropDown == NSLocalizedString("Series", comment: ""){
-                    let bPredicate: NSPredicate = NSPredicate(format: "rgn contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || rgd contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString,newString)
+                    let bPredicate: NSPredicate = NSPredicate(format: checkValueInAllFields, newString,newString,newString,newString,newString)
                     
                     let fetchcustRep = fetchAllDataBarcOdeStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false", barcode: newString as String).filtered(using: bPredicate) as NSArray
                     if fetchcustRep.count > 0 {
@@ -1379,12 +1360,12 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
                 
                 if self.clickOnDropDown == NSLocalizedString("RGN", comment: ""){
-                    let bPredicate: NSPredicate = NSPredicate(format: "rgn contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || rgd contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString,newString)
+                    let bPredicate: NSPredicate = NSPredicate(format: checkValueInAllFields, newString,newString,newString,newString,newString)
                     
                     let fetchcustRep = fetchAllDataRGNStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false", barcode: newString as String).filtered(using: bPredicate) as NSArray
                     if fetchcustRep.count > 0 {
@@ -1393,12 +1374,12 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
                 
-                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString("RGD or Animal ID", comment: ""){
-                    let bPredicate: NSPredicate = NSPredicate(format: "rgn contains[cd] %@ || animalbarCodeTag contains[cd] %@ || animalTag contains[cd] %@ || rgd contains[cd] %@ || productName contains[cd] %@", newString,newString,newString,newString,newString)
+                if self.clickOnDropDown == NSLocalizedString("RGD", comment: "") || self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
+                    let bPredicate: NSPredicate = NSPredicate(format: checkValueInAllFields, newString,newString,newString,newString,newString)
                     
                     let fetchcustRep = fetchAllDataRGDStatus(entityName: "ProductAdonAnimlTbLBeef", asending: true, status: "true", orderStatus: "false", barcode: newString as String).filtered(using: bPredicate) as NSArray
                     if fetchcustRep.count > 0 {
@@ -1407,7 +1388,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                     else{
                         arr1.removeAll()
                         reloadTable()
-                        self.view.makeToast(NSLocalizedString("No records found.", comment: ""), duration: 1, position: .center)
+                        self.view.makeToast(NSLocalizedString(LocalizedStrings.noRecordFound, comment: ""), duration: 1, position: .center)
                     }
                 }
             }
@@ -1604,7 +1585,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         updateAnimalOrderEmailStatus(entity: "BeefAnimaladdTbl", IsEmailId: false)
                         updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
                         if UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool != true {
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                             return
                         }
                         
@@ -1635,7 +1616,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                         updateAnimalOrderEmailStatus(entity: "BeefAnimalMaster", IsEmailId: false)
                         if UserDefaults.standard.value(forKey: "isAggreForSubmit") as? Bool != true {
                             
-                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString("Please accept the order terms to proceed.", comment: ""))
+                            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString("Alert", comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.acceptOrderTerms, comment: ""))
                             return
                         }
                         
@@ -1671,7 +1652,7 @@ class BeefOrderProductSelectionReviewVC: UIViewController,UITableViewDataSource,
                             
                             let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default) {
                                 UIAlertAction in
-                                NSLog("Cancel Pressed")
+                                print(LocalizedStrings.cancelPressed)
                                 
                                 return
                             }

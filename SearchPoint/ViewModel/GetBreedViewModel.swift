@@ -96,7 +96,7 @@ extension GetBreedViewModel: ResponseDelegate {
             self.completion()
         }else {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(GetBreedsModel.self, from: data!)
+            modalObject = try? decoder.decode(GetBreedsModel.self, from: data!)
             DispatchQueue.main.async {
                 
                 if self.modalObject != nil {

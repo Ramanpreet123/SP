@@ -1710,11 +1710,11 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                 sireIdTextField.layer.borderColor = UIColor.gray.cgColor
                 damtexfield.layer.borderColor = UIColor.gray.cgColor
                 
-                if data.date == "DD/MM/YYYY" || data.date == "MM/DD/YYYY"  {
+                if data.date == DateFormatters.DDMMYYYYAllCapsFormat || data.date == DateFormatters.MMDDYYYYAllCapsFormat  {
                     dateBtnOutlet.setTitle("", for: .normal)
                     dateBtnOutlet.titleLabel?.text = ""
                     dateTextField.text = ""
-                    dateTextField.placeholder = "MM/DD/YYYY"
+                    dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
                 } else {
                     if data.date != "" {
                         
@@ -2232,11 +2232,11 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                     damtexfield.layer.borderColor = UIColor.gray.cgColor
                     dateBtnOutlet.titleLabel!.text = ""
                     
-                    if data.date == "DD/MM/YYYY" || data.date == "MM/DD/YYYY"  {
+                    if data.date == DateFormatters.DDMMYYYYAllCapsFormat || data.date == DateFormatters.MMDDYYYYAllCapsFormat  {
                         dateBtnOutlet.setTitle("", for: .normal)
                         dateBtnOutlet.titleLabel?.text = ""
                         dateTextField.text = ""
-                        dateTextField.placeholder = "MM/DD/YYYY"
+                        dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
                     } else {
                         if data.date != "" {
                             let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
@@ -2642,11 +2642,11 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                     damtexfield.layer.borderColor = UIColor.gray.cgColor
                     dateBtnOutlet.titleLabel!.text = ""
                     
-                    if data.date == "DD/MM/YYYY" || data.date == "MM/DD/YYYY"  {
+                    if data.date == DateFormatters.DDMMYYYYAllCapsFormat || data.date == DateFormatters.MMDDYYYYAllCapsFormat  {
                         dateBtnOutlet.setTitle("", for: .normal)
                         dateBtnOutlet.titleLabel?.text = ""
                         dateTextField.text = ""
-                        dateTextField.placeholder = "MM/DD/YYYY"
+                        dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
                     } else {
                         if data.date != "" {
                             let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String

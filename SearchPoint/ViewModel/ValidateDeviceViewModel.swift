@@ -53,7 +53,7 @@ extension ValidateDeviceViewModel: ResponseDelegate {
             delegate?.responseRecievedStatusForValidateDevice(status: status, response: nil)
         } else {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(ValidateDeviceModel.self, from: data!)
+            modalObject = try? decoder.decode(ValidateDeviceModel.self, from: data!)
             
             if modalObject?.errorDetail == "Invalid Code" {
                 delegate?.responseRecievedStatusForValidateDevice(status: status, response: modalObject)

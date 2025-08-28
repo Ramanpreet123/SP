@@ -53,7 +53,7 @@ extension DataCollectorViewModel: ResponseDelegate {
             delegate?.responseRecievedStatus(status: status)
         } else {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(DataCollectorModel.self, from: data!)
+            modalObject = try? decoder.decode(DataCollectorModel.self, from: data!)
             DispatchQueue.main.async {
                 self.completion()
             }

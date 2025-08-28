@@ -135,7 +135,7 @@ extension ReviewOrderListVc : UITableViewDelegate, UITableViewDataSource {
                 cell.bilingBtnOutlet.setAttributedTitle(attributeString, for: .normal)
                 
                 if UserDefaults.standard.value(forKey: keyValue.name.rawValue) as? String  == marketNameType.Dairy.rawValue{
-                    cell.emailOrderBtnOutlet.setTitle(NSLocalizedString(LocalizedStrings.emailEnteredData, comment: ""), for: .normal)
+                    cell.emailOrderBtnOutlet.setTitle(NSLocalizedString(ButtonTitles.emailEnteredData, comment: ""), for: .normal)
                     cell.submitOrderOutlet.setTitle(NSLocalizedString(ButtonTitles.submitText, comment: ""), for: .normal)
                     cell.pricingTextView.delegate = self
                     let clariText = UserDefaults.standard.value(forKey: keyValue.providerName.rawValue) as? String
@@ -559,7 +559,7 @@ extension ReviewOrderListVc : UITableViewDelegate, UITableViewDataSource {
                     cell.editBtnOutlet.setTitle(ButtonTitles.editText.localized, for: .normal)
                     cell.nominatorTitle.text = ButtonTitles.nominatorText.localized
                     cell.placeAnotrderTitle.text = ButtonTitles.placeAnOrderText.localized
-                    cell.emailMeEnterTtitle.text = LocalizedStrings.emailEnteredData.localized
+                    cell.emailMeEnterTtitle.text = ButtonTitles.emailEnteredData
                 }
                 
                 cell.billingContact.text = NSLocalizedString(LocalizedStrings.billingContact, comment: "")
@@ -567,7 +567,7 @@ extension ReviewOrderListVc : UITableViewDelegate, UITableViewDataSource {
                 
                 if UserDefaults.standard.value(forKey: keyValue.name.rawValue) as? String  != marketNameType.Dairy.rawValue{
                     cell.beefPlaceAnSelectionTitle.text = ButtonTitles.placeAnOrderText.localized
-                    cell.emailMeSelectionTtile.text = LocalizedStrings.emailEnteredData.localized
+                    cell.emailMeSelectionTtile.text = ButtonTitles.emailEnteredData
                 }
                 
                 let pviduser = (UserDefaults.standard.integer(forKey:keyValue.beefPvid.rawValue))

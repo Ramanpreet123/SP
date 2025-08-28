@@ -52,7 +52,9 @@ extension ADHFilterVC: UICollectionViewDelegate,UICollectionViewDataSource,UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-      
+        // Intentionally left empty.
+           // This delegate method is required by the protocol,
+           // but we don’t need custom behavior here (for now).
       
     }
 }
@@ -63,81 +65,98 @@ extension ADHFilterVC {
         let formatterADH = DateFormatter()
         formatterADH.dateFormat = DateFormatters.MMddyyyyFormat
         let selectedDateADH = formatterADH.string(from: datePicker.date)
+        
         if bttnTagClass == 0 {
             dateFromBttn.setTitle(selectedDateADH, for: .normal)
             fromDateDateFormat = datePicker.date
-        }
-        else {
+        } else {
             toDateDateFormat = datePicker.date
-            let isLessThan = fromDateDateFormat.isSmallerThan(toDateDateFormat)
-            
-            if !isLessThan  {
-                CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.fromDateSmallerThanDate, comment: ""))
+            guard fromDateDateFormat.isSmallerThan(toDateDateFormat) else {
+                showDateError()
                 return
             }
             dateToBttn.setTitle(selectedDateADH, for: .normal)
         }
-        self.datePicker.resignFirstResponder()
+        
+        hideDatePickerUI()
+        
+        if let fromDateStr = UserDefaults.standard.string(forKey: keyValue.fromdate.rawValue),
+           !fromDateStr.isEmpty {
+            UserDefaults.standard.setValue(keyValue.newKey.rawValue, forKey: keyValue.checkDate.rawValue)
+            
+            if bttnTagClass == 0 {
+                handleFromDateSelection()
+            } else {
+                handleToDateSelection()
+            }
+            hideDatePickerUI()
+        }
+    }
+    
+    private func hideDatePickerUI() {
+        datePicker.resignFirstResponder()
         datePicker.isHidden = true
-        self.toolBar.isHidden = true
+        toolBar.isHidden = true
         calenderView.isHidden = true
         calendarViewBkg.isHidden = true
+    }
+
+    private func showDateError() {
+        CommonClass.showAlertMessage(
+            self,
+            titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""),
+            messageStr: NSLocalizedString(AlertMessagesStrings.fromDateSmallerThanDate, comment: "")
+        )
+    }
+
+    private func configureFormatter() -> DateFormatter {
+        let df = DateFormatter()
+        df.dateFormat = (UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM")
+            ? DateFormatters.MMddyyyyFormat
+            : DateFormatters.ddMMyyyyFormat
+        return df
+    }
+
+    private func handleFromDateSelection() {
+        let dateFormatter = configureFormatter()
         
-        if UserDefaults.standard.value(forKey: keyValue.fromdate.rawValue) as! String != "" {
-            UserDefaults.standard.setValue(keyValue.newKey.rawValue, forKey: keyValue.checkDate.rawValue)
-            let dateFormatter1 = DateFormatter()
-            dateFormatter1.dateStyle = .medium
-            dateFormatter1.timeStyle = .none
-            dateFormatter3.dateFormat = DateFormatters.MMddyyyyFormat
-            
-            if bttnTagClass == 0{
-                let dateToNw = dateToBttn.titleLabel?.text ?? ""
-                toDateClass = dateFormatter3.date(from: dateToNw)!
-                if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM"{
-                    dateFormatter3.dateFormat = DateFormatters.MMddyyyyFormat
-                } else {
-                    dateFormatter3.dateFormat = DateFormatters.ddMMyyyyFormat
-                }
-                let selectedDate = dateFormatter3.string(from: datePicker.date)
-                dateFromBttn.setTitle(selectedDate, for: .normal)
-                fromDate = dateFormatter3.date(from: selectedDate)!
-                let isLessThan = fromDate.isSmallerThan(toDateClass)
-                if isLessThan {
-                    dateFrom  = selectedDate
-                    dateTo = selectedDate
-                }
-                else{
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.fromDateSmallerThanDate, comment: ""))
-                }
-            }
-            else{
-                let dateFromNw = dateFromBttn.titleLabel?.text ?? ""
-                fromDate = dateFormatter3.date(from: dateFromNw)!
-                if UserDefaults.standard.string(forKey: keyValue.date.rawValue) == "MM"{
-                    dateFormatter3.dateFormat = DateFormatters.MMddyyyyFormat
-                } else {
-                    dateFormatter3.dateFormat = DateFormatters.ddMMyyyyFormat
-                }
-                
-                let selectedDate = dateFormatter3.string(from: datePicker.date)
-                dateToBttn.setTitle(selectedDate, for: .normal)
-                toDateClass = dateFormatter3.date(from: selectedDate)!
-                let isLessThan = fromDate.isSmallerThan(toDateClass)
-                
-                if isLessThan {
-                    dateFrom  = selectedDate
-                    dateTo = selectedDate
-                }
-                else{
-                    CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.fromDateSmallerThanDate, comment: ""))
-                }
-            }
-            self.datePicker.resignFirstResponder()
-            datePicker.isHidden = true
-            self.toolBar.isHidden = true
-            calenderView.isHidden = true
-            calendarViewBkg.isHidden = true
+        if let dateToStr = dateToBttn.titleLabel?.text,
+           let toDate = dateFormatter.date(from: dateToStr) {
+            toDateClass = toDate
         }
+        
+        let selectedDateStr = dateFormatter.string(from: datePicker.date)
+        dateFromBttn.setTitle(selectedDateStr, for: .normal)
+        fromDate = dateFormatter.date(from: selectedDateStr) ?? datePicker.date
+        
+        guard fromDate.isSmallerThan(toDateClass) else {
+            showDateError()
+            return
+        }
+        
+        dateFrom = selectedDateStr
+        dateTo = selectedDateStr
+    }
+
+    private func handleToDateSelection() {
+        let dateFormatter = configureFormatter()
+        
+        if let dateFromStr = dateFromBttn.titleLabel?.text,
+           let fromDt = dateFormatter.date(from: dateFromStr) {
+            fromDate = fromDt
+        }
+        
+        let selectedDateStr = dateFormatter.string(from: datePicker.date)
+        dateToBttn.setTitle(selectedDateStr, for: .normal)
+        toDateClass = dateFormatter.date(from: selectedDateStr) ?? datePicker.date
+        
+        guard fromDate.isSmallerThan(toDateClass) else {
+            showDateError()
+            return
+        }
+        
+        dateFrom = selectedDateStr
+        dateTo = selectedDateStr
     }
     
     @objc func cancelClick() {

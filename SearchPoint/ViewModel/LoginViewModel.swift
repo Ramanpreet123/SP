@@ -159,7 +159,7 @@ extension LoginViewModel:ResponseDelegate{
         }
         else{
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(LoginModel.self, from: data!)
+            modalObject = try? decoder.decode(LoginModel.self, from: data!)
             
             let errorDetail = modalObject?.errorDetail
             let token = modalObject?.authorizationToken

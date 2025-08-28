@@ -21,6 +21,7 @@ class GetListForCutomerWithTimeViewModel {
     var damYob = String()
     var completion:()->()?
     let beefPvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
+    var girolandoAssociation = "a40549ab9-beae-4c0c-8e48-5147f18333d9"
     
     init(ref:DashboardVC,callBack:@escaping ()->()) {
         dependency = ref
@@ -269,7 +270,7 @@ class GetListForCutomerWithTimeViewModel {
                                         if item.providerID == 4  {
                                             
                                             
-                                            if itemSecond.breedAssociationID == "a40549ab9-beae-4c0c-8e48-5147f18333d9" {
+                                            if itemSecond.breedAssociationID == self.girolandoAssociation {
                                                 
                                                 self.breedAssoId = LocalizedStrings.girolandoAssociationStr
                                             }
@@ -630,7 +631,7 @@ class GetListForCutomerWithTimeViewModel {
                                         if item.providerID == 4 {
                                             
                                             
-                                            if itemSecond.breedAssociationID == "a40549ab9-beae-4c0c-8e48-5147f18333d9" {
+                                            if itemSecond.breedAssociationID == self.girolandoAssociation {
                                                 
                                                 self.breedAssoId = LocalizedStrings.girolandoAssociationStr
                                             }
@@ -968,7 +969,7 @@ class GetListForCutomerWithTimeViewModel {
                                 if item.providerID == 4 {
                                     
                                     
-                                    if itemSecond.breedAssociationID == "a40549ab9-beae-4c0c-8e48-5147f18333d9" {
+                                    if itemSecond.breedAssociationID == girolandoAssociation {
                                         
                                         self.breedAssoId = LocalizedStrings.girolandoAssociationStr
                                     }

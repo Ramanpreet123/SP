@@ -303,7 +303,7 @@ extension OrderSubmittedVCiPad : ResponseDelegate {
     func responseRecieved(_ data: Data?, status: Bool) {
         if status {
             let decoder = JSONDecoder()
-            modalObject = try! decoder.decode(LoginModel.self, from: data!)
+            modalObject = try? decoder.decode(LoginModel.self, from: data!)
             if modalObject != nil {
                 saveLoginDat(dataModel: modalObject!)
             }

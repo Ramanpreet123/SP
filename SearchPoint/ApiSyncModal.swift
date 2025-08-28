@@ -25,7 +25,9 @@ struct ApiSyncModal:Codable{
     var emailAddresses = [String]()
 
     init() {
-        
+        // Intentionally left empty.
+        // This initializer exists in case we need
+        // to add custom setup logic in the future.
     }
 }
 //

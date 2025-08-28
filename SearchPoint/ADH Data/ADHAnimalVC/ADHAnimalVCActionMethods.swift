@@ -263,7 +263,10 @@ extension ADHAnimalVC {
                     if UIApplication.shared.canOpenURL(settingsUrl) {
                         if #available(iOS 10.0, *) {
                             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
-                            //logic to be implemented later on
+                            // Currently nothing is needed here.
+                            // We could log success/failure or track analytics if required.
+                            // Leaving it empty because the only action is opening Settings.
+                            print("Settings opened successfully")
                         } else {
                             UIApplication.shared.openURL(settingsUrl)
                             
