@@ -17,9 +17,7 @@ struct SaveListModel: Codable {
     var updateAnimals = [Animal]()
     var deleteAnimals = [Animal]()
 
-     init() {
-        
-     }
+    
 }
 
 // MARK: - Animal

@@ -552,6 +552,9 @@ extension MyHerdResultsByAnimalViewController : UIImagePickerControllerDelegate 
 //MARK: OBJECT PICK CART SCREEN EXTENSION
 extension MyHerdResultsByAnimalViewController : objectPickCartScreen {
     func objectGetOnSelection(temp: Int) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }
 

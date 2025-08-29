@@ -10,7 +10,9 @@ import Foundation
 // MARK: - SIDE MENU UI AND OBJECT PICK CART SCREEN
 extension DataEntryBeefAnimalBrazilVC : SideMenuUI,objectPickCartScreen{
     func objectGetOnSelection(temp: Int) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     func anOptionalMethod(check :Bool){
         if check {

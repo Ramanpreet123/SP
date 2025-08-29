@@ -18,6 +18,7 @@ protocol nearByDevice {
 }
 class BluetoothCentre :NSObject{
     
+    let deviceConnected = "Bluetooth device disconnected."
     var nearByDeviceDelegate :nearByDevice?
     var cbPerpgerialArray = [CBPeripheral]()
     var abc = [Character]()
@@ -141,7 +142,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
                     vc.bleBttn.setImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
                     vc.blebttn1.setImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
                     
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device disconnected.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(deviceConnected, comment: ""))
                     manager.cancelPeripheralConnection(peripheral)
                     manager.scanForPeripherals(withServices: nil, options: nil)
                     
@@ -154,7 +155,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
                     
                     vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
                     
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device disconnected.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(deviceConnected, comment: ""))
                     manager.cancelPeripheralConnection(peripheral)
                     manager.scanForPeripherals(withServices: nil, options: nil)
                     
@@ -166,7 +167,7 @@ extension BluetoothCentre : CBCentralManagerDelegate,CBPeripheralDelegate{
                     
                     vc.blebttn1.setBackgroundImage(UIImage(named: ImageNames.scanIconActiveImg), for: .normal)
                     
-                    vc.view.makeToast(NSLocalizedString("Bluetooth device disconnected.", comment: ""))
+                    vc.view.makeToast(NSLocalizedString(deviceConnected, comment: ""))
                     manager.cancelPeripheralConnection(peripheral)
                     manager.scanForPeripherals(withServices: nil, options: nil)
                     

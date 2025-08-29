@@ -67,13 +67,17 @@ public class LTHRadioButton: UIView {
 		return tg
 	}()
 	/// The closure that will be called when the control is selected.
-	private var didSelect: () -> Void = { } {
+	private var didSelect: () -> Void = {
+        print("didSelect")
+    } {
 		willSet {
 			addTapGesture()
 		}
 	}
 	/// The closure that will be called when the control is deselected.
-	private var didDeselect: () -> Void = { } {
+	private var didDeselect: () -> Void = {
+        print("didDeselect")
+    } {
 		willSet {
 			addTapGesture()
 		}

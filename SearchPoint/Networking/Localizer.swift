@@ -18,56 +18,11 @@ class Localizer: NSObject {
         
         MethodSwizzleGivenClassName(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
         MethodSwizzleGivenClassName(cls: UIApplication.self, originalSelector: #selector(getter: UIApplication.userInterfaceLayoutDirection), overrideSelector: #selector(getter: UIApplication.cstm_userInterfaceLayoutDirection))
-      //  MethodSwizzleGivenClassName(cls: UITextField.self, originalSelector: #selector(UITextField.layoutSubviews), overrideSelector: #selector(UITextField.cstmlayoutSubviews))
-     //   MethodSwizzleGivenClassName(cls: UILabel.self, originalSelector: #selector(UILabel.layoutSubviews), overrideSelector: #selector(UILabel.cstmlayoutSubviews))
+    
 
 
     }
 }
-
-//extension UILabel {
-//    @objc public func cstmlayoutSubviews() {
-//        self.cstmlayoutSubviews()
-//        if self.isKind(of: NSClassFromString("UITextFieldLabel")!) {
-//            return // handle special case with uitextfields
-//        }
-//        if self.tag <= 0  {
-//            if UIApplication.isRTL()  {
-//                if self.textAlignment == .right {
-//                    return
-//                }
-//            } else {
-//                if self.textAlignment == .left {
-//                    return
-//                }
-//            }
-//        }
-//        if self.tag <= 0 {
-//            if UIApplication.isRTL()  {
-//                self.textAlignment = .center
-//            } else {
-//                self.textAlignment = .center
-//            }
-//        }
-//    }
-//}
-//
-//
-//extension UITextField {
-//    @objc public func cstmlayoutSubviews() {
-//        self.cstmlayoutSubviews()
-//        if self.tag <= 0 {
-//            if UIApplication.isRTL()  {
-//                if self.textAlignment == .right { return }
-//                self.textAlignment = .right
-//            } else {
-//                if self.textAlignment == .left { return }
-//                self.textAlignment = .left
-//            }
-//        }
-//    }
-//}
-
 
 var numberoftimes = 0
 extension UIApplication {
@@ -101,10 +56,6 @@ extension Bundle {
         }
     }
 }
-func disableMethodSwizzling() {
-    
-}
-
 
 /// Exchange the implementation of two methods of the same Class
 func MethodSwizzleGivenClassName(cls: AnyClass, originalSelector: Selector, overrideSelector: Selector) {

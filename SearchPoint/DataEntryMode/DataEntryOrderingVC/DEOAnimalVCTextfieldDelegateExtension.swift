@@ -1122,6 +1122,9 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
                         }else{
                             nationalHerdIdTextField.layer.borderColor = UIColor.gray.cgColor
                             addAnimalBtn(completionHandler: { (success) -> Void in
+                                // Intentionally left empty.
+                                // No action is required on success/failure here.
+                                // Could be extended in the future for logging or analytics.
                             })
                         }
                     }
@@ -1197,6 +1200,9 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
                 damtexfield.resignFirstResponder()
                 if damtexfield.text?.count == 0 {
                     addAnimalBtn(completionHandler: { (success) -> Void in
+                        // Intentionally left empty.
+                        // No action is required on success/failure here.
+                        // Could be extended in the future for logging or analytics.
                     })
                     
                 } else {
@@ -1261,6 +1267,9 @@ extension DataEntryOrderingAnimalVC :UITextFieldDelegate  {
             }else{
                 nationalHerdIdTextField.layer.borderColor = UIColor.gray.cgColor
                 addAnimalBtn(completionHandler: { (success) -> Void in
+                    // Intentionally left empty.
+                    // No action is required on success/failure here.
+                    // Could be extended in the future for logging or analytics.
                 })
             }
         }

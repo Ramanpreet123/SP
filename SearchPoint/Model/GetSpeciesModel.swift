@@ -39,7 +39,11 @@ class JSONNull: Codable, Hashable {
         return 0
     }
 
-    public init() {}
+    public init() {
+        // Intentionally left empty.
+        // This initializer exists in case we need
+        // to add custom setup logic in the future.
+    }
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

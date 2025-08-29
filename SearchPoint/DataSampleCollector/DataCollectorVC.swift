@@ -324,5 +324,9 @@ class DataCollectorVC: UIViewController , ResponseDataCollectorApi, offlineCusto
         customPopView.removeFromSuperview()
     }
     
-    func responseRecievedStatus(status: Bool) {}
+    func responseRecievedStatus(status: Bool) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
+    }
 }

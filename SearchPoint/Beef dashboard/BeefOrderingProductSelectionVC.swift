@@ -146,7 +146,9 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
                     for pdName2 in arr as? [GetProductTblBeef] ?? [] {
                         if pdName2.status == "true" {
                             updateProducData(entity: "ProductAdonAnimlTbLBeef", productID: Int(pdName2.productId), status: "true", animalTag: pName.animalTag ?? "", orderId: orderId,userId:userId, completionHandler: { (success) -> Void in
-                             
+                                // Intentionally left empty.
+                                   // No action is required on success/failure here.
+                                   // Could be extended in the future for logging or analytics.
                             })
                         }
                     }
@@ -1308,7 +1310,8 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
             let refreshAlert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("Are you sure you want to remove the animal from the order?", comment: ""), preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-                
+                // Intentionally left empty.
+                // Could be used in the future for logging, analytics, or error handling.
             }))
             
             refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("YES", comment: "") , style: .default, handler: { (action: UIAlertAction!) in
@@ -1451,7 +1454,8 @@ class BeefOrderingProductSelectionVC: UIViewController ,UICollectionViewDelegate
         let refreshAlert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("Are you sure you want to remove all animals in conflict from the order?", comment: ""), preferredStyle: UIAlertController.Style.alert)
         
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
         }))
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
             

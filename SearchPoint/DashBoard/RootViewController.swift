@@ -40,11 +40,16 @@ public class RootViewController: AKSideMenu, AKSideMenuDelegate {
     // MARK: - <AKSideMenuDelegate>
     
     public func sideMenu(_ sideMenu: AKSideMenu, willShowMenuViewController menuViewController: UIViewController) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
+       
     }
     
     public func sideMenu(_ sideMenu: AKSideMenu, didShowMenuViewController menuViewController: UIViewController) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     
     public func sideMenu(_ sideMenu: AKSideMenu, willHideMenuViewController menuViewController: UIViewController) {
@@ -55,6 +60,8 @@ public class RootViewController: AKSideMenu, AKSideMenuDelegate {
     }
     
     public func sideMenu(_ sideMenu: AKSideMenu, didHideMenuViewController menuViewController: UIViewController) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }

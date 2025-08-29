@@ -95,11 +95,21 @@ class DropDownSwift: UITextField {
     
     
     //MARK: Closures
-    fileprivate var didSelectCompletion: (String, Int ,Int) -> () = {selectedText, index , id  in }
-    fileprivate var TableWillAppearCompletion: () -> () = { }
-    fileprivate var TableDidAppearCompletion: () -> () = { }
-    fileprivate var TableWillDisappearCompletion: () -> () = { }
-    fileprivate var TableDidDisappearCompletion: () -> () = { }
+    fileprivate var didSelectCompletion: (String, Int ,Int) -> () = {selectedText, index , id  in
+        print("didSelectCompletion")
+    }
+    fileprivate var TableWillAppearCompletion: () -> () = {
+        print("TableWillAppearCompletion")
+    }
+    fileprivate var TableDidAppearCompletion: () -> () = {
+        print("TableDidAppearCompletion")
+    }
+    fileprivate var TableWillDisappearCompletion: () -> () = {
+        print("TableWillDisappearCompletion")
+    }
+    fileprivate var TableDidDisappearCompletion: () -> () = {
+        print("TableDidDisappearCompletion")
+    }
     
     func setupUI () {
         let size = self.frame.height
@@ -190,7 +200,8 @@ class DropDownSwift: UITextField {
                         
         },
                        completion: { (finish) -> Void in
-                        
+            // nothing requires to be done here
+            print("completed")
         })
         
     }

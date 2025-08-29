@@ -551,6 +551,9 @@ extension MyHerdResultsViewController : SideMenuUI,RFID,nearByDevice{
 
 extension MyHerdResultsViewController: scannedOCRProtocol {
     func ocrDetected(_ scannedResult: String) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }
 

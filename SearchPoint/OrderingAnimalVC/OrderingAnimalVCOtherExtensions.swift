@@ -716,7 +716,11 @@ extension OrderingAnimalVC : UIImagePickerControllerDelegate & UINavigationContr
 
 //MARK: OBJECT PICK CART SCREEN DELEGATE
 extension OrderingAnimalVC : objectPickCartScreen {
-    func objectGetOnSelection(temp: Int) {}
+    func objectGetOnSelection(temp: Int) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
+    }
     
 }
 

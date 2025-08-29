@@ -153,6 +153,7 @@ extension DataEntryOrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                     let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.changeBreedClearProduct, comment: ""), preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: { (_) in
+                        print(LocalizedStrings.cancelPressed)
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
@@ -746,7 +747,6 @@ extension DataEntryOrderingAnimalVC : SideMenuUI,RFID,nearByDevice{
 extension DataEntryOrderingAnimalVC: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         picker.dismiss(animated: true, completion: nil)
-        startAnimating()
         if self.scanAnimalTagText.tag == 0 {
             self.scanAnimalTagText.text = ""
             
@@ -772,6 +772,8 @@ extension DataEntryOrderingAnimalVC: offlineCustomView1 {
 // MARK: - OBJECT PICK CART EXTENSION
 extension DataEntryOrderingAnimalVC : objectPickCartScreen {
     func objectGetOnSelection(temp: Int) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }

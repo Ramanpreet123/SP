@@ -46,18 +46,26 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
         }
     }
     func crossBtn() {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     
     func objectGetOnSelection(temp: Int) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     
     func anOptionalMethod(check: Bool) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     var custmerId = UserDefaults.standard.value(forKey: "currentActiveCustomerId") as! Int
     var farmAddr = [GetBillingContact]()
     
-    @IBAction func addDealerCodeBtn(_ sender: Any) {
-    }
+  
     @IBOutlet weak var billingViewHeightConst: NSLayoutConstraint!
     @IBOutlet weak var submitBttn: UIButton!
     @IBOutlet weak var appHelpBtn: UIButton!
@@ -100,6 +108,9 @@ class BeefReviewOrderVC: UIViewController,UITextFieldDelegate,objectPickCartScre
     var heartBeatViewModel:HeartBeatViewModel?
     
     func navigateToAnotherVc(){
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
     
     override func viewDidLoad() {

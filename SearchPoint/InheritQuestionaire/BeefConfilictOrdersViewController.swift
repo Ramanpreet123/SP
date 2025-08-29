@@ -72,7 +72,7 @@ class BeefConfilictOrdersViewController: UIViewController {
     @IBAction func removeAllAction(_ sender: Any) {
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removeAllAnimalsAlert, comment: ""), preferredStyle: UIAlertController.Style.alert)
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: .default, handler: { [self] (action: UIAlertAction!) in
@@ -304,7 +304,7 @@ extension BeefConfilictOrdersViewController :UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.wantToRemoveAnimal, comment: ""), preferredStyle: UIAlertController.Style.alert)
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("YES", comment: "") , style: .default, handler: { [self] (action: UIAlertAction!) in
             

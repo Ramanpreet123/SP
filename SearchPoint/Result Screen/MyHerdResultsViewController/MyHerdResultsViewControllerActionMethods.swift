@@ -31,7 +31,8 @@ extension MyHerdResultsViewController {
                         if #available(iOS 10.0, *) {
                             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
                             // Intentionally left empty.
-                            // but we don’t need custom behavior here (for now).
+                            // Nothing additional required after opening Settings.
+                            // Could be used in the future for logging, analytics, or error handling.
                             print("Settings Opened")
                         } else {
                             UIApplication.shared.openURL(settingsUrl)
@@ -162,7 +163,8 @@ extension MyHerdResultsViewController {
                         if #available(iOS 10.0, *) {
                             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
                             // Intentionally left empty.
-                            // WE don’t need custom behavior here (for now).
+                            // Nothing additional required after opening Settings.
+                            // Could be used in the future for logging, analytics, or error handling.
                             print("Settings opened")
                         }
                         else {

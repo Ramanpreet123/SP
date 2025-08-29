@@ -563,6 +563,7 @@ extension OrderProductSelectionSecondVC : UICollectionViewDataSource,UICollectio
                 let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: AlertMessagesStrings.bvdvAlreadyAppliedToOrder.localized, preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
+                    print(LocalizedStrings.cancelPressed)
                 }
                 let okAction = UIAlertAction(title: NSLocalizedString("Continue", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
@@ -689,7 +690,10 @@ extension OrderProductSelectionSecondVC : UICollectionViewDataSource,UICollectio
                             
                         }
                     }
-                    self.fetchProductAdonAnimalTblForCollectionView(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTblForCollectionView(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     updateAnimalTblDataDairy(entity: Entities.subProductTblEntity, status: "false", animalTag: self.aTag,orderId: orderId, userId: userId, completionHandler: { (success) -> Void in
                         
                         if success {
@@ -847,7 +851,10 @@ extension OrderProductSelectionSecondVC : UICollectionViewDataSource,UICollectio
                         self.fethData =  fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
                     }
                 }
-                self.fetchProductAdonAnimalTblForCollectionView(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTblForCollectionView(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 updateAnimalTblDataDairy(entity: Entities.subProductTblEntity, status: "false", animalTag: self.aTag,orderId: orderId, userId: userId, completionHandler: { (success) -> Void in
                     
                     if success {

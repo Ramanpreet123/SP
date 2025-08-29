@@ -124,7 +124,9 @@ class BeefViewAnimalVC: UIViewController {
     func showAlertformissingBarcodeAnimal(animalCount: Int , msgString: String){
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message:  msgString.localized(with: animalCount), preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in })
+        let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
+            print("Ok")
+        })
         alert.addAction(ok)
         DispatchQueue.main.async(execute: {
             self.present(alert, animated: true)
@@ -258,7 +260,7 @@ class BeefViewAnimalVC: UIViewController {
         UserDefaults.standard.setValue(true, forKey: keyValue.addDealerCodeCheck.rawValue)
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.clearAllOrders, comment: ""), preferredStyle: UIAlertController.Style.alert)
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
             self.view.makeToast(NSLocalizedString(LocalizedStrings.orderCleared, comment: ""), duration: 10, position: .center)

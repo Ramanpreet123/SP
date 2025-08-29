@@ -739,7 +739,7 @@ extension DataEntryBeefAnimalBrazilVC {
         let pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         let ok = UIAlertAction(title:NSLocalizedString("Yes",comment: "") , style: .default, handler: { action in
@@ -813,7 +813,7 @@ extension DataEntryBeefAnimalBrazilVC {
         
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         

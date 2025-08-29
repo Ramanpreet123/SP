@@ -214,6 +214,7 @@ class DataEntryModeListVC: UIViewController{
                     let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.cannotDeleteList, comment: ""), preferredStyle: .alert)
                     
                     let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
+                        print("Ok")
                     })
                     alert.addAction(ok)
                     DispatchQueue.main.async(execute: {
@@ -301,6 +302,7 @@ class DataEntryModeListVC: UIViewController{
                     let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.cannotDeleteList, comment: ""), preferredStyle: .alert)
                     
                     let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
+                        print("Ok")
                     })
                     alert.addAction(ok)
                     DispatchQueue.main.async(execute: {
@@ -417,7 +419,7 @@ class DataEntryModeListVC: UIViewController{
                 
             })
             let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-                
+                print(LocalizedStrings.cancelPressed)
             })
             
             alert.addAction(cancel)

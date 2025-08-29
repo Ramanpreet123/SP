@@ -1,8 +1,8 @@
 //
-//  OrderingAnimalVCGirlandoActionMethods.swift
+//  OrderingAnimalVCGirlandoIpadActionMethods.swift
 //  SearchPoint
 //
-//  Created by Mobile Programming on 10/03/24.
+//  Created by Ramanpreet Singh on 08/03/25.
 //
 
 import Foundation
@@ -10,12 +10,14 @@ import UIKit
 import Alamofire
 
 // MARK: - IB ACTIONS
-extension OrderingAnimalVCGirlando {
+extension OrderingAnimalVCGirlandoIpad {
     @IBAction func mergeListBtnClick(_ sender: Any) {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.animalMergePopVC) as! AnimalMergePopUpVC
+        
+        let storyboard = UIStoryboard(name: "DairyPlaceAnOrder", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ImportListViewVC") as! ImportListViewVC
         vc.delegate = self
         vc.providerId = pvid
-        self.navigationController?.present(vc, animated: false, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func importFromListAction(_ sender: Any) {
@@ -27,14 +29,7 @@ extension OrderingAnimalVCGirlando {
         if tempImportListArray.count > 0{
             importListArray = orderingDataListViewModel.hideInternalDataList(tempImportListArray: tempImportListArray)
         }
-        if importListArray.count == 0 {
-            
-            CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.noListImported, comment: ""))
-            
-            importListMainView.isHidden = true
-            importBackroundView.isHidden = true
-            return
-        }
+        
         conflictArr.removeAll()
         showIndicator(self.view, withTitle: NSLocalizedString(LocalizedStrings.loadStr, comment: ""), and: "")
         
@@ -47,8 +42,6 @@ extension OrderingAnimalVCGirlando {
                 let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message:NSLocalizedString(AlertMessagesStrings.prodSelectionCleared, comment: "") , preferredStyle: .alert)
                 
                 let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-                    self.importListMainView.isHidden = true
-                    self.importBackroundView.isHidden = true
                     return
                 })
                 alert.addAction(cancel)
@@ -64,12 +57,11 @@ extension OrderingAnimalVCGirlando {
                         updateProductTablDataaid(entity: Entities.subProductTblEntity, status: "false")
                         
                     }
-                    if self.importListArray.count != 0 {
-                        self.importListMainView.isHidden = false
-                        self.importBackroundView.isHidden = false
-                        self.importTblView.reloadData()
-                        
-                    }
+                    
+                    let vc = UIStoryboard.init(name: "DairyPlaceAnOrder", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddExistingAnimaliPad") as? AddExistingAnimaliPad
+                    vc!.bckRetain = true
+                    vc?.importDelegate = self
+                    self.navigationController?.pushViewController(vc!, animated: false)
                 })
                 alert.addAction(ok)
                 
@@ -78,21 +70,18 @@ extension OrderingAnimalVCGirlando {
                 })
                 
             }else {
-                if importListArray.count != 0 {
-                    importListMainView.isHidden = false
-                    importBackroundView.isHidden = false
-                    importTblView.reloadData()
-                    
-                }
+                let vc = UIStoryboard.init(name: "DairyPlaceAnOrder", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddExistingAnimaliPad") as? AddExistingAnimaliPad
+                vc!.bckRetain = true
+                vc?.importDelegate = self
+                self.navigationController?.pushViewController(vc!, animated: false)
+                
             }
         }else {
             
-            if importListArray.count != 0 {
-                importListMainView.isHidden = false
-                importBackroundView.isHidden = false
-                importTblView.reloadData()
-                
-            }
+            let vc = UIStoryboard.init(name: "DairyPlaceAnOrder", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddExistingAnimaliPad") as? AddExistingAnimaliPad
+            vc!.bckRetain = true
+            vc?.importDelegate = self
+            self.navigationController?.pushViewController(vc!, animated: false)
         }
         self.hideIndicator()
     }
@@ -101,7 +90,6 @@ extension OrderingAnimalVCGirlando {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removingOrdersList, comment: ""), preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-            print(LocalizedStrings.cancelPressed)
         })
         
         alert.addAction(cancel)
@@ -127,21 +115,24 @@ extension OrderingAnimalVCGirlando {
             }
             deleteDataWithPvidCustomerId(entityString: Entities.mergeDataEntryListTblEntity ,providerId: Int64(self.pvid),customerId: Int64(self.custmerId ?? 0))
             UserDefaults.standard.removeObject(forKey: keyValue.dataEntryListName.rawValue)
-            self.importFromListOutlet.isEnabled = true
             let animalCount =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: self.userId,orderId:self.orderId,orderStatus:"false", providerId: self.pvid)
             self.notificationLblCount.text = String(animalCount.count)
             if animalCount.count == 0 {
                 self.notificationLblCount.isHidden = true
                 self.countLbl.isHidden = true
+                self.cartView.isHidden = true
             } else {
                 self.notificationLblCount.isHidden = false
                 self.countLbl.isHidden = false
+                self.cartView.isHidden = false
             }
             
             if fetchMergeDataPvidCustomer(entityName: Entities.mergeDataEntryListTblEntity,providerId: Int64(self.pvid),customerId:Int64(self.custmerId ?? 0)).count == 0 {
                 self.mergeListBtnOulet.isHidden = true
+                self.mergeListView.isHidden = true
             } else {
                 self.mergeListBtnOulet.isHidden = false
+                self.mergeListView.isHidden = false
             }
             self.crossBtnOutlet.isHidden = true
         })
@@ -151,25 +142,25 @@ extension OrderingAnimalVCGirlando {
             self.present(alert, animated: true)
         })
     }
-  func deleteSigalAnimalFromList(animalTagStr:String) {
-    let objApiSync = ApiSyncList()
-    let listName = orderingDataListViewModel.makeListName(custmerId: custmerId ?? 0,providerID: pvid)
-    
-    let fetchDataEntry = fetchAllDataEnteryList(entityName: Entities.dataEntryListTblEntity,customerId:Int64(self.custmerId ?? 0 ),listName:listName ,productName:"Dairy") as! [DataEntryList]
-      if fetchDataEntry.count > 0 {
-        let fetchAllDatalistAnimals =  fetchAllDataAnimalDaWithOutOrderId(entityName: Entities.dataEntryAnimalAddTbl, userId: userId,orderStatus:"false",listid:Int64(fetchDataEntry[0].listId), custmerId: Int64(custmerId ?? 0 ), providerId: pvid) as! [DataEntryAnimaladdTbl]
-          if fetchAllDatalistAnimals.count > 0{
-              let filterdatalistAnimal = fetchAllDatalistAnimals.filter{$0.animalbarCodeTag == animalTagStr}
-              if filterdatalistAnimal.count > 0 {
-                  let animalVal = filterdatalistAnimal[0]
-                deleteAnimalfromdataEntry(enitityName:Entities.dataEntryAnimalAddTbl, Int(animalVal.animalId), listId: Int(animalVal.listId))
-                  if Connectivity.isConnectedToInternet() {
-                      objApiSync.postListDataDelete(listId: fetchDataEntry[0].listId, custmerId: Int64(UserDefaults.standard.integer(forKey: keyValue.currentActiveCustomerId.rawValue)), clearOrder: false, animalId: Int(animalVal.animalId))
-                  }
-              }
-          }
-      }
-  }
+    func deleteSigalAnimalFromList(animalTagStr:String) {
+        let objApiSync = ApiSyncList()
+        let listName = orderingDataListViewModel.makeListName(custmerId: custmerId ?? 0,providerID: pvid)
+        
+        let fetchDataEntry = fetchAllDataEnteryList(entityName: Entities.dataEntryListTblEntity,customerId:Int64(self.custmerId ?? 0 ),listName:listName ,productName:"Dairy") as! [DataEntryList]
+        if fetchDataEntry.count > 0 {
+            let fetchAllDatalistAnimals =  fetchAllDataAnimalDaWithOutOrderId(entityName: Entities.dataEntryAnimalAddTbl, userId: userId,orderStatus:"false",listid:Int64(fetchDataEntry[0].listId), custmerId: Int64(custmerId ?? 0 ), providerId: pvid) as! [DataEntryAnimaladdTbl]
+            if fetchAllDatalistAnimals.count > 0{
+                let filterdatalistAnimal = fetchAllDatalistAnimals.filter{$0.animalbarCodeTag == animalTagStr}
+                if filterdatalistAnimal.count > 0 {
+                    let animalVal = filterdatalistAnimal[0]
+                    deleteAnimalfromdataEntry(enitityName:Entities.dataEntryAnimalAddTbl, Int(animalVal.animalId), listId: Int(animalVal.listId))
+                    if Connectivity.isConnectedToInternet() {
+                        objApiSync.postListDataDelete(listId: fetchDataEntry[0].listId, custmerId: Int64(UserDefaults.standard.integer(forKey: keyValue.currentActiveCustomerId.rawValue)), clearOrder: false, animalId: Int(animalVal.animalId))
+                    }
+                }
+            }
+        }
+    }
     @IBAction func okBtnClickImportViewAction(_ sender: Any) {
         orderId = autoD
         if listId == 0 {
@@ -192,13 +183,11 @@ extension OrderingAnimalVCGirlando {
                     let count1 = conflictArr.count
                     let alertPrint = String(count1) + " " + NSLocalizedString(LocalizedStrings.selectActionToBePerformed, comment: "")
                     let alert = UIAlertController(title: listNameString, message: alertPrint, preferredStyle: .alert)
-                  let cancel = UIAlertAction(title: "Cancel".localized, style: .default, handler: { action in
-                        self.importBackroundView.isHidden = true
-                        self.importListMainView.isHidden = true
-                        
+                    let cancel = UIAlertAction(title: "Cancel".localized, style: .default, handler: { action in
+                     
                     })
                     alert.addAction(cancel)
-                  let ok = UIAlertAction(title: "Ignore".localized, style: .default, handler: { [self] action in
+                    let ok = UIAlertAction(title: "Ignore".localized, style: .default, handler: { [self] action in
                         
                         let fetchData11 = fetchAllDataAnimalDatarderIdDateEntryGIR(entityName: Entities.dataEntryAnimalAddTbl, userId: self.userId,orderId:self.orderId,orderStatus:"false",listid:Int64(self.listId), custmerId: Int64(self.custmerId ?? 0), providerId: self.pvid)
                         if fetchData11.count != 0 {
@@ -228,7 +217,6 @@ extension OrderingAnimalVCGirlando {
                                             }
                                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                                                 UIAlertAction in
-                                                print(LocalizedStrings.cancelPressed)
                                             }
                                             
                                             alertController.addAction(okAction)
@@ -354,11 +342,13 @@ extension OrderingAnimalVCGirlando {
                                             let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                             mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                             mergeListBtnOulet.isHidden = false
+                                            self.mergeListView.isHidden = false
                                         } else {
                                             let fetchNameDisplay = String(obj ?? "") + " + " + String(fetchAllMergeDta)
                                             let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                             mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                             mergeListBtnOulet.isHidden = false
+                                            self.mergeListView.isHidden = false
                                         }
                                     }
                                 }
@@ -369,9 +359,11 @@ extension OrderingAnimalVCGirlando {
                             if animalCount.count == 0{
                                 self.notificationLblCount.isHidden = true
                                 self.countLbl.isHidden = true
+                                self.cartView.isHidden = true
                             } else {
                                 self.notificationLblCount.isHidden = false
                                 self.countLbl.isHidden = false
+                                self.cartView.isHidden = false
                             }
                         }
                         
@@ -416,7 +408,6 @@ extension OrderingAnimalVCGirlando {
                                         }
                                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                                             UIAlertAction in
-                                            print(LocalizedStrings.cancelPressed)
                                         }
                                         
                                         alertController.addAction(okAction)
@@ -482,7 +473,7 @@ extension OrderingAnimalVCGirlando {
                                         }
                                     }
                                     if data12333.count > 0 {
-                                        if !addedd  {
+                                        if !addedd {
                                             let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.animalCannotBeAddedBVDV, comment: ""), preferredStyle: .alert)
                                             
                                             let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
@@ -534,17 +525,18 @@ extension OrderingAnimalVCGirlando {
                                         let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                         mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                         mergeListBtnOulet.isHidden = false
+                                        self.mergeListView.isHidden = false
                                     } else {
                                         let fetchNameDisplay = String(obj ?? "") + " + " + String(fetchAllMergeDta)
                                         let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                         mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                         mergeListBtnOulet.isHidden = false
+                                        self.mergeListView.isHidden = false
                                     }
                                 }
                                 
                                 UserDefaults.standard.setValue(self.listNameString, forKey: keyValue.dataEntryListName.rawValue)
                                 UserDefaults.standard.set(Int64(dataGet.listId), forKey: keyValue.dataEntryListId.rawValue)
-                                importFromListOutlet.isEnabled = true
                             }
                         }
                         let animalCount =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: self.userId,orderId:self.orderId,orderStatus:"false", providerId: self.pvid)
@@ -552,9 +544,11 @@ extension OrderingAnimalVCGirlando {
                         if animalCount.count == 0{
                             self.notificationLblCount.isHidden = true
                             self.countLbl.isHidden = true
+                            self.cartView.isHidden = true
                         } else {
                             self.notificationLblCount.isHidden = false
                             self.countLbl.isHidden = false
+                            self.cartView.isHidden = false
                         }
                     }
                 }
@@ -587,7 +581,6 @@ extension OrderingAnimalVCGirlando {
                                     }
                                     let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                                         UIAlertAction in
-                                        print(LocalizedStrings.cancelPressed)
                                     }
                                     alertController.addAction(okAction)
                                     alertController.addAction(cancelAction)
@@ -687,7 +680,6 @@ extension OrderingAnimalVCGirlando {
                             self.crossBtnOutlet.isHidden = false
                             UserDefaults.standard.setValue(self.listNameString, forKey: keyValue.dataEntryListName.rawValue)
                             UserDefaults.standard.set(Int64(dataGet.listId), forKey: keyValue.dataEntryListId.rawValue)
-                            importFromListOutlet.isEnabled = true
                             
                             if fetchMergeDataListId(entityName: Entities.mergeDataEntryListTblEntity,listId: Int64(dataGet.listId),customerId: Int64(self.custmerId ?? 0)).count == 0 {
                                 let fetchList = fetchMergeDataListId(entityName: Entities.dataEntryListTblEntity,listId: Int64(dataGet.listId),customerId:Int64(self.custmerId ?? 0))
@@ -707,11 +699,13 @@ extension OrderingAnimalVCGirlando {
                                     let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                     mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                     mergeListBtnOulet.isHidden = false
+                                    self.mergeListView.isHidden = false
                                 } else {
                                     let fetchNameDisplay = String(obj ?? "") + " + " + String(fetchAllMergeDta)
                                     let attributeString = NSMutableAttributedString(string: fetchNameDisplay, attributes: self.attrs)
                                     mergeListBtnOulet.setAttributedTitle(attributeString, for: .normal)
                                     mergeListBtnOulet.isHidden = false
+                                    self.mergeListView.isHidden = false
                                 }
                             }
                         }
@@ -722,23 +716,25 @@ extension OrderingAnimalVCGirlando {
                     if animalCount.count == 0{
                         self.notificationLblCount.isHidden = true
                         self.countLbl.isHidden = true
+                        self.cartView.isHidden = true
                     } else {
                         self.notificationLblCount.isHidden = false
                         self.countLbl.isHidden = false
+                        self.cartView.isHidden = false
                     }
                 }
             }
-            
-            importBackroundView.isHidden = true
-            importListMainView.isHidden = true
+         
             let animalCount =  fetchAllDataAnimalDatarderId(entityName: Entities.animalAddTblEntity, userId: userId,orderId:orderId,orderStatus:"false", providerId: self.pvid)
             notificationLblCount.text = String(animalCount.count)
             if animalCount.count == 0{
                 notificationLblCount.isHidden = true
                 countLbl.isHidden = true
+                self.cartView.isHidden = true
             } else {
                 notificationLblCount.isHidden = false
                 countLbl.isHidden = false
+                self.cartView.isHidden = false
                 self.showAlertforwithoutBarcodeAnimal(importListAnimal: nil)
             }
         }
@@ -746,12 +742,11 @@ extension OrderingAnimalVCGirlando {
     }
     
     @IBAction func cancelBtnClickImportViewAction(_ sender: Any) {
-        importBackroundView.isHidden = true
-        importListMainView.isHidden = true
+      // action removed
     }
     
     @IBAction func incrementalBarcodeButtonAction(_ sender: UIButton) {
-        if UserDefaults.standard.bool(forKey: keyValue.matchedBarcodeFlag.rawValue) {
+        if UserDefaults.standard.bool(forKey: keyValue.matchedBarcodeFlag.rawValue)  {
             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeSelectedStr, comment: "") )
         }
         else {
@@ -774,7 +769,7 @@ extension OrderingAnimalVCGirlando {
                 return
             }
             
-            if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue)  {
+            if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue) {
                 sender.isSelected = false
                 incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.incrementalCheckImg)
                 UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncremental.rawValue)
@@ -784,7 +779,7 @@ extension OrderingAnimalVCGirlando {
                 
             } else {
                 sender.isSelected = true
-                incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.checkImg)
+                incrementalBarcodeCheckBox.image = UIImage(named: "incrementalCheckIpad")
                 UserDefaults.standard.set(true, forKey: keyValue.isBarCodeIncremental.rawValue)
                 self.isBarcodeAutoIncrementedEnabled = true
                 checkBarcode = false
@@ -808,7 +803,7 @@ extension OrderingAnimalVCGirlando {
     @IBAction func viewAnimalClick(_ sender: Any) {
         barcodeScreen = false
         selectedDate = Date()
-        let vc = UIStoryboard.init(name: StoryboardType.MainStoryboard, bundle: Bundle.main).instantiateViewController(withIdentifier: ClassIdentifiers.viewAnimalsControllerVC) as? ViewAnimalsController
+        let vc = UIStoryboard.init(name: "DairyPlaceAnOrder", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewAnimalsControlleriPadVC") as? ViewAnimalsControlleriPadVC
         vc!.productBackSave = false
         self.navigationController?.pushViewController(vc!, animated: true)
     }
@@ -817,12 +812,17 @@ extension OrderingAnimalVCGirlando {
         view.endEditing(true)
         selectedBornTypeId = 3
         etBtn = "Et"
-        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-        singleBttn.layer.borderColor = UIColor.gray.cgColor
-        etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-        etBttn.layer.borderWidth = 2
-        multipleBirthBttn.layer.borderWidth = 0.5
-        singleBttn.layer.borderWidth = 0.5
+        
+        etBttn.layer.borderColor = UIColor.clear.cgColor
+        multipleBirthBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        singleBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        etBttn.backgroundColor = UIColor(red:57/255, green: 69/255, blue: 73/255, alpha: 1)
+        etBttn.setTitleColor(UIColor.white, for: .normal)
+        
+        singleBttn.backgroundColor = UIColor.white
+        multipleBirthBttn.backgroundColor = UIColor.white
+        singleBttn.setTitleColor(UIColor.black, for: .normal)
+        multipleBirthBttn.setTitleColor(UIColor.black, for: .normal)
         
         if statusOrder {
             msgAnimalSucess = true
@@ -840,12 +840,17 @@ extension OrderingAnimalVCGirlando {
         view.endEditing(true)
         selectedBornTypeId = 2
         etBtn = LocalizedStrings.multipleBirthStr
-        multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-        etBttn.layer.borderColor = UIColor.gray.cgColor
-        singleBttn.layer.borderColor = UIColor.gray.cgColor
-        etBttn.layer.borderWidth = 0.5
-        multipleBirthBttn.layer.borderWidth = 2
-        singleBttn.layer.borderWidth = 0.5
+        
+        multipleBirthBttn.layer.borderColor = UIColor.clear.cgColor
+        etBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        singleBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        multipleBirthBttn.backgroundColor = UIColor(red:57/255, green: 69/255, blue: 73/255, alpha: 1)
+        multipleBirthBttn.setTitleColor(UIColor.white, for: .normal)
+        
+        singleBttn.backgroundColor = UIColor.white
+        etBttn.backgroundColor = UIColor.white
+        singleBttn.setTitleColor(UIColor.black, for: .normal)
+        etBttn.setTitleColor(UIColor.black, for: .normal)
         _ = statusOrderTrue()
         if statusOrder {
             msgAnimalSucess = true
@@ -863,12 +868,15 @@ extension OrderingAnimalVCGirlando {
         view.endEditing(true)
         selectedBornTypeId = 1
         etBtn = LocalizedStrings.singlesText
-        singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-        etBttn.layer.borderColor = UIColor.gray.cgColor
-        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-        etBttn.layer.borderWidth = 0.5
-        multipleBirthBttn.layer.borderWidth = 0.5
-        singleBttn.layer.borderWidth = 2
+        singleBttn.layer.borderColor = UIColor.clear.cgColor
+        etBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        multipleBirthBttn.layer.borderColor = UIColor(red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        singleBttn.backgroundColor = UIColor(red:57/255, green: 69/255, blue: 73/255, alpha: 1)
+        singleBttn.setTitleColor(UIColor.white, for: .normal)
+        multipleBirthBttn.backgroundColor = UIColor.white
+        etBttn.backgroundColor = UIColor.white
+        multipleBirthBttn.setTitleColor(UIColor.black, for: .normal)
+        etBttn.setTitleColor(UIColor.black, for: .normal)
         _ = statusOrderTrue()
         if statusOrder {
             msgAnimalSucess = true
@@ -884,7 +892,8 @@ extension OrderingAnimalVCGirlando {
     }
     
     @IBAction func backBtnClk(_ sender: UIButton) {
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.dashboardVC)), animated: true)
     }
     
     @IBAction func dateAction(_ sender: Any) {
@@ -915,25 +924,12 @@ extension OrderingAnimalVCGirlando {
     }
     
     @IBAction func menuBtnClk(_ sender: UIButton) {
-        self.view.makeCorner(withRadius: 40)
-        self.sideMenuViewController?.presentRightMenuViewController()
+        self.sideMenuRevealSettingsViewController()?.revealSideMenu()
     }
     
     @IBAction func maleFemaleAction(_ sender: UIButton) {
         self.view.endEditing(true)
-      
-        if(genderToggleFlag == 0) {
-            self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
-            genderToggleFlag = 1
-            genderString = NSLocalizedString("Male", comment: "")
-            UserDefaults.standard.set("M", forKey: "GirlandoGender")
-        }
-        else {
-            self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
-            genderString = NSLocalizedString("Female", comment: "")
-            genderToggleFlag = 0
-            UserDefaults.standard.set("F", forKey: "GirlandoGender")
-        }
+        
         _ = statusOrderTrue()
         if statusOrder {
             msgAnimalSucess = true
@@ -945,6 +941,58 @@ extension OrderingAnimalVCGirlando {
         if animalDataMaster.count > 0 {
             msgUpatedd = true
         }
+        
+        btnTag = 50
+        
+        self.genderView.layer.borderColor = UIColor(displayP3Red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        self.setShadowForUIView(view: genderView, removeShadow: false)
+        self.tableViewpop()
+        var yFrame = (male_femaleBttnOutlet.frame.minY + 130) - self.scrolView.contentOffset.y
+        
+        if UIDevice().userInterfaceIdiom == .pad {
+            switch UIScreen.main.bounds.height {
+            case 768:
+                yFrame = (male_femaleBttnOutlet.frame.minY + 635) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 520,y: yFrame,width: 482,height: 95)
+                
+            case 810:
+                yFrame = (male_femaleBttnOutlet.frame.minY + 635) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 550,y: yFrame,width: 512,height: 95)
+                
+            case 820:
+                if UIScreen.main.nativeBounds.height == 2360.0 {
+                    yFrame = (male_femaleBttnOutlet.frame.minY + 582) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 595,y: yFrame,width: 567,height: 95)
+                } else {
+                    yFrame = (male_femaleBttnOutlet.frame.minY + 635) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 550,y: yFrame,width: 512,height: 95)
+                }
+                
+                
+            case 834:
+                if UIScreen.main.nativeBounds.height == 2224.0 {
+                    yFrame = (male_femaleBttnOutlet.frame.minY + 632) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 565,y: yFrame,width: 527,height: 95)
+                } else {
+                    yFrame = (male_femaleBttnOutlet.frame.minY + 632) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 615,y: yFrame,width: 577,height: 95)
+                }
+                
+            case 1024:
+                yFrame = (male_femaleBttnOutlet.frame.minY + 585) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 690,y: yFrame,width: 655,height: 95)
+                
+            case 1032:
+                yFrame = (male_femaleBttnOutlet.frame.minY + 585) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 695,y: yFrame,width: 655,height: 95)
+                
+            default:
+                break
+            }
+        }
+        
+        droperTableView.reloadData()
+        
     }
     
     @IBAction func offLineRestrictionPopUp(_ sender: UIButton) {
@@ -959,8 +1007,17 @@ extension OrderingAnimalVCGirlando {
         self.view.endEditing(true)
         addContiuneBtn = 1
         isAddMoreAnimal = true
+        changeColorToRed = true
         addAnimalBtn(completionHandler: { (success) -> Void in
-            self.scanBarcodeTextfield.becomeFirstResponder()
+            if success  {
+                self.changeColorToRed = false
+                self.scanBarcodeTextfield.becomeFirstResponder()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self.changeColorToRed = false
+                })
+                self.scanBarcodeTextfield.becomeFirstResponder()
+            }
         })
     }
     
@@ -990,7 +1047,7 @@ extension OrderingAnimalVCGirlando {
                                         self.NavigateToOrderingProductSelectionScreen()
                                     }
                                     else{
-                                      self.NavigateToOrderingProductSelectionScreen(screenType: 2)
+                                        self.NavigateToOrderingProductSelectionScreen(screenType: 2)
                                         self.NavigateToOrderingProductSelectionScreen(screenType: 2)
                                     }
                                 }
@@ -1188,31 +1245,57 @@ extension OrderingAnimalVCGirlando {
     }
     
     @IBAction func tissueBtnnAction(_ sender: UIButton) {
+        self.sampleTypeView.layer.borderColor = UIColor(displayP3Red: 57/255, green: 69/255, blue: 73/255, alpha: 1).cgColor
+        self.setShadowForUIView(view: sampleTypeView, removeShadow: false)
         btnTag = 10
         view.endEditing(true)
         let pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
         tissueArr =  fetchproviderData(entityName: Entities.getSampleTblEntity, provId: pvid)
         self.tableViewpop()
-        var yFrame = (tissueLbl.frame.minY + 130) - self.scrolView.contentOffset.y
-        if UIDevice().userInterfaceIdiom == .phone {
-            switch UIScreen.main.nativeBounds.height {
-            case 1136:
-                break
-            case 1334:
-                yFrame = (tissueLbl.frame.minY + 105) - self.scrolView.contentOffset.y
-            case 1920, 2208:
-                yFrame = (tissueLbl.frame.minY + 110) - self.scrolView.contentOffset.y
-            case 2436:
-                break
-            case 2688,2796:
-                break
-            case 1792:
-                yFrame = (tissueLbl.frame.minY + 143) - self.scrolView.contentOffset.y
+        var yFrame = (tissueBttnOutlet.frame.minY + 640) - self.scrolView.contentOffset.y
+        
+        if UIDevice().userInterfaceIdiom == .pad {
+            switch UIScreen.main.bounds.height {
+            case 768:
+                yFrame = (tissueBttnOutlet.frame.minY + 640) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 20,y: yFrame,width: 482,height: 150)
+                
+                
+            case 810:
+                yFrame = (tissueBttnOutlet.frame.minY + 640) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 20,y: yFrame,width: 512,height: 150)
+                
+            case 820:
+                if UIScreen.main.nativeBounds.height == 2360.0 {
+                    yFrame = (tissueBttnOutlet.frame.minY + 585) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 20,y: yFrame,width: 562,height: 150)
+                } else {
+                    yFrame = (tissueBttnOutlet.frame.minY + 640) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 20,y: yFrame,width: 512,height: 150)
+                }
+                
+                
+            case 834:
+                if UIScreen.main.nativeBounds.height == 2224.0 {
+                    yFrame = (tissueBttnOutlet.frame.minY + 635) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 20,y: yFrame,width: 532,height: 150)
+                } else {
+                    yFrame = (tissueBttnOutlet.frame.minY + 635) - self.scrolView.contentOffset.y
+                    droperTableView.frame = CGRect(x: 20,y: yFrame,width: 562,height: 150)
+                }
+                
+            case 1024:
+                yFrame = (tissueBttnOutlet.frame.minY + 585) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 20,y: yFrame,width: 655,height: 150)
+                
+            case 1032:
+                yFrame = (tissueBttnOutlet.frame.minY + 585) - self.scrolView.contentOffset.y
+                droperTableView.frame = CGRect(x: 20,y: yFrame,width: 655,height: 150)
+                
             default:
                 break
             }
         }
-        droperTableView.frame = CGRect(x: 30,y: yFrame,width: 150,height: 150)
         droperTableView.reloadData()
         _ = statusOrderTrue()
         if statusOrder {
@@ -1228,8 +1311,10 @@ extension OrderingAnimalVCGirlando {
     }
     
     @IBAction func acnADHAnimalList(_ sender: UIButton) {
-        let vc = UIStoryboard.init(name: StoryboardType.MainStoryboard, bundle: Bundle.main).instantiateViewController(withIdentifier: ClassIdentifiers.adhAnimalVC) as? ADHAnimalVC
+        
+        let vc = UIStoryboard.init(name: "DairyPlaceAnOrder", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddExistingAnimaliPad") as? AddExistingAnimaliPad
         vc!.bckRetain = true
+        vc?.importDelegate = self
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
@@ -1268,7 +1353,7 @@ extension OrderingAnimalVCGirlando {
         let pvid = UserDefaults.standard.integer(forKey: keyValue.providerID.rawValue)
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            print(LocalizedStrings.cancelPressed)
+            
         })
         alert.addAction(cancel)
         
@@ -1299,9 +1384,9 @@ extension OrderingAnimalVCGirlando {
             }
             
             let inrementCheck = UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncrementalClear.rawValue)
-            if inrementCheck  {
+            if inrementCheck == true {
                 self.isBarcodeAutoIncrementedEnabled = true
-                self.incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.checkImg)
+                self.incrementalBarcodeCheckBox.image = UIImage(named: "incrementalCheckIpad")
                 UserDefaults.standard.set(true, forKey: keyValue.isBarCodeIncremental.rawValue)
                 
             } else {

@@ -8,8 +8,7 @@
 class AutoAnimalViewModel {
   var autoAnimalData = [AutoAnimalList]()
   var filterAutoAnimalData = [AutoAnimalList]()
-  init() {
-  }
+ 
   
   func fetchAnimalList() {
     autoAnimalData.removeAll()

@@ -186,7 +186,7 @@ extension OrderingAnimalVC :UITableViewDelegate,UITableViewDataSource{
                     let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString(LocalizedStrings.changeBreedClearProduct, comment: ""), preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (_) in
-                        
+                        print(LocalizedStrings.cancelPressed)
                     }))
                     alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
                         

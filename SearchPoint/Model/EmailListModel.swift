@@ -14,7 +14,5 @@ struct EmailListModel: Codable {
     var listName: String?
     var emailAddresses = [String]()
 
-    init() {
-        
-    }
+  
 }

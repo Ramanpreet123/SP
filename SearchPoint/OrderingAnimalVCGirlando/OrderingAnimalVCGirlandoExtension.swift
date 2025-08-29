@@ -17,7 +17,11 @@ extension OrderingAnimalVCGirlando:offlineCustomView{
 
 // MARK: - SIDE MENU UI, RFID EXTENSION
 extension OrderingAnimalVCGirlando : SideMenuUI,RFID{
-    func rfidCode(rfid: String) {}
+    func rfidCode(rfid: String) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
+    }
     
     func changeCornerRadius(val: Int) {
         self.view.makeCorner(withRadius: CGFloat(val))

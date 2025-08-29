@@ -17,7 +17,11 @@ protocol MakeDropDownDataSourceProtocol{
 }
 
 extension MakeDropDownDataSourceProtocol{
-    func selectItemInDropDown(indexPos: Int, makeDropDownIdentifier: String) {}
+    func selectItemInDropDown(indexPos: Int, makeDropDownIdentifier: String) {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
+    }
 }
 
 class MakeDropDown: UIView{

@@ -954,7 +954,6 @@ extension ApiSyncList {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let json = String(data: body, encoding: String.Encoding.utf8)
@@ -1139,7 +1138,6 @@ extension ApiSyncList {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let json = String(data: body, encoding: String.Encoding.utf8)
@@ -1243,7 +1241,6 @@ extension ApiSyncList {
             }
             
             guard let body = jsonData else {
-                print("No JSON data to send")
                 return
             }
             let json = String(data: body, encoding: String.Encoding.utf8)
@@ -1350,7 +1347,6 @@ extension ApiSyncList {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let json = String(data: body, encoding: String.Encoding.utf8)
@@ -1985,7 +1981,6 @@ extension ApiSyncList {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let json = String(data: body, encoding: String.Encoding.utf8)
@@ -2606,7 +2601,6 @@ extension ApiSyncList {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let json = String(data: body, encoding: String.Encoding.utf8)

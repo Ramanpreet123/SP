@@ -419,7 +419,7 @@ extension DataEntryOrderingAnimalVC {
         let stringResult = idAnimal.contains("UK")
         if stringResult {
             let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+            let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
             let dropTwelveElement = test.suffix(12).uppercased()
             borderRedCheck = false
             let totalString = dropTwelveElement
@@ -460,7 +460,7 @@ extension DataEntryOrderingAnimalVC {
     func usTagReutn(animalId:String)-> String {
         let idAnimal = animalId.uppercased()
         let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-        let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+        let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
         if test.count > 15 {
             guard let range: Range<String.Index> = test.range(of: LocalizedStrings.eightFortyCountryCode) else {
                 return LocalizedStrings.againClick

@@ -246,6 +246,7 @@ extension DataEntryBeefViewAnimalController:UITableViewDataSource,UITableViewDel
         } else {
             let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.removeAnimalStr, comment: ""), preferredStyle: UIAlertController.Style.alert)
             refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                print(LocalizedStrings.cancelPressed)
             }))
             
             refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("Yes", comment: "") , style: .default, handler: { (action: UIAlertAction!) in
@@ -341,6 +342,7 @@ extension DataEntryBeefViewAnimalController {
                     let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.cannotDeleteList, comment: ""), preferredStyle: .alert)
                     
                     let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
+                        print("Ok")
                     })
                     alert.addAction(ok)
                     DispatchQueue.main.async(execute: {
@@ -352,6 +354,7 @@ extension DataEntryBeefViewAnimalController {
                     let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: msg.localized, preferredStyle: UIAlertController.Style.alert)
                     refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
                         refreshAlert .dismiss(animated: true, completion: nil)
+                        print(LocalizedStrings.cancelPressed)
                     }))
                     
                     refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { [self] (action: UIAlertAction!) in
@@ -400,7 +403,7 @@ extension DataEntryBeefViewAnimalController {
             
         })
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
-            
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         alert.addAction(ok)

@@ -671,6 +671,7 @@ extension SideMenuVC : UITableViewDataSource, UITableViewDelegate {
                 
                 let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message:NSLocalizedString(AlertMessagesStrings.forceFullyRefreshData, comment: ""), preferredStyle: .alert)
                 let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+                    print(LocalizedStrings.cancelPressed)
                 })
                 alert.addAction(cancel)
                 let ok = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { action in

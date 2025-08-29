@@ -270,6 +270,7 @@ extension DataEntryViewAnimalController:UITableViewDataSource,UITableViewDelegat
         else {
             let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.removeAnimalStr, comment: ""), preferredStyle: UIAlertController.Style.alert)
             refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                print("No")
             }))
             
             refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("Yes", comment: "") , style: .default, handler: { [self] (action: UIAlertAction!) in
@@ -355,6 +356,7 @@ extension DataEntryViewAnimalController {
                 if animalCount1.count > 0{
                     let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.cannotDeleteList, comment: ""), preferredStyle: .alert)
                     let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
+                        print("Ok")
                     })
                     alert.addAction(ok)
                     DispatchQueue.main.async(execute: {
@@ -426,6 +428,7 @@ extension DataEntryViewAnimalController {
             
         })
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            print("No")
         })
         alert.addAction(cancel)
         alert.addAction(ok)

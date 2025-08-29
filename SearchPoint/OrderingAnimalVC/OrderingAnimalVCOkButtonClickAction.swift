@@ -1478,6 +1478,7 @@ extension OrderingAnimalVC {
                 })
                 let thirdAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
                     (_)in
+                    print(LocalizedStrings.cancelPressed)
                 })
                 self.importListMainView.isHidden = true
                 self.importBGView.isHidden = true
@@ -3662,6 +3663,7 @@ extension OrderingAnimalVC {
                 })
                 let thirdAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default, handler: {
                     (_)in
+                    print(LocalizedStrings.cancelPressed)
                 })
                 self.importListMainView.isHidden = true
                 self.importBGView.isHidden = true

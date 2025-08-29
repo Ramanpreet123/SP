@@ -290,7 +290,11 @@ class GroupDetailsViewController: UIViewController, UIImagePickerControllerDeleg
                     }
                     if UIApplication.shared.canOpenURL(settingsUrl) {
                         if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                // Intentionally left empty.
+                                // Nothing additional required after opening Settings.
+                                // Could be used in the future for logging, analytics, or error handling.
+                            })
                             
                         } else {
                             UIApplication.shared.openURL(settingsUrl)
@@ -389,7 +393,7 @@ class GroupDetailsViewController: UIViewController, UIImagePickerControllerDeleg
                     if self.searchTextField.tag == 0 {
                         
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.searchTextField.text = ""
                         var mesageShow = String()
                         mesageShow = LocalizedStrings.unableToReadValue.localized(with: test)
@@ -406,6 +410,7 @@ class GroupDetailsViewController: UIViewController, UIImagePickerControllerDeleg
                         })
                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                             (_)in
+                            print(LocalizedStrings.cancelPressed)
                         })
                         let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                             (_)in
@@ -422,7 +427,7 @@ class GroupDetailsViewController: UIViewController, UIImagePickerControllerDeleg
                     }
                     else {
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.searchTextField.text = ""
                         var mesageShow = String()
                         mesageShow = LocalizedStrings.unableToReadValue.localized(with: test)
@@ -437,6 +442,7 @@ class GroupDetailsViewController: UIViewController, UIImagePickerControllerDeleg
                         })
                         let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                             (_)in
+                            print(LocalizedStrings.cancelPressed)
                         })
                         let thirdAction = UIAlertAction(title: NSLocalizedString(NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), comment: ""), style: UIAlertAction.Style.default, handler: {
                             (_)in

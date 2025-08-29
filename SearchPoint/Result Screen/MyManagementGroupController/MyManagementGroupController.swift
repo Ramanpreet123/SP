@@ -391,7 +391,6 @@ class MyManagementGroupController: UIViewController {
         }
         
         guard let body = jsonData else {
-            print("No JSON data to send")
             return
         }
         let headerDict :[String:String] = [LocalizedStrings.authorizationHeader:"" + accessToken!]

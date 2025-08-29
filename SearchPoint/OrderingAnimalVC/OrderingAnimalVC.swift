@@ -2844,7 +2844,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
         let stringResult = idAnimal.contains("UK")
         if stringResult  {
             let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+            let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
             
             let dropTwelveElement = test.suffix(12).uppercased()
             borderRedCheck = false
@@ -2885,7 +2885,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
     func usTagReutn(animalId:String)-> String {
         let idAnimal = animalId.uppercased()
         let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-        let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+        let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
         if test.count > 15 {
             guard let range: Range<String.Index> = test.range(of: "840") else {
                 return LocalizedStrings.againClick
@@ -2923,7 +2923,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
                     if self.scanAnimalTagText.tag == 0 {
                         
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             
@@ -2943,7 +2943,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
                             })
                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
-                                
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in
@@ -2968,7 +2968,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
                     }
                     else {
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.methReturn =  self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             
@@ -2987,6 +2987,7 @@ class OrderingAnimalVC: UIViewController,VNDocumentCameraViewControllerDelegate{
                             })
                             let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in

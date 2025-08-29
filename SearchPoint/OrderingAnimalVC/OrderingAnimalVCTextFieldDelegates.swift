@@ -167,6 +167,7 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                                 let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: LocalizedStrings.pleaseAddCountry.localized(with: providerCountryCodeAlpha2), preferredStyle: .alert)
                                 let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertAction.Style.default) {
                                     UIAlertAction in
+                                    print("Ok")
                                 }
                                 
                                 alert.addAction(okAction)
@@ -1235,8 +1236,7 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
             return LocalizedStrings.invalidFormatStr
         }
     }
-    
-    func autoShowFarmIDPopUp(){}
+
     
     func dataPopulateInFocusChange(){
         var animalTagValue = String()
@@ -2574,6 +2574,9 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                         }else{
                             nationalHerdIdTextField.layer.borderColor = UIColor.gray.cgColor
                             addAnimalBtn(completionHandler: { (success) -> Void in
+                                // Intentionally left empty.
+                                // No action is required on success/failure here.
+                                // Could be extended in the future for logging or analytics.
                             })
                         }
                     }
@@ -2984,6 +2987,9 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                         }else{
                             nationalHerdIdTextField.layer.borderColor = UIColor.gray.cgColor
                             addAnimalBtn(completionHandler: { (success) -> Void in
+                                // Intentionally left empty.
+                                // No action is required on success/failure here.
+                                // Could be extended in the future for logging or analytics.
                             })
                         }
                     }
@@ -3060,6 +3066,9 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
                 damtexfield.resignFirstResponder()
                 if damtexfield.text?.count == 0 {
                     addAnimalBtn(completionHandler: { (success) -> Void in
+                        // Intentionally left empty.
+                        // No action is required on success/failure here.
+                        // Could be extended in the future for logging or analytics.
                     })
                     
                 } else {
@@ -3158,6 +3167,9 @@ extension OrderingAnimalVC :UITextFieldDelegate  {
             if nationalHerdIdTextField.text != ""{
                 nationalHerdIdTextField.layer.borderColor = UIColor.gray.cgColor
                 addAnimalBtn(completionHandler: { (success) -> Void in
+                    // Intentionally left empty.
+                    // No action is required on success/failure here.
+                    // Could be extended in the future for logging or analytics.
                 })
             }
         }

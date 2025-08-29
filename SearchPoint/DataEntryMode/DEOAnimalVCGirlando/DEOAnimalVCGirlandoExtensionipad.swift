@@ -1,24 +1,22 @@
 //
-//  DEOrderingAnimalVCGirlandoExtension.swift
+//  DEOAnimalVCGirlandoExtension.swift
 //  SearchPoint
 //
-//  Created by Mobile Programming on 22/02/24.
+//  Created by Ramanpreet Singh on 19/03/25.
 //
 
 import Foundation
-
 //MARK: EXTENSION OFFLINE CUSTOM VIEW
-extension DataEntryOrderingAnimalVCGirlando:offlineCustomView{
+extension DEOAnimalVCGirlando:offlineCustomView{
     func crossBtnCall() {
         buttonbg.removeFromSuperview()
         customPopView.removeFromSuperview()
     }}
 
 //MARK: EXTENSION SIDEMENU UI AND RFID
-extension DataEntryOrderingAnimalVCGirlando : SideMenuUI,RFID{
+extension DEOAnimalVCGirlando : SideMenuUI,RFID{
     func rfidCode(rfid: String) {
-        // Intentionally left empty.
-        // Currently unused, but kept for consistency with protocol or planned implementation.
+        
     }
     
     func changeCornerRadius(val: Int) {
@@ -27,12 +25,12 @@ extension DataEntryOrderingAnimalVCGirlando : SideMenuUI,RFID{
 }
 
 //MARK: TEXTFIELD DELEGATE EXTENSION
-extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
+extension DEOAnimalVCGirlando :UITextFieldDelegate  {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (string == " ") {
             return false
         }
-        if barAutoPopu {
+        if barAutoPopu == false {
             barcodeflag = true
         }
         else {
@@ -51,7 +49,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
             isautoPopulated = false
             barcodeflag = true
             if self.isBarcodeAutoIncrementedEnabled {
-                if isBarcodeEndingWithNumberAndGetIncremented(newString as String).isBarCodeEndsWithNumber  {
+                if isBarCodeEndsWithNumber_GetIncrementedBarCode(newString as String).isBarCodeEndsWithNumber  {
                     incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.checkImg)
                     UserDefaults.standard.set(true, forKey: keyValue.isBarCodeIncremental.rawValue)
                     checkBarcode = false
@@ -91,16 +89,16 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                     textFieldBackroungWhite()
                 }
             }
-            if editIngText{
+            if editIngText == true{
                 editIngText = false
                 
             }
             
-            else if isUpdate {
+            else if isUpdate == true {
                 animalId1 = editAid
                 isUpdate = false
             }
-            if statusOrder {
+            if statusOrder == true{
                 msgAnimalSucess = true
             }
             else{
@@ -117,7 +115,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                 barcodeflag = true
             }
             barcodeflag = true
-            if isautoPopulated  {
+            if isautoPopulated == true {
                 let animalData = fetchAnimaldataValidateAnimalTagGirlandoDataEntry(entityName: Entities.dataEntryAnimalAddTbl, earTag: scanEarTagTextField.text ?? "", listId: listIdGet, userId: userId, custmerId: custmerId ?? 0)
                 
                 
@@ -140,17 +138,17 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
         }
         
         if textField == scanBarcodeTextfield {
-            let acceptableCharacters = LocalizedStrings.acceptableChrString
-            let check  = acceptableCharacters.contains(string)
-            if !check {
+            let ACCEPTABLE_CHARACTERS = LocalizedStrings.acceptableChrString
+            let check  = ACCEPTABLE_CHARACTERS.contains(string)
+            if check == false {
                 return false
             }
         }
         
         if textField == scanEarTagTextField {
-            let acceptableCharacters = LocalizedStrings.earTagRegex
-            let check  = acceptableCharacters.contains(string)
-            if !check {
+            let ACCEPTABLE_CHARACTERS = LocalizedStrings.earTagRegex
+            let check  = ACCEPTABLE_CHARACTERS.contains(string)
+            if check == false {
                 return false
             }
         }
@@ -168,7 +166,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
         }
         if let dateGet = dateFormatterGet.date(from: dateString) {
             let smallDate = dateGet.isSmallerThan(Date())
-            if !smallDate {
+            if smallDate == false {
                 return LocalizedStrings.greaterThenDateStr
             }
             return LocalizedStrings.correctFormatStr
@@ -232,7 +230,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
         
         let animalData = fetchAnimaldataValidateAnimalwithouOrderIDGirlando(entityName: Entities.animalMasterTblEntity, earTag: scanEarTagTextField.text ?? "", farmId: "", animalbarCodeTag: scanBarcodeTextfield.text ?? "", offDamId: damRegTextfield.text ?? "" , offsireId: sireRegTextfield.text ?? "", orderId: orderId, userId: userId)
         
-        if !isautoPopulated {
+        if isautoPopulated == false {
             if animalData.count > 0 {
                 self.view.hideToast()
                 let data =  animalData.lastObject as! AnimalMaster
@@ -247,12 +245,13 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                 let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
                 animalId1 = Int(data.animalId)
                 if data.eT == "" {
-                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    singleBttn.layer.borderWidth = 2
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
-                    
                     selectedBornTypeId = 1
+                    singleBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    singleBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 barcodeView.layer.borderColor = UIColor.gray.cgColor
                 dateBttnOutlet.titleLabel!.text = ""
@@ -355,51 +354,71 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                 }
                 
                 if data.gender == ButtonTitles.maleText.localized || data.gender == "M" || data.gender == "m"{
-                    self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+              //      self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                    male_femaleBttnOutlet.setTitle("Male", for: .normal)
                     genderToggleFlag = 1
                     genderString = ButtonTitles.maleText.localized
                     
                 } else {
-                    self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                   // self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                    male_femaleBttnOutlet.setTitle("Female", for: .normal)
                     genderToggleFlag = 0
                     genderString = ButtonTitles.femaleText.localized
                     
                 }
-                singleBttn.layer.borderColor = UIColor.gray.cgColor
-                singleBttn.layer.borderWidth = 0.5
+//                singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                singleBttn.layer.borderWidth = 0.5
                 let et = data.eT
                 etBtn = et!
-                etBttn.layer.borderWidth = 0.5
-                singleBttn.layer.borderWidth = 0.5
-                multipleBirthBttn.layer.borderWidth = 0.5
+//                etBttn.layer.borderWidth = 0.5
+//                singleBttn.layer.borderWidth = 0.5
+//                multipleBirthBttn.layer.borderWidth = 0.5
                 
                 if data.selectedBornTypeId == 3 {
-                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    etBttn.layer.borderWidth = 2
-                    singleBttn.layer.borderColor = UIColor.gray.cgColor
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    etBttn.layer.borderWidth = 2
+//                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    selectedBornTypeId = 3
+                    etBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                     selectedBornTypeId = 3
+                    etBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    etBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 else if data.selectedBornTypeId == 1{
-                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    singleBttn.layer.borderWidth = 2
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
+//                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    singleBttn.layer.borderWidth = 2
+//                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    etBttn.layer.borderColor = UIColor.gray.cgColor
+//                    selectedBornTypeId = 1
+                    singleBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                     selectedBornTypeId = 1
+                    singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    singleBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 else if data.selectedBornTypeId == 2{
-                    multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    multipleBirthBttn.layer.borderWidth = 2
-                    singleBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
                     selectedBornTypeId = 2
+                    multipleBirthBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    multipleBirthBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 else {
-                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    singleBttn.layer.borderWidth = 2
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                    singleBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                     selectedBornTypeId = 1
+                    singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    singleBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 
                 if data.tissuName == "" || data.tissuName == nil {
@@ -461,7 +480,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
         
         let animalData = fetchAnimaldataValidateAnimalwithouOrderIDGirlando(entityName: Entities.animalMasterTblEntity, earTag: scanEarTagTextField.text ?? "", farmId: "", animalbarCodeTag: scanBarcodeTextfield.text ?? "", offDamId: damRegTextfield.text ?? "" , offsireId: sireRegTextfield.text ?? "", orderId: orderId, userId: userId)
         
-        if !isautoPopulated {
+        if isautoPopulated == false {
             if animalData.count > 0 {
                 self.view.hideToast()
                 let data =  animalData.lastObject as! AnimalMaster
@@ -477,12 +496,13 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                     let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
                     animalId1 = Int(data.animalId)
                     if data.eT == "" {
-                        singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                        singleBttn.layer.borderWidth = 2
-                        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                        etBttn.layer.borderColor = UIColor.gray.cgColor
+                        singleBttn.layer.borderColor = UIColor.clear.cgColor
+                       // etBttn.layer.borderWidth = 2
+                        etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                         selectedBornTypeId = 1
-                    }
+                        singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                        singleBttn.setTitleColor(UIColor.white, for: .normal)                    }
                     barcodeView.layer.borderColor = UIColor.gray.cgColor
                     dateBttnOutlet.titleLabel!.text = ""
                     
@@ -519,7 +539,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                         }
                         self.selectedDate = formatter.date(from: dateBttnOutlet.titleLabel!.text!) ?? Date()
                         let isGreater = Date().isSmaller(than: selectedDate)
-                        if isGreater  {
+                        if isGreater == true {
                             dateBttnOutlet.setTitle("", for: .normal)
                             dateTextField.text = ""
                         }
@@ -581,12 +601,14 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                     UserDefaults.standard.set(breedId, forKey: keyValue.breed.rawValue)
                     
                     if data.gender == ButtonTitles.maleText.localized || data.gender == "M" || data.gender == "m"{
-                        self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                   //     self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                        male_femaleBttnOutlet.setTitle("Male", for: .normal)
                         genderToggleFlag = 1
                         genderString = ButtonTitles.maleText.localized
                     }
                     else {
-                        self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                       // self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                        male_femaleBttnOutlet.setTitle("Female", for: .normal)
                         genderToggleFlag = 0
                         genderString = ButtonTitles.femaleText.localized
                     }
@@ -599,42 +621,59 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
                         breedBtnOutlet.setTitle(medbreedRegArr1?.alpha2 ?? medbreedRegArr1?.breedName, for: .normal)
                     }
                     
-                    singleBttn.layer.borderColor = UIColor.gray.cgColor
-                    singleBttn.layer.borderWidth = 0.5
+//                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                    singleBttn.layer.borderWidth = 0.5
                     let et = data.eT
                     etBtn = et!
-                    etBttn.layer.borderWidth = 0.5
-                    singleBttn.layer.borderWidth = 0.5
-                    multipleBirthBttn.layer.borderWidth = 0.5
+//                    etBttn.layer.borderWidth = 0.5
+//                    singleBttn.layer.borderWidth = 0.5
+//                    multipleBirthBttn.layer.borderWidth = 0.5
                     
-                    if data.selectedBornTypeId == 3{
-                        etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                        etBttn.layer.borderWidth = 2
-                        singleBttn.layer.borderColor = UIColor.gray.cgColor
-                        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                    if data.selectedBornTypeId == 3 {
+    //                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+    //                    etBttn.layer.borderWidth = 2
+    //                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+    //                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+    //                    selectedBornTypeId = 3
+                        etBttn.layer.borderColor = UIColor.clear.cgColor
+                       // etBttn.layer.borderWidth = 2
+                        singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                         selectedBornTypeId = 3
+                        etBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                        etBttn.setTitleColor(UIColor.white, for: .normal)
                     }
                     else if data.selectedBornTypeId == 1{
-                        singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                        singleBttn.layer.borderWidth = 2
-                        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                        etBttn.layer.borderColor = UIColor.gray.cgColor
+    //                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+    //                    singleBttn.layer.borderWidth = 2
+    //                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+    //                    etBttn.layer.borderColor = UIColor.gray.cgColor
+    //                    selectedBornTypeId = 1
+                        singleBttn.layer.borderColor = UIColor.clear.cgColor
+                       // etBttn.layer.borderWidth = 2
+                        etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                         selectedBornTypeId = 1
-                        
+                        singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                        singleBttn.setTitleColor(UIColor.white, for: .normal)
                     }
-                    else if data.selectedBornTypeId == 2 {
-                        multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                        multipleBirthBttn.layer.borderWidth = 2
-                        singleBttn.layer.borderColor = UIColor.gray.cgColor
-                        etBttn.layer.borderColor = UIColor.gray.cgColor
+                    else if data.selectedBornTypeId == 2{
                         selectedBornTypeId = 2
+                        multipleBirthBttn.layer.borderColor = UIColor.clear.cgColor
+                       // etBttn.layer.borderWidth = 2
+                        etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        multipleBirthBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                        multipleBirthBttn.setTitleColor(UIColor.white, for: .normal)
                     }
                     else {
-                        singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                        singleBttn.layer.borderWidth = 2
-                        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                        etBttn.layer.borderColor = UIColor.gray.cgColor
+                        singleBttn.layer.borderColor = UIColor.clear.cgColor
+                       // etBttn.layer.borderWidth = 2
+                        etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                        multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                         selectedBornTypeId = 1
+                        singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                        singleBttn.setTitleColor(UIColor.white, for: .normal)
                     }
                     
                     if data.tissuName == "" || data.tissuName == nil {
@@ -704,9 +743,9 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
             }
         }
         
-        if textField == scanBarcodeTextfield {
-            scanEarTagTextField.becomeFirstResponder()
-        } else if  textField == scanEarTagTextField {
+        if textField == scanEarTagTextField {
+            scanBarcodeTextfield.becomeFirstResponder()
+        } else if  textField == scanBarcodeTextfield {
             breedRegTextfield.becomeFirstResponder()
         } else if textField == breedRegTextfield {
             
@@ -737,6 +776,48 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
             animalNameTextfield.returnKeyType = UIReturnKeyType.next
             sireRegTextfield.returnKeyType = UIReturnKeyType.next
         }
+        
+        if textField == scanBarcodeTextfield {
+            viewsArray = [earTagView, sampleTypeView, genderView, breedTypeView, dateBtnView, breedRegView, associationTypeView, animalNameView, sireRegView, damRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.barcodeView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
+        
+        if textField == scanEarTagTextField {
+            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, breedRegView, associationTypeView, animalNameView, sireRegView, damRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.earTagView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
+        
+        if textField == breedRegTextfield {
+            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, earTagView, associationTypeView, animalNameView, sireRegView, damRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.breedRegView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
+        
+//        if textField == girlandoNoTextField {
+//            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, earTagView, breedRegView, animalNameView, sireRegView, damRegView]
+//            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+//            self.associationTypeView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+//        }
+        
+        if textField == animalNameTextfield {
+            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, earTagView, breedRegView, associationTypeView, sireRegView, damRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.animalNameView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
+        
+        if textField == sireRegTextfield {
+            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, earTagView, breedRegView, associationTypeView, animalNameView, damRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.sireRegView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
+        
+        if textField == damRegTextfield {
+            viewsArray = [barcodeView, sampleTypeView, genderView, breedTypeView, dateBtnView, earTagView, breedRegView, associationTypeView, animalNameView, sireRegView]
+            self.changeViewColorToBlack(view: viewsArray, color: UIColor(red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor)
+            self.damRegView.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        }
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.textColor = UIColor.black
@@ -748,11 +829,6 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
         return true;
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        super.touchesBegan(touches, with: event)
-        
-    }
-    
     func animateView (_ movement : CGFloat){
         UIView.animate(withDuration: 0.1, animations: {
             self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement);
@@ -761,7 +837,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITextFieldDelegate  {
 }
 
 //MARK: TABLEVIEW DATA SOURCE AND DELEGATE
-extension DataEntryOrderingAnimalVCGirlando :UITableViewDelegate,UITableViewDataSource{
+extension DEOAnimalVCGirlando :UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if btnTag == 10 {
@@ -770,6 +846,9 @@ extension DataEntryOrderingAnimalVCGirlando :UITableViewDelegate,UITableViewData
         else if btnTag == 20{
             return breedArr.count
         }
+        else if btnTag == 50 {
+            return self.genderArray.count
+        }
         else{
             return breedRegArr.count
         }
@@ -777,7 +856,7 @@ extension DataEntryOrderingAnimalVCGirlando :UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 19)
         if btnTag == 10{
             let tissue = self.tissueArr[indexPath.row]  as! GetSampleTbl
             cell.textLabel?.text = tissue.sampleName?.localized
@@ -794,11 +873,20 @@ extension DataEntryOrderingAnimalVCGirlando :UITableViewDelegate,UITableViewData
             let tissue = self.breedRegArr[indexPath.row]  as! GetBreedSocieties
             cell.textLabel?.text = tissue.association
         }
+        if btnTag == 50 {
+           let gender = self.genderArray[indexPath.row] as! String
+           cell.textLabel?.text = gender
+           return cell
+           
+       }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         barcodeEnable = true
+        self.sampleTypeView.layer.borderColor = UIColor(displayP3Red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor
+        self.genderView.layer.borderColor = UIColor(displayP3Red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor
+        self.dateBtnView.layer.borderColor = UIColor(displayP3Red: 88/255, green: 88/255, blue: 88/255, alpha: 1).cgColor
         if btnTag == 10  {
             let tissue = self.tissueArr[indexPath.row] as! GetSampleTbl
             tissuId = Int(tissue.sampleId)
@@ -822,11 +910,21 @@ extension DataEntryOrderingAnimalVCGirlando :UITableViewDelegate,UITableViewData
             breedRegBttn.setTitle(breedReg.association, for: .normal)
             buttonbg2.removeFromSuperview()
         }
+        
+        if btnTag == 50  {
+            let gender = self.genderArray[indexPath.row]
+            genderString = gender
+            male_femaleBttnOutlet.titleLabel?.font = male_femaleBttnOutlet.titleLabel?.font.withSize(20)
+            male_femaleBttnOutlet.setTitleColor(.black, for: .normal)
+            male_femaleBttnOutlet.setTitle(gender, for: .normal)
+            buttonbg2.removeFromSuperview()
+            
+        }
     }
 }
 
 //MARK: SCANNED OCR PROTOCOL EXTENSION
-extension DataEntryOrderingAnimalVCGirlando: scannedOCRProtocol {
+extension DEOAnimalVCGirlando: scannedOCRProtocol {
     func ocrDetected(_ scannedResult: String) {
         scanEarTagTextField.text = scannedResult
         scanEarTagTextField.becomeFirstResponder()
@@ -834,7 +932,7 @@ extension DataEntryOrderingAnimalVCGirlando: scannedOCRProtocol {
 }
 
 //MARK: QR SCANNER PROTOCOL EXTENSION
-extension DataEntryOrderingAnimalVCGirlando: QrScannerProtocol {
+extension DEOAnimalVCGirlando: QrScannerProtocol {
     func qrCodeScannedResult(_ qrValue: String) {
         scanBarcodeTextfield.text = qrValue
         scanBarcodeTextfield.becomeFirstResponder()

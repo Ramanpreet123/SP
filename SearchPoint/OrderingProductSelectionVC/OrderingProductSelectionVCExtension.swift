@@ -523,7 +523,7 @@ extension OrderingProductSelectionVC : UITableViewDelegate, UITableViewDataSourc
             }))
             
             refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-                
+                print(LocalizedStrings.cancelPressed)
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
@@ -533,5 +533,8 @@ extension OrderingProductSelectionVC : UITableViewDelegate, UITableViewDataSourc
 //MARK: OFFLINE CUSTOM VIEW UI EXTENSION
 extension OrderingProductSelectionVC : offlineCustomView1 {
     func crossBtn() {
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }

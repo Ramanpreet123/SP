@@ -278,7 +278,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.animaId = 1
                         
                     }
@@ -286,7 +289,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.animaId = 0
                     }
                     
@@ -297,14 +303,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.barCodeId = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.barCodeId = 0
                     }
                     
@@ -318,7 +330,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.animaId = 1
                         
                     }
@@ -326,7 +341,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.animaId = 0
                     }
                     
@@ -339,14 +357,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.barCodeId = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.barCodeId = 0
                     }
                     
@@ -357,14 +381,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGN(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.rGN_ID = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGN(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.rGN_ID = 0
                     }
                     
@@ -376,14 +406,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGD(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.rGD_ID = 1
                     }
                     else{
                         self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                         
                         self.fethData =  fetchAllDataRGD(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                        self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                         self.rGD_ID = 0
                     }
                     
@@ -644,7 +680,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:orderId,userId:userId, animalTag: serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 1
                     
                 }
@@ -652,7 +691,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:orderId,userId:userId, animalTag: serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 0
                 }
                 
@@ -662,14 +704,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:orderId,userId:userId, barcode: serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 1
                 }
                 else{
                     dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:orderId,userId:userId, barcode: serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 0
                 }
                 
@@ -682,7 +730,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 1
                     
                 }
@@ -690,7 +741,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 0
                 }
                 
@@ -701,14 +755,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 0
                 }
                 
@@ -719,14 +779,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGN(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.rGN_ID = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGN(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.rGN_ID = 0
                 }
                 
@@ -738,14 +804,20 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     self.dropUpDownBtn.setImage(UIImage(named: "sortingdesc"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGD(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.rGD_ID = 1
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: "sorting"), for: .normal)
                     
                     self.fethData =  fetchAllDataRGD(entityName: "ProductAdonAnimlTbLBeef", asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.rGD_ID = 0
                 }
                 
@@ -766,7 +838,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     
                     let fetchcustRep =   fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:orderId,userId:userId, animalTag: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -778,7 +853,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 if clickOnDropDown == NSLocalizedString("Barcode", comment: ""){
                     let fetchcustRep =    fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:orderId,userId:userId, barcode: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -792,7 +870,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 if self.clickOnDropDown == NSLocalizedString("Barcode", comment: ""){
                     let fetchcustRep =   fetchAllDataanimalTag(entityName: "ProductAdonAnimlTbLBeef",asending : true,orderId:orderId,userId:userId, animalTag: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -804,7 +885,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 if clickOnDropDown == NSLocalizedString("Series", comment: ""){
                     let fetchcustRep =    fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:orderId,userId:userId, barcode: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -816,7 +900,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 if clickOnDropDown == "RGN"{
                     let fetchcustRep =    fetchAllDataRGN(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:orderId,userId:userId, barcode: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -828,7 +915,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 if clickOnDropDown == NSLocalizedString("RGD", comment: "") ||  self.clickOnDropDown == NSLocalizedString(LocalizedStrings.RGDorAnimalIDText, comment: ""){
                     let fetchcustRep =    fetchAllDataRGD(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:orderId,userId:userId, barcode: newString as String)
                     if fetchcustRep.count > 0 {
-                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                        fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                            // Intentionally left empty.
+                            // Could be used in the future for logging, analytics, or error handling.
+                        })
                     }
                     else{
                         arr1.removeAll()
@@ -843,7 +933,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
         else{
             dropUpDownBtn.setImage(UIImage(named: "Image"), for: .normal)
             fethData =   fetchAllDataOrderStatus(entityName: "ProductAdonAnimlTbLBeef", ordestatus: "false",orderId:orderId,userId:userId)
-            fetchProductAdonAnimalTbl(fethData: fethData, completion: {})
+            fetchProductAdonAnimalTbl(fethData: fethData, completion: {
+                // Intentionally left empty.
+                // Could be used in the future for logging, analytics, or error handling.
+            })
             
             reloadTable()
         }
@@ -1177,7 +1270,8 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                         updateProducData(entity: "ProductAdonAnimlTbLBeef", productID: Int(pid), status: "true", animalTag: aTag!,orderId: orderId, userId: userId, completionHandler: { (success) -> Void in
                             if success {
                                 updateAnimalTblData(entity: "BeefAnimaladdTbl", status:"true", animalTag: aTag, orderId: orderId, userId: userId, completionHandler: { (success) -> Void in
-                                
+                                    // Intentionally left empty.
+                                    // Could be used in the future for logging, analytics, or error handling.
                                 })
                             }
                         })
@@ -1192,7 +1286,10 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 self.farmIdDisplyOutlet.setTitle(self.clickOnDropDown, for: .normal)
                 self.fethData =  fetchAllDataBarcOde(entityName: "ProductAdonAnimlTbLBeef", asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
             }
-            fetchProductAdonAnimalTblForCollectionView(fethData: fethData, completion: {})
+            fetchProductAdonAnimalTblForCollectionView(fethData: fethData, completion: {
+                // Intentionally left empty.
+                // Could be used in the future for logging, analytics, or error handling.
+            })
             
             if UserDefaults.standard.value(forKey: "Brazil") as? String == "BR" {
                 fethData = fetchAllDataOrderStatus(entityName: "ProductAdonAnimlTbLBeef", ordestatus: "false",orderId: orderId,userId:userId)
@@ -1670,7 +1767,7 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     
                     let cancelAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
-                 
+                        print(LocalizedStrings.cancelPressed)
                     }
                    
                     alertController.addAction(okAction)
@@ -1750,7 +1847,7 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     
                     let cancelAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
-                        
+                        print(LocalizedStrings.cancelPressed)
                     }
           
                     alertController.addAction(okAction)
@@ -1841,9 +1938,8 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                     }
                     
                     let cancelAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
-                        
                         UIAlertAction in
-                        
+                        print(LocalizedStrings.cancelPressed)
                     }
         
                     
@@ -1901,8 +1997,8 @@ class BeefOrderProductSelectionSecondVC: UIViewController,UITableViewDataSource,
                 }
                 
                 let cancelAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
-                    
                     UIAlertAction in
+                    print(LocalizedStrings.cancelPressed)
                 }
                 
                 alertController.addAction(okAction)

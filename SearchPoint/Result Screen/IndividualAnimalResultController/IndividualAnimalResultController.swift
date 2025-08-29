@@ -495,6 +495,7 @@ class IndividualAnimalResultController: UIViewController {
     @IBAction func deleteBtnClick(_ sender: Any) {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.deletePhoto, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         

@@ -1,10 +1,11 @@
 //
-//  DataEntryOrderingAnimalVCGirlando.swift
+//  DEOAnimalVCGirlando.swift
 //  SearchPoint
 //
-//  Created by "" on 20/04/20.
+//  Created by Ramanpreet Singh on 19/03/25.
 //
 
+import Foundation
 import UIKit
 import Toast_Swift
 import DropDown
@@ -14,9 +15,38 @@ import VisionKit
 
 //MARK: CLASS
 
-class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewControllerDelegate {
+class DEOAnimalVCGirlando: UIViewController,VNDocumentCameraViewControllerDelegate {
     
     //MARK: OUTLETS
+    @IBOutlet weak var animalNameHeaderView: UIView!
+    @IBOutlet weak var breedRegHeaderView: UIView!
+    @IBOutlet weak var associationTypeHeaderView: UIView!
+    @IBOutlet weak var damIdStackView: UIStackView!
+    @IBOutlet weak var animalNameAndSireRegStackView: UIStackView!
+    @IBOutlet weak var breedRegAndAssociationTypeStackView: UIStackView!
+    @IBOutlet weak var genderHeaderView: UIView!
+    @IBOutlet weak var bornTypeView: UIView!
+    @IBOutlet weak var sampleTypeHeaderView: UIView!
+    @IBOutlet weak var sampleBreedHeaderView: UIView!
+    @IBOutlet weak var breedAndDateStackView: UIStackView!
+    @IBOutlet weak var sampleTypeAndGenderStackView: UIStackView!
+    @IBOutlet weak var dobHeaderView: UIView!
+    @IBOutlet weak var damIDHeaderView: UIView!
+    @IBOutlet weak var sireIDHeaderView: UIView!
+    @IBOutlet weak var bornTypeHeaderView: UIView!
+    @IBOutlet weak var clearFormBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addAAnimalStackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var innerScrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var menuIconLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cartView: UIView!
+    @IBOutlet weak var breedTypeView: UIView!
+    @IBOutlet weak var sampleTypeView: UIView!
+    @IBOutlet weak var genderView: UIView!
+    @IBOutlet weak var breedRegView: UIView!
+    @IBOutlet weak var associationTypeView: UIView!
+    @IBOutlet weak var animalNameView: UIView!
+    @IBOutlet weak var sireRegView: UIView!
+    @IBOutlet weak var damRegView: UIView!
     @IBOutlet weak var keyBoardOptionsView: UIView!
     @IBOutlet weak var keyBoardOptionsViewBottomConstrains: NSLayoutConstraint!
     @IBOutlet weak var dateTextField: UITextField!
@@ -89,8 +119,20 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
     @IBOutlet weak var singleBttn: UIButton!
     @IBOutlet weak var etBttn: UIButton!
     @IBOutlet weak var clearFormOutlet: UIButton!
-    
+
     //MARK: VARIABLES AND CONSTANTS
+    var sideMenuViewVC: SideMenuVC!
+    var sideMenuShadowView: UIView!
+    var sideMenuRevealWidth: CGFloat = 300
+    let paddingForRotation: CGFloat = 150
+    var isExpanded: Bool = false
+    var draggingIsEnabled: Bool = false
+    var panBaseLocation: CGFloat = 0.0
+    var gestureEnabled: Bool = true
+    private var sideMenuTrailingConstraint: NSLayoutConstraint!
+    private var revealSideMenuOnTop: Bool = true
+    var genderArray = ["Female","Male"]
+    var viewsArray = [UIView]()
     var validateDateFlag = true
     let tapRec = UITapGestureRecognizer()
     var etBtn = String()
@@ -168,9 +210,9 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
     let buttonbg = UIButton ()
     var customPopView :OfflinePopUp!
     var methReturn = String()
-    
+
     //MARK: VIEW LIFE CYCLE
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUIOnDidLoad()
@@ -189,13 +231,132 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         removeObserver()
     }
     
+    //MARK: SIDE MENU UI METHODS
+    func setSideMenu(){
+        if UIDevice.current.orientation.isLandscape {
+            self.sideMenuRevealWidth = 300
+        }
+        else {
+            self.sideMenuRevealWidth = 260
+            
+        }
+        
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer))
+//        tapGestureRecognizer.numberOfTapsRequired = 1
+//        tapGestureRecognizer.delegate = self
+        
+        let storyboard = UIStoryboard(name: "iPad", bundle: Bundle.main)
+        self.sideMenuViewVC = storyboard.instantiateViewController(withIdentifier: "SideMenuVC") as? SideMenuVC
+        view.insertSubview(self.sideMenuViewVC!.view, at: self.revealSideMenuOnTop ? 1 : 0)
+        addChild(self.sideMenuViewVC!)
+        self.sideMenuViewVC!.didMove(toParent: self)
+        self.sideMenuViewVC.view.backgroundColor = UIColor.white
+        
+        // Side Menu AutoLayout
+        
+        self.sideMenuViewVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if self.revealSideMenuOnTop {
+            self.sideMenuTrailingConstraint = self.sideMenuViewVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -self.sideMenuRevealWidth - self.paddingForRotation)
+            self.sideMenuTrailingConstraint.isActive = true
+        }
+        NSLayoutConstraint.activate([
+            self.sideMenuViewVC.view.widthAnchor.constraint(equalToConstant: self.sideMenuRevealWidth),
+            self.sideMenuViewVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.sideMenuViewVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+            self.sideMenuViewVC.searchpointImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 42.0)
+        ])
+    }
+    
+    func animateShadow(targetPosition: CGFloat) {
+        UIView.animate(withDuration: 0.5) {
+            // When targetPosition is 0, which means side menu is expanded, the shadow opacity is 0.6
+            self.sideMenuShadowView.alpha = (targetPosition == 0) ? 0.6 : 0.0
+        }
+    }
+    
+    // Call this Button Action from the View Controller you want to Expand/Collapse when you tap a button
+    @IBAction open func revealSideMenu() {
+        self.sideMenuState(expanded: self.isExpanded ? false : true)
+    }
+    
+    func sideMenuState(expanded: Bool) {
+        if expanded {
+            if UIDevice.current.orientation.isLandscape {
+                self.menuIconLeadingConstraint.constant = 320
+                print("Landscape")
+            } else {
+                self.menuIconLeadingConstraint.constant = 270
+                print("Portrait")
+            }
+            
+            self.animateSideMenu(targetPosition: self.revealSideMenuOnTop ? 0 : self.sideMenuRevealWidth) { _ in
+                self.isExpanded = true
+                
+            }
+            // Animate Shadow (Fade In)
+            //  UIView.animate(withDuration: 0.5) { self.sideMenuShadowView.alpha = 0.6 }
+        }
+        else {
+            self.menuIconLeadingConstraint.constant = 30
+            self.animateSideMenu(targetPosition: self.revealSideMenuOnTop ? (-self.sideMenuRevealWidth - self.paddingForRotation) : 0) { _ in
+                self.isExpanded = false
+                
+            }
+            // Animate Shadow (Fade Out)
+            //  UIView.animate(withDuration: 0.5) { self.sideMenuShadowView.alpha = 0.0 }
+            
+        }
+    }
+    
+    func animateSideMenu(targetPosition: CGFloat, completion: @escaping (Bool) -> ()) {
+        self.view.bringSubviewToFront(self.sideMenuViewVC.view)
+        self.sideMenuViewVC.tblView.reloadData()
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: .layoutSubviews, animations: {
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = targetPosition
+                self.view.layoutIfNeeded()
+            }
+            else {
+                self.view.subviews[1].frame.origin.x = targetPosition
+            }
+        }, completion: completion)
+    }
+    
+    func sideMenuRevealSettingsViewController() -> DEOAnimalVCGirlando? {
+        var viewController: UIViewController? = self
+        
+        if viewController != nil && viewController is DEOAnimalVCGirlando {
+            return viewController! as? DEOAnimalVCGirlando
+        }
+        while (!(viewController is DEOAnimalVCGirlando) && viewController?.parent != nil) {
+            viewController = viewController?.parent
+        }
+        if viewController is DEOAnimalVCGirlando {
+            return viewController as? DEOAnimalVCGirlando
+        }
+        return nil
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let touch: UITouch? = touches.first
+        //location is relative to the current view
+        // do something with the touched point
+        if touch?.view != self.sideMenuViewVC {
+            sideMenuState(expanded: false)
+        }
+    }
+
+    
     //MARK: METHODS AND FUNCTIONS
     func defaultIncrementalBarCodeSetting() {
         incrementalBarcodeCheckBox.image = UIImage(named: ImageNames.incrementalCheckImg)
         UserDefaults.standard.set(false, forKey: keyValue.isBarCodeIncremental.rawValue)
         incrementalBarcodeTitleLabel.text = NSLocalizedString(ButtonTitles.incrementalBarcodeText, comment: "")
     }
-    
+ 
     func addObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -213,14 +374,14 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
     }
     
-    
+  
     
     func dataPopulateInScreen(animalId:Int){
         isautoPopulated = true
         barAutoPopu = true
         var animalFetch = NSArray()
         
-        if animalIdBool  {
+        if animalIdBool == true {
             textFieldBackroungWhite()
             animalFetch = fetchAllDataWithAnimalId(entityName: Entities.dataEntryAnimalAddTbl, animalId: animalId, customerID: custmerId!)
             let data = animalFetch.object(at: 0) as! DataEntryAnimaladdTbl
@@ -271,7 +432,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 let isGreater = Date().isSmaller(than: selectedDate)
                 print(isGreater)
                 
-                if isGreater  {
+                if isGreater == true {
                     dateBttnOutlet.setTitle("", for: .normal)
                     dateTextField.text = ""
                 }
@@ -294,14 +455,18 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             UserDefaults.standard.set(breedId, forKey: keyValue.breed.rawValue)
             
             if data.gender == ButtonTitles.maleText.localized || data.gender == "M" || data.gender == "m"{
-                self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                
+                male_femaleBttnOutlet.setTitle("Male", for: .normal)
                 genderToggleFlag = 1
-                genderString = ButtonTitles.maleText.localized
+                genderString = NSLocalizedString("Male", comment: "")
                 
             } else {
-                self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
-                genderToggleFlag = 0
-                genderString = ButtonTitles.femaleText.localized
+//                self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+//                genderToggleFlag = 0
+//                genderString = ButtonTitles.femaleText.localized
+                male_femaleBttnOutlet.setTitle("Female", for: .normal)
+                genderToggleFlag = 1
+                genderString = NSLocalizedString("Female", comment: "")
                 
             }
             
@@ -315,38 +480,56 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             
             let et = data.eT
             etBtn = et!
-            etBttn.layer.borderWidth = 0.5
-            singleBttn.layer.borderWidth = 0.5
-            multipleBirthBttn.layer.borderWidth = 0.5
+//            etBttn.layer.borderWidth = 0.5
+//            singleBttn.layer.borderWidth = 0.5
+//            multipleBirthBttn.layer.borderWidth = 0.5
             
             if et == "Et" || et == "ET"{
-                etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                etBttn.layer.borderWidth = 2
-                singleBttn.layer.borderColor = UIColor.gray.cgColor
-                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+                etBttn.layer.borderColor = UIColor.clear.cgColor
+               // etBttn.layer.borderWidth = 2
+                singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                 selectedBornTypeId = 3
+                etBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                etBttn.setTitleColor(UIColor.white, for: .normal)
                 
             } else if et == LocalizedStrings.singlesText{
                 
-                singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                singleBttn.layer.borderWidth = 2
-                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                etBttn.layer.borderColor = UIColor.gray.cgColor
+//                singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                singleBttn.layer.borderWidth = 2
+//                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                etBttn.layer.borderColor = UIColor.gray.cgColor
+//                selectedBornTypeId = 1
+                singleBttn.layer.borderColor = UIColor.clear.cgColor
+               // etBttn.layer.borderWidth = 2
+                etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                 selectedBornTypeId = 1
-                
+                singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                singleBttn.setTitleColor(UIColor.white, for: .normal)
             }else if et == LocalizedStrings.multipleBirthStr{
-                multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                multipleBirthBttn.layer.borderWidth = 2
-                singleBttn.layer.borderColor = UIColor.gray.cgColor
-                etBttn.layer.borderColor = UIColor.gray.cgColor
+                //
+//                multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                multipleBirthBttn.layer.borderWidth = 2
+//                singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                etBttn.layer.borderColor = UIColor.gray.cgColor
+//                selectedBornTypeId = 2
                 selectedBornTypeId = 2
+                multipleBirthBttn.layer.borderColor = UIColor.clear.cgColor
+               // etBttn.layer.borderWidth = 2
+                etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                multipleBirthBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                multipleBirthBttn.setTitleColor(UIColor.white, for: .normal)
             }
             else {
-                singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                singleBttn.layer.borderWidth = 2
-                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                etBttn.layer.borderColor = UIColor.gray.cgColor
                 selectedBornTypeId = 1
+                singleBttn.layer.borderColor = UIColor.clear.cgColor
+               // etBttn.layer.borderWidth = 2
+                etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                singleBttn.setTitleColor(UIColor.white, for: .normal)
                 
             }
             
@@ -424,13 +607,15 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 if data.gender == ButtonTitles.maleText.localized || data.gender == "M" || data.gender == "m"{
                     
                     
-                    self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                  //  self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
+                    male_femaleBttnOutlet.setTitle("Male", for: .normal)
                     genderToggleFlag = 1
                     genderString = ButtonTitles.maleText.localized
                     
                 } else {
                     
-                    self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                   // self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+                    male_femaleBttnOutlet.setTitle("Female", for: .normal)
                     genderToggleFlag = 0
                     genderString = ButtonTitles.femaleText.localized
                     
@@ -438,42 +623,93 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 
                 let et = data.eT
                 etBtn = et!
-                etBttn.layer.borderWidth = 0.5
-                singleBttn.layer.borderWidth = 0.5
-                multipleBirthBttn.layer.borderWidth = 0.5
+//                etBttn.layer.borderWidth = 0.5
+//                singleBttn.layer.borderWidth = 0.5
+//                multipleBirthBttn.layer.borderWidth = 0.5
                 
-                if et == "Et" || et == "ET"{
-                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    etBttn.layer.borderWidth = 2
-                    singleBttn.layer.borderColor = UIColor.gray.cgColor
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                if et == "Et" || et == "ET"{
+//                    etBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    etBttn.layer.borderWidth = 2
+//                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    selectedBornTypeId = 3
+//                    
+//                } else if et == LocalizedStrings.singlesText{
+//                    
+//                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    singleBttn.layer.borderWidth = 2
+//                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    etBttn.layer.borderColor = UIColor.gray.cgColor
+//                    
+//                    selectedBornTypeId = 1
+//                    
+//                }else if et == LocalizedStrings.multipleBirthStr{
+//                    multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    multipleBirthBttn.layer.borderWidth = 2
+//                    singleBttn.layer.borderColor = UIColor.gray.cgColor
+//                    etBttn.layer.borderColor = UIColor.gray.cgColor
+//                    selectedBornTypeId = 2
+//                }
+//                else {
+//                    
+//                    
+//                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+//                    singleBttn.layer.borderWidth = 2
+//                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//                    etBttn.layer.borderColor = UIColor.gray.cgColor
+//                    
+//                    selectedBornTypeId = 1
+//                }
+                
+                if et == "Et"{
+                    etBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                     selectedBornTypeId = 3
-                    
-                } else if et == LocalizedStrings.singlesText{
-                    
-                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    singleBttn.layer.borderWidth = 2
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
-                    
+                    etBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    etBttn.setTitleColor(UIColor.white, for: .normal)
+                }
+                else if et == LocalizedStrings.singlesText{
+    //                singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+    //                singleBttn.layer.borderWidth = 2
+    //                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+    //                etBttn.layer.borderColor = UIColor.gray.cgColor
+    //                selectedBornTypeId = 1
+                    singleBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
                     selectedBornTypeId = 1
+                    singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    singleBttn.setTitleColor(UIColor.white, for: .normal)
                     
-                }else if et == LocalizedStrings.multipleBirthStr{
-                    multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    multipleBirthBttn.layer.borderWidth = 2
-                    singleBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
+                }
+                else if et == LocalizedStrings.multipleBirthStr{
+    //                multipleBirthBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+    //                multipleBirthBttn.layer.borderWidth = 2
+    //                singleBttn.layer.borderColor = UIColor.gray.cgColor
+    //                etBttn.layer.borderColor = UIColor.gray.cgColor
                     selectedBornTypeId = 2
+                    multipleBirthBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    multipleBirthBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 else {
-                    
-                    
-                    singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
-                    singleBttn.layer.borderWidth = 2
-                    multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-                    etBttn.layer.borderColor = UIColor.gray.cgColor
-                    
+    //                singleBttn.layer.borderColor = UIColor(red: 117/255, green: 206/255, blue: 222/255, alpha: 1).cgColor
+    //                singleBttn.layer.borderWidth = 2
+    //                multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+    //                etBttn.layer.borderColor = UIColor.gray.cgColor
                     selectedBornTypeId = 1
+                    singleBttn.layer.borderColor = UIColor.clear.cgColor
+                   // etBttn.layer.borderWidth = 2
+                    etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+                    singleBttn.backgroundColor = UIColor(red: 255/255, green: 96/255, blue: 6/255, alpha: 1)
+                    singleBttn.setTitleColor(UIColor.white, for: .normal)
                 }
                 
                 tissuId = Int(data.tissuId)
@@ -498,10 +734,10 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         let dateStr = UserDefaults.standard.value(forKey: keyValue.date.rawValue) as? String
         if dateStr == "MM" {
             dateformt.dateFormat = DateFormatters.MMddyyyyFormat
-            dateTextField.placeholder = DateFormatters.MMDDYYYYAllCapsFormat
+            dateTextField.placeholder = DateFormatters.MMDDYYYYFormat
         } else {
             dateformt.dateFormat = DateFormatters.ddMMyyyyFormat
-            dateTextField.placeholder = DateFormatters.DDMMYYYYAllCapsFormat
+            dateTextField.placeholder = DateFormatters.DDMMYYYYFormat
             
         }
         animalId1 = 0
@@ -534,27 +770,23 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         breedRegTextfield.text?.removeAll()
         animalNameTextfield.text?.removeAll()
         self.selectedDate = Date()
-        etBttn.layer.borderColor = UIColor.gray.cgColor
-        singleBttn.layer.borderColor = UIColor.gray.cgColor
-        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
-        etBttn.layer.borderWidth = 0.5
-        singleBttn.layer.borderWidth = 0.5
-        multipleBirthBttn.layer.borderWidth = 0.5
+//        etBttn.layer.borderColor = UIColor.gray.cgColor
+//        singleBttn.layer.borderColor = UIColor.gray.cgColor
+//        multipleBirthBttn.layer.borderColor = UIColor.gray.cgColor
+//        etBttn.layer.borderWidth = 0.5
+//        singleBttn.layer.borderWidth = 0.5
+//        multipleBirthBttn.layer.borderWidth = 0.5
+        etBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        singleBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
+        multipleBirthBttn.layer.borderColor = UIColor(red: 10/255, green: 137/255, blue: 157/255, alpha: 1).cgColor
         etBttn.isEnabled = false
         singleBttn.isEnabled = false
         multipleBirthBttn.isEnabled = false
         breedRegBttn.setTitle(NSLocalizedString(LocalizedStrings.girolandoAssociationStr, comment:  "") , for: .normal)
-        if UserDefaults.standard.value(forKey: "DEGirlandoGender") as? String == "F" || UserDefaults.standard.value(forKey: "DEGirlandoGender") as? String == nil {
-            self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
-            genderToggleFlag = 0
-            genderString = ButtonTitles.femaleText.localized
-            UserDefaults.standard.set("F", forKey: "DEGirlandoGender")
-        } else {
-            UserDefaults.standard.set("M", forKey: "DEGirlandoGender")
-            self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
-            genderToggleFlag = 1
-            genderString = ButtonTitles.maleText.localized
-        }
+       // self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+        male_femaleBttnOutlet.setTitle("Female", for: .normal)
+        genderToggleFlag = 0
+        genderString = ButtonTitles.femaleText.localized
         breedBtnOutlet.setTitleColor(.gray, for: .normal)
         tissueBttnOutlet.setTitleColor(.gray, for: .normal)
         self.scrolView.contentOffset.y = 0.0
@@ -606,7 +838,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
     }
     
     func anOptionalMethod(check :Bool){
-        if check {
+        if check == true{
             isUpdate = false
             editIngText = false
             statusOrder = false
@@ -629,7 +861,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         return strTimeStamp
     }
     
-    
+   
     func statusOrderTrue() -> Bool{
         
         let animalFetch = fetchAllDataWithAnimalId(entityName: Entities.animalMasterTblEntity, animalId: idAnimal, customerID: custmerId!)
@@ -713,7 +945,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         calenderView.addSubview(self.datePicker)
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 1, alpha: 1)
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
         toolBar.sizeToFit()
         self.datePicker.maximumDate = Date()
         let doneButton = UIBarButtonItem(title:  NSLocalizedString(LocalizedStrings.doneStr, comment: ""), style: .plain, target: self, action: #selector(self.doneClick))
@@ -728,8 +960,8 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         
     }
     
-    
-    
+  
+  
     
     func initialNetworkCheck(){
         NotificationCenter.default.addObserver(self, selector:#selector(self.checkForReachability), name: NSNotification.Name.reachabilityChanged, object: nil)
@@ -750,7 +982,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
     
     func addAnimalBtn(completionHandler: @escaping CompletionHandler){
         
-        if barcodeEnable  {
+        if barcodeEnable == true {
             let orederStatus = fetchAllDataWithAnimalIdstatus(entityName: Entities.animalMasterTblEntity, animalId: idAnimal,orderststus:"true", customerId: self.custmerId!)
             if orederStatus.count > 0 {
                 
@@ -780,7 +1012,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             return
         } else {
             addBtnCondtion(completionHandler: { (success) -> Void in
-                if success {
+                if success == true{
                     completionHandler(true)
                 }
             })
@@ -789,12 +1021,13 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         if notificationLblCount.text != "0"{
             countLbl.isHidden = false
             notificationLblCount.isHidden = false
+            self.cartView.isHidden = false
         }
     }
     
     
     func addBtnCondtion(completionHandler: CompletionHandler){
-        if checkBarcode  {
+     if checkBarcode == true {
             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.barcodeMustEndWithNumAlert, comment: ""))
             return
         }
@@ -867,7 +1100,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                         CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.invalidDateFormat, comment: ""))
                         return
                     }
-                    
+                    return
                 }
             }
             else {
@@ -877,9 +1110,9 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 return
             }
         }
-        
-        if  !msgUpatedd {
-            if barcodeflag  &&  scanBarcodeTextfield.text != ""{
+  
+        if  msgUpatedd == false {
+            if barcodeflag == true &&  scanBarcodeTextfield.text != ""{
                 let barCode = fetchAnimaldataValidateAnimalBarcodeanimalIdOrderId(entityName: Entities.dataEntryAnimalAddTbl, animalbarCodeTag: scanBarcodeTextfield.text ?? "", userId: userId, animalId: animalId1,orderSatatus:"false",orderid:orderId, custId: UserDefaults.standard.integer(forKey: keyValue.currentActiveCustomerId.rawValue))
                 if barCode.count > 0 {
                     barcodeView.layer.borderColor = UIColor.red.cgColor
@@ -914,7 +1147,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             
             updateOrderStatusISyncSubProductGirlando(entity: Entities.subProductTblEntity,earTag: scanEarTagTextField.text ?? "",barCodetag:  scanBarcodeTextfield.text!,farmId: farmIdText,orderId: orderId,userId:userId,animalId: animalId1)
             updadeOfflineSyncInfo(entity: Entities.dataEntryListTblEntity,customerId:custmerId ?? 0,offlineSync:false,listid: listIdGet)
-            
+           
             let fetchDataUpdate = fetchAnimalDataAccEarTagGirlando(entityName: Entities.animalAddTblEntity,animalTag:scanEarTagTextField.text ?? "",custmerId :Int64(custmerId ?? 0),providerid:pvid)
             let fetchDataUpdate1 = fetchAnimalDataAccEarTagGirlando(entityName: Entities.dataEntryAnimalAddTbl,animalTag:scanEarTagTextField.text ?? "",custmerId :Int64(custmerId ?? 0),providerid:pvid)
             
@@ -943,7 +1176,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             }
             
             else if animalDataMaster.count > 0 {
-                if  msgUpatedd {
+                if  msgUpatedd == true{
                     CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalRecordUpdated, comment: ""))
                     UserDefaults.standard.set(self.tissueBttnOutlet.titleLabel!.text, forKey: keyValue.dataEntryGirlandoSampleTypeClear.rawValue)
                     
@@ -959,7 +1192,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             
             editAid = animalId1
             animalId1 = 0
-            if identify1  {
+            if identify1 == true {
                 let data1 = fetchAllDataOrderStatusWithoutOrderId(entityName: Entities.dataEntryAnimalAddTbl,ordestatus: "false", orderId:orderId,userId:userId)
                 if data1.count > 0 {
                     completionHandler(true)
@@ -970,7 +1203,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             completionHandler(true)
             scrolView.contentOffset.y = 0.0
             
-        } else if isUpdate  {
+        } else if isUpdate == true {
             
             animalId1 = editAid
             updateOrderStatusISyncAnimalMasterGirlando(entity: Entities.animalMasterTblEntity, earTag: scanEarTagTextField.text ?? "", barCodetag: scanBarcodeTextfield.text!, date: dateVale, damId: damRegTextfield.text ?? "", sireId: sireRegTextfield.text ?? "" , gender: genderString, update: "false", breedRegNumber: breedRegTextfield.text ?? "", tissuName: tissueBttnOutlet.titleLabel!.text!, breedName: breedBtnOutlet.titleLabel!.text!, et: etBtn, farmId: "", orderId: autoD, orderSataus: "false", breedId: breedId, isSync: "false", providerId: pvid, tissuId: tissuId, sireIDAU: "", animalName: animalNameTextfield.text ?? "", userId: userId, udid: timeStampString, animalId: animalId1, breedAssocation: breedRegBttn.titleLabel?.text ?? "",girlandoID: "")
@@ -982,7 +1215,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             updateOrderStatusISyncSubProductGirlando(entity: Entities.subProductTblEntity,earTag: scanEarTagTextField.text ?? "",barCodetag:  scanBarcodeTextfield.text!,farmId: farmIdText,orderId: orderId,userId:userId,animalId: animalId1)
             updadeOfflineSyncInfo(entity: Entities.dataEntryListTblEntity,customerId:custmerId ?? 0,offlineSync:false,listid: listIdGet)
             
-            if identify1  {
+            if identify1 == true {
                 let data1 = fetchAllDataOrderStatusWithoutOrderId(entityName: Entities.dataEntryAnimalAddTbl,ordestatus: "false", orderId:orderId,userId:userId)
                 if data1.count > 0 {
                     completionHandler(true)
@@ -1001,7 +1234,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             }
             
             else if animalDataMaster.count > 0 {
-                if  msgUpatedd {
+                if  msgUpatedd == true{
                     CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalRecordUpdated, comment: ""))
                     UserDefaults.standard.set(self.tissueBttnOutlet.titleLabel!.text, forKey: keyValue.dataEntryGirlandoSampleTypeClear.rawValue)
                     
@@ -1042,7 +1275,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 }
                 
                 updateOrderStatusISyncAnimalMasterAnimalIdGirlando(entity: Entities.animalMasterTblEntity, earTag: scanEarTagTextField.text ?? "", barCodetag: scanBarcodeTextfield.text!, date: dateVale, damId: damRegTextfield.text!, sireId: sireRegTextfield.text ?? "", gender: genderString, update: "false", breedRegNumber: breedRegTextfield.text ?? "", tissuName: tissueBttnOutlet.titleLabel!.text!, breedName: breedBtnOutlet.titleLabel!.text!, et: etBtn, farmId: farmIdText, orderId: autoD, orderSataus: "false", breedId: breedId, isSync: "false", providerId: pvid, tissuId: tissuId, sireIDAU: "", animalName: animalNameTextfield.text ?? "", userId: userId, udid: timeStampString, animalId: animalId1, animalidNew: animalID1, breedAssocation: breedRegBttn.titleLabel!.text!,girlandoID: "")
-                
+  
                 let fetchDataUpdate = fetchAnimalDataAccEarTagGirlando(entityName: Entities.animalAddTblEntity,animalTag:scanEarTagTextField.text ?? "",custmerId :Int64(custmerId ?? 0),providerid:pvid)
                 let fetchDataUpdate1 = fetchAnimalDataAccEarTagGirlando(entityName: Entities.dataEntryAnimalAddTbl,animalTag:scanEarTagTextField.text ?? "",custmerId :Int64(custmerId ?? 0),providerid:pvid)
                 
@@ -1097,7 +1330,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                     }
                     let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
-                        print(LocalizedStrings.cancelPressed)
+                        NSLog("Cancel Pressed")
                     }
                     
                     alertController.addAction(okAction)
@@ -1114,13 +1347,13 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             statusOrder = false
             UserDefaults.standard.removeObject(forKey: keyValue.review.rawValue)
             self.animalSucInOrder = ""
-            if !self.msgAnimalSucess {
+            if self.msgAnimalSucess == false {
                 if self.addContiuneBtn == 1 {
-                    if self.msgcheckk  {
+                    if self.msgcheckk == true {
                         self.view.makeToast(NSLocalizedString(AlertMessagesStrings.animalRecordUpdatedAdded, comment: ""), duration: 2, position: .top)
                     }
                     else {
-                        if self.isautoPopulated  {
+                        if self.isautoPopulated == true {
                             self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""), duration: 2, position: .top)
                         } else {
                             self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAdded, comment: ""), duration: 2, position: .top)
@@ -1128,11 +1361,11 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                     }
                 }
                 else if self.addContiuneBtn == 2{
-                    if self.msgcheckk  {
+                    if self.msgcheckk == true {
                         CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalRecordUpdatedAdded, comment: ""))
                     }
                     else{
-                        if self.isautoPopulated  {
+                        if self.isautoPopulated == true {
                             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""))
                             
                         } else {
@@ -1141,11 +1374,11 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                     }
                 }
                 else {
-                    if self.msgcheckk  {
+                    if self.msgcheckk == true {
                         CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(AlertMessagesStrings.animalRecordUpdatedAdded, comment: ""))
                     }
                     else{
-                        if self.isautoPopulated  {
+                        if self.isautoPopulated == true {
                             CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""))
                             
                         } else {
@@ -1156,11 +1389,11 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 self.msgAnimalSucess = false
             }
             else {
-                if self.msgcheckk  {
+                if self.msgcheckk == true {
                     self.view.makeToast(NSLocalizedString(AlertMessagesStrings.animalRecordUpdatedAdded, comment: ""), duration: 2, position: .top)
                 }
                 else{
-                    if self.isautoPopulated  {
+                    if self.isautoPopulated == true {
                         self.view.makeToast(NSLocalizedString(LocalizedStrings.animalAddedSuccessfully, comment: ""), duration: 2, position: .top)
                     }else {
                         CommonClass.showAlertMessage(self, titleStr: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), messageStr: NSLocalizedString(LocalizedStrings.animalAdded, comment: ""))
@@ -1169,7 +1402,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             }
             
             UserDefaults.standard.set(self.tissueBttnOutlet.titleLabel!.text, forKey: keyValue.dataEntryGirlandoSampleTypeClear.rawValue)
-            if isBarcodeAutoIncrementedEnabled  {
+            if isBarcodeAutoIncrementedEnabled == true {
                 UserDefaults.standard.set(true, forKey: keyValue.isBarCodeIncrementalClear.rawValue)
                 UserDefaults.standard.set(true, forKey: keyValue.isBarCodeIncremental.rawValue)
             }
@@ -1181,25 +1414,15 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             UserDefaults.standard.set(self.tissueBttnOutlet.titleLabel!.text, forKey: keyValue.dataEntryGirlandoSampleType.rawValue)
             UserDefaults.standard.set("", forKey: keyValue.selectAnimalId.rawValue)
             barAutoPopu = false
-            
-            
-            if UserDefaults.standard.value(forKey: "DEGirlandoGender") as? String == "F" || UserDefaults.standard.value(forKey: "DEGirlandoGender") as? String == nil {
-                self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
-                genderToggleFlag = 0
-                genderString = ButtonTitles.femaleText.localized
-                UserDefaults.standard.set("F", forKey: "DEGirlandoGender")
-            } else {
-                UserDefaults.standard.set("M", forKey: "DEGirlandoGender")
-                self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangMale\(langCode)", comment: "")), for: .normal)
-                genderToggleFlag = 1
-                genderString = ButtonTitles.maleText.localized
-            }
-            
+         //   self.male_femaleBttnOutlet.setImage(UIImage(named: NSLocalizedString("LangFemale\(langCode)", comment: "")), for: .normal)
+            male_femaleBttnOutlet.setTitle("Female", for: .normal)
             byDefaultSetting()
+            genderToggleFlag = 0
+            genderString = ButtonTitles.femaleText.localized
             etBtn.removeAll()
-            etBttn.layer.borderWidth = 0.5
-            singleBttn.layer.borderWidth = 0.5
-            multipleBirthBttn.layer.borderWidth = 0.5
+//            etBttn.layer.borderWidth = 0.5
+//            singleBttn.layer.borderWidth = 0.5
+//            multipleBirthBttn.layer.borderWidth = 0.5
             scanBarcodeTextfield.text = ""
             
             let userId = UserDefaults.standard.integer(forKey: keyValue.userId.rawValue)
@@ -1220,14 +1443,14 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             dateTextField.text = ""
             completionHandler(true)
         }
-        if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue)  {
+        if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue) == true {
             UserDefaults.standard.set(incrementalBarCode, forKey: keyValue.barcodeIncremental.rawValue)
         }
         incrementalBarCode = ""
         
-        if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue)  {
+        if UserDefaults.standard.bool(forKey: keyValue.isBarCodeIncremental.rawValue) == true {
             if let lastSavedBarCode = UserDefaults.standard.value(forKey: keyValue.barcodeIncremental.rawValue) as? String {
-                scanBarcodeTextfield.text = isBarcodeEndingWithNumberAndGetIncremented(lastSavedBarCode).incrementedBarCode
+                scanBarcodeTextfield.text = isBarCodeEndsWithNumber_GetIncrementedBarCode(lastSavedBarCode).incrementedBarCode
                 
                 if scanBarcodeTextfield.text?.isEmpty == false {
                     textFieldBackroungWhite()
@@ -1269,7 +1492,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 textStr += "\n\(topCandidate.string)"
                 DispatchQueue.main.async {
                     let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                    let test = String(trimmed.filter{!LocalizedStrings.removedCharFromString.contains($0)})
+                    let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
                     self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                     
                     if self.methReturn == LocalizedStrings.againClick {
@@ -1281,6 +1504,7 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: mesageShow, preferredStyle: .alert)
                         let OKAction = UIAlertAction(title:NSLocalizedString("Retry", comment: "") , style: UIAlertAction.Style.default, handler: {
                             (_)in
+                            //                            self.setUpGallary()
                             let storyboard = UIStoryboard(name: StoryboardType.MainStoryboard, bundle: nil) //
                             let vc = storyboard.instantiateViewController(withIdentifier: ClassIdentifiers.textScanVC) as? TextScanVC
                             vc?.delegate = self
@@ -1288,7 +1512,6 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                         })
                         let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                             (_)in
-                            print(LocalizedStrings.cancelPressed)
                         })
                         let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                             (_)in
@@ -1331,9 +1554,9 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
         
         let idAnimal = animalId.uppercased()
         let stringResult = idAnimal.contains("UK")
-        if stringResult  {
+        if stringResult == true {
             let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!LocalizedStrings.removedCharFromString.contains($0)})
+            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
             
             let dropTwelveElement = test.suffix(12).uppercased()
             let totalString =  dropTwelveElement
@@ -1343,9 +1566,9 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
             let stringResultUS = idAnimal.contains("US")
             let stringResult840 = idAnimal.contains(LocalizedStrings.eightFortyCountryCode)
             
-            if stringResultUS  && stringResult840  {
+            if stringResultUS == true && stringResult840 == true {
                 let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-                let test = String(trimmedString.filter{!LocalizedStrings.removedCharFromString.contains($0)})
+                let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{/".contains($0)})
                 if test.count < 15 {
                     return LocalizedStrings.againClick
                 }
@@ -1370,5 +1593,6 @@ class DataEntryOrderingAnimalVCGirlando: UIViewController,VNDocumentCameraViewCo
                 return LocalizedStrings.againClick
             }
         }
+        return LocalizedStrings.againClick
     }
 }

@@ -116,10 +116,6 @@ extension ProductWiseTermsController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if self.isBeefOrder  {
             return beefProducts[section].productName ?? ""

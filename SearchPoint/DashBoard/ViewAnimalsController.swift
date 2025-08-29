@@ -234,7 +234,7 @@ class ViewAnimalsController: UIViewController {
             let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: AlertMessagesStrings.pleaseReviewTheCart.localized(with: animals.count), preferredStyle: .alert)
             
             let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
-                
+                print("Ok")
             })
             alert.addAction(ok)
             self.present(alert, animated: true, completion: nil)
@@ -259,7 +259,7 @@ class ViewAnimalsController: UIViewController {
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.clearAllOrders, comment: ""), preferredStyle: UIAlertController.Style.alert)
         
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
@@ -454,7 +454,7 @@ extension ViewAnimalsController:UITableViewDataSource,UITableViewDelegate{
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.removeAnimalFromOrder, comment: ""), preferredStyle: UIAlertController.Style.alert)
         
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         
         refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("Yes", comment: "") , style: .default, handler: { (action: UIAlertAction!) in
@@ -630,6 +630,7 @@ extension EmailListHelper {
             let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.noEmailSent, comment: ""), preferredStyle: .alert)
             
             let OKAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { (action:UIAlertAction!) in
+                print("Ok")
             }
             alertController.addAction(OKAction)
             self.present(alertController, animated: true, completion:nil)

@@ -14,7 +14,4 @@ struct EmailGroupModel: Codable {
     var groupName: String?
     var emailAddresses = [String]()
 
-    init() {
-        
-    }
 }

@@ -141,7 +141,8 @@ class OrderProductSelectionSecondVC: UIViewController {
         }
         let dataval:  [ProductAdonAnimalTbl] =  fetchAllDataFarmIdStatus(entityName: Entities.productAdonAnimalTblEntity, asending: true, status: "true", orderStatus: "false",orderId:orderId,userId:userId, farmId: serchTextField.text!) as! [ProductAdonAnimalTbl]
         fetchProductAdonAnimalTbl(fethData: fethData, completion: {
-            
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if dataval.count > 0 {
@@ -432,6 +433,7 @@ class OrderProductSelectionSecondVC: UIViewController {
                         }
                         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                             UIAlertAction in
+                            print(LocalizedStrings.cancelPressed)
                         }
                         
                         alertController.addAction(okAction)
@@ -845,7 +847,10 @@ class OrderProductSelectionSecondVC: UIViewController {
         }
     }
     
-    @objc func deleteButton(_ sender : UIButton){}
+    @objc func deleteButton(_ sender : UIButton){
+        // Intentionally left empty.
+        // Could be used in the future for deletion handling.
+    }
     
     @objc func openPopUp(_ sender: UIButton){
         let vc = self.storyboard!.instantiateViewController(withIdentifier: ClassIdentifiers.commanInfoPopUpControllerVC) as! CommanInfoPopUpController
@@ -891,7 +896,10 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
             if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.onFarmIdText, comment: ""){
                 let fetchcustRep =   fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:true,orderId:orderId,userId:userId, farmId: newString as String)
                 if fetchcustRep.count > 0 {
-                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
                 else{
                     arr1.removeAll()
@@ -903,7 +911,10 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
             if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
                 let fetchcustRep =   fetchAllDataanimalTag(entityName: Entities.productAdonAnimalTblEntity,asending : true,orderId:orderId,userId:userId, animalTag: newString as String)
                 if fetchcustRep.count > 0 {
-                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
                 else{
                     arr1.removeAll()
@@ -915,7 +926,10 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
             if clickOnDropDown == ButtonTitles.barcodeText{
                 let fetchcustRep =    fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: true,orderId:orderId,userId:userId, barcode: newString as String)
                 if fetchcustRep.count > 0 {
-                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
                 else{
                     arr1.removeAll()
@@ -926,7 +940,10 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
             if clickOnDropDown == ButtonTitles.earTagText{
                 let fetchcustRep =    fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity, asending: true, orderId: orderId, userId: userId, animalTag:  newString as String)
                 if fetchcustRep.count > 0 {
-                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {})
+                    fetchProductAdonAnimalTbl(fethData: fetchcustRep, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
                 else{
                     arr1.removeAll()
@@ -938,7 +955,10 @@ extension OrderProductSelectionSecondVC : UITextFieldDelegate {
         else{
             dropUpDownBtn.setImage(UIImage(named: ImageNames.imageImg), for: .normal)
             fethData =   fetchAllDataOrderStatus(entityName: Entities.productAdonAnimalTblEntity, ordestatus: "false",orderId:orderId,userId:userId)
-            fetchProductAdonAnimalTbl(fethData: fethData, completion: {})
+            fetchProductAdonAnimalTbl(fethData: fethData, completion: {
+                // Intentionally left empty.
+                // Could be used in the future for logging, analytics, or error handling.
+            })
             reloadTable()
         }
         return true

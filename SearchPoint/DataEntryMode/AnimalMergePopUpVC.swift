@@ -47,6 +47,7 @@ class AnimalMergePopUpVC: UIViewController {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removingOrdersList, comment: ""), preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         
@@ -114,7 +115,7 @@ class AnimalMergePopUpVC: UIViewController {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removingOrdersList, comment: ""), preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: "") , style: .default, handler: { action in
-            
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         

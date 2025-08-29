@@ -1706,7 +1706,7 @@ class BeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControllerDelegate
         let stringResult = animalID.contains("UK")
         if stringResult  {
             let trimmedString = String(animalID.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+            let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
             let dropTwelveElement = test.suffix(12).uppercased()
             let totalString =  dropTwelveElement
             return totalString
@@ -1717,7 +1717,7 @@ class BeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControllerDelegate
             
             if stringResultUS  && stringResult840  {
                 let trimmedString = String(animalID.compactMap({ $0.isWhitespace ? nil : $0 }))
-                let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                 if test.count < 15 {
                     return LocalizedStrings.againClick
                 }

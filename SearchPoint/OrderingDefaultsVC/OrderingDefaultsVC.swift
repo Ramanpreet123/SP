@@ -2294,7 +2294,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                 
                 let alert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("Are you sure you want to change the provider?", comment: ""),   preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
-                    
+                    print(LocalizedStrings.cancelPressed)
                     
                 }))
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Yes", comment: ""),style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
@@ -2342,6 +2342,7 @@ extension OrderingDefaultsVC: UICollectionViewDelegate,UICollectionViewDataSourc
                         let alert = UIAlertController(title: NSLocalizedString("Alert", comment: ""), message: NSLocalizedString("\(strinBreed) \(StringSampleType) Do you want to remove animal(s) from the order?",comment : ""),  preferredStyle: UIAlertController.Style.alert)
                         
                         alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
+                            print(LocalizedStrings.cancelPressed)
                             return
                         }))
                         alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default,

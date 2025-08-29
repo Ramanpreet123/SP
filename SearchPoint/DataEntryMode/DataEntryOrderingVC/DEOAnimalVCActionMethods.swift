@@ -127,7 +127,11 @@ extension DataEntryOrderingAnimalVC {
                     }
                     if UIApplication.shared.canOpenURL(settingsUrl) {
                         if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                // Intentionally left empty.
+                                // Nothing additional required after opening Settings.
+                                // Could be used in the future for logging, analytics, or error handling.
+                            })
                         } else {
                             UIApplication.shared.openURL(settingsUrl)
                         }
@@ -836,7 +840,7 @@ extension DataEntryOrderingAnimalVC {
         self.view.endEditing(true)
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
-            
+            print(LocalizedStrings.cancelPressed)
         })
         alert.addAction(cancel)
         let ok = UIAlertAction(title:NSLocalizedString("Yes",comment: "") , style: .default, handler: { action in

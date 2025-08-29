@@ -75,7 +75,7 @@ extension ADHAnimalVC {
         
         func cleanText(_ rawText: String) -> String {
             let trimmed = String(rawText.compactMap { $0.isWhitespace ? nil : $0 })
-            return String(trimmed.filter { !"\n\t\r(),.-[]:}{".contains($0) })
+            return String(trimmed.filter { !LocalizedStrings.trimmedCharFromString.contains($0) })
         }
         
         func presentAlert(with text: String, useScannedValueHandler: @escaping () -> Void) {

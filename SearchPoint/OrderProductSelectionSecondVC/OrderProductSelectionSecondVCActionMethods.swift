@@ -76,7 +76,10 @@ extension OrderProductSelectionSecondVC {
                     else {
                         self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:true,orderId:self.orderId,userId:self.userId, farmId: self.serchTextField.text!)
                     }
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                     self.farmIdValue = 1
                 }
@@ -88,7 +91,10 @@ extension OrderProductSelectionSecondVC {
                     else {
                         self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:false,orderId:self.orderId,userId:self.userId, farmId: self.serchTextField.text!)
                     }
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.farmIdValue = 0
                 }
                 
@@ -100,13 +106,19 @@ extension OrderProductSelectionSecondVC {
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                     
                     self.fethData =  fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity,asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
                 else{
                     self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingImg), for: .normal)
                     self.earTagID = 0
                     self.fethData =  fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity,asending : false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                 }
             }
             else if self.clickOnDropDown == NSLocalizedString(LocalizedStrings.officialIDText, comment: ""){
@@ -123,7 +135,10 @@ extension OrderProductSelectionSecondVC {
                         self.fethData =  fetchAllDataanimalTag(entityName: Entities.productAdonAnimalTblEntity,asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
                     }
                     
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 1
                 }
                 else{
@@ -134,7 +149,10 @@ extension OrderProductSelectionSecondVC {
                     else {
                         self.fethData =  fetchAllDataanimalTag(entityName: Entities.productAdonAnimalTblEntity, asending: false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
                     }
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.animaId = 0
                 }
             }
@@ -148,7 +166,10 @@ extension OrderProductSelectionSecondVC {
                     else {
                         self.fethData = fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: true,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
                     }
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 1
                 }
                 else{
@@ -159,7 +180,10 @@ extension OrderProductSelectionSecondVC {
                     else {
                         self.fethData =  fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: false,orderId:self.orderId,userId:self.userId, barcode: self.serchTextField.text!)
                     }
-                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                    self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                        // Intentionally left empty.
+                        // Could be used in the future for logging, analytics, or error handling.
+                    })
                     self.barCodeId = 0
                 }
             }
@@ -207,7 +231,10 @@ extension OrderProductSelectionSecondVC {
                 } else {
                     self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:true,orderId:orderId,userId:userId, farmId: serchTextField.text!)
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                 self.farmIdValue = 1
             }
@@ -220,7 +247,10 @@ extension OrderProductSelectionSecondVC {
                 } else {
                     self.fethData =  fetchAllDataFarmId(entityName: Entities.productAdonAnimalTblEntity,asending:false,orderId:orderId,userId:userId, farmId: serchTextField.text!)
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 self.farmIdValue = 0
             }
             
@@ -236,7 +266,10 @@ extension OrderProductSelectionSecondVC {
                 } else {
                     self.fethData =  fetchAllDataanimalTag(entityName: Entities.productAdonAnimalTblEntity,asending : true,orderId:orderId,userId:userId, animalTag: serchTextField.text!)
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 self.animaId = 1
             }
             else{
@@ -246,7 +279,10 @@ extension OrderProductSelectionSecondVC {
                 }else {
                     self.fethData = fetchAllDataanimalTag(entityName: Entities.productAdonAnimalTblEntity, asending: false,orderId:orderId,userId:userId, animalTag: serchTextField.text!)
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 self.animaId = 0
             }
         }
@@ -256,13 +292,19 @@ extension OrderProductSelectionSecondVC {
                 self.earTagID = 1
                 self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingDescImg), for: .normal)
                 self.fethData =  fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity,asending : true,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
             }
             else{
                 self.dropUpDownBtn.setImage(UIImage(named: ImageNames.sortingImg), for: .normal)
                 self.earTagID = 0
                 self.fethData =  fetchAllDataEarTag(entityName: Entities.productAdonAnimalTblEntity,asending : false,orderId:self.orderId,userId:self.userId, animalTag: self.serchTextField.text!)
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
             }
         }
         else{
@@ -276,7 +318,10 @@ extension OrderProductSelectionSecondVC {
                     self.fethData =  fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: true,orderId:orderId,userId:userId, barcode: serchTextField.text!)
                     
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 self.barCodeId = 1
             }
             else{
@@ -287,7 +332,10 @@ extension OrderProductSelectionSecondVC {
                 else {
                     self.fethData =  fetchAllDataBarcOde(entityName: Entities.productAdonAnimalTblEntity, asending: false,orderId:orderId,userId:userId, barcode: serchTextField.text!)
                 }
-                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {})
+                self.fetchProductAdonAnimalTbl(fethData: self.fethData, completion: {
+                    // Intentionally left empty.
+                    // Could be used in the future for logging, analytics, or error handling.
+                })
                 self.barCodeId = 0
             }
         }
@@ -342,6 +390,7 @@ extension OrderProductSelectionSecondVC {
                                 }
                                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                                     UIAlertAction in
+                                    print(LocalizedStrings.cancelPressed)
                                 }
                                 
                                 alertController.addAction(okAction)
@@ -360,6 +409,7 @@ extension OrderProductSelectionSecondVC {
                                 }
                                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                                     UIAlertAction in
+                                    print(LocalizedStrings.cancelPressed)
                                 }
                                 alertController.addAction(cancelAction)
                                 alertController.addAction(okAction)
@@ -412,7 +462,7 @@ extension OrderProductSelectionSecondVC {
         if identyCheck == true {
             let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.diffBreedForAnimals, comment: ""), preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
-                
+                print(LocalizedStrings.cancelPressed)
             }))
             
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""),
@@ -475,6 +525,7 @@ extension OrderProductSelectionSecondVC {
                 let alertController = UIAlertController(title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString(LocalizedStrings.clearAllProdSelections, comment: ""), preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title:  NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
+                    print(LocalizedStrings.cancelPressed)
                 }
                 let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
@@ -483,6 +534,8 @@ extension OrderProductSelectionSecondVC {
                     for i in 0 ..< arr.count{
                         let data  = arr[i] as! GetProductTbl
                         updateProductTabl(entity: Entities.getProductTblEntity, productId: Int(data.productId), status: "false", completionHandler: { (success) -> Void in
+                            // no action performed here right now
+                            // could be used in the future
                         })
                         updateProducDataSingle(entity: Entities.productAdonAnimalTblEntity, productID:Int(data.productId), status: "false")
                         let product  = fetchProductAdonData(entityName: Entities.getAdonTblEntity, prodId: Int(data.productId))

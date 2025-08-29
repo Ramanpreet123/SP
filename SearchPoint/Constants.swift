@@ -207,6 +207,7 @@ struct AlertMessagesStrings {
 // MARK: - LOCALIZED STRINGS
 
 struct LocalizedStrings {
+    static let trimmedCharFromString = "\n\t\r(),.-[]:}{"
     static let burkinaFasoBreedId = "1f263617-923b-450f-825b-1489bfb42d7f"
     static let removedCharFromString = "\n\t\r(),.-[]:}{/"
     static let animalBarcodeTagContainsValue = " animalbarCodeTag contains[cd] %@ || productName contains[cd] %@"

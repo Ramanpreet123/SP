@@ -3451,11 +3451,6 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
         return true
     }
     
-    func startAnimating(){
-    }
-    func stopAnimating(){
-    }
-    
     private func setUpGallary(){
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             let imgPhotoLib = UIImagePickerController()
@@ -3479,10 +3474,9 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                 }
                 textStr += "\n\(topCandidate.string)"
                 DispatchQueue.main.async {
-                    self.stopAnimating()
                     if self.scanAnimalTagText.tag == 0 {
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             self.scanAnimalTagText.text = ""
@@ -3500,6 +3494,7 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                             })
                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in
@@ -3524,7 +3519,7 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                         
                     } else {
                         let trimmed = String(textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.methReturn =  self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             self.farmIdTextField.text = ""
@@ -3541,6 +3536,7 @@ class DataEntryOrderingAnimalVC: UIViewController,UIScrollViewDelegate ,VNDocume
                             })
                             let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in

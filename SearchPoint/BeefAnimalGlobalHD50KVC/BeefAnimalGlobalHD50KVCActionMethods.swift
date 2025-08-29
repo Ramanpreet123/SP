@@ -1089,6 +1089,8 @@ extension BeefAnimalGlobalHD50KVC {
     @IBAction func inheritCrossBtnAction(_ sender: Any) {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removingOrdersList, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
         })
         
         alert.addAction(cancel)
@@ -1183,6 +1185,8 @@ extension BeefAnimalGlobalHD50KVC {
     @IBAction func globalCrossBtnAction(_ sender: Any) {
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(AlertMessagesStrings.removingOrdersList, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { action in
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
         })
         
         alert.addAction(cancel)
@@ -2043,7 +2047,11 @@ extension BeefAnimalGlobalHD50KVC {
                         }
                         if UIApplication.shared.canOpenURL(settingsUrl) {
                             if #available(iOS 10.0, *) {
-                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    // Intentionally left empty.
+                                    // Nothing additional required after opening Settings.
+                                    // Could be used in the future for logging, analytics, or error handling.
+                                })
                                 
                             } else {
                                 UIApplication.shared.openURL(settingsUrl)
@@ -2098,7 +2106,11 @@ extension BeefAnimalGlobalHD50KVC {
                         }
                         if UIApplication.shared.canOpenURL(settingsUrl) {
                             if #available(iOS 10.0, *) {
-                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    // Intentionally left empty.
+                                    // Nothing additional required after opening Settings.
+                                    // Could be used in the future for logging, analytics, or error handling.
+                                })
                                 
                             } else {
                                 UIApplication.shared.openURL(settingsUrl)
@@ -2138,6 +2150,8 @@ extension BeefAnimalGlobalHD50KVC {
         let pvid = UserDefaults.standard.integer(forKey: keyValue.beefPvid.rawValue)
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
             
         })
         alert.addAction(cancel)
@@ -2206,6 +2220,8 @@ extension BeefAnimalGlobalHD50KVC {
         
         let alert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString,comment: ""), message: NSLocalizedString(LocalizedStrings.wantToResetForm, comment: ""), preferredStyle: .alert)
         let cancel = UIAlertAction(title: NSLocalizedString("No",comment: ""), style: .default, handler: { action in
+            // Intentionally left empty.
+            // Could be used in the future for logging, analytics, or error handling.
             
         })
         alert.addAction(cancel)

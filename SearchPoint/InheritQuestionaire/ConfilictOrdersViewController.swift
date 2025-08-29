@@ -188,7 +188,7 @@ class ConfilictOrdersViewController: UIViewController {
             }
         }))
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            
+            print(LocalizedStrings.cancelPressed)
         }))
         present(refreshAlert, animated: true, completion: nil)
     }
@@ -280,6 +280,7 @@ extension ConfilictOrdersViewController :UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let refreshAlert = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.removeAnimalFromOrder, comment: ""), preferredStyle: UIAlertController.Style.alert)
         refreshAlert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+            print(LocalizedStrings.cancelPressed)
         }))
         refreshAlert.addAction(UIAlertAction(title:NSLocalizedString("Yes", comment: "") , style: .default, handler: { [self] (action: UIAlertAction!) in
             

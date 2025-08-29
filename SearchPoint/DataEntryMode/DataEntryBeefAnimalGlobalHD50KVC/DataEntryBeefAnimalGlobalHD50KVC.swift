@@ -2083,8 +2083,12 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
     }
     
     private func startAnimating(){
+        // Intentionally left empty.
+         
     }
     private func stopAnimating(){
+        // Intentionally left empty.
+        
     }
     
     private func setUpGallary(){
@@ -2132,6 +2136,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
                             })
                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in
@@ -2154,7 +2159,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
                     }
                     else {
                         let trimmed = (textStr.compactMap({ $0.isWhitespace ? nil : $0 }))
-                        let test = String(trimmed.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                        let test = String(trimmed.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                         self.methReturn = self.ukTagReutn(animalId: test.uppercased())
                         if self.methReturn == LocalizedStrings.againClick {
                             
@@ -2174,6 +2179,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
                             })
                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: UIAlertAction.Style.default, handler: {
                                 (_)in
+                                print(LocalizedStrings.cancelPressed)
                             })
                             let thirdAction = UIAlertAction(title: NSLocalizedString(LocalizedStrings.useScannedValue, comment: ""), style: UIAlertAction.Style.default, handler: {
                                 (_)in
@@ -2215,7 +2221,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
         let stringResult = idAnimal.contains("UK")
         if stringResult  {
             let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-            let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+            let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
             let dropTwelveElement = test.suffix(12).uppercased()
             let totalString =  dropTwelveElement
             return totalString
@@ -2226,7 +2232,7 @@ class DataEntryBeefAnimalGlobalHD50KVC : UIViewController,UIImagePickerControlle
             
             if stringResultUS  && stringResult840  {
                 let trimmedString = String(idAnimal.compactMap({ $0.isWhitespace ? nil : $0 }))
-                let test = String(trimmedString.filter{!"\n\t\r(),.-[]:}{".contains($0)})
+                let test = String(trimmedString.filter{!LocalizedStrings.trimmedCharFromString.contains($0)})
                 if test.count < 15 {
                     return LocalizedStrings.againClick
                 }

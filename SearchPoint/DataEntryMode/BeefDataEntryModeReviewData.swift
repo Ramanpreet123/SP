@@ -437,7 +437,7 @@ class BeefDataEntryModeReviewData: UIViewController{
             if self.unchecked {
                 let alertController = UIAlertController(title: NSLocalizedString(AlertMessagesStrings.alertString, comment: ""), message: NSLocalizedString(LocalizedStrings.noEmailSent, comment: ""), preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action:UIAlertAction!) in
-                    
+                    print(LocalizedStrings.cancelPressed)
                 }
                 alertController.addAction(cancelAction)
                 let OKAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { (action:UIAlertAction!) in
@@ -730,6 +730,8 @@ extension BeefDataEntryModeReviewData : syncApi {
 // MARK: - OBJECT PICK CART EXTENSION
 extension BeefDataEntryModeReviewData : objectPickCartScreen {
     func objectGetOnSelection(temp: Int) {
-        
+        // Intentionally left empty.
+        // This function will handle navigation to another view controller in the future.
+        // Currently unused, but kept for consistency with protocol or planned implementation.
     }
 }
